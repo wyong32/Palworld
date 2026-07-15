@@ -367,7 +367,8 @@ select:focus-visible {
   padding: 9px;
 }
 
-.site-sidebar-group h2 {
+.site-sidebar-group-title {
+  display: block;
   color: var(--color-ink);
   font-size: 0.92rem;
   line-height: 1.18;
@@ -884,7 +885,7 @@ select:focus-visible {
 .home-mission-card h3,
 .listing-card-body h2,
 .home-path-grid h3,
-.database-category-head h2,
+.database-category-head h3,
 .pal-spotlight-head h2,
 .database-featured-copy h2,
 .pal-result-title h2,
@@ -1426,12 +1427,15 @@ select:focus-visible {
   line-height: 1;
 }
 
-.site-footer h2 {
+.site-footer-tagline {
   color: #fffdf5;
   font-size: clamp(1.15rem, 1.5vw, 1.5rem);
+  font-weight: 800;
+  line-height: 1.1;
 }
 
-.site-footer h3 {
+.site-footer-column-title {
+  display: block;
   color: #ffe183;
   font-size: 0.78rem;
   font-weight: 900;
@@ -1593,8 +1597,10 @@ select:focus-visible {
   padding: 14px;
 }
 
-.legal-side-panel h2 {
+.legal-side-title {
+  display: block;
   font-size: 1.05rem;
+  font-weight: 800;
 }
 
 .legal-side-panel nav {
@@ -6261,7 +6267,8 @@ nav.site-nav {
   padding: 8px;
 }
 
-.site-sidebar-group h2 {
+.site-sidebar-group-title {
+  display: block;
   margin-bottom: 5px;
   color: var(--color-water);
   font-size: 0.78rem;
@@ -7048,10 +7055,12 @@ nav.site-nav {
   font-size: 1.05rem;
 }
 
-.site-footer h2 {
+.site-footer-tagline {
   margin-top: 14px;
   color: #fffdf6;
   font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.1;
 }
 
 .site-footer-brand p {
@@ -7073,10 +7082,12 @@ nav.site-nav {
   gap: 6px;
 }
 
-.site-footer-link-group h3 {
+.site-footer-column-title {
+  display: block;
   margin-bottom: 4px;
   color: #ffe083;
   font-size: 0.76rem;
+  font-weight: 900;
   text-transform: uppercase;
 }
 

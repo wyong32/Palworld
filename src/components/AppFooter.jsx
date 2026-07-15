@@ -29,7 +29,7 @@ export default function AppFooter() {
               />
               <strong>{siteConfig.name}</strong>
             </Link>
-            <h2>Know the Pal. Plan the route.</h2>
+            <p className="site-footer-tagline">Know the Pal. Plan the route.</p>
             <p>
               A player-built Palworld Wiki for Pals, work suitability, combat teams,
               breeding, items, maps, updates, and the decisions that shape every Palpagos run.
@@ -38,7 +38,7 @@ export default function AppFooter() {
 
           <div className="site-footer-columns">
             <nav className="site-footer-link-group" aria-label="Footer main navigation">
-              <h3>Navigate</h3>
+              <span className="site-footer-column-title">Navigate</span>
               {mainLinks.map((item) => (
                 <Link href={item.href} key={item.href}>
                   {item.label}
@@ -47,7 +47,7 @@ export default function AppFooter() {
             </nav>
 
             <nav className="site-footer-link-group" aria-label="Legal navigation">
-              <h3>Legal</h3>
+              <span className="site-footer-column-title">Legal</span>
               {legalRoutes.map((item) => (
                 <Link href={item.href} key={item.href}>
                   {item.label}

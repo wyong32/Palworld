@@ -132,7 +132,7 @@ export default function DatabasePage({ items }) {
                   <div className="database-category-head">
                     <div>
                       <span>{group.guide.role}</span>
-                      <h2>{group.category}</h2>
+                      <h3>{group.category}</h3>
                     </div>
                     <strong>{group.count}</strong>
                   </div>

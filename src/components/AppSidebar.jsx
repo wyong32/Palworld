@@ -76,7 +76,7 @@ export default function AppSidebar() {
         <nav className="site-sidebar-nav" aria-label="Palworld topic navigation">
           {topicGroups.map((group) => (
             <section className="site-sidebar-group" key={group.title}>
-              <h2>{group.title}</h2>
+              <span className="site-sidebar-group-title">{group.title}</span>
               <div>
                 {group.links.map((item) => (
                   <Link href={item.href} key={`${group.title}-${item.label}`}>

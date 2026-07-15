@@ -33,7 +33,7 @@ export default function LegalArticle({ page }) {
         </div>
 
         <aside className="legal-side-panel" aria-label="Legal pages">
-          <h2>Legal</h2>
+          <span className="legal-side-title">Legal</span>
           <nav>
             {legalRoutes.map((item) => (
               <Link href={item.href} key={item.href} aria-current={item.href === page.href ? "page" : undefined}>
