@@ -6,7 +6,7 @@ export default function GuidesPage({ guides }) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "Palworld Guides - 1.0 Progression and World Tree",
+    name: "Palworld Guides - Complete Player Strategy Hub",
     url: `${siteConfig.url}/guides`,
     mainEntity: {
       "@type": "ItemList",
@@ -26,8 +26,11 @@ export default function GuidesPage({ guides }) {
       <section className="listing-hero-section">
         <div className="container">
           <div className="listing-hero-content">
-            <h1>Palworld Guides - 1.0 Progression and World Tree Checklists</h1>
-            <p>Palworld Guides help players follow 1.0 progression, prepare for the World Tree, and turn long routes into practical checklists.</p>
+            <h1>Palworld Guides - Complete Player Strategy Hub</h1>
+            <p>
+              Palworld Guides help players plan progression, bases, teams, breeding,
+              maps, updates, resources, bosses, and long routes with practical checklists.
+            </p>
           </div>
         </div>
       </section>

@@ -26,10 +26,10 @@ export const pageSeo = {
       "Palworld Pals, Palworld Paldeck, Palworld work suitability, Palworld mounts, Palworld drops",
   },
   guides: {
-    title: "Palworld Guides - 1.0 Progression and World Tree",
+    title: "Palworld Guides - Complete Player Strategy Hub",
     description:
-      "Palworld Guides provide practical 1.0 progression and World Tree checklists for base setup, Pal teams, gear, resources, Awakening, routes, and endgame prep.",
-    keywords: "Palworld Guides, Palworld 1.0 progression guide, Palworld World Tree guide, Palworld endgame checklist",
+      "Palworld Guides help players plan progression, bases, teams, breeding, maps, updates, resources, bosses, and long routes with practical checklists.",
+    keywords: "Palworld Guides, Palworld strategy guide, Palworld progression guide, Palworld base guide, Palworld map guide, Palworld endgame guide",
   },
   breeding: {
     title: "Palworld Breeding Guide - Calculator, Cake and Eggs",
