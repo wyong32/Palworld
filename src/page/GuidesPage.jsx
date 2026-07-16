@@ -44,7 +44,7 @@ export default function GuidesPage({ guides }) {
             </div>
             <div className="listing-card-grid">
               {guides.map((guide) => (
-                <article className="listing-card" key={guide.id}>
+                <Link className="listing-card" href={`/guides/${guide.addressBar}`} key={guide.id}>
                   <Image className="listing-card-image" src={guide.imageUrl} alt={guide.imageAlt} width={900} height={506} />
                   <div className="listing-card-body">
                     <h2>{guide.title}</h2>
@@ -52,9 +52,8 @@ export default function GuidesPage({ guides }) {
                     <div className="listing-card-tags">
                       {guide.tags.map((tag) => <span key={tag}>{tag}</span>)}
                     </div>
-                    <Link className="listing-card-link" href={`/guides/${guide.addressBar}`}>Read guide</Link>
                   </div>
-                </article>
+                </Link>
               ))}
             </div>
           </div>

@@ -74,11 +74,33 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
           <div className="detail-body-content">
             <article className="detail-article database-detail-article">
               <nav className="pal-detail-toc" aria-label={`${item.title} database guide sections`}>
+                <a href="#best-use">Best use</a>
                 <a href="#how-to-use">How to use</a>
                 <a href="#how-to-get">How to get</a>
+                <a href="#task-chain">Task chain</a>
                 <a href="#pal-links">Pal links</a>
                 <a href="#related-items">Related items</a>
+                <a href="#data-status">Data status</a>
               </nav>
+
+              <section className="pal-detail-section" id="best-use">
+                <span className="wiki-kicker">Decision Guide</span>
+                <h2>Best use for {item.title}</h2>
+                <p>
+                  {item.title} should answer a specific player problem before it becomes a farming target.
+                  Use these checks to decide whether this item belongs in your next craft, boss route,
+                  base upgrade, capture run, or long-term stockpile.
+                </p>
+                <div className="pal-guide-card-grid">
+                  {item.decisionModules.map((module) => (
+                    <article className="pal-guide-card" key={module.title}>
+                      <span>{module.label}</span>
+                      <h3>{module.title}</h3>
+                      <p>{module.body}</p>
+                    </article>
+                  ))}
+                </div>
+              </section>
 
               <section className="pal-detail-section" id="how-to-use">
                 <span className="wiki-kicker">Player Use</span>
@@ -108,6 +130,24 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
                 </div>
               </section>
 
+              <section className="pal-detail-section" id="task-chain">
+                <span className="wiki-kicker">Next Step</span>
+                <h2>{item.title} task chain</h2>
+                <p>
+                  Move from this item page to the next page that matches the job. A good item route usually
+                  continues into a Pal, a connected material, a map route, a breeding setup, or a progression
+                  checkpoint rather than stopping at one Database entry.
+                </p>
+                <div className="database-task-chain">
+                  {item.taskLinks.map((link) => (
+                    <Link href={link.href} key={`${link.href}-${link.label}`}>
+                      <strong>{link.label}</strong>
+                      <span>{link.note}</span>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+
               <section className="pal-detail-section" id="pal-links">
                 <span className="wiki-kicker">Pal Connections</span>
                 <h2>Related Pals</h2>
@@ -128,7 +168,11 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
                     ))}
                   </div>
                 ) : (
-                  <p>No Pal drop or Pal Gear connection is currently listed for this item.</p>
+                  <p>
+                    No Pal drop or Pal Gear connection is currently listed for this item. Use the{" "}
+                    <Link href="/pals#work-filters">Pal role filters</Link> when the next question is which
+                    worker, mount, fighter, or drop target supports the route.
+                  </p>
                 )}
               </section>
 
@@ -156,6 +200,17 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
                 )}
               </section>
 
+              <section className="pal-detail-section" id="data-status">
+                <span className="wiki-kicker">Version Check</span>
+                <h2>{item.title} data status</h2>
+                <div className="database-status-grid">
+                  <div><strong>Updated date</strong><span>{item.dataStatus.updated}</span></div>
+                  <div><strong>Game version</strong><span>{item.dataStatus.gameVersion}</span></div>
+                  <div><strong>Data type</strong><span>{item.dataStatus.sourceType}</span></div>
+                  <div><strong>Precision</strong><span>{item.dataStatus.precision}</span></div>
+                </div>
+              </section>
+
             </article>
 
             <aside className="detail-side-panel database-detail-side-panel">
@@ -164,11 +219,14 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
                 <FactRow label="Primary Category" value={item.category} />
                 <FactRow label="Player Role" value={item.role} />
                 <FactRow label="Listed Categories" value={item.categories.join(", ")} />
-                <FactRow label="Updated" value={item.lastChecked} />
+                <FactRow label="Updated" value={item.dataStatus.updated} />
+                <FactRow label="Game Version" value={item.dataStatus.gameVersion} />
+                <FactRow label="Data Type" value={item.dataStatus.sourceType} />
               </dl>
               <div className="detail-related-links">
                 <Link href={`/database/${categorySlug}`}>Back to {item.category}</Link>
                 <Link href="/database">All Database Categories</Link>
+                <Link href="/map">Open map routes</Link>
               </div>
             </aside>
           </div>

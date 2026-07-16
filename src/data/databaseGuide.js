@@ -191,6 +191,11 @@ function wordsMatchTitle(title, words) {
   return words.some((word) => title.includes(word));
 }
 
+function itemTitleIncludes(item, words) {
+  const title = item.title.toLowerCase();
+  return words.some((word) => title.includes(word.toLowerCase()));
+}
+
 export function getItemRole(item) {
   return categoryGuides[item.category]?.role || categoryGuides.Items.role;
 }
@@ -243,6 +248,136 @@ export function getItemUsageSteps(item) {
   }
 
   return Array.from(new Set(steps));
+}
+
+export function getItemDecisionModules(item, relatedPals = [], relatedItems = []) {
+  const guide = categoryGuides[item.category] || categoryGuides.Items;
+  const category = item.category;
+  const modules = [
+    {
+      title: `Best use for ${item.title}`,
+      label: guide.role,
+      body: `${item.title} matters most when the current goal matches ${guide.priority.toLowerCase()}. If that goal is not active, keep it as a reference target instead of interrupting a working route.`,
+    },
+    {
+      title: "Acquisition route check",
+      label: "Before farming",
+      body: getItemAcquisitionHints(item)[0],
+    },
+    {
+      title: "Common pairing",
+      label: relatedPals.length > 0 ? "Pal chain" : "Loadout chain",
+      body:
+        relatedPals.length > 0
+          ? `Start from ${relatedPals[0].title}, then compare capture, breeding, drop, or Pal Gear needs before repeating the same route.`
+          : relatedItems.length > 0
+            ? `Compare it with ${relatedItems.slice(0, 2).map((entry) => entry.title).join(" and ")} so the next craft or upgrade does not stall on a missing companion item.`
+            : `Pair it with the matching ${category} category page, then decide whether the next step belongs in Database, Pals, Breeding, or Map planning.`,
+    },
+  ];
+
+  if (["Weapons", "Ammo", "Armor", "Accessories"].includes(category)) {
+    modules.push({
+      title: "When it is not worth chasing",
+      label: "Skip condition",
+      body: `Do not chase ${item.title} during a route where damage, defense, ammo supply, or climate pressure is already solved. Upgrade only when the next boss, dungeon, or biome forces a real loadout change.`,
+    });
+  } else if (["Materials", "Ingredients", "Spheres", "Consumables"].includes(category)) {
+    modules.push({
+      title: "When to stockpile",
+      label: "Base economy",
+      body: `Stockpile ${item.title} only when it feeds repeated crafting, cooking, capture, breeding, or recovery. One-time needs should stay on a short route checklist.`,
+    });
+  } else if (["Structures", "Furniture"].includes(category)) {
+    modules.push({
+      title: "When to build it later",
+      label: "Base layout",
+      body: `Delay ${item.title} if it blocks Pal pathing, storage access, power, cooling, cooking, farming, or production lines that the base already depends on.`,
+    });
+  } else {
+    modules.push({
+      title: "When to pause the route",
+      label: "Route control",
+      body: `Pause farming ${item.title} when the page does not yet expose a precise drop, recipe, or location chain. Move through related items, Pals, or the map before spending a long run on it.`,
+    });
+  }
+
+  if (category === "Accessories" && itemTitleIncludes(item, ["glasses", "pendant", "ring", "undershirt"])) {
+    modules.push({
+      title: "Loadout comparison",
+      label: "Accessory slot",
+      body: `${item.title} competes with other accessory-slot choices. Compare the route objective first: boss damage, elemental resistance, carry weight, climate safety, or scouting speed.`,
+    });
+  }
+
+  return modules;
+}
+
+export function getItemTaskLinks(item, relatedPals = [], relatedItems = []) {
+  const links = [
+    {
+      label: `${item.category} category`,
+      href: `/database/${databaseCategorySlug(item.category)}`,
+      note: `Compare other ${item.category} entries before committing resources.`,
+    },
+  ];
+
+  if (relatedPals[0]) {
+    links.push({
+      label: relatedPals[0].title,
+      href: relatedPals[0].href,
+      note: "Move from item lookup into capture, breeding, drop, or Pal Gear planning.",
+    });
+  } else {
+    links.push({
+      label: "Pal role filters",
+      href: "/pals#work-filters",
+      note: "Find workers, combat candidates, mounts, or drop targets that support this item route.",
+    });
+  }
+
+  if (relatedItems[0]) {
+    links.push({
+      label: relatedItems[0].title,
+      href: relatedItems[0].href,
+      note: "Check the next connected craft, upgrade, or category neighbor.",
+    });
+  }
+
+  if (["Ingredients", "Consumables"].includes(item.category) || /cake|egg|milk|honey|berry|flour/i.test(item.title)) {
+    links.push({
+      label: "Breeding planner",
+      href: "/breeding#planner",
+      note: "Use this when the item affects Cake, eggs, parent routing, or base food production.",
+    });
+  }
+
+  if (["Materials", "Schematics", "Accessories", "Weapons", "Armor"].includes(item.category)) {
+    links.push({
+      label: "Map routes",
+      href: "/map",
+      note: "Use the map when the next question is a boss, dungeon, merchant, resource, or region route.",
+    });
+  }
+
+  if (["Weapons", "Armor", "Accessories", "Spheres"].includes(item.category)) {
+    links.push({
+      label: "Progression guide",
+      href: "/guides/palworld-1-0-progression-guide",
+      note: "Check whether this item belongs before or after the next tower, biome, or boss step.",
+    });
+  }
+
+  return links.slice(0, 5);
+}
+
+export function getItemDataStatus(item) {
+  return {
+    updated: item.lastChecked || item.publishDate,
+    gameVersion: "Palworld 1.0",
+    sourceType: item.imageSourceUrl ? "Game item record with local route guidance" : "Category item record with local route guidance",
+    precision: "Item data page, not a coordinate marker",
+  };
 }
 
 export function getRelatedPalsForItem(item, pals) {
@@ -313,6 +448,9 @@ export function enrichDatabaseItem(item, { items = [], pals = [] } = {}) {
   const relatedItems = getRelatedItems(item, items);
   const acquisitionHints = getItemAcquisitionHints(item);
   const usageSteps = getItemUsageSteps(item);
+  const decisionModules = getItemDecisionModules(item, relatedPals, relatedItems);
+  const taskLinks = getItemTaskLinks(item, relatedPals, relatedItems);
+  const dataStatus = getItemDataStatus(item);
 
   return {
     ...item,
@@ -320,10 +458,13 @@ export function enrichDatabaseItem(item, { items = [], pals = [] } = {}) {
     role: getItemRole(item),
     acquisitionHints,
     usageSteps,
+    decisionModules,
+    taskLinks,
+    dataStatus,
     relatedPals,
     relatedItems,
     categoryHref: `/database/${databaseCategorySlug(item.category)}`,
-    guideSummary: `${item.title} belongs to Palworld ${item.category} and supports ${guide.role.toLowerCase()}. Use this guide to decide when it matters, how to plan acquisition, and which Pals or items connect to the same goal.`,
+    guideSummary: `${item.title} belongs to Palworld ${item.category} and supports ${guide.role.toLowerCase()}. Use this guide to decide when it matters, how to plan acquisition, which task chain it supports, and whether the route is worth doing now.`,
   };
 }
 

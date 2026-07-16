@@ -115,7 +115,9 @@ export default function PalsDetailPage({ pal }) {
                 <a href="#where-to-find">Where to find</a>
                 <a href="#breeding-planner">Breeding</a>
                 <a href="#database-links">Drops</a>
+                <a href="#task-chain">Task chain</a>
                 <a href="#related-pals">Compare</a>
+                <a href="#data-status">Data status</a>
               </nav>
 
               <section id="how-to-use" className="pal-detail-section">
@@ -275,6 +277,23 @@ export default function PalsDetailPage({ pal }) {
                 )}
               </section>
 
+              <section id="task-chain" className="pal-detail-section">
+                <span className="wiki-kicker">Next Step</span>
+                <h2>{pal.title} task chain</h2>
+                <p>
+                  Use {pal.title} as part of a route, not as an isolated Paldeck entry. The next useful page depends
+                  on whether you are catching it, breeding it, comparing workers, farming drops, or replacing a team slot.
+                </p>
+                <div className="database-task-chain">
+                  {pal.taskLinks.map((link) => (
+                    <Link href={link.href} key={`${link.href}-${link.label}`}>
+                      <strong>{link.label}</strong>
+                      <span>{link.note}</span>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+
               <section id="related-pals" className="pal-detail-section">
                 <span className="wiki-kicker">Role comparison</span>
                 <h2>Pals to compare with {pal.title}</h2>
@@ -291,6 +310,17 @@ export default function PalsDetailPage({ pal }) {
                   ))}
                 </div>
               </section>
+
+              <section id="data-status" className="pal-detail-section">
+                <span className="wiki-kicker">Version Check</span>
+                <h2>{pal.title} data status</h2>
+                <div className="database-status-grid">
+                  <div><strong>Updated date</strong><span>{pal.dataStatus.updated}</span></div>
+                  <div><strong>Game version</strong><span>{pal.dataStatus.gameVersion}</span></div>
+                  <div><strong>Data type</strong><span>{pal.dataStatus.sourceType}</span></div>
+                  <div><strong>Precision</strong><span>{pal.dataStatus.precision}</span></div>
+                </div>
+              </section>
             </article>
 
             <aside className="detail-side-panel pal-detail-side-panel">
@@ -304,7 +334,9 @@ export default function PalsDetailPage({ pal }) {
                 <FactRow label="Drops" value={pal.drops} />
                 <FactRow label="Habitat" value={pal.habitat} />
                 <FactRow label="Group" value={pal.section} />
-                <FactRow label="Updated" value={updatedDate} />
+                <FactRow label="Updated" value={pal.dataStatus.updated || updatedDate} />
+                <FactRow label="Game Version" value={pal.dataStatus.gameVersion} />
+                <FactRow label="Data Type" value={pal.dataStatus.sourceType} />
               </dl>
               <div className="detail-related-links">
                 <Link href="/pals">Back to Paldeck</Link>

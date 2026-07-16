@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 
 const allValue = "All";
@@ -35,7 +36,12 @@ function WorkBadge({ work }) {
   );
 }
 
+function isNestedInteractive(target) {
+  return target.closest("a, button, input, select, textarea, summary");
+}
+
 export default function PalsExplorer({ data }) {
+  const router = useRouter();
   const [query, setQuery] = useState("");
   const [role, setRole] = useState(allValue);
   const [element, setElement] = useState(allValue);
@@ -203,7 +209,15 @@ export default function PalsExplorer({ data }) {
 
       <section className="pal-card-grid" aria-label="Filtered Pal results">
         {filteredPals.map((pal) => (
-          <article className="pal-result-card" key={pal.id}>
+          <article
+            className="pal-result-card"
+            key={pal.id}
+            onClick={(event) => {
+              if (!isNestedInteractive(event.target)) {
+                router.push(`/pals/${pal.addressBar}`);
+              }
+            }}
+          >
             <Link href={`/pals/${pal.addressBar}`} className="pal-result-image" aria-label={`Open ${pal.title} guide`}>
               <Image src={pal.imageUrl} alt={pal.imageAlt} width={180} height={180} />
             </Link>
@@ -244,9 +258,6 @@ export default function PalsExplorer({ data }) {
                   </div>
                 </div>
               )}
-              <Link className="pal-result-link" href={`/pals/${pal.addressBar}`}>
-                Open Pal guide
-              </Link>
             </div>
           </article>
         ))}
