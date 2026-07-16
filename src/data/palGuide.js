@@ -332,56 +332,6 @@ export function getPalGuideSummary(pal) {
   return `${pal.title} is a ${pal.element || "multi-role"} Pal for ${use.slice(0, 4).join(", ") || "collection and Paldeck completion"}. Use this page to compare work roles, element matchups, drops, partner skill, breeding links, and related Pals.`;
 }
 
-function getPalTaskLinks(pal, { linkedDrops = [], relatedPals = [], primaryWork = null } = {}) {
-  const links = [
-    {
-      label: "Find locations",
-      href: "/map",
-      note: `Search ${pal.title} on the Palworld map before spending rare Spheres or starting a long Alpha route.`,
-    },
-    {
-      label: "Breeding planner",
-      href: "/breeding#planner",
-      note: `Check whether ${pal.title} is easier to breed, use as a parent, or replace with a cleaner passive line.`,
-    },
-  ];
-
-  if (primaryWork) {
-    links.push({
-      label: `${primaryWork.type} alternatives`,
-      href: "/pals#work-filters",
-      note: `Compare other ${primaryWork.type} workers before investing Pal Souls, condensation copies, or work books.`,
-    });
-  }
-
-  if (linkedDrops[0]) {
-    links.push({
-      label: linkedDrops[0].title,
-      href: linkedDrops[0].href,
-      note: `Follow the drop chain into Database planning for farming, crafting, or stockpile decisions.`,
-    });
-  }
-
-  if (relatedPals[0]) {
-    links.push({
-      label: relatedPals[0].title,
-      href: relatedPals[0].href,
-      note: `Compare a nearby Pal option before locking ${pal.title} into a team, base, or breeding route.`,
-    });
-  }
-
-  return links.slice(0, 5);
-}
-
-function getPalDataStatus(pal) {
-  return {
-    updated: pal.lastChecked || pal.publishDate,
-    gameVersion: "Palworld 1.0",
-    sourceType: "Pal record, current work data, and local player recommendations",
-    precision: "Pal detail page; map locations should be checked as exact markers, route clusters, or planning markers",
-  };
-}
-
 export function enrichPal(pal, { items = [], allPals = [] } = {}) {
   const work = getCurrentWork(pal);
   const roles = getPalRoles(pal);
@@ -433,8 +383,6 @@ export function enrichPal(pal, { items = [], allPals = [] } = {}) {
       element: candidate.element,
       workSuitability: formatWorkSuitability(getCurrentWork(candidate)),
     }));
-  const taskLinks = getPalTaskLinks(pal, { linkedDrops, relatedPals, primaryWork });
-  const dataStatus = getPalDataStatus(pal);
 
   return {
     ...pal,
@@ -450,8 +398,6 @@ export function enrichPal(pal, { items = [], allPals = [] } = {}) {
     strongAgainst,
     weakAgainst,
     relatedPals,
-    taskLinks,
-    dataStatus,
     breedingCombos,
     recommendations: {
       base:

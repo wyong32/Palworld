@@ -6,7 +6,7 @@ const faqItems = [
   {
     question: "How do I find a specific Pal on the map?",
     answer:
-      "Inspect the Pals and Alpha Pals markers on the interactive map, then compare the location with nearby fast-travel points and the matching Pal guide.",
+      "Choose Pal hunting, return to the interactive map, enable the Pals or Alpha Pals layer, then search the species name and inspect nearby fast-travel points.",
   },
   {
     question: "Why are Sunreach and World Tree handled carefully?",
@@ -39,7 +39,7 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
     "@type": "Article",
     headline: "Palworld Map Guide: Interactive Map, Sunreach, World Tree, Pals, Dungeons and Resources",
     description: pageSeo.map.description,
-    dateModified: "2026-07-16",
+    dateModified: "2026-07-15",
     author: {
       "@type": "Organization",
       name: siteConfig.name,
@@ -82,13 +82,13 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
             </div>
             <div className="map-workbench-meta" aria-label="Map route notes">
               <strong>{hub.version}</strong>
-              <span>Last checked 2026-07-16</span>
+              <span>Last checked 2026-07-15</span>
               <span>Map layers plus player route guidance</span>
             </div>
           </div>
         </section>
 
-        <MapFocusWorkbench categories={categories} markers={markers} />
+        <MapFocusWorkbench />
 
         <section className="map-workbench-strip" aria-label="Map marker coverage">
           {sourceStats.slice(0, 4).map((stat) => (
@@ -117,7 +117,7 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
                 <Link href="/pals">Pal explorer</Link> before you spend high-tier Spheres. The Pal page helps you
                 verify element, work suitability, drops, and whether the same target may be easier through{" "}
                 <Link href="/breeding">Breeding</Link>. For Alpha runs,{" "}
-                <a href="#interactive-map-title">return to the interactive map</a> and treat
+                <a href="#interactive-map-title" data-map-focus="pals">focus the map on Pal hunting</a> and treat
                 exact coordinates differently from route clusters.
               </p>
             </article>
@@ -128,7 +128,7 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
                 A tower or dungeon marker should lead to preparation, not just travel. If the embedded map points you
                 toward a boss route, check your <Link href="/guides/palworld-1-0-progression-guide">progression plan</Link>,
                 repair materials, ammo, food, and climate gear before entering. Use{" "}
-                <a href="#interactive-map-title">return to the map before the combat route</a> when the route
+                <a href="#interactive-map-title" data-map-focus="combat">the combat map focus</a> when the route
                 includes towers, field bosses, dungeon entrances, or chest farming.
               </p>
             </article>
@@ -139,7 +139,8 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
                 Resource layers are only useful if they stay connected to what you are crafting. A sulfur marker
                 belongs to ammo planning, while ore and coal usually feed production bases. After finding a marker,
                 use <Link href="/database/materials">Materials</Link> and item detail pages to keep the run
-                focused on the thing you actually need. For farming, <a href="#interactive-map-title">return to the map before starting the run</a>.
+                focused on the thing you actually need. For farming, <a href="#interactive-map-title" data-map-focus="resources">switch the map
+                task to Materials</a>.
               </p>
             </article>
 
@@ -150,7 +151,7 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
                 and a breeding base ask for different terrain, nearby resources, Pal pathing, and fast travel access.
                 When your map search is about building, compare the result with <Link href="/breeding">Breeding</Link>
                 and <Link href="/database/structures">Structures</Link> before committing. You can{" "}
-                <a href="#interactive-map-title">return to the map before comparing base locations</a> first.
+                <a href="#interactive-map-title" data-map-focus="bases">focus the map on base planning</a> first.
               </p>
             </article>
           </div>

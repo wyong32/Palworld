@@ -6,7 +6,7 @@ import { buildMetadata, pageSeo } from "@/seo/site";
 export const metadata = buildMetadata(pageSeo.map, "/map", {
   type: "article",
   publishedTime: "2026-07-13",
-  modifiedTime: "2026-07-16",
+  modifiedTime: "2026-07-15",
 });
 
 export default function MapPage() {

@@ -107,7 +107,7 @@ export const breedingHub = {
         "Egg management is the bridge between breeding theory and usable Pals. A clean workflow prevents good eggs from being lost in storage noise.",
       body: [
         "Eggs may come from Breeding Farm output or from world exploration. The hatch step should record parent pair, target, passive skills, element, and whether the hatch is kept, condensed, assigned to base work, or moved into a combat build.",
-        "A professional wiki should eventually expose egg categories, incubation conditions, and item links. Until that data is fully verified, the page gives players a practical audit workflow that still supports the future database."
+        "A professional wiki should eventually expose egg categories, incubation conditions, and item links. Until that data is fully imported, the page gives players a practical audit workflow that still supports the future database."
       ],
       facts: [
         "Breeding eggs and field eggs should be tracked separately.",
@@ -368,7 +368,7 @@ export const updatesHub = {
         "A professional wiki should treat patch notes as an editorial workflow, not a single news card.",
       body: [
         "Each update should be broken into affected systems: Pals, items, breeding, map, bases, combat, servers, and UI. The page should then link the changed system to the corresponding local dataset or guide.",
-        "The current site now stores Pal and Database records locally, so patch notes should trigger a data refresh checklist: refresh records, check image coverage, rebuild sitemap, and verify affected pages in browser."
+        "The current site now stores imported Pal and Database data locally, so patch notes should trigger a data refresh checklist: run the importer, check image coverage, rebuild sitemap, and verify affected pages in browser."
       ],
       facts: [
         "Official changelog first, community follow-up second.",
@@ -424,7 +424,7 @@ export const updatesHub = {
       facts: [
         "Release dates and version numbers should be easy to find.",
         "Mechanics pages should avoid mixing old and current advice.",
-        "Game records and player planning notes should stay separate.",
+        "Imported data and player planning notes should stay separate.",
         "High-traffic pages need review after every major update."
       ],
       checklist: ["Last checked date", "Version tag", "Change impact", "Player caveats"],

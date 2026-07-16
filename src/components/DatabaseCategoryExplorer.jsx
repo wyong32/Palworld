@@ -106,14 +106,16 @@ export default function DatabaseCategoryExplorer({ data }) {
 
       <section className="database-card-list" aria-label={`${data.category} database entries`}>
         {filteredItems.map((item) => (
-          <Link className="database-result-card" href={item.href} key={item.id}>
-            <span className="database-result-image" aria-hidden="true">
+          <article className="database-result-card" key={item.id}>
+            <Link href={item.href} className="database-result-image" aria-label={`Open ${item.title}`}>
               <Image src={item.imageUrl} alt={item.imageAlt} width={132} height={96} />
-            </span>
+            </Link>
             <div className="database-result-body">
               <div className="database-result-heading">
                 <span>{item.role}</span>
-                <h2>{item.title}</h2>
+                <h2>
+                  <Link href={item.href}>{item.title}</Link>
+                </h2>
               </div>
               <p>{item.guideSummary}</p>
               <div className="database-chip-row">
@@ -128,8 +130,11 @@ export default function DatabaseCategoryExplorer({ data }) {
                   <small key={hint}>{hint}</small>
                 ))}
               </div>
+              <Link className="database-result-link" href={item.href}>
+                Open item guide
+              </Link>
             </div>
-          </Link>
+          </article>
         ))}
       </section>
     </div>

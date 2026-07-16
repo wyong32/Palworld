@@ -11,7 +11,7 @@ const STATIC_PAGE_LASTMOD = {
   "/database": "2026-07-15",
   "/breeding": "2026-07-15",
   "/guides": "2026-07-15",
-  "/map": "2026-07-16",
+  "/map": "2026-07-15",
   "/updates": "2026-07-15",
   "/legal": "2026-07-15",
   "/legal/privacy-policy": "2026-07-15",
