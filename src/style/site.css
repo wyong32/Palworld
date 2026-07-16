@@ -60,6 +60,51 @@ select:focus-visible {
   width: min(100% - 32px, 1400px);
 }
 
+.page-breadcrumbs {
+  margin: 0 0 12px;
+}
+
+.page-breadcrumbs-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--color-muted);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.page-breadcrumbs-item {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.page-breadcrumbs-item:not(:last-child)::after {
+  content: "/";
+  margin: 0 8px;
+  color: rgba(81, 100, 107, 0.72);
+}
+
+.page-breadcrumbs-item a {
+  color: var(--color-water);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.page-breadcrumbs-item a:hover {
+  color: var(--color-coral);
+  text-decoration: underline;
+}
+
+.page-breadcrumbs-item span[aria-current="page"] {
+  color: var(--color-ink);
+  font-weight: 700;
+}
+
 .wiki-kicker {
   border: 1px solid rgba(234, 88, 12, 0.25);
   border-radius: 5px;

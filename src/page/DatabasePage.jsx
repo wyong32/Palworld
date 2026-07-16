@@ -1,9 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import PageBreadcrumbs from "@/components/PageBreadcrumbs";
 import { buildDatabaseExplorerData } from "@/data/databaseGuide";
+import { databaseHubTrail } from "@/seo/breadcrumbs";
 import { siteConfig } from "@/seo/site";
 
 export default function DatabasePage({ items }) {
+  const breadcrumbs = databaseHubTrail();
   const data = buildDatabaseExplorerData(items);
   const schema = {
     "@context": "https://schema.org",
@@ -47,6 +50,7 @@ export default function DatabasePage({ items }) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <PageBreadcrumbs items={breadcrumbs} />
       <section className="listing-hero-section database-hero-section">
         <div className="container">
           <div className="listing-hero-content database-hero-content">

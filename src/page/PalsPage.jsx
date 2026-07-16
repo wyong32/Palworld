@@ -1,9 +1,12 @@
 import PalsExplorer from "@/components/PalsExplorer";
+import PageBreadcrumbs from "@/components/PageBreadcrumbs";
 import { items } from "@/data/items";
 import { buildPalExplorerData } from "@/data/palGuide";
+import { palsHubTrail } from "@/seo/breadcrumbs";
 import { siteConfig } from "@/seo/site";
 
 export default function PalsPage({ pals }) {
+  const breadcrumbs = palsHubTrail();
   const explorerData = buildPalExplorerData(pals, items);
   const schema = {
     "@context": "https://schema.org",
@@ -26,6 +29,7 @@ export default function PalsPage({ pals }) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <PageBreadcrumbs items={breadcrumbs} />
       <section className="listing-hero-section pals-hero-section">
         <div className="container">
           <div className="listing-hero-content pals-hero-content">

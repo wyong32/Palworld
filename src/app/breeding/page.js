@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import BreedingPlanner from "@/components/BreedingPlanner";
+import PageBreadcrumbs from "@/components/PageBreadcrumbs";
 import { featuredBreedingCombos, breedingSteps, cakeProductionPlan, mutationCards } from "@/data/breedingTools";
 import { getDatabaseItemPath } from "@/data/database";
 import { items } from "@/data/items";
 import { pals } from "@/data/pals";
+import { breedingHubTrail } from "@/seo/breadcrumbs";
 import { buildMetadata, pageSeo, siteConfig } from "@/seo/site";
 
 export const metadata = buildMetadata(pageSeo.breeding, "/breeding", {
@@ -228,6 +230,7 @@ export default function BreedingPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <PageBreadcrumbs items={breedingHubTrail()} />
 
       <article className="breeding-page">
         <section className="breeding-page-hero" aria-labelledby="breeding-page-title">

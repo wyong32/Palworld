@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import PageBreadcrumbs from "@/components/PageBreadcrumbs";
 import { searchSite } from "@/data/searchIndex";
+import { searchHubTrail } from "@/seo/breadcrumbs";
 
 function SearchResultImage({ item }) {
   if (!item.imageUrl) {
@@ -15,11 +17,13 @@ function SearchResultImage({ item }) {
 }
 
 export default function SearchPage({ query }) {
+  const breadcrumbs = searchHubTrail();
   const results = searchSite(query);
   const hasQuery = query.trim().length > 0;
 
   return (
     <>
+      <PageBreadcrumbs items={breadcrumbs} />
       <section className="listing-hero-section search-hero-section">
         <div className="container">
           <div className="listing-hero-content search-hero-content">

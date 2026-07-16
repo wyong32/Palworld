@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import PageBreadcrumbs from "@/components/PageBreadcrumbs";
+import { buildBreadcrumbJsonLd, databaseItemTrail } from "@/seo/breadcrumbs";
 import { siteConfig } from "@/seo/site";
 
 function FactRow({ label, value }) {
@@ -17,6 +19,7 @@ function FactRow({ label, value }) {
 
 export default function DatabaseDetailPage({ item, categorySlug }) {
   const url = `${siteConfig.url}/database/${categorySlug}/${item.addressBar}`;
+  const breadcrumbs = databaseItemTrail(item, categorySlug);
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -33,21 +36,14 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
         author: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
         publisher: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
       },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
-          { "@type": "ListItem", position: 2, name: "Palworld Database", item: `${siteConfig.url}/database` },
-          { "@type": "ListItem", position: 3, name: item.category, item: `${siteConfig.url}/database/${categorySlug}` },
-          { "@type": "ListItem", position: 4, name: item.title, item: url },
-        ],
-      },
+      buildBreadcrumbJsonLd(breadcrumbs),
     ],
   };
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <PageBreadcrumbs items={breadcrumbs} />
       <section className="detail-hero-section database-detail-hero-section">
         <div className="container">
           <div className="detail-hero-content database-detail-hero-content">

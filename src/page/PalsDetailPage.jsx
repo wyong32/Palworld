@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import PageBreadcrumbs from "@/components/PageBreadcrumbs";
+import { buildBreadcrumbJsonLd, palsDetailTrail } from "@/seo/breadcrumbs";
 import { siteConfig } from "@/seo/site";
 
 function FactRow({ label, value }) {
@@ -45,6 +47,7 @@ export default function PalsDetailPage({ pal }) {
     ? `${pal.title} is most useful for ${pal.decisionSummary}.`
     : `${pal.title} is currently best treated as a Paldeck and species-comparison entry.`;
   const url = `${siteConfig.url}/pals/${pal.addressBar}`;
+  const breadcrumbs = palsDetailTrail(pal);
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -61,20 +64,14 @@ export default function PalsDetailPage({ pal }) {
         publisher: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
         about: ["Palworld", pal.title, "Palworld Pals", "Palworld work suitability"],
       },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
-          { "@type": "ListItem", position: 2, name: "Palworld Pals", item: `${siteConfig.url}/pals` },
-          { "@type": "ListItem", position: 3, name: pal.title, item: url },
-        ],
-      },
+      buildBreadcrumbJsonLd(breadcrumbs),
     ],
   };
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <PageBreadcrumbs items={breadcrumbs} />
 
       <section className="detail-hero-section pal-detail-hero-section">
         <div className="container">

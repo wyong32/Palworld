@@ -1,5 +1,7 @@
 import Link from "next/link";
 import MapFocusWorkbench from "@/components/MapFocusWorkbench";
+import PageBreadcrumbs from "@/components/PageBreadcrumbs";
+import { mapHubTrail } from "@/seo/breadcrumbs";
 import { pageSeo, siteConfig } from "@/seo/site";
 
 const faqItems = [
@@ -33,6 +35,7 @@ function countByCategory(markers) {
 }
 
 export default function MapPage({ hub, markers, categories, sourceStats, guidance }) {
+  const breadcrumbs = mapHubTrail();
   const categoryCounts = countByCategory(markers);
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -68,6 +71,7 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <PageBreadcrumbs items={breadcrumbs} />
 
       <article className="map-workbench">
         <section className="map-workbench-hero" aria-labelledby="map-page-title">

@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import UpdateImpactBoard from "@/components/UpdateImpactBoard";
+import PageBreadcrumbs from "@/components/PageBreadcrumbs";
+import { updatesHubTrail } from "@/seo/breadcrumbs";
 import { pageSeo, siteConfig } from "@/seo/site";
 
 const quickStats = [
@@ -193,6 +195,7 @@ const faqItems = [
 ];
 
 export default function UpdatesPage() {
+  const breadcrumbs = updatesHubTrail();
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -228,6 +231,7 @@ export default function UpdatesPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <PageBreadcrumbs items={breadcrumbs} />
 
       <article className="updates-page">
         <section className="updates-page-hero" aria-labelledby="updates-page-title">

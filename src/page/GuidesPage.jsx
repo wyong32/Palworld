@@ -1,8 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import PageBreadcrumbs from "@/components/PageBreadcrumbs";
+import { guidesHubTrail } from "@/seo/breadcrumbs";
 import { siteConfig } from "@/seo/site";
 
 export default function GuidesPage({ guides }) {
+  const breadcrumbs = guidesHubTrail();
   const schema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -23,6 +26,7 @@ export default function GuidesPage({ guides }) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <PageBreadcrumbs items={breadcrumbs} />
       <section className="listing-hero-section">
         <div className="container">
           <div className="listing-hero-content">

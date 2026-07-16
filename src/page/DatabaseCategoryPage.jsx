@@ -1,11 +1,14 @@
 import DatabaseCategoryExplorer from "@/components/DatabaseCategoryExplorer";
+import PageBreadcrumbs from "@/components/PageBreadcrumbs";
 import { buildDatabaseCategoryData } from "@/data/databaseGuide";
 import Link from "next/link";
+import { buildBreadcrumbJsonLd, databaseCategoryTrail } from "@/seo/breadcrumbs";
 import { siteConfig } from "@/seo/site";
 
 export default function DatabaseCategoryPage({ group, items, pals }) {
   const data = buildDatabaseCategoryData(group, items, pals);
   const categoryIntent = data.guide.intent.charAt(0).toLowerCase() + data.guide.intent.slice(1);
+  const breadcrumbs = databaseCategoryTrail(group);
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -25,20 +28,14 @@ export default function DatabaseCategoryPage({ group, items, pals }) {
           })),
         },
       },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
-          { "@type": "ListItem", position: 2, name: "Palworld Database", item: `${siteConfig.url}/database` },
-          { "@type": "ListItem", position: 3, name: group.category, item: `${siteConfig.url}/database/${group.slug}` },
-        ],
-      },
+      buildBreadcrumbJsonLd(breadcrumbs),
     ],
   };
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <PageBreadcrumbs items={breadcrumbs} />
       <section className="listing-hero-section database-hero-section">
         <div className="container">
           <div className="listing-hero-content database-hero-content">

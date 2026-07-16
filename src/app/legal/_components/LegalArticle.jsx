@@ -1,9 +1,14 @@
 import Link from "next/link";
+import PageBreadcrumbs from "@/components/PageBreadcrumbs";
+import { legalDetailTrail } from "@/seo/breadcrumbs";
 import { legalRoutes, legalUpdatedDate } from "../_content";
 
 export default function LegalArticle({ page }) {
+  const breadcrumbs = legalDetailTrail(page);
+
   return (
     <article className="legal-page">
+      <PageBreadcrumbs items={breadcrumbs} />
       <section className="legal-hero-section">
         <span className="wiki-kicker">{page.eyebrow}</span>
         <h1>{page.title}</h1>

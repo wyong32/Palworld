@@ -1,5 +1,7 @@
 import Link from "next/link";
+import PageBreadcrumbs from "@/components/PageBreadcrumbs";
 import { buildMetadata } from "@/seo/site";
+import { legalHubTrail } from "@/seo/breadcrumbs";
 import { legalPages, legalRoutes } from "./_content";
 
 export const metadata = buildMetadata(
@@ -17,6 +19,7 @@ export default function LegalIndexPage() {
 
   return (
     <article className="legal-page legal-index-page">
+      <PageBreadcrumbs items={legalHubTrail()} />
       <section className="legal-hero-section">
         <span className="wiki-kicker">Legal</span>
         <h1>Palworld Wiki Legal</h1>

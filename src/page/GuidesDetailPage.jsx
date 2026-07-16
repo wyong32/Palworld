@@ -1,10 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import PageBreadcrumbs from "@/components/PageBreadcrumbs";
+import { buildBreadcrumbJsonLd, guidesDetailTrail } from "@/seo/breadcrumbs";
 import { siteConfig } from "@/seo/site";
 
 export default function GuidesDetailPage({ guide }) {
   const heading = guide.seo?.title || (guide.title.startsWith("Palworld") ? guide.title : `Palworld Guides - ${guide.title}`);
   const url = `${siteConfig.url}/guides/${guide.addressBar}`;
+  const breadcrumbs = guidesDetailTrail(guide);
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -20,20 +23,14 @@ export default function GuidesDetailPage({ guide }) {
         author: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
         publisher: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
       },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
-          { "@type": "ListItem", position: 2, name: "Palworld Guides", item: `${siteConfig.url}/guides` },
-          { "@type": "ListItem", position: 3, name: guide.title, item: url },
-        ],
-      },
+      buildBreadcrumbJsonLd(breadcrumbs),
     ],
   };
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <PageBreadcrumbs items={breadcrumbs} />
       <section className="detail-hero-section">
         <div className="container">
           <div className="detail-hero-content">
