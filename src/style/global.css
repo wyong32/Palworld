@@ -16,6 +16,8 @@
   --shadow-pop: 0 2px 0 rgba(13, 52, 61, 0.12);
   --radius-sm: 6px;
   --radius-md: 8px;
+  --font-baloo: "Arial Rounded MT Bold", "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+  --font-nunito: "Segoe UI", Arial, system-ui, sans-serif;
   --font-display: var(--font-baloo);
   --font-body: var(--font-nunito);
 }

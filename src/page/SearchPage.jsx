@@ -13,7 +13,7 @@ function SearchResultImage({ item }) {
     );
   }
 
-  return <Image src={item.imageUrl} alt={item.imageAlt || `${item.title} result`} width={82} height={82} />;
+  return <Image src={item.imageUrl} alt={item.imageAlt || `${item.title} result`} width={82} height={82} sizes="64px" />;
 }
 
 export default function SearchPage({ query }) {

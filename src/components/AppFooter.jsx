@@ -25,6 +25,7 @@ export default function AppFooter() {
                 src={siteConfig.logoImage}
                 width={40}
                 height={40}
+                sizes="40px"
                 alt=""
               />
               <strong>{siteConfig.name}</strong>

@@ -145,7 +145,7 @@ export default function DatabasePage({ items }) {
                     <div className="database-category-samples">
                       {group.sampleItems.slice(0, 4).map((item) => (
                         <Link href={item.href} key={item.href}>
-                          <Image src={item.imageUrl} alt="" width={42} height={42} />
+                          <Image src={item.imageUrl} alt="" width={42} height={42} sizes="42px" />
                           <span>{item.title}</span>
                         </Link>
                       ))}
@@ -178,7 +178,7 @@ export default function DatabasePage({ items }) {
             <div className="database-featured-grid">
               {data.featured.map((item) => (
                 <Link href={item.href} className="database-feature-card" key={item.href}>
-                  <Image src={item.imageUrl} alt={`${item.title} database item`} width={96} height={72} />
+                  <Image src={item.imageUrl} alt={`${item.title} database item`} width={96} height={72} sizes="64px" />
                   <span>
                     <strong>{item.title}</strong>
                     <small>{item.category} · {item.role}</small>

@@ -256,9 +256,10 @@ export default function BreedingPage() {
                 width={720}
                 height={420}
                 preload
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 42vw, 360px"
               />
               <div className="breeding-art-card">
-                <Image src="/images/database/breeding-farm.png" alt="Breeding Farm icon" width={72} height={72} />
+                <Image src="/images/database/breeding-farm.png" alt="Breeding Farm icon" width={72} height={72} sizes="54px" />
                 <div>
                   <strong>Farm + Cake + Incubator</strong>
                   <span>The core loop before combo hunting.</span>
@@ -353,6 +354,7 @@ export default function BreedingPage() {
                     alt={`${cake.name} Palworld breeding use`}
                     width={56}
                     height={56}
+                    sizes="48px"
                   />
                   <span>{cake.use}</span>
                 </div>

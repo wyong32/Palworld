@@ -59,7 +59,14 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
               </div>
             </div>
             <div className="detail-hero-image database-detail-hero-image">
-              <Image src={item.imageUrl} alt={item.imageAlt} width={760} height={570} preload />
+              <Image
+                src={item.imageUrl}
+                alt={item.imageAlt}
+                width={760}
+                height={570}
+                preload
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 42vw, 360px"
+              />
             </div>
           </div>
         </div>
@@ -115,7 +122,7 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
                   <div className="pal-related-grid">
                     {item.relatedPals.map((pal) => (
                       <Link href={pal.href} className="pal-related-card" key={pal.href}>
-                        <Image src={pal.imageUrl} alt={`${pal.title} Palworld icon`} width={92} height={92} />
+                        <Image src={pal.imageUrl} alt={`${pal.title} Palworld icon`} width={92} height={92} sizes="72px" />
                         <span>
                           <strong>{pal.title}</strong>
                           <small>{pal.element} · {pal.reasons.join(", ")}</small>
@@ -139,7 +146,7 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
                   <div className="pal-drop-grid">
                     {item.relatedItems.map((related) => (
                       <Link href={related.href} className="pal-drop-card" key={related.href}>
-                        <Image src={related.imageUrl} alt={`${related.title} database item`} width={96} height={72} />
+                        <Image src={related.imageUrl} alt={`${related.title} database item`} width={96} height={72} sizes="64px" />
                         <span>
                           <strong>{related.title}</strong>
                           <small>{related.category}</small>

@@ -32,7 +32,7 @@ function PalBadge({ pal, fallback }) {
 
   return (
     <Link className="breeding-pal-badge" href={`/pals/${pal.addressBar}`}>
-      <Image src={pal.imageUrl} alt={pal.imageAlt || pal.title} width={72} height={72} />
+      <Image src={pal.imageUrl} alt={pal.imageAlt || pal.title} width={72} height={72} sizes="52px" />
       <span>{pal.title}</span>
     </Link>
   );
@@ -41,7 +41,7 @@ function PalBadge({ pal, fallback }) {
 function ItemChip({ item, fallback, href }) {
   const content = (
     <>
-      {item?.imageUrl && <Image src={item.imageUrl} alt={item.imageAlt || item.title} width={44} height={44} />}
+      {item?.imageUrl && <Image src={item.imageUrl} alt={item.imageAlt || item.title} width={44} height={44} sizes="40px" />}
       <span>{item?.title || fallback}</span>
     </>
   );

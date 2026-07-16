@@ -119,7 +119,7 @@ export default function PalsExplorer({ data }) {
             <div className="pal-spotlight-row">
               {spotlight.pals.map((pal) => (
                 <Link href={pal.href} className="pal-mini-card" key={`${spotlight.key}-${pal.title}`}>
-                  <Image src={pal.imageUrl} alt={`${pal.title} Palworld icon`} width={78} height={78} />
+                  <Image src={pal.imageUrl} alt={`${pal.title} Palworld icon`} width={78} height={78} sizes="54px" />
                   <span>
                     <strong>{pal.title}</strong>
                     <small>{pal.roles.join(" / ") || pal.element}</small>
@@ -205,7 +205,7 @@ export default function PalsExplorer({ data }) {
         {filteredPals.map((pal) => (
           <article className="pal-result-card" key={pal.id}>
             <Link href={`/pals/${pal.addressBar}`} className="pal-result-image" aria-label={`Open ${pal.title} guide`}>
-              <Image src={pal.imageUrl} alt={pal.imageAlt} width={180} height={180} />
+              <Image src={pal.imageUrl} alt={pal.imageAlt} width={180} height={180} sizes="(max-width: 768px) 112px, 160px" />
             </Link>
             <div className="pal-result-body">
               <div className="pal-result-title">

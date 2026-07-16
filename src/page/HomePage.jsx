@@ -175,11 +175,12 @@ export default function HomePage() {
                 width={920}
                 height={520}
                 preload
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 330px, 48vw"
               />
               <div className="home-pal-stack" aria-label="Featured Pal shortcuts">
                 {heroPals.map((pal) => (
                   <Link href={`/pals/${pal.addressBar}`} key={pal.addressBar}>
-                    <Image src={pal.imageUrl} alt={pal.imageAlt} width={96} height={96} />
+                    <Image src={pal.imageUrl} alt={pal.imageAlt} width={96} height={96} sizes="38px" />
                     <span>{pal.title}</span>
                   </Link>
                 ))}
@@ -259,7 +260,7 @@ export default function HomePage() {
               <div className="home-pal-preview" aria-label="Pal role previews">
                 {featuredPals.map((pal) => (
                   <Link href={`/pals/${pal.addressBar}`} key={`${pal.addressBar}-preview`}>
-                    <Image src={pal.imageUrl} alt={pal.imageAlt} width={78} height={78} />
+                    <Image src={pal.imageUrl} alt={pal.imageAlt} width={78} height={78} sizes="52px" />
                     <span><strong>{pal.title}</strong><small>{getPalWorkSuitability(pal) || pal.element}</small></span>
                   </Link>
                 ))}

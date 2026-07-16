@@ -256,6 +256,7 @@ export default function UpdatesPage() {
                 width={720}
                 height={430}
                 preload
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 42vw, 360px"
               />
               <div className="updates-page-release-card">
                 <span>Current major version</span>

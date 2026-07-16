@@ -1,23 +1,9 @@
-import { Lexend, Source_Sans_3 } from "next/font/google";
 import AppFooter from "@/components/AppFooter";
 import AppHeader from "@/components/AppHeader";
 import AppSidebar from "@/components/AppSidebar";
 import { buildBaseJsonLd, buildMetadata, pageSeo, siteConfig } from "@/seo/site";
 import "@/style/global.css";
 import "@/style/site.css";
-
-const lexend = Lexend({
-  variable: "--font-baloo",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["500", "600", "700"],
-});
-
-const sourceSans = Source_Sans_3({
-  variable: "--font-nunito",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -28,7 +14,7 @@ const baseJsonLd = buildBaseJsonLd();
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${lexend.variable} ${sourceSans.variable}`}>
+    <html lang="en">
       <body>
         {baseJsonLd.map((schema, index) => (
           <script

@@ -49,7 +49,14 @@ export default function GuidesPage({ guides }) {
             <div className="listing-card-grid">
               {guides.map((guide) => (
                 <article className="listing-card" key={guide.id}>
-                  <Image className="listing-card-image" src={guide.imageUrl} alt={guide.imageAlt} width={900} height={506} />
+                  <Image
+                    className="listing-card-image"
+                    src={guide.imageUrl}
+                    alt={guide.imageAlt}
+                    width={900}
+                    height={506}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 45vw, 360px"
+                  />
                   <div className="listing-card-body">
                     <h2>{guide.title}</h2>
                     <p>{guide.summary}</p>

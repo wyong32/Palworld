@@ -95,7 +95,14 @@ export default function PalsDetailPage({ pal }) {
               </div>
             </div>
             <div className="detail-hero-image pal-detail-hero-image">
-              <Image src={pal.imageUrl} alt={pal.imageAlt} width={760} height={570} preload />
+              <Image
+                src={pal.imageUrl}
+                alt={pal.imageAlt}
+                width={760}
+                height={570}
+                preload
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 42vw, 360px"
+              />
             </div>
           </div>
         </div>
@@ -256,7 +263,7 @@ export default function PalsDetailPage({ pal }) {
                   <div className="pal-drop-grid">
                     {pal.linkedDrops.map((drop) => (
                       <Link href={drop.href} className="pal-drop-card" key={drop.href}>
-                        <Image src={drop.imageUrl} alt={`${drop.title} database item`} width={96} height={72} />
+                        <Image src={drop.imageUrl} alt={`${drop.title} database item`} width={96} height={72} sizes="64px" />
                         <span><strong>{drop.title}</strong><small>{drop.category}</small></span>
                       </Link>
                     ))}
@@ -282,7 +289,7 @@ export default function PalsDetailPage({ pal }) {
                 <div className="pal-related-grid">
                   {pal.relatedPals.map((related) => (
                     <Link href={related.href} className="pal-related-card" key={related.href}>
-                      <Image src={related.imageUrl} alt={`${related.title} Palworld icon`} width={92} height={92} />
+                      <Image src={related.imageUrl} alt={`${related.title} Palworld icon`} width={92} height={92} sizes="72px" />
                       <span><strong>{related.title}</strong><small>{related.element}</small></span>
                     </Link>
                   ))}

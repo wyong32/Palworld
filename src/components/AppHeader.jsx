@@ -14,8 +14,8 @@ export default function AppHeader() {
               src={siteConfig.logoImage}
               width={40}
               height={40}
+              sizes="40px"
               alt=""
-              priority
             />
             <span>
               <span className="site-brand-mark">Palworld Wiki</span>

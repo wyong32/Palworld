@@ -108,7 +108,7 @@ export default function DatabaseCategoryExplorer({ data }) {
         {filteredItems.map((item) => (
           <article className="database-result-card" key={item.id}>
             <Link href={item.href} className="database-result-image" aria-label={`Open ${item.title}`}>
-              <Image src={item.imageUrl} alt={item.imageAlt} width={132} height={96} />
+              <Image src={item.imageUrl} alt={item.imageAlt} width={132} height={96} sizes="112px" />
             </Link>
             <div className="database-result-body">
               <div className="database-result-heading">

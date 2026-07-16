@@ -40,7 +40,13 @@ export default function GuidesDetailPage({ guide }) {
               <p>{heading} helps players use {guide.summary.charAt(0).toLowerCase() + guide.summary.slice(1)}</p>
             </div>
             <div className="detail-hero-image">
-              <Image src={guide.imageUrl} alt={guide.imageAlt} width={760} height={570} />
+              <Image
+                src={guide.imageUrl}
+                alt={guide.imageAlt}
+                width={760}
+                height={570}
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 42vw, 360px"
+              />
             </div>
           </div>
         </div>
