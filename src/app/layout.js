@@ -1,3 +1,4 @@
+import Script from "next/script";
 import AppFooter from "@/components/AppFooter";
 import AppHeader from "@/components/AppHeader";
 import AppSidebar from "@/components/AppSidebar";
@@ -11,11 +12,28 @@ export const metadata = {
 };
 
 const baseJsonLd = buildBaseJsonLd();
+const googleAnalyticsId = "G-V3KEFG6ER0";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
+          strategy="afterInteractive"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${googleAnalyticsId}');
+            `,
+          }}
+        />
         {baseJsonLd.map((schema, index) => (
           <script
             key={`base-json-ld-${index}`}
