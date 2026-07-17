@@ -1,5 +1,6 @@
 import Link from "next/link";
 import MapFocusWorkbench from "@/components/MapFocusWorkbench";
+import { bossRouteHighlights } from "@/data/newContent";
 import PageBreadcrumbs from "@/components/PageBreadcrumbs";
 import { mapHubTrail } from "@/seo/breadcrumbs";
 import { pageSeo, siteConfig } from "@/seo/site";
@@ -196,6 +197,28 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
                 gear, and resource planning are not separated from the map result.
               </p>
             </article>
+          </div>
+        </section>
+
+        <section className="map-workbench-section" aria-labelledby="map-boss-routes-title">
+          <div className="map-workbench-section-head">
+            <span className="wiki-kicker">Boss routes</span>
+            <h2 id="map-boss-routes-title">New boss and tower routes added to Palworld 1.0.</h2>
+            <p>
+              Boss markers should lead into team, item, and route preparation. These 1.0 entries connect the map
+              to the Pal pages players should check before spending supplies on the run.
+            </p>
+          </div>
+          <div className="map-guidance-grid">
+            {bossRouteHighlights.map((route) => (
+              <article key={route.title}>
+                <h3>{route.title}</h3>
+                <p>
+                  <b>{route.region}</b> · {route.level}. {route.body}
+                </p>
+                <Link href={route.href}>Open related page</Link>
+              </article>
+            ))}
           </div>
         </section>
 

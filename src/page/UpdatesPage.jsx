@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import UpdateImpactBoard from "@/components/UpdateImpactBoard";
+import { bossRouteHighlights, newItemHighlights, newPalHighlights, onePointZeroCoverage } from "@/data/newContent";
 import PageBreadcrumbs from "@/components/PageBreadcrumbs";
 import { updatesHubTrail } from "@/seo/breadcrumbs";
 import { pageSeo, siteConfig } from "@/seo/site";
@@ -309,6 +310,64 @@ export default function UpdatesPage() {
                 <p>{action.body}</p>
                 {action.href && <Link href={action.href}>{action.linkText}</Link>}
                 <small>{action.proof}</small>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="updates-page-section" aria-labelledby="updates-new-content-title">
+          <div className="updates-section-head">
+            <span className="eyebrow">New content index</span>
+            <h2 id="updates-new-content-title">Palworld 1.0 additions that deserve their own route checks</h2>
+            <p>
+              New Pals, tower bosses, World Tree progression, and rare-item pressure should lead players into the
+              matching Pal, map, breeding, or Database page instead of staying as a broad update note.
+            </p>
+          </div>
+
+          <div className="updates-action-grid">
+            {onePointZeroCoverage.map((card) => (
+              <article key={card.title} className="updates-action-card">
+                <span>{card.label}</span>
+                <h3>{card.title}</h3>
+                <p>{card.body}</p>
+                <Link href={card.href}>Open route</Link>
+              </article>
+            ))}
+          </div>
+
+          <div className="pal-related-grid" aria-label="New Palworld 1.0 Pal and monster links">
+            {newPalHighlights.slice(0, 8).map((pal) => (
+              <Link href={pal.href} className="pal-related-card" key={pal.title}>
+                <Image src={pal.imageUrl} alt={pal.imageAlt} width={92} height={92} sizes="72px" />
+                <span><strong>{pal.title}</strong><small>{pal.note}</small></span>
+              </Link>
+            ))}
+          </div>
+
+          <div className="updates-impact-table" role="table" aria-label="Palworld 1.0 boss and item route additions">
+            {bossRouteHighlights.map((route) => (
+              <article key={route.title} role="row">
+                <div>
+                  <span>Boss route</span>
+                  <strong>{route.title}</strong>
+                </div>
+                <p><b>Region:</b> {route.region} · {route.level}</p>
+                <p>
+                  <b>Player use:</b> {route.body} <Link href={route.href}>Open related page</Link>
+                </p>
+              </article>
+            ))}
+            {newItemHighlights.slice(0, 5).map((item) => (
+              <article key={item.title} role="row">
+                <div>
+                  <span>Item route</span>
+                  <strong>{item.title}</strong>
+                </div>
+                <p><b>Category:</b> {item.category}</p>
+                <p>
+                  <b>Player use:</b> {item.note} <Link href={item.href}>Open item guide</Link>
+                </p>
               </article>
             ))}
           </div>

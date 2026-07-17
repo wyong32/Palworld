@@ -309,6 +309,109 @@ export function getPrimaryWork(work) {
   return [...work].sort((a, b) => b.level - a.level || a.type.localeCompare(b.type))[0] || null;
 }
 
+function getPalInvestmentCards(pal, { primaryWork, travelType, roles, linkedDrops, linkedTech }) {
+  const hasCombatRole = roles.includes("Combat Candidate");
+  const strongestDrop = linkedDrops[0];
+  const buildAround = primaryWork
+    ? `${pal.title} is easiest to justify when ${primaryWork.type} Lv.${primaryWork.level} is the job you need filled right now. Keep the assignment narrow so the Pal does not wander between lower-impact stations.`
+    : travelType
+      ? `${pal.title} is most useful when ${travelType.toLowerCase()} movement solves a route problem faster than another combat or base worker would.`
+      : hasCombatRole
+        ? `${pal.title} is worth testing when ${pal.element || "its element"} coverage matches the boss, dungeon, or Alpha Pal you are preparing for.`
+        : `${pal.title} works best as a Paldeck, comparison, or parent-check entry until a stronger base, travel, or combat reason appears.`;
+  const investWhen = hasCombatRole
+    ? `Invest once the matchup, Partner Skill, and passive line all support the same fight plan. Avoid spending rare upgrades before checking the target encounter.`
+    : primaryWork && primaryWork.level >= 4
+      ? `Invest when this worker removes a real production bottleneck, especially if the base already has food, beds, transport, and storage pathing under control.`
+      : linkedTech
+        ? `Invest after the matching Pal Gear is useful to your route; catching the Pal alone is not enough if the gear action will sit unused.`
+        : `Invest only after the Pal fills a repeatable task in your base, team, or breeding plan.`;
+  const delayWhen = primaryWork
+    ? `Delay extra copies when another Pal already covers ${primaryWork.type} at the same or higher level and your base bottleneck is storage, transport, food, or power instead.`
+    : linkedDrops.length > 0
+      ? `Delay training if you only need ${strongestDrop.title}; a dedicated farming route can be faster than building a permanent team slot around this Pal.`
+      : `Delay investment when the page does not show a clear work, travel, drop, or combat reason for your current route.`;
+
+  return [
+    {
+      label: "Build around",
+      title: "Use it when the job is clear",
+      text: buildAround,
+    },
+    {
+      label: "Worth investing",
+      title: "Commit after the route checks out",
+      text: investWhen,
+    },
+    {
+      label: "Hold resources",
+      title: "Skip extra upgrades when the need is weak",
+      text: delayWhen,
+    },
+  ];
+}
+
+function getAlternativePals(pal, { allPals, work, primaryWork, roles, travelType }) {
+  const fallbackRole = travelType || (roles.includes("Combat Candidate") ? "Combat Candidate" : "");
+
+  return allPals
+    .filter((candidate) => candidate.addressBar !== pal.addressBar)
+    .map((candidate) => {
+      const candidateWork = getCurrentWork(candidate);
+      const sameWork = primaryWork
+        ? candidateWork.find((entry) => entry.type === primaryWork.type)
+        : null;
+      const candidateRoles = getPalRoles(candidate);
+      const sameRole = fallbackRole && candidateRoles.includes(fallbackRole);
+      const sameElements = candidate.elements?.filter((element) => pal.elements?.includes(element)).length || 0;
+      const score =
+        (sameWork ? sameWork.level * 4 : 0) +
+        (sameRole ? 6 : 0) +
+        (sameElements * 2);
+
+      return { candidate, score, sameWork, sameRole };
+    })
+    .filter((entry) => entry.score > 0)
+    .sort((a, b) => b.score - a.score || a.candidate.title.localeCompare(b.candidate.title))
+    .slice(0, 4)
+    .map(({ candidate, sameWork, sameRole }) => ({
+      title: candidate.title,
+      href: `/pals/${candidate.addressBar}`,
+      imageUrl: candidate.imageUrl,
+      element: candidate.element,
+      note: sameWork
+        ? `${sameWork.type} Lv.${sameWork.level}`
+        : sameRole
+          ? travelType || "Combat role"
+          : candidate.element,
+    }));
+}
+
+function getSharedDropPals(pal, { allPals, linkedDrops }) {
+  const dropTitles = linkedDrops.map((drop) => drop.title);
+
+  if (dropTitles.length === 0) {
+    return [];
+  }
+
+  return allPals
+    .filter((candidate) => candidate.addressBar !== pal.addressBar)
+    .map((candidate) => {
+      const matches = dropTitles.filter((title) => itemMatchesDrop(candidate.drops || "", title));
+      return { candidate, matches };
+    })
+    .filter((entry) => entry.matches.length > 0)
+    .sort((a, b) => b.matches.length - a.matches.length || a.candidate.title.localeCompare(b.candidate.title))
+    .slice(0, 4)
+    .map(({ candidate, matches }) => ({
+      title: candidate.title,
+      href: `/pals/${candidate.addressBar}`,
+      imageUrl: candidate.imageUrl,
+      element: candidate.element,
+      note: matches.slice(0, 2).join(", "),
+    }));
+}
+
 export function getPalGuideSummary(pal) {
   const work = getCurrentWork(pal);
   const primaryWork = getPrimaryWork(work);
@@ -383,6 +486,21 @@ export function enrichPal(pal, { items = [], allPals = [] } = {}) {
       element: candidate.element,
       workSuitability: formatWorkSuitability(getCurrentWork(candidate)),
     }));
+  const investmentCards = getPalInvestmentCards(pal, {
+    primaryWork,
+    travelType,
+    roles,
+    linkedDrops,
+    linkedTech,
+  });
+  const alternativePals = getAlternativePals(pal, {
+    allPals,
+    work,
+    primaryWork,
+    roles,
+    travelType,
+  });
+  const sharedDropPals = getSharedDropPals(pal, { allPals, linkedDrops });
 
   return {
     ...pal,
@@ -398,6 +516,9 @@ export function enrichPal(pal, { items = [], allPals = [] } = {}) {
     strongAgainst,
     weakAgainst,
     relatedPals,
+    investmentCards,
+    alternativePals,
+    sharedDropPals,
     breedingCombos,
     recommendations: {
       base:

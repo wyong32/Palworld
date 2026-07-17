@@ -1,6 +1,7 @@
 import { databaseCategorySlug, getDatabaseCategoryGroups } from "@/data/database";
 import { guides } from "@/data/guides";
 import { items } from "@/data/items";
+import { bossRouteHighlights, newItemHighlights, newPalHighlights, onePointZeroCoverage } from "@/data/newContent";
 import { getPalWorkSuitability } from "@/data/palGuide";
 import { pals } from "@/data/pals";
 import Image from "next/image";
@@ -308,6 +309,80 @@ export default function HomePage() {
                   <span>{item.body}</span>
                 </Link>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="home-section home-objective-section" aria-labelledby="home-new-content-title">
+        <div className="container">
+          <div className="home-section-head">
+            <div>
+              <span className="wiki-kicker">New in Palworld 1.0</span>
+              <h2 id="home-new-content-title">New Pals, bosses, regions, and route pressure</h2>
+              <p>
+                Version 1.0 is not just a patch note. It adds new Pal goals, boss routes, endgame
+                regions, and items that change what players should check before a long run.
+              </p>
+            </div>
+            <Link href="/updates">Full update desk</Link>
+          </div>
+
+          <div className="home-objective-grid">
+            {onePointZeroCoverage.map((card) => (
+              <article key={card.title}>
+                <span>{card.label}</span>
+                <h3>{card.title}</h3>
+                <p>{card.body}</p>
+                <Link href={card.href}>Open related guide</Link>
+              </article>
+            ))}
+          </div>
+
+          <div className="home-planning-grid">
+            <div className="home-pal-board">
+              <div className="home-section-head">
+                <div>
+                  <span className="wiki-kicker">New Pal checks</span>
+                  <h2>1.0 Pals and special creatures to compare first</h2>
+                  <p>Open the Pal page before committing Spheres, parent routes, boss prep, or upgrade materials.</p>
+                </div>
+                <Link href="/pals">All Pal entries</Link>
+              </div>
+              <div className="home-pal-preview" aria-label="New Palworld 1.0 Pal shortcuts">
+                {newPalHighlights.slice(0, 8).map((pal) => (
+                  <Link href={pal.href} key={pal.title}>
+                    <Image src={pal.imageUrl} alt={pal.imageAlt} width={78} height={78} sizes="52px" />
+                    <span><strong>{pal.title}</strong><small>{pal.note}</small></span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="home-category-board">
+              <div>
+                <div>
+                  <span className="wiki-kicker">Boss and item routes</span>
+                  <h2>What changed your next long route?</h2>
+                </div>
+                <Link href="/map">Open map</Link>
+              </div>
+              <div className="home-category-grid">
+                {bossRouteHighlights.slice(0, 2).map((route) => (
+                  <Link href={route.href} className="home-category-card" key={route.title}>
+                    <strong>{route.title}</strong>
+                    <span>{route.region}</span>
+                    <small>{route.body}</small>
+                  </Link>
+                ))}
+                {newItemHighlights.slice(0, 4).map((item) => (
+                  <Link href={item.href} className="home-category-card" key={item.title}>
+                    <strong>{item.title}</strong>
+                    <span>{item.category}</span>
+                    <small>{item.note}</small>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </div>

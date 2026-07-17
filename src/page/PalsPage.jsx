@@ -1,9 +1,12 @@
 import PalsExplorer from "@/components/PalsExplorer";
 import PageBreadcrumbs from "@/components/PageBreadcrumbs";
 import { items } from "@/data/items";
+import { newPalHighlights, specialMonsterHighlights, unreleasedArchiveHighlights } from "@/data/newContent";
 import { buildPalExplorerData } from "@/data/palGuide";
 import { palsHubTrail } from "@/seo/breadcrumbs";
 import { siteConfig } from "@/seo/site";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function PalsPage({ pals }) {
   const breadcrumbs = palsHubTrail();
@@ -50,6 +53,39 @@ export default function PalsPage({ pals }) {
 
       <section className="pals-table-section" id="pal-results">
         <div className="container">
+          <section className="pal-spotlight-grid" aria-label="Palworld 1.0 additions and special creatures">
+            <article className="pal-spotlight-card">
+              <div className="pal-spotlight-head">
+                <span>1.0 additions</span>
+                <h2>New Palworld Pals to check before route planning</h2>
+                <p>These entries connect new regions, boss routes, Paldeck goals, and team planning back into individual Pal pages.</p>
+              </div>
+              <div className="pal-spotlight-row">
+                {newPalHighlights.slice(0, 8).map((pal) => (
+                  <Link href={pal.href} className="pal-mini-card" key={pal.title}>
+                    <Image src={pal.imageUrl} alt={pal.imageAlt} width={78} height={78} sizes="54px" />
+                    <span><strong>{pal.title}</strong><small>{pal.note}</small></span>
+                  </Link>
+                ))}
+              </div>
+            </article>
+
+            <article className="pal-spotlight-card">
+              <div className="pal-spotlight-head">
+                <span>Special creatures</span>
+                <h2>Terraria Monsters and archive entries</h2>
+                <p>Crossover creatures and archive entries stay searchable so players can separate active planning from collection tracking.</p>
+              </div>
+              <div className="pal-spotlight-row">
+                {[...specialMonsterHighlights.slice(0, 4), ...unreleasedArchiveHighlights.slice(0, 4)].map((pal) => (
+                  <Link href={pal.href} className="pal-mini-card" key={pal.title}>
+                    <Image src={pal.imageUrl} alt={pal.imageAlt} width={78} height={78} sizes="54px" />
+                    <span><strong>{pal.title}</strong><small>{pal.note}</small></span>
+                  </Link>
+                ))}
+              </div>
+            </article>
+          </section>
           <PalsExplorer data={explorerData} />
         </div>
       </section>

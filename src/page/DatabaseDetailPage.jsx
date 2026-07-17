@@ -17,6 +17,25 @@ function FactRow({ label, value }) {
   );
 }
 
+function DecisionCard({ card }) {
+  return (
+    <article>
+      <strong>{card.label}</strong>
+      <span>
+        <b>{card.title}</b>
+        {" "}
+        {card.text}
+        {card.href && (
+          <>
+            {" "}
+            <Link href={card.href}>{card.linkLabel}</Link>
+          </>
+        )}
+      </span>
+    </article>
+  );
+}
+
 export default function DatabaseDetailPage({ item, categorySlug }) {
   const url = `${siteConfig.url}/database/${categorySlug}/${item.addressBar}`;
   const breadcrumbs = databaseItemTrail(item, categorySlug);
@@ -95,6 +114,11 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
                     </div>
                   ))}
                 </div>
+                <div className="database-hint-grid" aria-label={`${item.title} player decision notes`}>
+                  {item.decisionCards.map((card) => (
+                    <DecisionCard card={card} key={card.label} />
+                  ))}
+                </div>
               </section>
 
               <section className="pal-detail-section" id="how-to-get">
@@ -107,6 +131,20 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
                       <strong>Route hint</strong>
                       <span>{hint}</span>
                     </article>
+                  ))}
+                </div>
+                <div className="database-step-list" aria-label={`${item.title} task chain`}>
+                  {item.routeSteps.map((step, index) => (
+                    <div key={step.label}>
+                      <strong>{String(index + 1).padStart(2, "0")}</strong>
+                      <span>
+                        <b>{step.label}.</b>
+                        {" "}
+                        {step.text}
+                        {" "}
+                        <Link href={step.href}>{step.linkLabel}</Link>
+                      </span>
+                    </div>
                   ))}
                 </div>
               </section>
@@ -164,10 +202,12 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
             <aside className="detail-side-panel database-detail-side-panel">
               <h2>Item Facts</h2>
               <dl className="detail-fact-list">
+                <FactRow label="Game Version" value="Palworld 1.0" />
                 <FactRow label="Primary Category" value={item.category} />
                 <FactRow label="Player Role" value={item.role} />
                 <FactRow label="Listed Categories" value={item.categories.join(", ")} />
                 <FactRow label="Updated" value={item.lastChecked} />
+                <FactRow label="Page Type" value="Item guide and route planning" />
               </dl>
               <div className="detail-related-links">
                 <Link href={`/database/${categorySlug}`}>Back to {item.category}</Link>

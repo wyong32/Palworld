@@ -27,6 +27,19 @@ function GuideCard({ title, verdict, children }) {
   );
 }
 
+function DecisionCard({ card }) {
+  return (
+    <article>
+      <strong>{card.label}</strong>
+      <span>
+        <b>{card.title}</b>
+        {" "}
+        {card.text}
+      </span>
+    </article>
+  );
+}
+
 function JoinList({ values, fallback = "No direct advantage listed" }) {
   return values.length > 0 ? values.join(", ") : fallback;
 }
@@ -152,6 +165,11 @@ export default function PalsDetailPage({ pal }) {
                       : "Use it as a parent only when its species result, passives, or work role moves the target line forward."}
                   </GuideCard>
                 </div>
+                <div className="database-hint-grid" aria-label={`${pal.title} route decision notes`}>
+                  {pal.investmentCards.map((card) => (
+                    <DecisionCard card={card} key={card.label} />
+                  ))}
+                </div>
               </section>
 
               <section id="work-planner" className="pal-detail-section">
@@ -271,6 +289,22 @@ export default function PalsDetailPage({ pal }) {
                 ) : (
                   <p>No matching Database item page is linked for this Pal&apos;s current drop text.</p>
                 )}
+                {pal.sharedDropPals.length > 0 && (
+                  <>
+                    <p>
+                      If the goal is farming the item instead of training {pal.title}, compare these Pals before
+                      locking the route.
+                    </p>
+                    <div className="pal-related-grid">
+                      {pal.sharedDropPals.map((related) => (
+                        <Link href={related.href} className="pal-related-card" key={related.href}>
+                          <Image src={related.imageUrl} alt={`${related.title} Palworld icon`} width={92} height={92} sizes="72px" />
+                          <span><strong>{related.title}</strong><small>{related.note}</small></span>
+                        </Link>
+                      ))}
+                    </div>
+                  </>
+                )}
                 {pal.linkedTech && (
                   <div className="pal-tech-callout">
                     <strong>Pal Gear</strong>
@@ -294,12 +328,29 @@ export default function PalsDetailPage({ pal }) {
                     </Link>
                   ))}
                 </div>
+                {pal.alternativePals.length > 0 && (
+                  <>
+                    <p>
+                      For the same job or route pressure, check these alternatives before replacing a trained worker,
+                      mount, or combat Pal.
+                    </p>
+                    <div className="pal-related-grid">
+                      {pal.alternativePals.map((related) => (
+                        <Link href={related.href} className="pal-related-card" key={`${related.href}-alternative`}>
+                          <Image src={related.imageUrl} alt={`${related.title} Palworld icon`} width={92} height={92} sizes="72px" />
+                          <span><strong>{related.title}</strong><small>{related.note}</small></span>
+                        </Link>
+                      ))}
+                    </div>
+                  </>
+                )}
               </section>
             </article>
 
             <aside className="detail-side-panel pal-detail-side-panel">
               <h2>{pal.title} facts</h2>
               <dl className="detail-fact-list">
+                <FactRow label="Game Version" value="Palworld 1.0" />
                 <FactRow label="Paldeck No." value={pal.number} />
                 <FactRow label="Element" value={pal.element} />
                 <FactRow label="Recommended Role" value={pal.recommendations.base} />
@@ -309,6 +360,7 @@ export default function PalsDetailPage({ pal }) {
                 <FactRow label="Habitat" value={pal.habitat} />
                 <FactRow label="Group" value={pal.section} />
                 <FactRow label="Updated" value={updatedDate} />
+                <FactRow label="Page Type" value="Pal guide and route planning" />
               </dl>
               <div className="detail-related-links">
                 <Link href="/pals">Back to Paldeck</Link>
