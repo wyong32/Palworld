@@ -58,8 +58,8 @@ export default function DatabasePage({ items }) {
             <h1>Palworld Database - Items, Gear, Materials, and Structures</h1>
             <p>
               Palworld Database starts with the category that matches your goal, then drills into item
-              lists and detail pages with acquisition hints, usage steps, related Pals, crafting context,
-              and connected item routes.
+              lists and detail pages with acquisition hints, usage steps, related <Link href="/pals">Pals</Link>, crafting context,
+              and connected <Link href="/map">item routes</Link>.
             </p>
             <div className="database-hero-actions">
               <a href="#database-categories">Browse categories</a>
@@ -98,7 +98,7 @@ export default function DatabasePage({ items }) {
                 <p>
                   The Database starts as a category index. Pick the lane that matches your current
                   route, open its second-level item list, then use item pages for acquisition notes,
-                  related Pals, acquisition routes, and practical uses.
+                  related <Link href="/pals">Pals</Link>, acquisition routes, and practical uses.
                 </p>
               </div>
               <div className="database-route-lanes">
@@ -172,7 +172,7 @@ export default function DatabasePage({ items }) {
               <h2>Route-critical items to check first</h2>
               <p>
                 These entries connect common player workflows: capture progression, ammo stockpiles,
-                armor upgrades, breeding support, Pal Gear, and material chains.
+                armor upgrades, <Link href="/breeding">breeding support</Link>, Pal Gear, and <Link href="/database/materials">material chains</Link>.
               </p>
             </div>
             <div className="database-featured-grid">

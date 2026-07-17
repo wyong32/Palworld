@@ -18,7 +18,7 @@ export const guides = [
     },
     detailsHtml: `
       <h2>What Changed in Palworld 1.0</h2>
-      <p>Palworld 1.0 is not just a content patch. The game exits Early Access with Sunreach, the World Tree, 72 new Pals, rebalanced Pal habitats, changed capture and crafting progression, Awakening, Mutation, and a clearer route from exploration into tower bosses and World Tree goals. Treat older Early Access routes as starting points, not as final answers.</p>
+      <p>Palworld 1.0 is not just a content patch. The game exits Early Access with <a href="/map">Sunreach</a>, the <a href="/guides/world-tree-preparation-checklist">World Tree</a>, 72 new <a href="/pals">Pals</a>, rebalanced Pal habitats, changed capture and crafting progression, Awakening, <a href="/breeding">Mutation</a>, and a clearer route from exploration into tower bosses and World Tree goals. Treat older Early Access routes as starting points, not as final answers.</p>
 
       <h2>Recommended Progression Route</h2>
       <ol>
@@ -26,8 +26,8 @@ export const guides = [
         <li><strong>Capture workers by role.</strong> Prioritize planting, watering, kindling, handiwork, mining, lumbering, transporting, and gathering. Open the <a href="/pals">Pal explorer</a> when you need work-suitability filters.</li>
         <li><strong>Unlock map control.</strong> Watchtowers reveal surrounding map areas and serve as fast travel points, so new routes should include watchtower checks instead of only old statue loops.</li>
         <li><strong>Progress through towers deliberately.</strong> Main missions and tower progress now connect more naturally to the World Tree path, and some mission progress resets or auto-completes depending on prior tower defeats.</li>
-        <li><strong>Scale crafting in tiers.</strong> Crafting materials, weapons, armor, ammo, schematics, saddles, and technology unlocks were rebalanced, so rebuild your upgrade plan around the current Database rather than old costs.</li>
-        <li><strong>Move into Sunreach and World Tree prep.</strong> Sunreach adds new Pals, tower bosses, and specialized ores; the World Tree is tied to the core story and Awakening resources.</li>
+        <li><strong>Scale crafting in tiers.</strong> Crafting materials, weapons, armor, ammo, schematics, saddles, and technology unlocks were rebalanced, so rebuild your upgrade plan around the current <a href="/database">Database</a> rather than old costs.</li>
+        <li><strong>Move into Sunreach and World Tree prep.</strong> <a href="/map">Sunreach</a> adds new Pals, tower bosses, and specialized ores; the <a href="/guides/world-tree-preparation-checklist">World Tree</a> is tied to the core story and Awakening resources.</li>
       </ol>
 
       <h2>Early Game Priorities</h2>
@@ -39,7 +39,7 @@ export const guides = [
       </ul>
 
       <h2>Midgame Checks Before Endgame Pushes</h2>
-      <p>Before you focus on World Tree or high-difficulty content, review your equipment, Pal levels, mounts, ammo supply, repair materials, and base output. Version 1.0 also changes accessory acquisition, shop rewards, expedition rewards, boss placement, and high-difficulty content balance, so midgame planning should include a fresh item and map check.</p>
+      <p>Before you focus on <a href="/guides/world-tree-preparation-checklist">World Tree</a> or high-difficulty content, review your equipment, Pal levels, mounts, ammo supply, repair materials, and base output. Version 1.0 also changes accessory acquisition, shop rewards, expedition rewards, boss placement, and high-difficulty content balance, so midgame planning should include a fresh <a href="/database">item</a> and <a href="/map">map</a> check.</p>
       <ul>
         <li>Use <a href="/database">Database</a> pages for current item categories, structures, materials, and gear links.</li>
         <li>Use <a href="/breeding">Breeding</a> when you need a target Pal route, passive chain, Cake loop, or Mutation batch.</li>
@@ -74,7 +74,7 @@ export const guides = [
     },
     detailsHtml: `
       <h2>Why the World Tree Matters in 1.0</h2>
-      <p>The World Tree is now a real progression destination rather than a distant landmark. In 1.0 it becomes central to the story route, tied to one of the game's hardest challenges, and connected to Awakening resources found in the newly opened mystical area.</p>
+      <p>The <a href="/guides/world-tree-preparation-checklist">World Tree</a> is now a real progression destination rather than a distant landmark. In 1.0 it becomes central to the story route, tied to one of the game's hardest challenges, and connected to Awakening resources found in the newly opened mystical area.</p>
 
       <h2>World Tree Readiness Checklist</h2>
       <ul>
@@ -87,7 +87,7 @@ export const guides = [
       </ul>
 
       <h2>Resource and Database Checks</h2>
-      <p>Version 1.0 adds Soralite and Paloxite, with Soralite tied to Sunreach and Paloxite tied to the World Tree. Because these resources feed new crafting and building content, treat World Tree scouting as both a combat objective and a material route.</p>
+      <p>Version 1.0 adds Soralite and Paloxite, with Soralite tied to <a href="/map">Sunreach</a> and Paloxite tied to the <a href="/guides/world-tree-preparation-checklist">World Tree</a>. Because these resources feed new crafting and building content, treat World Tree scouting as both a combat objective and a material route.</p>
       <ul>
         <li>Open <a href="/database/materials">Materials</a> before a long run so item names, categories, and related links are one click away.</li>
         <li>Open <a href="/map">Map</a> to check exploration layers, nearby routes, resources, and boss preparation paths.</li>

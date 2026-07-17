@@ -4561,6 +4561,62 @@ select:focus-visible {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.breeding-calculator-tool .breeding-combo-pals {
+  position: relative;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  align-items: stretch;
+}
+
+.breeding-calculator-tool .breeding-combo-pals .calculator-pal-summary {
+  grid-template-columns: 1fr;
+  align-content: start;
+  justify-items: center;
+  min-height: 116px;
+  gap: 5px;
+  padding: 8px 6px;
+  text-align: center;
+}
+
+.breeding-calculator-tool .breeding-combo-pals .calculator-pal-summary img,
+.breeding-calculator-tool .breeding-combo-pals .calculator-pal-fallback {
+  width: 50px;
+  height: 50px;
+}
+
+.breeding-calculator-tool .breeding-combo-pals .calculator-pal-summary span {
+  justify-items: center;
+}
+
+.breeding-calculator-tool .breeding-combo-pals .calculator-pal-summary strong {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.breeding-calculator-tool .breeding-combo-symbol {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid rgba(8, 145, 178, 0.18);
+  border-radius: 999px;
+  background: #fffdf5;
+  box-shadow: 0 6px 14px rgba(16, 42, 50, 0.12);
+  transform: translate(-50%, -50%);
+}
+
+.breeding-calculator-tool .breeding-combo-symbol:nth-of-type(1) {
+  left: 33.333%;
+}
+
+.breeding-calculator-tool .breeding-combo-symbol:nth-of-type(2) {
+  left: 66.666%;
+}
+
 .breeding-calculator-tabs {
   display: flex;
   flex-wrap: wrap;
@@ -4966,6 +5022,35 @@ select:focus-visible {
   .calculator-result-equation,
   .calculator-pair-pals {
     grid-template-columns: 1fr;
+  }
+
+  .breeding-calculator-tool .breeding-combo-pals {
+    grid-template-columns: 1fr;
+  }
+
+  .breeding-calculator-tool .breeding-combo-pals .calculator-pal-summary {
+    grid-template-columns: 48px minmax(0, 1fr);
+    align-content: center;
+    justify-items: start;
+    min-height: auto;
+    padding: 7px;
+    text-align: left;
+  }
+
+  .breeding-calculator-tool .breeding-combo-pals .calculator-pal-summary img,
+  .breeding-calculator-tool .breeding-combo-pals .calculator-pal-fallback {
+    width: 48px;
+    height: 48px;
+  }
+
+  .breeding-calculator-tool .breeding-combo-pals .calculator-pal-summary span {
+    justify-items: start;
+  }
+
+  .breeding-calculator-tool .breeding-combo-symbol {
+    position: static;
+    justify-self: center;
+    transform: none;
   }
 
   .calculator-result-equation > strong,

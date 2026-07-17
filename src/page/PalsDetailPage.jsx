@@ -81,7 +81,7 @@ export default function PalsDetailPage({ pal }) {
               <h1>Palworld Pals - {pal.title} Guide</h1>
               <p>
                 {intro} Compare its base role, element matchups, Partner Skill, drops,
-                breeding options, and the Pals that compete for the same job.
+                {" "}<Link href="/breeding/calculator">breeding options</Link>, and the <Link href="/pals">Pals</Link> that compete for the same job.
               </p>
               <div className="pal-detail-chip-row">
                 {pal.elements.map((element) => (
@@ -128,7 +128,7 @@ export default function PalsDetailPage({ pal }) {
                 <p>
                   Choose {pal.title} for the role it performs well, not simply because it is available.
                   These recommendations combine the work levels, element, mount role, Partner Skill,
-                  drops, and known breeding routes recorded on this page.
+                  drops, and known <Link href="/breeding/calculator">breeding routes</Link> recorded on this page.
                 </p>
                 <div className="pal-guide-card-grid">
                   <GuideCard title="Base work" verdict={pal.recommendations.base}>
@@ -246,7 +246,7 @@ export default function PalsDetailPage({ pal }) {
                 ) : (
                   <p>
                     No curated combination involving {pal.title} is recorded in the current planner. Use the general
-                    <Link href="/breeding#planner"> Palworld breeding planner</Link> to compare available parent routes,
+                    {" "}<Link href="/breeding/calculator">Palworld breeding planner</Link> to compare available parent routes,
                     then verify the result before scaling a passive or Mutation line.
                   </p>
                 )}
@@ -257,7 +257,7 @@ export default function PalsDetailPage({ pal }) {
                 <h2>{pal.title} drops and Database links</h2>
                 <p>
                   The listed drops are {pal.drops || "not yet recorded"}. Open a linked item when you need its
-                  category, use case, related materials, or the next Pal connection.
+                  category, use case, related materials, or the next <Link href="/pals">Pal connection</Link>.
                 </p>
                 {pal.linkedDrops.length > 0 ? (
                   <div className="pal-drop-grid">
@@ -313,7 +313,7 @@ export default function PalsDetailPage({ pal }) {
               <div className="detail-related-links">
                 <Link href="/pals">Back to Paldeck</Link>
                 <Link href="/map">Find on the map</Link>
-                <Link href="/breeding#planner">Open breeding planner</Link>
+                <Link href="/breeding/calculator">Open breeding planner</Link>
               </div>
             </aside>
           </div>

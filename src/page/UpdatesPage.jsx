@@ -18,15 +18,21 @@ const priorityActions = [
   {
     label: "Returning players",
     title: "Check saves, mods, and old routes before grinding",
-    body:
-      "Version 1.0 touches progression, habitats, towers, partner skills, breeding, bases, and the world map. Remove or update mods first, then retest old resource loops before treating them as current.",
+    body: (
+      <>
+        Version 1.0 touches progression, habitats, towers, partner skills, <Link href="/breeding">breeding</Link>, bases, and the <Link href="/map">world map</Link>. Remove or update mods first, then retest old resource loops before treating them as current.
+      </>
+    ),
     proof: "Best used before long farming sessions.",
   },
   {
     label: "Pal hunters",
     title: "Rebuild Paldeck goals around new habitats and variants",
-    body:
-      "The 1.0 roster adds 47 new Pals and 25 variants. Use the Pal explorer to compare elements, work suitability, drops, and team roles before committing rare Spheres.",
+    body: (
+      <>
+        The 1.0 roster adds 47 new <Link href="/pals">Pals</Link> and 25 variants. Use the Pal explorer to compare elements, work suitability, drops, and team roles before committing rare Spheres.
+      </>
+    ),
     href: "/pals",
     linkText: "Open the Pal explorer",
     proof: "Version 1.0 roster planning.",
@@ -34,8 +40,11 @@ const priorityActions = [
   {
     label: "Explorers",
     title: "Treat Sunreach and World Tree as version-marked routes",
-    body:
-      "Sunreach, the World Tree, Watchtowers, settlements, Ancient Ruins, seven new small islands, and rebalanced habitats make old map advice fragile. Start from the interactive map, then confirm the route you actually plan to run.",
+    body: (
+      <>
+        Sunreach, the <Link href="/guides/world-tree-preparation-checklist">World Tree</Link>, Watchtowers, settlements, Ancient Ruins, seven new small islands, and rebalanced habitats make old map advice fragile. Start from the <Link href="/map">interactive map</Link>, then confirm the route you actually plan to run.
+      </>
+    ),
     href: "/map",
     linkText: "Use the interactive map",
     proof: "Route planning for the expanded world.",
@@ -43,8 +52,11 @@ const priorityActions = [
   {
     label: "Breeders",
     title: "Separate normal breeding from Mutation experiments",
-    body:
-      "Mutation and special cakes now change breeding planning. Keep clean passive lines apart from Mushroom, Vegetable, Deluxe Vegetable, and Special Cake tests.",
+    body: (
+      <>
+        Mutation and special cakes now change <Link href="/breeding">breeding</Link> planning. Keep clean passive lines apart from Mushroom, Vegetable, Deluxe Vegetable, and Special <Link href="/database/ingredients/cake">Cake</Link> tests.
+      </>
+    ),
     href: "/breeding",
     linkText: "Plan breeding batches",
     proof: "Mutation and cake batch planning.",
@@ -52,8 +64,11 @@ const priorityActions = [
   {
     label: "Crafters",
     title: "Recheck materials, weapons, structures, and recipes",
-    body:
-      "Soralite, Paloxite, accessory schematics, new equipment, base pieces, ores, and technology mean old storage layouts and material priorities may be wrong. Use Database categories for item planning instead of broad update posts.",
+    body: (
+      <>
+        Soralite, Paloxite, accessory schematics, new equipment, base pieces, ores, and technology mean old storage layouts and material priorities may be wrong. Use <Link href="/database">Database categories</Link> for item planning instead of broad update posts.
+      </>
+    ),
     href: "/database",
     linkText: "Browse Database categories",
     proof: "Item and base-building refresh.",
@@ -240,8 +255,8 @@ export default function UpdatesPage() {
               <span className="eyebrow">Palworld 1.0 Update Desk</span>
               <h1 id="updates-page-title">Palworld Updates - 1.0 Patch Notes, New Pals, and Route Changes</h1>
               <p>
-                Palworld Updates tracks 1.0 patch notes, new Pals, Sunreach, World Tree routes,
-                Awakening, Mutation, Database changes, and the player routes that need a fresh check.
+                Palworld Updates tracks 1.0 patch notes, new <Link href="/pals">Pals</Link>, <Link href="/map">Sunreach</Link>, <Link href="/guides/world-tree-preparation-checklist">World Tree routes</Link>,
+                Awakening, <Link href="/breeding">Mutation</Link>, <Link href="/database">Database</Link> changes, and the player routes that need a fresh check.
               </p>
               <div className="updates-page-proof">
                 <span>Last checked: 2026-07-15</span>
@@ -282,8 +297,8 @@ export default function UpdatesPage() {
             <span className="eyebrow">Player priority</span>
             <h2 id="updates-actions-title">Palworld Updates checklist: what to do first after 1.0</h2>
             <p>
-              These player routes turn the biggest 1.0 changes into concrete next steps. Open a Pal, item, breeding,
-              or map page only when it helps the next action.
+              These player routes turn the biggest 1.0 changes into concrete next steps. Open a <Link href="/pals">Pal</Link>, <Link href="/database">item</Link>, <Link href="/breeding">breeding</Link>,
+              or <Link href="/map">map</Link> page only when it helps the next action.
             </p>
           </div>
           <div className="updates-action-grid">

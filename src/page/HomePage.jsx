@@ -157,8 +157,8 @@ export default function HomePage() {
               <span className="wiki-kicker">Palworld Wiki</span>
               <h1>Palworld Wiki - Pals, Breeding, Maps, Items, and 1.0 Guides</h1>
               <p>
-                Find the Pal, item, route, or answer you need. Compare workers and combat teams,
-                plan breeding, search the map, and prepare for Palworld 1.0 without losing the thread of your run.
+                Find the <Link href="/pals">Pal</Link>, <Link href="/database">item</Link>, route, or answer you need. Compare workers and combat teams,
+                plan <Link href="/breeding">breeding</Link>, search the <Link href="/map">map</Link>, and prepare for Palworld 1.0 without losing the thread of your run.
               </p>
               <div className="home-field-actions" aria-label="Primary Palworld Wiki shortcuts">
                 <Link href="/pals">Browse Pals</Link>
@@ -198,13 +198,13 @@ export default function HomePage() {
               <h2>A practical field guide for every Palpagos run</h2>
               <p>
                 Palworld combines creature collection with survival crafting, base automation,
-                exploration, breeding, and combat. One decision often touches several systems:
+                exploration, <Link href="/breeding">breeding</Link>, and combat. One decision often touches several systems:
                 a Pal can be a worker, a mount, a fighter, a parent, and a way to obtain an item you need.
               </p>
               <p>
                 Palworld Wiki connects those systems so you can begin with the problem in front of you
                 and move naturally to the next answer, whether that is a Work Suitability comparison,
-                a breeding pair, an item category, or a map route.
+                a <Link href="/breeding/calculator">breeding pair</Link>, an <Link href="/database">item category</Link>, or a <Link href="/map">map route</Link>.
               </p>
             </div>
             <div className="home-stat-strip home-overview-stats" aria-label="Current wiki coverage">
@@ -297,7 +297,7 @@ export default function HomePage() {
               <h2 id="home-version-title">Recheck the systems behind your old route</h2>
               <p>
                 The July 10, 2026 release changed progression, the world, the roster, Pal investment,
-                breeding, bases, and combat. Returning players should refresh the route before repeating the grind.
+                <Link href="/breeding">breeding</Link>, bases, and combat. Returning players should refresh the route before repeating the grind.
               </p>
               <Link href="/updates">Read the 1.0 update guide</Link>
             </div>

@@ -227,7 +227,7 @@ export default function BreedingPage() {
               <span className="eyebrow">Palworld 1.0 Breeding Desk</span>
               <h1 id="breeding-page-title">Palworld Breeding Guide - Parents, Cake, Eggs, and Mutation</h1>
               <p>
-                Palworld Breeding Guide helps players build the farm, automate Cake, choose parents,
+                Palworld Breeding Guide helps players build the farm, automate <Link href="/database/ingredients/cake">Cake</Link>, choose parents,
                 protect passive chains, hatch eggs, and keep Mutation tests organized beyond a simple
                 combo table.
               </p>
@@ -262,7 +262,7 @@ export default function BreedingPage() {
             <span className="eyebrow">Player route</span>
             <h2 id="breeding-command-title">Palworld Breeding Guide route: start with the bottleneck, not the rarest Pal</h2>
             <p>
-              Breeding fails most often because the base loop is weak: no Cake, bad parent pathing, missing Incubator
+              Breeding fails most often because the base loop is weak: no <Link href="/database/ingredients/cake">Cake</Link>, bad parent pathing, missing <Link href="/database/structures/egg-incubator">Incubator</Link>
               temperature control, or passive chains mixed with random test eggs.
             </p>
           </div>
@@ -274,11 +274,11 @@ export default function BreedingPage() {
                 <h3>Five steps before mass breeding</h3>
               </div>
               <ol>
-                <li>Unlock and place the Breeding Farm at Technology tier 19.</li>
-                <li>Automate the Cake recipe before assigning valuable parents.</li>
+                <li>Unlock and place the <Link href="/database/structures/breeding-farm">Breeding Farm</Link> at Technology tier 19.</li>
+                <li>Automate the <Link href="/database/ingredients/cake">Cake</Link> recipe before assigning valuable parents.</li>
                 <li>Keep one male and one female assigned and watch for pathing resets.</li>
-                <li>Move each egg into an Egg Incubator and adjust hot/cold messages.</li>
-                <li>Only promote children that improve the target Pal or passive chain.</li>
+                <li>Move each egg into an <Link href="/database/structures/egg-incubator">Egg Incubator</Link> and adjust hot/cold messages.</li>
+                <li>Only promote children that improve the <Link href="/breeding/calculator">target Pal</Link> or passive chain.</li>
               </ol>
             </div>
 
@@ -303,7 +303,7 @@ export default function BreedingPage() {
             <span className="eyebrow">How players use it</span>
             <h2 id="breeding-flow-title">Choose the workflow that matches your current goal</h2>
             <p>
-              These workflows match common player goals: first farm setup, Cake scaling, target Pal routes,
+              These workflows match common player goals: first farm setup, <Link href="/database/ingredients/cake">Cake</Link> scaling, <Link href="/breeding/calculator">target Pal</Link> routes,
               passive chains, and 1.0 mutation batches.
             </p>
           </div>
@@ -329,7 +329,7 @@ export default function BreedingPage() {
             <span className="eyebrow">Cake and 1.0 effects</span>
             <h2 id="breeding-cake-title">Use the right Cake for the batch you are testing</h2>
             <p>
-              Normal Cake is the baseline input for egg production. Palworld 1.0 added special Cake effects, so
+              Normal <Link href="/database/ingredients/cake">Cake</Link> is the baseline input for egg production. Palworld 1.0 added special Cake effects, so
               batch planning now matters more than simply filling the farm box.
             </p>
           </div>

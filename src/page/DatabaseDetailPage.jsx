@@ -116,7 +116,7 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
                 <h2>Related Pals</h2>
                 <p>
                   These Pals can connect through listed drops, Pal Gear requirements, or matching Pal Gear
-                  names. Use them to move from item planning into capture, breeding, or base work.
+                  names. Use them to move from item planning into <Link href="/pals">capture</Link>, <Link href="/breeding/calculator">breeding</Link>, or <Link href="/pals#work-filters">base work</Link>.
                 </p>
                 {item.relatedPals.length > 0 ? (
                   <div className="pal-related-grid">
@@ -140,7 +140,7 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
                 <h2>Related Database items</h2>
                 <p>
                   Compare entries from the same category or neighboring equipment and material groups when
-                  the next craft, upgrade, or farming route is not obvious.
+                  the next craft, upgrade, or <Link href="/map">farming route</Link> is not obvious.
                 </p>
                 {item.relatedItems.length > 0 ? (
                   <div className="pal-drop-grid">
@@ -155,7 +155,7 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
                     ))}
                   </div>
                 ) : (
-                  <p>No closely connected item is listed yet. Return to {item.category} to compare entries with the same player role.</p>
+                  <p>No closely connected item is listed yet. Return to <Link href={`/database/${categorySlug}`}>{item.category}</Link> to compare entries with the same player role.</p>
                 )}
               </section>
 
