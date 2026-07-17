@@ -38,6 +38,13 @@ export const pageSeo = {
     keywords:
       "Palworld Breeding Guide, Palworld breeding calculator, Palworld Cake, Palworld Breeding Farm, Palworld Mutation, Palworld eggs",
   },
+  breedingCalculator: {
+    title: "Palworld Breeding Calculator - 1.0 Combos and Paths",
+    description:
+      "Palworld Breeding Calculator checks 1.0 parent pairs, target Pal combos, path planning, passive routes, Cake prep, and linked Pal detail pages.",
+    keywords:
+      "Palworld Breeding Calculator, Palworld breeding combos, Palworld parent pairs, Palworld breeding path calculator, Palworld passive skill breeding",
+  },
   database: {
     title: "Palworld Database - Items, Gear, Materials and Structures",
     description:

@@ -75,6 +75,13 @@ export function buildSearchIndex() {
       keywords: "Palworld Breeding Guide breeding calculator cake eggs parent pairs mutation passive skills breeding farm incubator",
     },
     {
+      type: "Breeding Calculator",
+      title: "Palworld Breeding Calculator - 1.0 Combos and Paths",
+      href: "/breeding/calculator",
+      summary: "Check Palworld 1.0 parent pairs, target Pal combinations, path planning, passive routes, and linked Pal detail pages.",
+      keywords: "Palworld Breeding Calculator breeding combos parent pairs target Pal path calculator passive skill breeding 1.0",
+    },
+    {
       type: "Guide Hub",
       title: "Palworld Guides - Progression and World Tree",
       href: "/guides",

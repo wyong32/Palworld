@@ -24,9 +24,20 @@ export default function AppHeader() {
           </Link>
           <nav className="site-nav" aria-label="Primary navigation">
             {topNavItems.map((item) => (
-              <Link className="site-nav-link" href={item.href} key={item.href}>
-                {item.label}
-              </Link>
+              <div className="site-nav-item" key={item.href}>
+                <Link className="site-nav-link" href={item.href} aria-haspopup={item.children?.length ? "true" : undefined}>
+                  {item.label}
+                </Link>
+                {item.children?.length > 0 && (
+                  <div className="site-nav-dropdown" aria-label={`${item.label} quick links`}>
+                    {item.children.map((child) => (
+                      <Link className="site-nav-link" href={child.href} key={child.href}>
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </nav>
           <details className="site-nav" aria-label="Mobile primary navigation">
@@ -35,9 +46,16 @@ export default function AppHeader() {
             </summary>
             <div role="navigation" aria-label="Primary navigation">
               {topNavItems.map((item) => (
-                <Link className="site-nav-link" href={item.href} key={`mobile-${item.href}`}>
-                  {item.label}
-                </Link>
+                <div className="site-nav-mobile-group" key={`mobile-${item.href}`}>
+                  <Link className="site-nav-link" href={item.href}>
+                    {item.label}
+                  </Link>
+                  {item.children?.map((child) => (
+                    <Link className="site-nav-link" href={child.href} key={`mobile-${child.href}`}>
+                      {child.label}
+                    </Link>
+                  ))}
+                </div>
               ))}
             </div>
           </details>

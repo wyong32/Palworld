@@ -2,10 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import BreedingPlanner from "@/components/BreedingPlanner";
 import PageBreadcrumbs from "@/components/PageBreadcrumbs";
-import { featuredBreedingCombos, breedingSteps, cakeProductionPlan, mutationCards } from "@/data/breedingTools";
+import { breedingSteps, cakeProductionPlan, mutationCards } from "@/data/breedingTools";
 import { getDatabaseItemPath } from "@/data/database";
 import { items } from "@/data/items";
-import { pals } from "@/data/pals";
 import { breedingHubTrail } from "@/seo/breadcrumbs";
 import { buildMetadata, pageSeo, siteConfig } from "@/seo/site";
 
@@ -26,7 +25,7 @@ const factCards = [
     value: "1 + 1",
     label: "Parent assignment",
     detail: "Assign one male and one female Pal to the farm before adding Cake.",
-    href: "/breeding",
+    href: "/breeding/calculator",
   },
   {
     value: "1 Cake",
@@ -162,10 +161,6 @@ const faqItems = [
   },
 ];
 
-function findPal(title) {
-  return pals.find((pal) => pal.title.toLowerCase() === title.toLowerCase());
-}
-
 function findItem(title) {
   return items.find((item) => item.title.toLowerCase() === title.toLowerCase());
 }
@@ -179,13 +174,6 @@ function RouteLink({ href, children, className }) {
 }
 
 export default function BreedingPage() {
-  const combos = featuredBreedingCombos.map((combo) => ({
-    ...combo,
-    parentARef: findPal(combo.parentA),
-    parentBRef: findPal(combo.parentB),
-    targetRef: findPal(combo.target),
-  }));
-
   const cakePlan = cakeProductionPlan.map((part) => {
     const itemRef = findItem(part.item);
     return {
@@ -244,7 +232,7 @@ export default function BreedingPage() {
                 combo table.
               </p>
               <div className="breeding-page-actions" aria-label="Breeding shortcuts">
-                <a href="#planner">Open planner</a>
+                <Link href="/breeding/calculator">Open calculator</Link>
                 <a href="#cake-route">Cake route</a>
                 <a href="#breeding-faq">FAQ</a>
               </div>
@@ -307,7 +295,7 @@ export default function BreedingPage() {
         </section>
 
         <section id="planner" className="breeding-tool-section" aria-label="Breeding planner tool">
-          <BreedingPlanner combos={combos} steps={breedingSteps} cakePlan={cakePlan} mutationCards={mutationCards} />
+          <BreedingPlanner steps={breedingSteps} cakePlan={cakePlan} mutationCards={mutationCards} />
         </section>
 
         <section className="breeding-flow-section" aria-labelledby="breeding-flow-title">

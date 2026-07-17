@@ -61,6 +61,13 @@ export function breedingHubTrail() {
   return buildBreadcrumbTrail({ label: "Breeding", href: "/breeding" });
 }
 
+export function breedingCalculatorTrail() {
+  return buildBreadcrumbTrail(
+    { label: "Breeding", href: "/breeding" },
+    { label: "Palworld Breeding Calculator", href: "/breeding/calculator" },
+  );
+}
+
 export function mapHubTrail() {
   return buildBreadcrumbTrail({ label: "Map", href: "/map" });
 }
