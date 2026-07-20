@@ -1,13 +1,14 @@
+import Link from "next/link";
 import DatabaseCategoryExplorer from "@/components/DatabaseCategoryExplorer";
 import PageBreadcrumbs from "@/components/PageBreadcrumbs";
+import { getDatabaseCategoryGroups } from "@/data/database";
 import { buildDatabaseCategoryData } from "@/data/databaseGuide";
-import Link from "next/link";
 import { buildBreadcrumbJsonLd, databaseCategoryTrail } from "@/seo/breadcrumbs";
 import { siteConfig } from "@/seo/site";
 
 export default function DatabaseCategoryPage({ group, items, pals }) {
   const data = buildDatabaseCategoryData(group, items, pals);
-  const categoryIntent = data.guide.intent.charAt(0).toLowerCase() + data.guide.intent.slice(1);
+  const categoryLinks = getDatabaseCategoryGroups(items);
   const breadcrumbs = databaseCategoryTrail(group);
   const schema = {
     "@context": "https://schema.org",
@@ -36,44 +37,40 @@ export default function DatabaseCategoryPage({ group, items, pals }) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <PageBreadcrumbs items={breadcrumbs} />
-      <section className="listing-hero-section database-hero-section">
+
+      <section className="database-category-ledger-hero">
         <div className="container">
-          <div className="listing-hero-content database-hero-content">
-            <span className="wiki-kicker">Palworld Database Category</span>
-            <h1>Palworld Database - {group.category}</h1>
-            <p>Palworld Database - {group.category} entries help players {categoryIntent}</p>
-            <div className="database-hero-actions">
-              <a href="#category-list">Browse {group.category}</a>
-              <a href="#category-method">How to use this list</a>
-              <Link href="/database">All categories</Link>
+          <div className="database-category-ledger-grid">
+            <div>
+              <span className="wiki-kicker">Database category</span>
+              <h1>{group.category}</h1>
+              <p>{data.guide.intent} {data.isCreatureCategory ? "Every entry below is generated from a matched Palworld 1.0 character definition." : "The list below separates matched 1.0 records from entries without an exact DataTable match."}</p>
+              <div className="database-hero-actions">
+                <a href="#category-ledger">Open {group.category} list</a>
+                <Link href="/database">Database index</Link>
+              </div>
             </div>
+            <dl className="database-ledger-proof">
+              <div><dt>Entries</dt><dd>{data.stats.total}</dd></div>
+              <div><dt>Matched records</dt><dd>{data.stats.matched}</dd></div>
+              <div><dt>{data.isCreatureCategory ? "With drops" : "With recipes"}</dt><dd>{data.isCreatureCategory ? data.stats.withDrops : data.stats.craftable}</dd></div>
+              <div><dt>{data.isCreatureCategory ? "Exact map points" : "Used by others"}</dt><dd>{data.isCreatureCategory ? data.stats.mapped : data.stats.usedIn}</dd></div>
+            </dl>
           </div>
         </div>
       </section>
 
-      <section className="database-category-method-section" id="category-method">
+      <nav className="database-category-rail" aria-label="Database categories">
         <div className="container">
-          <div className="database-method-panel">
-            <article>
-              <span className="wiki-kicker">Use Case</span>
-              <h2>{data.guide.role}</h2>
-              <p>{data.guide.howToUse}</p>
-            </article>
-            <article>
-              <span className="wiki-kicker">Acquisition</span>
-              <h2>How players usually route it</h2>
-              <p>{data.guide.acquisition}</p>
-            </article>
-            <article>
-              <span className="wiki-kicker">Priority</span>
-              <h2>When it matters</h2>
-              <p>{data.guide.priority}</p>
-            </article>
-          </div>
+          {categoryLinks.map((category) => (
+            <Link className={category.slug === group.slug ? "is-active" : ""} href={`/database/${category.slug}`} key={category.slug} aria-current={category.slug === group.slug ? "page" : undefined}>
+              {category.category}<span>{category.items.length}</span>
+            </Link>
+          ))}
         </div>
-      </section>
+      </nav>
 
-      <section className="listing-grid-section" id="category-list">
+      <section className="database-category-ledger-section" id="category-ledger">
         <div className="container">
           <DatabaseCategoryExplorer data={data} />
         </div>

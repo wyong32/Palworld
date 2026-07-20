@@ -1,6 +1,7 @@
 import { getDatabaseCategoryGroups, getDatabaseItemPath } from "@/data/database";
+import { buildPalMapHref, getPalFixedEncounters } from "@/data/bossMap";
 import { guides } from "@/data/guides";
-import { items } from "@/data/items";
+import { databaseRecords } from "@/data/databaseRecords";
 import { pals } from "@/data/pals";
 
 function cleanText(value) {
@@ -23,13 +24,38 @@ function itemText(item) {
 }
 
 export function buildSearchIndex() {
-  const databaseCategories = getDatabaseCategoryGroups(items).map((group) => ({
+  const databaseCategories = getDatabaseCategoryGroups(databaseRecords).map((group) => ({
     type: "Database Category",
     title: `Palworld Database - ${group.category}`,
     href: `/database/${group.slug}`,
     summary: `Palworld Database category with ${group.items.length} ${group.category.toLowerCase()} entries for player planning.`,
     keywords: `Palworld Database ${group.category} ${group.category} items materials weapons armor accessories structures recipes`,
   }));
+  const fixedAlphaLocations = pals.flatMap((pal) => {
+    const encounters = getPalFixedEncounters(pal.addressBar);
+    if (encounters.length === 0) {
+      return [];
+    }
+
+    const regions = Array.from(new Set(encounters.map((encounter) => encounter.regionLabel)));
+    const levels = Array.from(new Set(encounters.map((encounter) => encounter.level).filter(Number.isFinite)));
+    return [{
+      type: "Map Location",
+      title: `${pal.title} fixed Alpha location`,
+      href: buildPalMapHref(pal.addressBar),
+      summary: `${encounters.length} validated Alpha point${encounters.length === 1 ? "" : "s"} on ${regions.join(" and ")} at level ${levels.join(" / ")}.`,
+      keywords: [
+        "Palworld Map",
+        pal.title,
+        pal.element,
+        pal.habitat,
+        regions.join(" "),
+        encounters.map((encounter) => `${encounter.world.x} ${encounter.world.y}`).join(" "),
+      ].filter(Boolean).join(" "),
+      imageUrl: pal.imageUrl,
+      imageAlt: pal.imageAlt,
+    }];
+  });
 
   return [
     ...pals.map((pal) => ({
@@ -41,9 +67,10 @@ export function buildSearchIndex() {
       imageUrl: pal.imageUrl,
       imageAlt: pal.imageAlt,
     })),
+    ...fixedAlphaLocations,
     ...databaseCategories,
-    ...items.map((item) => ({
-      type: "Database Item",
+    ...databaseRecords.map((item) => ({
+      type: item.recordType === "creature" ? "Database Creature" : "Database Item",
       title: `Palworld Database - ${item.title}`,
       href: getDatabaseItemPath(item),
       summary: cleanText(item.guideSummary || `${item.title} item entry in ${item.category}.`),
@@ -62,10 +89,10 @@ export function buildSearchIndex() {
     })),
     {
       type: "Map",
-      title: "Palworld Map - Interactive Palpagos Routes",
-      href: "/map",
-      summary: "Palworld Map helps players find Pal locations, Alpha routes, dungeons, towers, resources, merchants, and base spots.",
-      keywords: "Palworld Map interactive map pal locations alpha pals dungeons towers resources merchants base locations sunreach world tree",
+      title: "Palworld Map - Fixed Boss and Alpha Locations",
+      href: "/map#interactive-map-title",
+      summary: "Search fixed bosses, exact quest objectives, and clustered wild habitats across Palpagos and the World Tree.",
+      keywords: "Palworld Map interactive map fixed boss locations alpha pals human bosses world tree pal guides item drops",
     },
     {
       type: "Breeding",

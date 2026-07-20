@@ -7,19 +7,19 @@ import { pageSeo, siteConfig } from "@/seo/site";
 
 const faqItems = [
   {
-    question: "How do I find a specific Pal on the map?",
+    question: "How do I find a specific Alpha Pal on the map?",
     answer:
-      "Choose Pal hunting, return to the interactive map, enable the Pals or Alpha Pals layer, then search the species name and inspect nearby fast-travel points.",
+      "Choose Alpha Pals, search the English or Chinese name or internal ID, then select the result to center its fixed game-data point and open the matching Pal guide.",
   },
   {
-    question: "Why are Sunreach and World Tree handled carefully?",
+    question: "Why are tower bosses and random dungeon bosses not shown?",
     answer:
-      "They are 1.0 regions with newer route coverage. Treat them as planning areas first, then confirm the exact destination in-game before long farming or boss runs.",
+      "This atlas uses the fixed boss-spawner table. That table does not contain tower masters, sealed-realm entrances, dungeon entrances, or random dungeon interiors, so the map does not invent coordinates for them.",
   },
   {
-    question: "Which layer should I use first?",
+    question: "Why does World Tree use a separate map?",
     answer:
-      "Start from intent: Pal and Alpha layers for capture routes, Tower or Field Boss layers for combat, Dungeon layers for loot runs, Resource layers for farming, and Base location layers for build planning.",
+      "Palworld stores the World Tree with its own map image and world bounds. The atlas preserves that projection and switches to the seven fixed World Tree encounters instead of placing them on Palpagos.",
   },
   {
     question: "How should I prepare for a boss or tower route?",
@@ -35,15 +35,15 @@ function countByCategory(markers) {
   }, {});
 }
 
-export default function MapPage({ hub, markers, categories, sourceStats, guidance }) {
+export default function MapPage({ hub, markers, categories, sourceStats, guidance, palProfiles }) {
   const breadcrumbs = mapHubTrail();
   const categoryCounts = countByCategory(markers);
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: "Palworld Map Guide: Interactive Map, Sunreach, World Tree, Pals, Dungeons and Resources",
+    headline: "Palworld Map Guide: Alpha Pals, Bosses, and World Tree",
     description: pageSeo.map.description,
-    dateModified: "2026-07-15",
+    dateModified: "2026-07-20",
     author: {
       "@type": "Organization",
       name: siteConfig.name,
@@ -79,21 +79,21 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
           <span className="wiki-kicker">{hub.eyebrow}</span>
           <div className="map-workbench-hero-grid">
             <div>
-              <h1 id="map-page-title">Palworld Map - Interactive Palpagos Routes, Pals, Bosses, and Resources</h1>
+              <h1 id="map-page-title">Palworld Map - Alpha Pals, Bosses, and World Tree</h1>
               <p>
-                Palworld Map starts with the live map, then helps players decide which layer to open,
-                what to search, and how to prepare after a marker is found.
+                Palworld Map now combines fixed 1.0 boss points, exact quest objectives, and clustered wild-spawn
+                anchors, then connects those records to Pal guides, route preparation, and the wider player toolkit.
               </p>
             </div>
             <div className="map-workbench-meta" aria-label="Map route notes">
               <strong>{hub.version}</strong>
-              <span>Last checked 2026-07-15</span>
-              <span>Map layers plus player route guidance</span>
+              <span>928 searchable map records</span>
+              <span>Palpagos and World Tree projections</span>
             </div>
           </div>
         </section>
 
-        <MapFocusWorkbench />
+        <MapFocusWorkbench palProfiles={palProfiles} />
 
         <section className="map-workbench-strip" aria-label="Map marker coverage">
           {sourceStats.slice(0, 4).map((stat) => (
@@ -110,53 +110,47 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
             <h2 id="map-guide-title">Palworld Map route planning starts with player intent</h2>
             <p>
               A marker only tells you where something is. The route decision comes from the surrounding system:
-              whether the target is a Pal capture, a dungeon run, a tower fight, a resource loop, or a base plan.
+              whether the target is a fixed Alpha encounter, a human boss, a special region, or a separate World Tree route.
             </p>
           </div>
 
           <div className="map-prose-grid">
             <article>
-              <h3>Pal and Alpha routes</h3>
+              <h3>Alpha Pal encounters</h3>
               <p>
-                When you search for a Pal marker, compare the result against the{" "}
-                <Link href="/pals">Pal explorer</Link> before you spend high-tier Spheres. The Pal page helps you
-                verify element, work suitability, drops, and whether the same target may be easier through{" "}
-                <Link href="/breeding">Breeding</Link>. For Alpha runs,{" "}
-                <a href="#interactive-map-title" data-map-focus="pals">focus the map on Pal hunting</a> and treat
-                exact coordinates differently from route clusters.
+                Every Alpha marker in the atlas is a fixed point from the 1.0 boss-spawner table. Use the{" "}
+                <a href="#interactive-map-title" data-map-focus="alpha">Alpha preset</a>, search the Pal name,
+                then open its linked <Link href="/pals">Pal guide</Link> to compare elements, work suitability,
+                drops, and whether <Link href="/breeding">Breeding</Link> is a better route.
               </p>
             </article>
 
             <article>
-              <h3>Towers, dungeons, and boss preparation</h3>
+              <h3>Human boss encounters</h3>
               <p>
-                A tower or dungeon marker should lead to preparation, not just travel. If the embedded map points you
-                toward a boss route, check your <Link href="/guides/palworld-1-0-progression-guide">progression plan</Link>,
-                repair materials, ammo, food, and climate gear before entering. Use{" "}
-                <a href="#interactive-map-title" data-map-focus="combat">the combat map focus</a> when the route
-                includes towers, field bosses, dungeon entrances, or chest farming.
+                Human spawner records stay in their own filter so they are never presented as catchable Pals.
+                Open the <a href="#interactive-map-title" data-map-focus="human">Human bosses preset</a> to inspect
+                33 fixed encounters, then use the <Link href="/guides/palworld-1-0-progression-guide">progression guide</Link>
+                to prepare armor, ammunition, food, and climate protection.
               </p>
             </article>
 
             <article>
-              <h3>Resources and item intent</h3>
+              <h3>Special regions and oil rigs</h3>
               <p>
-                Resource layers are only useful if they stay connected to what you are crafting. A sulfur marker
-                belongs to ammo planning, while ore and coal usually feed production bases. After finding a marker,
-                use <Link href="/database/materials">Materials</Link> and item detail pages to keep the run
-                focused on the thing you actually need. For farming, <a href="#interactive-map-title" data-map-focus="resources">switch the map
-                task to Materials</a>.
+                The three oil-rig region records stay separate from creature encounters. Use the{" "}
+                <a href="#interactive-map-title" data-map-focus="special">Special regions preset</a> for their exact
+                positions, then connect the run to <Link href="/database/materials">Materials</Link> and relevant
+                equipment pages instead of treating an oil rig as a boss species.
               </p>
             </article>
 
             <article>
-              <h3>Base spots depend on the job</h3>
+              <h3>World Tree uses its own projection</h3>
               <p>
-                Base-location layers should not be read as a single universal tier list. A mining base, a food base,
-                and a breeding base ask for different terrain, nearby resources, Pal pathing, and fast travel access.
-                When your map search is about building, compare the result with <Link href="/breeding">Breeding</Link>
-                and <Link href="/database/structures">Structures</Link> before committing. You can{" "}
-                <a href="#interactive-map-title" data-map-focus="bases">focus the map on base planning</a> first.
+                The seven World Tree Alpha encounters use a different image and set of world bounds. The{" "}
+                <a href="#interactive-map-title" data-map-focus="world-tree">World Tree preset</a> switches both the
+                projection and marker set, keeping those endgame points out of the Palpagos coordinate space.
               </p>
             </article>
           </div>
@@ -176,8 +170,9 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
             <article>
               <h3>Palpagos main map</h3>
               <p>
-                Use the Palpagos map controls to search species, filter layers, inspect markers, and find the nearest
-                fast-travel point before committing Spheres, ammunition, food, or climate gear to the trip.
+                Use the Palpagos map controls to search species, filter layers, and inspect fixed boss coordinates.
+                Then compare the destination with your in-game fast-travel network before committing Spheres,
+                ammunition, food, or climate gear to the trip.
               </p>
             </article>
             <article>
@@ -203,10 +198,10 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
         <section className="map-workbench-section" aria-labelledby="map-boss-routes-title">
           <div className="map-workbench-section-head">
             <span className="wiki-kicker">Boss routes</span>
-            <h2 id="map-boss-routes-title">New boss and tower routes added to Palworld 1.0.</h2>
+            <h2 id="map-boss-routes-title">Editorial route notes for Palworld 1.0.</h2>
             <p>
-              Boss markers should lead into team, item, and route preparation. These 1.0 entries connect the map
-              to the Pal pages players should check before spending supplies on the run.
+              These planning notes are separate from the exact points in the interactive map. They connect selected
+              1.0 encounters to the team, item, and route preparation players should check before spending supplies.
             </p>
           </div>
           <div className="map-guidance-grid">
@@ -224,7 +219,7 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
 
         <section className="map-workbench-section" aria-labelledby="map-local-index-title">
           <div className="map-workbench-section-head">
-            <span className="wiki-kicker">Route index</span>
+            <span className="wiki-kicker">Editorial route index</span>
             <h2 id="map-local-index-title">Read every marker at the right level of precision.</h2>
             <p>
               Exact coordinates identify a point, route clusters group a practical run, regional markers narrow a

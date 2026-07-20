@@ -170,7 +170,7 @@ export const mapHub = {
   eyebrow: "World Map Guide",
   title: "Palworld Interactive Map Guide",
   summary:
-    "A professional Palworld interactive map hub for 1.0: live map search, Sunreach, World Tree, Pal locations, Alpha Pals, dungeons, towers, merchants, resources, base spots, and route planning.",
+    "A local Palworld 1.0 atlas with fixed bosses, exact quest objectives, and clustered wild-spawn anchors linked to Pal, item, breeding, and preparation pages.",
   heroImage: "/images/palworld/screenshot-1.jpg",
   version: "Palworld 1.0",
   lastVerified: "2026-07-14",

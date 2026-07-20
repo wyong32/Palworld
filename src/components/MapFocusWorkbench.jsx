@@ -5,41 +5,41 @@ import InteractiveMap from "@/components/InteractiveMap";
 
 const mapFocuses = [
   {
-    key: "pals",
-    label: "Pal hunting",
-    title: "Find a Pal or Alpha route",
-    layer: "Pals, Alpha Pals, Field Bosses",
-    search: "Search the map for a Pal name, then compare the marker with that Pal's work, combat, drops, and breeding page.",
-    note: "Use this when you are filling Paldeck gaps, scouting Alpha routes, or checking whether an old spawn note survived 1.0.",
+    key: "alpha",
+    label: "Alpha Pals",
+    title: "Scout fixed Alpha encounters",
+    note: "90 exact Alpha Pal points with direct links into the matching Pal guide.",
+    mapId: "main",
+    categories: ["alpha-pal"],
   },
   {
-    key: "combat",
-    label: "Combat path",
-    title: "Plan a tower, dungeon, or boss route",
-    layer: "Towers, Dungeons, Field Bosses, Chests",
-    search: "Open the combat layer first, then check route risk, climate, weapons, ammo, and return points.",
-    note: "Use this when a marker is only the destination; the route still needs preparation.",
+    key: "human",
+    label: "Human bosses",
+    title: "Inspect fixed human encounters",
+    note: "33 game-data locations for named and internal human boss spawners.",
+    mapId: "main",
+    categories: ["human-boss"],
   },
   {
-    key: "resources",
-    label: "Materials",
-    title: "Farm resources without guessing",
-    layer: "Resources, Ores, Merchants, Settlements",
-    search: "Filter the resource layer, then keep the route tied to the item you actually need to craft.",
-    note: "Use this for ore, coal, sulfur, oil, Soralite, Paloxite, Cake ingredients, and merchant checks.",
+    key: "special",
+    label: "Special regions",
+    title: "Check the oil-rig points",
+    note: "Three exact special-area records kept separate from creature encounters.",
+    mapId: "main",
+    categories: ["special"],
   },
   {
-    key: "bases",
-    label: "Base planning",
-    title: "Choose a base by job",
-    layer: "Base Locations, Fast Travel, Resources",
-    search: "Check terrain, nearby nodes, fast travel access, and route overlap before calling a location best.",
-    note: "Use this for mining, breeding, oil, food, production, or travel-hub bases.",
+    key: "world-tree",
+    label: "World Tree",
+    title: "Open the endgame boss map",
+    note: "Seven fixed Alpha encounters projected onto the separate World Tree map.",
+    mapId: "tree",
+    categories: ["alpha-pal"],
   },
 ];
 
-export default function MapFocusWorkbench() {
-  const [activeKey, setActiveKey] = useState("pals");
+export default function MapFocusWorkbench({ palProfiles }) {
+  const [activeKey, setActiveKey] = useState("alpha");
   const stageRef = useRef(null);
   const active = useMemo(
     () => mapFocuses.find((item) => item.key === activeKey) || mapFocuses[0],
@@ -69,29 +69,17 @@ export default function MapFocusWorkbench() {
 
   return (
     <section ref={stageRef} className="map-workbench-stage" aria-label="Interactive Palworld map and linked tasks">
-      <div className="map-workbench-map">
-        <div className="map-focus-panel" aria-live="polite">
-          <div>
-            <span>Current map task</span>
-            <strong>{active.title}</strong>
-          </div>
-          <p>
-            <b>Map layer:</b> {active.layer}. {active.search}
-          </p>
-        </div>
-        <InteractiveMap />
-      </div>
-
       <aside className="map-workbench-tasks" aria-label="Map player tasks">
         <div>
-          <span className="wiki-kicker">Map focus</span>
-          <h2>Choose what the map above should help with.</h2>
+          <span className="wiki-kicker">Quick map presets</span>
+          <h2>Start with the fixed-point layer you need.</h2>
         </div>
         {mapFocuses.map((action) => (
           <button
             type="button"
             key={action.key}
             className={action.key === activeKey ? "is-active" : ""}
+            aria-pressed={action.key === activeKey}
             onClick={() => setActiveKey(action.key)}
           >
             <span>{action.label}</span>
@@ -100,6 +88,10 @@ export default function MapFocusWorkbench() {
           </button>
         ))}
       </aside>
+
+      <div className="map-workbench-map">
+        <InteractiveMap preset={active} palProfiles={palProfiles} />
+      </div>
     </section>
   );
 }

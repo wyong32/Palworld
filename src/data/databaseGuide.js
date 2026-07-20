@@ -1,4 +1,5 @@
-import { databaseCategorySlug, getDatabaseItemPath } from "@/data/database";
+import { databaseCategorySlug, getDatabaseCategoryGroups, getDatabaseItemPath } from "@/data/database";
+import { gameDataProvenance, getItemGameDetails, getPalGameDetails } from "@/data/gameDetails";
 import { fitDescription, fitTitle } from "@/seo/tdk";
 
 export const databaseSourceRefs = [
@@ -125,6 +126,27 @@ export const categoryGuides = {
     howToUse: "Match weapons with ammo supply, armor tier, accessory plan, and boss route. A stronger weapon is not reliable if its ammo chain is unstable.",
     acquisition: "Weapons are commonly crafted through technology, schematics, special unlocks, or Pal-specific gear routes.",
     priority: "Tower bosses, Alpha routes, raid fights, dungeon clearing, and endgame farming.",
+  },
+  Bosses: {
+    role: "Boss encounter reference",
+    intent: "Compare fixed Alpha, Tower and Raid Boss definitions using extracted combat rows, exact fixed-spawn coordinates, drops and linked standard Pal pages.",
+    howToUse: "Use the displayed level and combat modifiers for preparation. A map link appears only when the exact spawner ID and coordinates exist in the published map dataset.",
+    acquisition: "Fixed Alpha coordinates come from DT_BossSpawnerLoactionData. Tower and Raid Boss records remain location-neutral when that table does not provide a fixed point.",
+    priority: "Alpha routes, Tower progression, Raid preparation, drop checks and combat-stat comparison.",
+  },
+  Predators: {
+    role: "Predator Pal encounters",
+    intent: "Separate PREDATOR_ combat definitions and drops from the corresponding standard Pal pages.",
+    howToUse: "Compare the Predator row with the linked standard Pal, then plan around its damage modifiers and verified drop table instead of assuming normal wild-Pal values.",
+    acquisition: "These records confirm a Predator character definition; they do not invent a fixed coordinate when the boss-spawner table has no matching point.",
+    priority: "Predator Core farming, high-pressure combat routes and special Pal comparisons.",
+  },
+  Enemies: {
+    role: "Hostile human archetypes",
+    intent: "Compare hostile human enemies by localized name, weapon class, organization, combat values, drops and scenario-specific internal variants.",
+    howToUse: "Read the representative row first, then inspect the variant IDs before applying the values to an oil rig, invasion, arena, tower or quest context.",
+    acquisition: "Enemy records are grouped only when the 1.0 human parameter table marks their AI response as hostile. Friendly village and test rows are excluded.",
+    priority: "Faction encounters, ammunition planning, oil-rig preparation and drop checks.",
   },
   Items: {
     role: "General index",
@@ -443,10 +465,16 @@ export function getRelatedPalsForItem(item, pals) {
     .map((pal) => {
       let score = 0;
       const reasons = [];
+      const exactDrop = getPalGameDetails(pal.title)?.drops?.some((drop) =>
+        normalize(drop.title) === title || normalize(drop.id) === title,
+      );
 
-      if (itemInText(item, pal.drops || "")) {
-        score += 5;
-        reasons.push("drops");
+      if (exactDrop) {
+        score += 8;
+        reasons.push("standard drop");
+      } else if (itemInText(item, pal.drops || "")) {
+        score += 4;
+        reasons.push("listed drop");
       }
       if (itemInText(item, pal.facts?.["Tech Needed"] || "")) {
         score += 5;
@@ -495,9 +523,56 @@ export function getRelatedItems(item, items) {
 }
 
 export function enrichDatabaseItem(item, { items = [], pals = [] } = {}) {
+  const gameData = getItemGameDetails(item.title);
+  const itemByHref = new Map(items.map((candidate) => [getDatabaseItemPath(candidate), candidate]));
+  const attachItemImage = (relation) => {
+    const related = relation.href ? itemByHref.get(relation.href) : null;
+    return { ...relation, imageUrl: related?.imageUrl || null };
+  };
+  const enrichedGameData = gameData
+    ? {
+        ...gameData,
+        materials: (gameData.materials || []).map(attachItemImage),
+        recipes: (gameData.recipes || []).map((recipe) => ({
+          ...recipe,
+          materials: recipe.materials.map(attachItemImage),
+        })),
+        drops: (gameData.drops || []).map(attachItemImage),
+      }
+    : null;
   const guide = categoryGuides[item.category] || categoryGuides.Items;
-  const relatedPals = getRelatedPalsForItem(item, pals);
-  const relatedItems = getRelatedItems(item, items);
+  const relatedPals = gameData?.relatedPal
+    ? [{ ...gameData.relatedPal, reasons: ["Matched creature species"] }]
+    : getRelatedPalsForItem(item, pals);
+  const recipeItems = [
+    ...(gameData?.materials || []),
+    ...(gameData?.recipes || []).flatMap((recipe) => recipe.materials),
+    ...(gameData?.unlocks || []),
+    ...(gameData?.drops || []),
+  ]
+    .filter((material) => material.href)
+    .map((material) => {
+      const related = itemByHref.get(material.href);
+      return related
+        ? { title: related.title, href: material.href, imageUrl: related.imageUrl, category: related.category }
+        : null;
+    })
+    .filter(Boolean);
+  const relatedItems = [...recipeItems, ...getRelatedItems(item, items)]
+    .filter((related, index, list) => list.findIndex((candidate) => candidate.href === related.href) === index)
+    .slice(0, 8);
+  const usedIn = (gameData?.usedIn || []).map((relation) => {
+    const related = itemByHref.get(relation.href);
+    return { ...relation, imageUrl: related?.imageUrl || null };
+  });
+  const categoryItems = items
+    .filter((candidate) => candidate.category === item.category)
+    .sort((a, b) => a.title.localeCompare(b.title));
+  const itemIndex = categoryItems.findIndex((candidate) => candidate.id === item.id);
+  const adjacentItems = {
+    previous: itemIndex > 0 ? categoryItems[itemIndex - 1] : null,
+    next: itemIndex >= 0 && itemIndex < categoryItems.length - 1 ? categoryItems[itemIndex + 1] : null,
+  };
   const acquisitionHints = getItemAcquisitionHints(item);
   const usageSteps = getItemUsageSteps(item);
   const decisionCards = getItemDecisionCards(item, { relatedPals, relatedItems });
@@ -505,6 +580,8 @@ export function enrichDatabaseItem(item, { items = [], pals = [] } = {}) {
 
   return {
     ...item,
+    gameData: enrichedGameData,
+    gameDataProvenance,
     guide,
     role: getItemRole(item),
     acquisitionHints,
@@ -513,58 +590,89 @@ export function enrichDatabaseItem(item, { items = [], pals = [] } = {}) {
     routeSteps,
     relatedPals,
     relatedItems,
+    usedIn,
+    adjacentItems: Object.fromEntries(
+      Object.entries(adjacentItems).map(([key, adjacent]) => [key, adjacent ? { title: adjacent.title, href: getDatabaseItemPath(adjacent) } : null]),
+    ),
     categoryHref: `/database/${databaseCategorySlug(item.category)}`,
-    guideSummary: `${item.title} belongs to Palworld ${item.category} and supports ${guide.role.toLowerCase()}. Use this guide to decide when it matters, how to plan acquisition, and which Pals or items connect to the same goal.`,
+    guideSummary: gameData?.description || `${item.title} is listed in ${item.category}. No matching 1.0 item or building record was found, so this page only shows the site's existing verified fields and related entries.`,
   };
 }
 
 export function buildDatabaseExplorerData(items) {
-  const categories = Object.values(
-    items.reduce((acc, item) => {
-      acc[item.category] ||= {
-        category: item.category,
-        slug: databaseCategorySlug(item.category),
-        items: [],
-        guide: categoryGuides[item.category] || categoryGuides.Items,
-      };
-      acc[item.category].items.push(item);
-      return acc;
-    }, {}),
-  ).sort((a, b) => a.category.localeCompare(b.category));
+  const categories = getDatabaseCategoryGroups(items).map((group) => ({
+    ...group,
+    guide: categoryGuides[group.category] || categoryGuides.Items,
+  }));
 
   const featured = [
-    "Pal Sphere",
-    "Ancient Sphere",
-    "Pal Metal Ingot",
-    "High Quality Pal Oil",
-    "Ancient Civilization Parts",
-    "Cake",
-    "Rocket Ammo",
-    "Refined Ingot",
-    "Jetragon's Missile Launcher",
-    "Ability Glasses",
-    "Metal Armor",
+    "Assault Rifle",
+    "Rocket Launcher",
     "Assault Rifle Ammo",
+    "Metal Armor",
+    "Cake",
+    "Pal Sphere",
+    "Aegidron Alpha Boss",
+    "Bellanoir Libero Raid Boss",
+    "Blazehowl Noct Predator",
+    "Syndicate Gunner — Assault Rifle",
+    "Pal Metal Ingot",
+    "Ancient Civilization Parts",
   ]
     .map((title) => items.find((item) => item.title === title))
     .filter(Boolean)
     .map((item) => enrichDatabaseItem(item, { items }));
 
+  const enrichedItems = items.map((item) => enrichDatabaseItem(item, { items }));
+
   return {
     stats: {
       total: items.length,
       categories: categories.length,
-      images: items.filter((item) => item.imageSourceUrl).length,
-      fallbacks: items.filter((item) => !item.imageSourceUrl).length,
+      matched: enrichedItems.filter((item) => item.gameData).length,
+      recipes: enrichedItems.filter((item) => (item.gameData?.recipes?.length || 0) > 0 || (item.gameData?.materials?.length || 0) > 0).length,
+      reverseLinks: enrichedItems.reduce((total, item) => total + item.usedIn.length, 0),
     },
     categories: categories.map((group) => ({
       ...group,
-      sampleItems: group.items.slice(0, 6).map((item) => ({
-        title: item.title,
-        href: getDatabaseItemPath(item),
-        imageUrl: item.imageUrl,
-      })),
+      isCreatureCategory: ["Bosses", "Predators", "Enemies"].includes(group.category),
+      matchedCount: group.items.filter((item) => getItemGameDetails(item.title)).length,
+      recipeCount: group.items.filter((item) => {
+        const game = getItemGameDetails(item.title);
+        return (game?.recipes?.length || 0) > 0 || (game?.materials?.length || 0) > 0;
+      }).length,
+      relationCount: group.items.reduce((total, item) => total + (getItemGameDetails(item.title)?.usedIn?.length || 0), 0),
+      encounterCount: group.items.reduce((total, item) => total + (getItemGameDetails(item.title)?.encounters?.length || 0), 0),
+      dropCount: group.items.reduce((total, item) => total + (getItemGameDetails(item.title)?.drops?.length || 0), 0),
+      palLinkCount: group.items.filter((item) => getItemGameDetails(item.title)?.relatedPal).length,
+      sampleItems: group.items
+        .map((item) => {
+          const game = getItemGameDetails(item.title);
+          return { item, score: (game?.usedIn?.length || 0) + (game?.recipes?.length || 0) * 3 + (game?.encounters?.length || 0) * 4 + (game?.drops?.length || 0) };
+        })
+        .sort((a, b) => b.score - a.score || a.item.title.localeCompare(b.item.title))
+        .slice(0, 4)
+        .map(({ item }) => ({ title: item.title, href: getDatabaseItemPath(item), imageUrl: item.imageUrl })),
       count: group.items.length,
+    })),
+    items: enrichedItems.map((item) => ({
+      id: item.id,
+      title: item.title,
+      href: getDatabaseItemPath(item),
+      imageUrl: item.imageUrl,
+      imageAlt: item.imageAlt,
+      category: item.category,
+      description: item.guideSummary,
+      matched: Boolean(item.gameData),
+      kind: item.gameData?.kind || "unmatched",
+      recipeCount: item.gameData?.recipes?.length || (item.gameData?.materials?.length ? 1 : 0),
+      usedInCount: item.usedIn.length,
+      unlockCount: item.gameData?.unlocks?.length || 0,
+      technologyLevel: item.gameData?.technology?.level || null,
+      encounterCount: item.gameData?.encounters?.length || 0,
+      dropCount: item.gameData?.drops?.length || 0,
+      maxEncounterLevel: Math.max(0, ...(item.gameData?.encounters || []).map((encounter) => encounter.level || 0)),
+      combatPower: Math.max(item.gameData?.stats?.meleeAttack || 0, item.gameData?.stats?.rangedAttack || 0),
     })),
     featured: featured.map((item) => ({
       title: item.title,
@@ -602,19 +710,51 @@ export function buildDatabaseCategoryData(group, allItems, pals) {
       acquisitionHints: item.acquisitionHints,
       relatedPalCount: item.relatedPals.length,
       relatedItemCount: item.relatedItems.length,
+      matched: Boolean(item.gameData),
+      kind: item.gameData?.kind || "unmatched",
+      type: item.gameData?.type || "",
+      subtype: item.gameData?.subtype || "",
+      gameplayEnabled: item.gameData?.gameplayEnabled,
+      recipeCount: item.gameData?.recipes?.length || (item.gameData?.materials?.length ? 1 : 0),
+      usedInCount: item.usedIn.length,
+      unlockCount: item.gameData?.unlocks?.length || 0,
+      technologyLevel: item.gameData?.technology?.level || null,
+      attack: item.gameData?.stats?.attack || Math.max(item.gameData?.stats?.meleeAttack || 0, item.gameData?.stats?.rangedAttack || 0),
+      defense: item.gameData?.stats?.defense || 0,
+      hp: item.gameData?.stats?.hp || 0,
+      rangedAttack: item.gameData?.stats?.rangedAttack || 0,
+      meleeAttack: item.gameData?.stats?.meleeAttack || 0,
+      encounterCount: item.gameData?.encounters?.length || 0,
+      dropCount: item.gameData?.drops?.length || 0,
+      maxEncounterLevel: Math.max(0, ...(item.gameData?.encounters || []).map((encounter) => encounter.level || 0)),
+      workAmount: item.gameData?.stats?.buildWork || item.gameData?.recipes?.[0]?.workAmount || 0,
     })),
     stats: {
       total: enriched.length,
+      matched: enriched.filter((item) => item.gameData).length,
+      craftable: enriched.filter((item) => (item.gameData?.recipes?.length || 0) > 0 || (item.gameData?.materials?.length || 0) > 0).length,
+      usedIn: enriched.filter((item) => item.usedIn.length > 0).length,
       linkedPals: enriched.filter((item) => item.relatedPals.length > 0).length,
-      sourcedImages: enriched.filter((item) => item.imageSourceUrl).length,
-      multiCategory: enriched.filter((item) => item.categories.length > 1).length,
+      mapped: enriched.filter((item) => (item.gameData?.encounters?.length || 0) > 0).length,
+      withDrops: enriched.filter((item) => (item.gameData?.drops?.length || 0) > 0).length,
     },
+    isCreatureCategory: ["Bosses", "Predators", "Enemies"].includes(group.category),
     sourceRefs: databaseSourceRefs,
   };
 }
 
 export function buildDatabaseSeo(item) {
   const guide = categoryGuides[item.category] || categoryGuides.Items;
+  if (item.recordType === "creature") {
+    return {
+      title: fitTitle("Palworld Database -", item.title, "Stats and Drops"),
+      description: fitDescription(
+        `Palworld Database ${item.title} record with 1.0 combat stats, internal variants, supported drops, related Pal links, and exact fixed-spawn coordinates when available.`,
+        "Source fields stay separate from editorial guidance.",
+      ),
+      keywords: `${item.title}, Palworld ${item.displayName}, Palworld ${item.category}, Palworld boss stats, Palworld enemy drops`,
+    };
+  }
   const title =
     item.title.length <= 14
       ? `Palworld Database - ${item.title} Item Guide and Uses`

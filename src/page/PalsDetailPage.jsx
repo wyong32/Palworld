@@ -5,69 +5,47 @@ import { buildBreadcrumbJsonLd, palsDetailTrail } from "@/seo/breadcrumbs";
 import { siteConfig } from "@/seo/site";
 
 function FactRow({ label, value }) {
-  if (!value) {
-    return null;
-  }
+  if (value === null || value === undefined || value === "") return null;
+  return <div><dt>{label}</dt><dd>{value}</dd></div>;
+}
 
+function formatCoordinate(value) {
+  return Number.isFinite(value) ? Math.round(value).toLocaleString("en-US") : "Unknown";
+}
+
+function StatCard({ label, value, note }) {
   return (
-    <div>
-      <dt>{label}</dt>
-      <dd>{value}</dd>
+    <div className="entity-stat-card">
+      <span>{label}</span>
+      <strong>{value}</strong>
+      {note && <small>{note}</small>}
     </div>
   );
 }
 
-function GuideCard({ title, verdict, children }) {
-  return (
-    <article className="pal-guide-card">
-      <span>{verdict}</span>
-      <h3>{title}</h3>
-      <p>{children}</p>
-    </article>
-  );
+function PalLink({ href, children }) {
+  return href ? <Link href={href}>{children}</Link> : <strong>{children}</strong>;
 }
 
-function DecisionCard({ card }) {
-  return (
-    <article>
-      <strong>{card.label}</strong>
-      <span>
-        <b>{card.title}</b>
-        {" "}
-        {card.text}
-      </span>
-    </article>
-  );
-}
-
-function JoinList({ values, fallback = "No direct advantage listed" }) {
-  return values.length > 0 ? values.join(", ") : fallback;
-}
-
-function PalComboLink({ href, children }) {
-  if (!href || href.endsWith("/pals/")) {
-    return <strong>{children}</strong>;
-  }
-
-  return <Link href={href}>{children}</Link>;
+function dropQuantity(drop) {
+  return drop.min === drop.max ? `${drop.min}` : `${drop.min}–${drop.max}`;
 }
 
 export default function PalsDetailPage({ pal }) {
+  const game = pal.gameData;
+  const stats = game?.stats;
   const updatedDate = pal.lastChecked || pal.publishDate;
-  const primaryWork = pal.primaryWork;
-  const combatCandidate = pal.roles.includes("Combat Candidate");
-  const intro = pal.decisionSummary
-    ? `${pal.title} is most useful for ${pal.decisionSummary}.`
-    : `${pal.title} is currently best treated as a Paldeck and species-comparison entry.`;
   const url = `${siteConfig.url}/pals/${pal.addressBar}`;
   const breadcrumbs = palsDetailTrail(pal);
+  const lead = game?.description || pal.summary;
+  const topWork = pal.work[0] || null;
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "Article",
-        headline: `Palworld Pals - ${pal.title} Guide`,
-        description: `${intro} Compare work suitability, combat matchups, partner skill, drops, breeding routes, and related Pals.`,
+        headline: `${pal.title} stats, locations and breeding guide`,
+        description: lead,
         datePublished: pal.publishDate,
         dateModified: updatedDate,
         image: `${siteConfig.url}${pal.imageUrl}`,
@@ -75,7 +53,7 @@ export default function PalsDetailPage({ pal }) {
         mainEntityOfPage: url,
         author: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
         publisher: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
-        about: ["Palworld", pal.title, "Palworld Pals", "Palworld work suitability"],
+        about: [pal.title, ...pal.elements, "base stats", "work suitability", "breeding"],
       },
       buildBreadcrumbJsonLd(breadcrumbs),
     ],
@@ -90,32 +68,18 @@ export default function PalsDetailPage({ pal }) {
         <div className="container">
           <div className="detail-hero-content pal-detail-hero-content">
             <div className="detail-hero-copy">
-              <span className="wiki-kicker">Palworld Pal Guide</span>
-              <h1>Palworld Pals - {pal.title} Guide</h1>
-              <p>
-                {intro} Compare its base role, element matchups, Partner Skill, drops,
-                {" "}<Link href="/breeding/calculator">breeding options</Link>, and the <Link href="/pals">Pals</Link> that compete for the same job.
-              </p>
+              <span className="wiki-kicker">Paldeck #{pal.number}</span>
+              <h1>{pal.title}</h1>
+              <p>{lead}</p>
               <div className="pal-detail-chip-row">
                 {pal.elements.map((element) => (
-                  <span className={`pal-element-chip pal-element-${element.toLowerCase().replace(/\s+/g, "-")}`} key={element}>
-                    {element}
-                  </span>
+                  <span className={`pal-element-chip pal-element-${element.toLowerCase().replace(/\s+/g, "-")}`} key={element}>{element}</span>
                 ))}
-                {pal.roles.slice(0, 5).map((role) => (
-                  <span className="pal-role-badge" key={role}>{role}</span>
-                ))}
+                {pal.work.slice(0, 4).map((work) => <span className="pal-role-badge" key={work.type}>{work.type} Lv.{work.level}</span>)}
               </div>
             </div>
             <div className="detail-hero-image pal-detail-hero-image">
-              <Image
-                src={pal.imageUrl}
-                alt={pal.imageAlt}
-                width={760}
-                height={570}
-                preload
-                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 42vw, 360px"
-              />
+              <Image src={pal.imageUrl} alt={pal.imageAlt} width={760} height={570} preload sizes="(max-width: 768px) 100vw, (max-width: 1024px) 42vw, 360px" />
             </div>
           </div>
         </div>
@@ -125,247 +89,183 @@ export default function PalsDetailPage({ pal }) {
         <div className="container">
           <div className="detail-body-content">
             <article className="detail-article pal-detail-article">
-              <nav className="pal-detail-toc" aria-label={`${pal.title} guide sections`}>
-                <a href="#how-to-use">Best uses</a>
-                <a href="#work-planner">Base work</a>
-                <a href="#combat-matchups">Combat</a>
-                <a href="#where-to-find">Where to find</a>
-                <a href="#breeding-planner">Breeding</a>
-                <a href="#database-links">Drops</a>
-                <a href="#related-pals">Compare</a>
+              <nav className="pal-detail-toc" aria-label={`${pal.title} page sections`}>
+                {stats && <a href="#stats">Stats</a>}
+                <a href="#work">Work and combat</a>
+                <a href="#locations">Locations</a>
+                <a href="#breeding">Breeding</a>
+                <a href="#drops">Drops</a>
+                <a href="#similar-pals">Similar Pals</a>
               </nav>
 
-              <section id="how-to-use" className="pal-detail-section">
-                <span className="wiki-kicker">At a glance</span>
-                <h2>Best uses for {pal.title}</h2>
-                <p>
-                  Choose {pal.title} for the role it performs well, not simply because it is available.
-                  These recommendations combine the work levels, element, mount role, Partner Skill,
-                  drops, and known <Link href="/breeding/calculator">breeding routes</Link> recorded on this page.
-                </p>
-                <div className="pal-guide-card-grid">
-                  <GuideCard title="Base work" verdict={pal.recommendations.base}>
-                    {primaryWork
-                      ? `Prioritize ${primaryWork.type} Lv.${primaryWork.level}. ${pal.work.length > 1 ? "Limit lower-priority jobs at the Monitoring Stand so it stays on the production line you built it for." : "Its narrow work profile makes assignment easier to control."}`
-                      : "No Work Suitability level is currently recorded, so do not plan a production line around it yet."}
-                  </GuideCard>
-                  <GuideCard title="Combat team" verdict={pal.recommendations.combat}>
-                    {combatCandidate
-                      ? `Use ${pal.title} when ${pal.element} coverage fits the encounter. Check active skills and the Partner Skill before investing rare upgrade materials.`
-                      : `Its element can still fill a matchup gap, but the current entry does not place it on the main combat shortlist.`}
-                  </GuideCard>
-                  <GuideCard title="Exploration" verdict={pal.recommendations.travel}>
-                    {pal.travelType
-                      ? `Use it for ${pal.travelType.toLowerCase()} routes after unlocking the required Pal Gear.`
-                      : "No ride, flight, swimming, or glider role is recorded; bring a separate travel Pal for long routes."}
-                  </GuideCard>
-                  <GuideCard title="Breeding" verdict={pal.recommendations.breeding}>
-                    {pal.breedingCombos.length > 0
-                      ? "Review the recorded combinations below, then keep clean parent passives separate from Mutation experiments."
-                      : "Use it as a parent only when its species result, passives, or work role moves the target line forward."}
-                  </GuideCard>
-                </div>
-                <div className="database-hint-grid" aria-label={`${pal.title} route decision notes`}>
-                  {pal.investmentCards.map((card) => (
-                    <DecisionCard card={card} key={card.label} />
-                  ))}
-                </div>
-              </section>
+              {stats && (
+                <section id="stats" className="pal-detail-section">
+                  <span className="wiki-kicker">Species parameters</span>
+                  <h2>{pal.title} base stats</h2>
+                  <p>
+                    These are species base parameters from the 1.0 monster parameter table, not a level-50 character sheet.
+                    Level, Potential, passives, condensation and other modifiers change the values shown in play.
+                  </p>
+                  <div className="entity-stat-grid">
+                    <StatCard label="HP" value={stats.hp} />
+                    <StatCard label="Melee attack" value={stats.meleeAttack} />
+                    <StatCard label="Ranged attack" value={stats.rangedAttack} />
+                    <StatCard label="Defense" value={stats.defense} />
+                    <StatCard label="Support" value={stats.support} />
+                    <StatCard label="Stamina" value={stats.stamina} />
+                    <StatCard label="Run speed" value={stats.runSpeed} />
+                    <StatCard label="Transport speed" value={stats.transportSpeed} />
+                  </div>
+                </section>
+              )}
 
-              <section id="work-planner" className="pal-detail-section">
-                <span className="wiki-kicker">Base planner</span>
-                <h2>{pal.title} Work Suitability</h2>
+              <section id="work" className="pal-detail-section">
+                <span className="wiki-kicker">Practical role</span>
+                <h2>What {pal.title} is good at</h2>
                 {pal.work.length > 0 ? (
                   <>
-                    <p>
-                      Higher Work Suitability levels complete their matching jobs faster. For a multi-job Pal,
-                      prioritize the highest level first and disable tasks that repeatedly pull it away from the key station.
-                    </p>
                     <div className="pal-work-grid">
                       {pal.work.map((work) => (
-                        <div className="pal-work-tile" key={`${work.type}-${work.level}`}>
+                        <div className="pal-work-tile" key={work.type}>
                           <strong>{work.type}</strong>
                           <span>Lv.{work.level}</span>
-                          <small>{work.level === work.topLevel ? "Highest recorded level" : `Recorded ceiling Lv.${work.topLevel}`}</small>
+                          <small>{work.level === work.topLevel ? "Current table maximum" : `Table maximum Lv.${work.topLevel}`}</small>
                         </div>
                       ))}
                     </div>
-                    <p>
-                      Compare these levels with other <Link href="/pals#work-filters">Palworld base workers</Link> before
-                      spending Pal Souls, Work Suitability books, or condensation copies.
+                    <p className="editorial-note">
+                      <strong>Practical reading:</strong> {topWork
+                        ? `${topWork.type} Lv.${topWork.level} is the strongest recorded base assignment for ${pal.title}${pal.work.length > 1 ? `; its other jobs are ${pal.work.slice(1).map((work) => `${work.type} Lv.${work.level}`).join(", ")}.` : "."}`
+                        : `${pal.title} has no recorded base assignment.`}
+                      {pal.travelType && ` Its ${pal.travelType.toLowerCase()} role is separate from base Work Suitability.`}
                     </p>
                   </>
                 ) : (
-                  <p>
-                    Work Suitability has not been recorded for {pal.title}. Treat it as a field, combat,
-                    travel, or collection Pal until a current work profile is available.
-                  </p>
+                  <p>{pal.title} has no non-zero Work Suitability entry in the matched 1.0 species record. Use it for combat, travel or collection only when its Partner Skill and your team plan justify the slot.</p>
                 )}
-              </section>
-
-              <section id="combat-matchups" className="pal-detail-section">
-                <span className="wiki-kicker">Battle guide</span>
-                <h2>{pal.title} combat matchups</h2>
-                <p>
-                  {pal.title} uses {pal.element} typing. Element advantage is the first check; active-skill power,
-                  Partner Skill behavior, passives, Potential, equipment, and the specific boss phase still decide
-                  whether it deserves a permanent team slot.
-                </p>
                 <div className="pal-matchup-grid">
-                  <div>
-                    <strong>Strong into</strong>
-                    <span>{JoinList({ values: pal.strongAgainst })}</span>
-                  </div>
-                  <div>
-                    <strong>Countered by</strong>
-                    <span>{JoinList({ values: pal.weakAgainst, fallback: "No direct counter listed" })}</span>
-                  </div>
-                  <div>
-                    <strong>Partner Skill</strong>
-                    <span>{pal.partnerSkill || "No Partner Skill is recorded"}</span>
-                  </div>
+                  <div><strong>Strong against</strong><span>{pal.strongAgainst.length ? pal.strongAgainst.join(", ") : "No direct elemental advantage"}</span></div>
+                  <div><strong>Weak against</strong><span>{pal.weakAgainst.length ? pal.weakAgainst.join(", ") : "No direct elemental weakness"}</span></div>
+                  <div><strong>Partner Skill</strong><span>{pal.partnerSkill || "Not recorded"}</span></div>
                 </div>
               </section>
 
-              <section id="where-to-find" className="pal-detail-section">
-                <span className="wiki-kicker">Capture route</span>
-                <h2>Where to find and catch {pal.title}</h2>
-                <p>
-                  Open the <Link href="/map">Palworld interactive map</Link>, enable the Pal or Alpha layer,
-                  and search for {pal.title}. The current habitat field records {pal.habitat || "no time-of-day detail"},
-                  so verify the marker and active time before committing rare Spheres to a long trip.
-                </p>
-                <div className="database-step-list">
-                  <div><strong>01</strong><span>Search {pal.title} on the map and choose the nearest unlocked fast-travel point.</span></div>
-                  <div><strong>02</strong><span>Bring {JoinList({ values: pal.weakAgainst, fallback: "appropriate counter-element" })} coverage, capture Spheres, food, and repair materials.</span></div>
-                  <div><strong>03</strong><span>Lower health carefully, avoid finishing the target with damage-over-time effects, then improve the capture angle before throwing.</span></div>
-                </div>
-              </section>
-
-              <section id="breeding-planner" className="pal-detail-section">
-                <span className="wiki-kicker">Breeding route</span>
-                <h2>{pal.title} breeding combinations</h2>
-                {pal.breedingCombos.length > 0 ? (
-                  <div className="pal-guide-card-grid">
-                    {pal.breedingCombos.map((combo) => (
-                      <article className="pal-guide-card" key={`${combo.parentA}-${combo.parentB}-${combo.target}`}>
-                        <span>{combo.role}</span>
-                        <h3>
-                          <PalComboLink href={combo.parentAHref}>{combo.parentA}</PalComboLink>
-                          {" + "}
-                          <PalComboLink href={combo.parentBHref}>{combo.parentB}</PalComboLink>
-                          {" = "}
-                          <PalComboLink href={combo.targetHref}>{combo.target}</PalComboLink>
-                        </h3>
-                        <p>{combo.why} {combo.action}</p>
-                      </article>
-                    ))}
-                  </div>
-                ) : (
-                  <p>
-                    No curated combination involving {pal.title} is recorded in the current planner. Use the general
-                    {" "}<Link href="/breeding/calculator">Palworld breeding planner</Link> to compare available parent routes,
-                    then verify the result before scaling a passive or Mutation line.
-                  </p>
-                )}
-              </section>
-
-              <section id="database-links" className="pal-detail-section">
-                <span className="wiki-kicker">Items and Pal Gear</span>
-                <h2>{pal.title} drops and Database links</h2>
-                <p>
-                  The listed drops are {pal.drops || "not yet recorded"}. Open a linked item when you need its
-                  category, use case, related materials, or the next <Link href="/pals">Pal connection</Link>.
-                </p>
-                {pal.linkedDrops.length > 0 ? (
-                  <div className="pal-drop-grid">
-                    {pal.linkedDrops.map((drop) => (
-                      <Link href={drop.href} className="pal-drop-card" key={drop.href}>
-                        <Image src={drop.imageUrl} alt={`${drop.title} database item`} width={96} height={72} sizes="64px" />
-                        <span><strong>{drop.title}</strong><small>{drop.category}</small></span>
-                      </Link>
-                    ))}
-                  </div>
-                ) : (
-                  <p>No matching Database item page is linked for this Pal&apos;s current drop text.</p>
-                )}
-                {pal.sharedDropPals.length > 0 && (
+              <section id="locations" className="pal-detail-section">
+                <span className="wiki-kicker">Encounter data</span>
+                <h2>Where to find {pal.title}</h2>
+                {pal.mapEncounters.length > 0 ? (
                   <>
-                    <p>
-                      If the goal is farming the item instead of training {pal.title}, compare these Pals before
-                      locking the route.
-                    </p>
-                    <div className="pal-related-grid">
-                      {pal.sharedDropPals.map((related) => (
-                        <Link href={related.href} className="pal-related-card" key={related.href}>
-                          <Image src={related.imageUrl} alt={`${related.title} Palworld icon`} width={92} height={92} sizes="72px" />
-                          <span><strong>{related.title}</strong><small>{related.note}</small></span>
-                        </Link>
+                    <p>{pal.mapPointCount} fixed Alpha encounter{pal.mapPointCount === 1 ? " is" : "s are"} available below. These are exact world coordinates from the boss-spawner data, not approximate habitat markers.</p>
+                    <div className="pal-map-location-grid">
+                      {pal.mapEncounters.map((encounter) => (
+                        <article key={encounter.id}>
+                          <span>Fixed Alpha · Lv.{encounter.level ?? "Unknown"}</span>
+                          <h3>{pal.title} in {encounter.regionLabel}</h3>
+                          <dl>
+                            <div><dt>World X</dt><dd>{formatCoordinate(encounter.world?.x)}</dd></div>
+                            <div><dt>World Y</dt><dd>{formatCoordinate(encounter.world?.y)}</dd></div>
+                          </dl>
+                          <Link href={encounter.mapHref}>Open exact map marker</Link>
+                        </article>
                       ))}
                     </div>
                   </>
-                )}
-                {pal.linkedTech && (
-                  <div className="pal-tech-callout">
-                    <strong>Pal Gear</strong>
-                    {pal.linkedTech.href ? <Link href={pal.linkedTech.href}>{pal.linkedTech.title}</Link> : <span>{pal.linkedTech.title}</span>}
-                  </div>
+                ) : (
+                  <p>
+                    No fixed Alpha coordinate for {pal.title} is present in the current boss-spawner dataset.
+                    {pal.habitat ? ` The existing habitat record is “${pal.habitat}”, but it is not precise enough to present as a coordinate.` : " No precise location is available on this page."}
+                    {" "}<Link href="/map#interactive-map-title">Open the map</Link> for encounters with validated points.
+                  </p>
                 )}
               </section>
 
-              <section id="related-pals" className="pal-detail-section">
-                <span className="wiki-kicker">Role comparison</span>
-                <h2>Pals to compare with {pal.title}</h2>
-                <p>
-                  These Pals share elements, work roles, travel roles, or other practical traits. Compare the exact
-                  Work Suitability level and Partner Skill before replacing a trained Pal.
-                </p>
+              <section id="breeding" className="pal-detail-section">
+                <span className="wiki-kicker">Current breeding table</span>
+                <h2>How to breed {pal.title}</h2>
+                {pal.breedingRoutes.length > 0 ? (
+                  <>
+                    <p>Each parent pair below resolves to {pal.title} in the current site breeding matrix. Parent passives and Potential do not change the species result.</p>
+                    <div className="breeding-route-grid">
+                      {pal.breedingRoutes.map((route) => (
+                        <div className="breeding-route-card" key={`${route.parentA}-${route.parentB}`}>
+                          <PalLink href={route.parentAHref}>{route.parentA}</PalLink>
+                          <span>+</span>
+                          <PalLink href={route.parentBHref}>{route.parentB}</PalLink>
+                          <span>=</span>
+                          <strong>{pal.title}</strong>
+                        </div>
+                      ))}
+                    </div>
+                    <p><Link href="/breeding/calculator">Open the breeding calculator</Link> to search every current parent pair.</p>
+                  </>
+                ) : (
+                  <p>No current parent pair is indexed for {pal.title}. Do not use older pre-1.0 combinations without checking them in the <Link href="/breeding/calculator">breeding calculator</Link>.</p>
+                )}
+              </section>
+
+              <section id="drops" className="pal-detail-section">
+                <span className="wiki-kicker">Standard drop table</span>
+                <h2>{pal.title} drops</h2>
+                {game?.drops?.length > 0 ? (
+                  <div className="drop-table-wrap">
+                    <table className="entity-data-table">
+                      <thead><tr><th>Item</th><th>Drop rate</th><th>Quantity</th></tr></thead>
+                      <tbody>
+                        {game.drops.map((drop) => (
+                          <tr key={drop.id}>
+                            <td>{drop.href ? <Link href={drop.href}>{drop.title}</Link> : drop.title}</td>
+                            <td>{drop.rate}%</td>
+                            <td>{dropQuantity(drop)}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : (
+                  <p>No standard level-0 drop row was matched for {pal.title}. The page does not infer rates from the older free-text drop field.</p>
+                )}
+                {pal.linkedTech && <p className="pal-tech-callout"><strong>Related Pal Gear:</strong> {pal.linkedTech.href ? <Link href={pal.linkedTech.href}>{pal.linkedTech.title}</Link> : pal.linkedTech.title}</p>}
+              </section>
+
+              <section id="similar-pals" className="pal-detail-section">
+                <span className="wiki-kicker">Direct comparisons</span>
+                <h2>Pals similar to {pal.title}</h2>
+                <p>These entries share an element, Work Suitability type or practical role. Compare their exact work levels and base parameters before replacing a trained Pal.</p>
                 <div className="pal-related-grid">
                   {pal.relatedPals.map((related) => (
                     <Link href={related.href} className="pal-related-card" key={related.href}>
-                      <Image src={related.imageUrl} alt={`${related.title} Palworld icon`} width={92} height={92} sizes="72px" />
-                      <span><strong>{related.title}</strong><small>{related.element}</small></span>
+                      <Image src={related.imageUrl} alt={`${related.title} icon`} width={92} height={92} sizes="72px" />
+                      <span><strong>{related.title}</strong><small>{related.element} · {related.workSuitability || "No base work"}</small></span>
                     </Link>
                   ))}
                 </div>
-                {pal.alternativePals.length > 0 && (
-                  <>
-                    <p>
-                      For the same job or route pressure, check these alternatives before replacing a trained worker,
-                      mount, or combat Pal.
-                    </p>
-                    <div className="pal-related-grid">
-                      {pal.alternativePals.map((related) => (
-                        <Link href={related.href} className="pal-related-card" key={`${related.href}-alternative`}>
-                          <Image src={related.imageUrl} alt={`${related.title} Palworld icon`} width={92} height={92} sizes="72px" />
-                          <span><strong>{related.title}</strong><small>{related.note}</small></span>
-                        </Link>
-                      ))}
-                    </div>
-                  </>
-                )}
               </section>
+
+              <div className="game-data-proof">
+                <strong>Data method</strong>
+                <p>Base parameters, Work Suitability and standard drops are normalized from the Palworld 1.0 unpacked DataTables. Map points come from the separate boss-spawner import. Practical readings are editorial summaries and are labeled as such.</p>
+              </div>
             </article>
 
             <aside className="detail-side-panel pal-detail-side-panel">
-              <h2>{pal.title} facts</h2>
+              <h2>{pal.title} record</h2>
               <dl className="detail-fact-list">
-                <FactRow label="Game Version" value="Palworld 1.0" />
+                <FactRow label="Game data" value={game ? pal.gameDataProvenance.gameVersion : "No matched 1.0 species row"} />
+                <FactRow label="Steam build" value={game ? pal.gameDataProvenance.steamBuildId : null} />
+                <FactRow label="Data table" value={game?.sourceAsset?.split("/").at(-1)} />
                 <FactRow label="Paldeck No." value={pal.number} />
-                <FactRow label="Element" value={pal.element} />
-                <FactRow label="Recommended Role" value={pal.recommendations.base} />
-                <FactRow label="Travel Role" value={pal.travelType} />
+                <FactRow label="Internal ID" value={game?.internalId} />
+                <FactRow label="Element" value={pal.elements.join(", ")} />
+                <FactRow label="Size" value={stats?.size} />
+                <FactRow label="Rarity value" value={stats?.rarity} />
+                <FactRow label="Breeding power" value={stats?.breedingPower} />
                 <FactRow label="Partner Skill" value={pal.partnerSkill} />
-                <FactRow label="Drops" value={pal.drops} />
-                <FactRow label="Habitat" value={pal.habitat} />
-                <FactRow label="Group" value={pal.section} />
                 <FactRow label="Updated" value={updatedDate} />
-                <FactRow label="Page Type" value="Pal guide and route planning" />
               </dl>
               <div className="detail-related-links">
-                <Link href="/pals">Back to Paldeck</Link>
-                <Link href="/map">Find on the map</Link>
-                <Link href="/breeding/calculator">Open breeding planner</Link>
+                <Link href="/pals">All Pals</Link>
+                <Link href={pal.mapHref || "/map#interactive-map-title"}>Open map</Link>
+                <Link href="/breeding/calculator">Breeding calculator</Link>
               </div>
             </aside>
           </div>

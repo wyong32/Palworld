@@ -1,0 +1,3157 @@
+{
+  "version": "1.0",
+  "updatedAt": "2026-07-17T10:23:38.876Z",
+  "dataset": "Palworld 1.0 DT_BossSpawnerLoactionData",
+  "bosses": [
+    {
+      "id": "yamijima_IceLand_pink_D_BOSS@-867560.9,-441338.22",
+      "spawnerId": "yamijima_IceLand_pink_D_BOSS",
+      "name": {
+        "zhHans": "伊西斯",
+        "en": "Faleris Aqua"
+      },
+      "category": "alpha-pal",
+      "level": 66,
+      "palId": "Horus_Water",
+      "world": {
+        "x": -867560.9,
+        "y": -441338.22,
+        "z": 18640.152
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.19537671176145777,
+        "y": 0.8399785339591386
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/faleris-aqua"
+    },
+    {
+      "id": "yamijima_plateau_pink_G_BOSS_2@-791868.2,-337175.94",
+      "spawnerId": "yamijima_plateau_pink_G_BOSS_2",
+      "name": {
+        "zhHans": "幽恋娜",
+        "en": "Splatterina"
+      },
+      "category": "alpha-pal",
+      "level": 65,
+      "palId": "GrimGirl",
+      "world": {
+        "x": -791868.2,
+        "y": -337175.94,
+        "z": 35122.785
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.26727226670347876,
+        "y": 0.7877334345665378
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/splatterina"
+    },
+    {
+      "id": "yamijima_forest_purple_C_BOSS@-691248.6,-309680.34",
+      "spawnerId": "yamijima_forest_purple_C_BOSS",
+      "name": {
+        "zhHans": "格鲁力斯",
+        "en": "Warsect Terra"
+      },
+      "category": "alpha-pal",
+      "level": 64,
+      "palId": "HerculesBeetle_Ground",
+      "world": {
+        "x": -691248.6,
+        "y": -309680.34,
+        "z": 16072.18
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.2862504555494202,
+        "y": 0.7182831308669244
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/warsect-terra"
+    },
+    {
+      "id": "yamijima_forest_purple_A_BOSS@-772213.2,-273563.47",
+      "spawnerId": "yamijima_forest_purple_A_BOSS",
+      "name": {
+        "zhHans": "金驰兽",
+        "en": "Gildane"
+      },
+      "category": "alpha-pal",
+      "level": 63,
+      "palId": "GoldenHorse",
+      "world": {
+        "x": -772213.2,
+        "y": -273563.47,
+        "z": 5318.775
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.3111792725013805,
+        "y": 0.7741670347874102
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/gildane"
+    },
+    {
+      "id": "yamijima_rock_purple_BOSS@-550552.06,-166886.31",
+      "spawnerId": "yamijima_rock_purple_BOSS",
+      "name": {
+        "zhHans": "面惧",
+        "en": "Omascul"
+      },
+      "category": "alpha-pal",
+      "level": 60,
+      "palId": "MysteryMask",
+      "world": {
+        "x": -550552.06,
+        "y": -166886.31,
+        "z": -476.0845
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.38481066399779124,
+        "y": 0.6211706653782441
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/omascul"
+    },
+    {
+      "id": "yamijima_rock_pink_E_BOSS@-721639,-432015",
+      "spawnerId": "yamijima_rock_pink_E_BOSS",
+      "name": {
+        "zhHans": "金棘兽",
+        "en": "Cryolinx Terra"
+      },
+      "category": "alpha-pal",
+      "level": 62,
+      "palId": "WhiteTiger_Ground",
+      "world": {
+        "x": -721639,
+        "y": -432015,
+        "z": 10210.874
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.20181184428492546,
+        "y": 0.7392593870789619
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/cryolinx-terra"
+    },
+    {
+      "id": "yamijima_forest_purple_A_BOSS_2@-717565.94,-251787.33",
+      "spawnerId": "yamijima_forest_purple_A_BOSS_2",
+      "name": {
+        "zhHans": "夜冥驹",
+        "en": "Starryon"
+      },
+      "category": "alpha-pal",
+      "level": 63,
+      "palId": "NightBlueHorse",
+      "world": {
+        "x": -717565.94,
+        "y": -251787.33,
+        "z": 175.19714
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.326209739094423,
+        "y": 0.7364480535615682
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/starryon"
+    },
+    {
+      "id": "yamijima_beach_purple_BOSS@-516157,-393151.12",
+      "spawnerId": "yamijima_beach_purple_BOSS",
+      "name": {
+        "zhHans": "天阴童子",
+        "en": "Dazzi Noct"
+      },
+      "category": "alpha-pal",
+      "level": 60,
+      "palId": "RaijinDaughter_Water",
+      "world": {
+        "x": -516157,
+        "y": -393151.12,
+        "z": -721.86566
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.22863672004417449,
+        "y": 0.59743028713418
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/dazzi-noct"
+    },
+    {
+      "id": "yamijima_plateau_pink_F_BOSS@-723782.7,-230996.66",
+      "spawnerId": "yamijima_plateau_pink_F_BOSS",
+      "name": {
+        "zhHans": "幽焰狼",
+        "en": "Kitsun Noct"
+      },
+      "category": "alpha-pal",
+      "level": 65,
+      "palId": "AmaterasuWolf_Dark",
+      "world": {
+        "x": -723782.7,
+        "y": -230996.66,
+        "z": 7282.106
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.3405600082827167,
+        "y": 0.7407390254003312
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/kitsun-noct"
+    },
+    {
+      "id": "yamijima_IceLand_pink_F_BOSS@-889441.3,-361294.3",
+      "spawnerId": "yamijima_IceLand_pink_F_BOSS",
+      "name": {
+        "zhHans": "驭雷马",
+        "en": "Azurmane"
+      },
+      "category": "alpha-pal",
+      "level": 66,
+      "palId": "BlueThunderHorse",
+      "world": {
+        "x": -889441.3,
+        "y": -361294.3,
+        "z": -1930.7573
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.25062513804527886,
+        "y": 0.8550809635560463
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/azurmane"
+    },
+    {
+      "id": "yamijima_forest_pink_D_WhiteDeer@-661871.9,-284991.84",
+      "spawnerId": "yamijima_forest_pink_D_WhiteDeer",
+      "name": {
+        "zhHans": "净世鹿",
+        "en": "Celesdir"
+      },
+      "category": "alpha-pal",
+      "level": 65,
+      "palId": "WhiteDeer",
+      "world": {
+        "x": -661871.9,
+        "y": -284991.84,
+        "z": 1422.1023
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.30329110988404195,
+        "y": 0.6980065571507454
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/celesdir"
+    },
+    {
+      "id": "yamijima_plateau_purple_BOSS@-544943.3,-264111.88",
+      "spawnerId": "yamijima_plateau_purple_BOSS",
+      "name": {
+        "zhHans": "妮瞅莎",
+        "en": "Nyafia"
+      },
+      "category": "alpha-pal",
+      "level": 60,
+      "palId": "BadCatgirl",
+      "world": {
+        "x": -544943.3,
+        "y": -264111.88,
+        "z": 2902.397
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.31770300938707896,
+        "y": 0.6172993511871894
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/nyafia"
+    },
+    {
+      "id": "yamijima_plateau_purple_BOSS_2@-593253.1,-294034.56",
+      "spawnerId": "yamijima_plateau_purple_BOSS_2",
+      "name": {
+        "zhHans": "艾基鲁迦",
+        "en": "Silvegis"
+      },
+      "category": "alpha-pal",
+      "level": 62,
+      "palId": "WhiteShieldDragon",
+      "world": {
+        "x": -593253.1,
+        "y": -294034.56,
+        "z": 1152.5956
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.29704958586416347,
+        "y": 0.6506440502484815
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/silvegis"
+    },
+    {
+      "id": "yamijima_plateau_purple_C_BOSS@-649837.06,-235616.66",
+      "spawnerId": "yamijima_plateau_purple_C_BOSS",
+      "name": {
+        "zhHans": "雷隐鹿",
+        "en": "Fenglope Lux"
+      },
+      "category": "alpha-pal",
+      "level": 60,
+      "palId": "FengyunDeeper_Electric",
+      "world": {
+        "x": -649837.06,
+        "y": -235616.66,
+        "z": 17616.092
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.3373711623412479,
+        "y": 0.6896997929320818
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/fenglope-lux"
+    },
+    {
+      "id": "yamijima_IceLand_pink_A_BOSS@-773027.4,-368265.88",
+      "spawnerId": "yamijima_IceLand_pink_A_BOSS",
+      "name": {
+        "zhHans": "霜镰魔",
+        "en": "Loupmoon Cryst"
+      },
+      "category": "alpha-pal",
+      "level": 66,
+      "palId": "Werewolf_Ice",
+      "world": {
+        "x": -773027.4,
+        "y": -368265.88,
+        "z": 4287.2188
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.24581316951960241,
+        "y": 0.7747290171176147
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/loupmoon-cryst"
+    },
+    {
+      "id": "remainsIsland_1_GrassGolem_FBOSS@517450,-626940",
+      "spawnerId": "remainsIsland_1_GrassGolem_FBOSS",
+      "name": {
+        "zhHans": "双心岩傀",
+        "en": "Dualith"
+      },
+      "category": "alpha-pal",
+      "level": 75,
+      "palId": "GrassGolem",
+      "world": {
+        "x": 517450,
+        "y": -626940,
+        "z": 10980
+      },
+      "mapId": "tree",
+      "map": {
+        "x": 0.5595631325026258,
+        "y": 0.5023405705725914
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/dualith"
+    },
+    {
+      "id": "worldtree_9_11_N_FBOSS_1@520440,-727175",
+      "spawnerId": "worldtree_9_11_N_FBOSS_1",
+      "name": {
+        "zhHans": "织夜鹿",
+        "en": "Celesdir Noct"
+      },
+      "category": "alpha-pal",
+      "level": 79,
+      "palId": "WhiteDeer_Dark",
+      "world": {
+        "x": 520440,
+        "y": -727175,
+        "z": 41054.54
+      },
+      "mapId": "tree",
+      "map": {
+        "x": 0.26630426832301046,
+        "y": 0.4935926880575312
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/celesdir-noct"
+    },
+    {
+      "id": "worldtree_9_02_B_FBOSS_1@526910.2,-581727.6",
+      "spawnerId": "worldtree_9_02_B_FBOSS_1",
+      "name": {
+        "zhHans": "桃晶鲸",
+        "en": "Whalaska Ignis"
+      },
+      "category": "alpha-pal",
+      "level": 74,
+      "palId": "IceNarwhal_Fire",
+      "world": {
+        "x": 526910.2,
+        "y": -581727.6,
+        "z": 18204.207
+      },
+      "mapId": "tree",
+      "map": {
+        "x": 0.6918416486979114,
+        "y": 0.4746627384090558
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/whalaska-ignis"
+    },
+    {
+      "id": "worldtree_9_10_L_FBOSS_1@458095,-694560",
+      "spawnerId": "worldtree_9_10_L_FBOSS_1",
+      "name": {
+        "zhHans": "红菇娘",
+        "en": "Mycora"
+      },
+      "category": "alpha-pal",
+      "level": 78,
+      "palId": "MushroomLady",
+      "world": {
+        "x": 458095,
+        "y": -694560,
+        "z": 19325
+      },
+      "mapId": "tree",
+      "map": {
+        "x": 0.3617264048543434,
+        "y": 0.6759962784927895
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/mycora"
+    },
+    {
+      "id": "worldtree_9_07_I_FBOSS_1@571870,-733420",
+      "spawnerId": "worldtree_9_07_I_FBOSS_1",
+      "name": {
+        "zhHans": "川霜龙",
+        "en": "Moldron Cryst"
+      },
+      "category": "alpha-pal",
+      "level": 78,
+      "palId": "VolcanoDragon_Ice",
+      "world": {
+        "x": 571870,
+        "y": -733420,
+        "z": 18000
+      },
+      "mapId": "tree",
+      "map": {
+        "x": 0.24803318929071935,
+        "y": 0.34312325737206584
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/moldron-cryst"
+    },
+    {
+      "id": "worldtree_9_05_D_FBOSS_1@601096.75,-572063.06",
+      "spawnerId": "worldtree_9_05_D_FBOSS_1",
+      "name": {
+        "zhHans": "燎火舞伶",
+        "en": "Renjishi"
+      },
+      "category": "alpha-pal",
+      "level": 78,
+      "palId": "KabukiMan",
+      "world": {
+        "x": 601096.75,
+        "y": -572063.06,
+        "z": 30180
+      },
+      "mapId": "tree",
+      "map": {
+        "x": 0.720117321099951,
+        "y": 0.25761416864396114
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/renjishi"
+    },
+    {
+      "id": "worldtree_9_13_M_FBOSS_1@491580.78,-725697.06",
+      "spawnerId": "worldtree_9_13_M_FBOSS_1",
+      "name": {
+        "zhHans": "磐甲龙",
+        "en": "Aegidron"
+      },
+      "category": "alpha-pal",
+      "level": 79,
+      "palId": "DomeArmorDragon",
+      "world": {
+        "x": 491580.78,
+        "y": -725697.06,
+        "z": 12042.806
+      },
+      "mapId": "tree",
+      "map": {
+        "x": 0.2706282969130798,
+        "y": 0.5780264894074552
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/aegidron"
+    },
+    {
+      "id": "81_2_dessert_FBOSS_FlowerDinosaur_Electric@-46108.395,302547.8",
+      "spawnerId": "81_2_dessert_FBOSS_FlowerDinosaur_Electric",
+      "name": {
+        "zhHans": "雷冠龙",
+        "en": "Dinossom Lux"
+      },
+      "category": "alpha-pal",
+      "level": 47,
+      "palId": "FlowerDinosaur_Electric",
+      "world": {
+        "x": -46108.395,
+        "y": 302547.8,
+        "z": -1928.4937
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.7088264770844838,
+        "y": 0.2729903333793484
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/dinossom-lux"
+    },
+    {
+      "id": "81_2_dessert_FBOSS_1@97716.31,307499.7",
+      "spawnerId": "81_2_dessert_FBOSS_1",
+      "name": {
+        "zhHans": "朱雀",
+        "en": "Suzaku"
+      },
+      "category": "alpha-pal",
+      "level": 45,
+      "palId": "Suzaku",
+      "world": {
+        "x": 97716.31,
+        "y": 307499.7,
+        "z": 17330.396
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.7122444091662065,
+        "y": 0.17371872584207615
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/suzaku"
+    },
+    {
+      "id": "81_2_dessert_FBOSS_3@122760,318710",
+      "spawnerId": "81_2_dessert_FBOSS_3",
+      "name": {
+        "zhHans": "冥铠蝎",
+        "en": "Menasting"
+      },
+      "category": "alpha-pal",
+      "level": 44,
+      "palId": "DarkScorpion",
+      "world": {
+        "x": 122760,
+        "y": 318710,
+        "z": 320
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.7199820541137493,
+        "y": 0.15643290999447823
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/menasting"
+    },
+    {
+      "id": "81_2_dessert_FBOSS_5@50564.78,357757.47",
+      "spawnerId": "81_2_dessert_FBOSS_5",
+      "name": {
+        "zhHans": "重岩龟",
+        "en": "Tetroise "
+      },
+      "category": "alpha-pal",
+      "level": 55,
+      "palId": "CubeTurtle",
+      "world": {
+        "x": 50564.78,
+        "y": 357757.47,
+        "z": 29.70578
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.7469336485367201,
+        "y": 0.2062639563776919
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/tetroise"
+    },
+    {
+      "id": "81_2_dessert_FBOSS_2@187731.2,359897.25",
+      "spawnerId": "81_2_dessert_FBOSS_2",
+      "name": {
+        "zhHans": "圣光骑士",
+        "en": "Paladius"
+      },
+      "category": "alpha-pal",
+      "level": 60,
+      "palId": "SaintCentaur",
+      "world": {
+        "x": 187731.2,
+        "y": 359897.25,
+        "z": 2647.323
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.748410581170624,
+        "y": 0.11158807288790729
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/paladius"
+    },
+    {
+      "id": "volcanoiskand_1_FBOSS@-1033347.94,-358750.8",
+      "spawnerId": "volcanoiskand_1_FBOSS",
+      "name": {
+        "zhHans": "流焰龙",
+        "en": "Moldron"
+      },
+      "category": "alpha-pal",
+      "level": 70,
+      "palId": "VolcanoDragon",
+      "world": {
+        "x": -1033347.94,
+        "y": -358750.8,
+        "z": 7958.069
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.25238072887907237,
+        "y": 0.954409124792932
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/moldron"
+    },
+    {
+      "id": "volcanoiskand_2_FBOSS@90345.45,534007.8",
+      "spawnerId": "volcanoiskand_2_FBOSS",
+      "name": {
+        "zhHans": "磐峰兽",
+        "en": "Pierdon"
+      },
+      "category": "alpha-pal",
+      "level": 50,
+      "palId": "RockBeast",
+      "world": {
+        "x": 90345.45,
+        "y": 534007.8,
+        "z": 3685.1067
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.8685862782992821,
+        "y": 0.17880628796245168
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/pierdon"
+    },
+    {
+      "id": "desertisland_2_FBOSS@-450359.53,356886.22",
+      "spawnerId": "desertisland_2_FBOSS",
+      "name": {
+        "zhHans": "球抱苞",
+        "en": "Needoll"
+      },
+      "category": "alpha-pal",
+      "level": 40,
+      "palId": "CactusDoll",
+      "world": {
+        "x": -450359.53,
+        "y": 356886.22,
+        "z": 3561.4421
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.7463322887907233,
+        "y": 0.552015136664826
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/needoll"
+    },
+    {
+      "id": "desertisland_1_FBOSS@-404768.2,-444910.75",
+      "spawnerId": "desertisland_1_FBOSS",
+      "name": {
+        "zhHans": "电针妖",
+        "en": "Prixter Lux"
+      },
+      "category": "alpha-pal",
+      "level": 70,
+      "palId": "ScorpionMan_Electric",
+      "world": {
+        "x": -404768.2,
+        "y": -444910.75,
+        "z": -695.8824
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.19291085726118168,
+        "y": 0.5205467973495306
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/prixter-lux"
+    },
+    {
+      "id": "remainsIsland_2_GrassGolem_Dark_FBOSS@-558869.94,-619480.75",
+      "spawnerId": "remainsIsland_2_GrassGolem_Dark_FBOSS",
+      "name": {
+        "zhHans": "咒心岩傀",
+        "en": "Dualith Noct"
+      },
+      "category": "alpha-pal",
+      "level": 70,
+      "palId": "GrassGolem_Dark",
+      "world": {
+        "x": -558869.94,
+        "y": -619480.75,
+        "z": -1819.6837
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.07241803561568194,
+        "y": 0.6269118856985091
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/dualith-noct"
+    },
+    {
+      "id": "remainsIsland_1_GrassGolem_FBOSS@-169138.25,575683.1",
+      "spawnerId": "remainsIsland_1_GrassGolem_FBOSS",
+      "name": {
+        "zhHans": "双心岩傀",
+        "en": "Dualith"
+      },
+      "category": "alpha-pal",
+      "level": 55,
+      "palId": "GrassGolem",
+      "world": {
+        "x": -169138.25,
+        "y": 575683.1,
+        "z": -1814.1444
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.8973516703478742,
+        "y": 0.3579087865819989
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/dualith"
+    },
+    {
+      "id": "snow_orange_I_BOSS@39324.883,-18772.695",
+      "spawnerId": "snow_orange_I_BOSS",
+      "name": {
+        "zhHans": "冰帝美露帕",
+        "en": "Kingpaca Cryst"
+      },
+      "category": "alpha-pal",
+      "level": 46,
+      "palId": "KingAlpaca_Ice",
+      "world": {
+        "x": 39324.883,
+        "y": -18772.695,
+        "z": 6701.4897
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.4870425904196577,
+        "y": 0.21402202995582553
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/kingpaca-cryst"
+    },
+    {
+      "id": "81_6_Ocean_FBOSS_1@262730,75740",
+      "spawnerId": "81_6_Ocean_FBOSS_1",
+      "name": {
+        "zhHans": "凉晶鲸",
+        "en": "Whalaska"
+      },
+      "category": "alpha-pal",
+      "level": 55,
+      "palId": "IceNarwhal",
+      "world": {
+        "x": 262730,
+        "y": 75740,
+        "z": -3182.9998
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.5522777471010492,
+        "y": 0.05982192159028166
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/whalaska"
+    },
+    {
+      "id": "81_3_snow_FBOSS_1@109790,-5880",
+      "spawnerId": "81_3_snow_FBOSS_1",
+      "name": {
+        "zhHans": "唤冬兽",
+        "en": "Frostallion"
+      },
+      "category": "alpha-pal",
+      "level": 60,
+      "palId": "IceHorse",
+      "world": {
+        "x": 109790,
+        "y": -5880,
+        "z": 22180
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.495941468801767,
+        "y": 0.1653851463279956
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/frostallion"
+    },
+    {
+      "id": "sakura_purple_D_LilyQueen@14681.052,-132067.56",
+      "spawnerId": "sakura_purple_D_LilyQueen",
+      "name": {
+        "zhHans": "百合女王",
+        "en": "Lyleen"
+      },
+      "category": "alpha-pal",
+      "level": 58,
+      "palId": "LilyQueen",
+      "world": {
+        "x": 14681.052,
+        "y": -132067.56,
+        "z": 2994.49
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.4088434842628382,
+        "y": 0.23103185256764225
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/lyleen"
+    },
+    {
+      "id": "sakura_red_B_BOSS@21745.545,-109001.64",
+      "spawnerId": "sakura_red_B_BOSS",
+      "name": {
+        "zhHans": "金铠蝎",
+        "en": "Menasting Terra"
+      },
+      "category": "alpha-pal",
+      "level": 55,
+      "palId": "DarkScorpion_Ground",
+      "world": {
+        "x": 21745.545,
+        "y": -109001.64,
+        "z": -1343.3158
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.4247641910546659,
+        "y": 0.2261557530369962
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/menasting-terra"
+    },
+    {
+      "id": "sakura_purple_D_LilyQueen_Dark@15843.516,-130382.9",
+      "spawnerId": "sakura_purple_D_LilyQueen_Dark",
+      "name": {
+        "zhHans": "黑月女王 ",
+        "en": "Lyleen Noct"
+      },
+      "category": "alpha-pal",
+      "level": 58,
+      "palId": "LilyQueen_Dark",
+      "world": {
+        "x": 15843.516,
+        "y": -130382.9,
+        "z": 3160.8438
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.4100062810601877,
+        "y": 0.23022948923246822
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/lyleen-noct"
+    },
+    {
+      "id": "skyisland_8_07_G_mountain_FBOSS_1@-821552.1,46132.06",
+      "spawnerId": "skyisland_8_07_G_mountain_FBOSS_1",
+      "name": {
+        "zhHans": "昭炎狐",
+        "en": "Flaracle"
+      },
+      "category": "alpha-pal",
+      "level": 68,
+      "palId": "FoxExorcist",
+      "world": {
+        "x": -821552.1,
+        "y": 46132.06,
+        "z": 51332.957
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.5318415654334622,
+        "y": 0.8082220458310325
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/flaracle"
+    },
+    {
+      "id": "skyisland_8_15_1_lake_FBOSS_1@-822007,-66402",
+      "spawnerId": "skyisland_8_15_1_lake_FBOSS_1",
+      "name": {
+        "zhHans": "灵曦龙",
+        "en": "Eidrolon"
+      },
+      "category": "alpha-pal",
+      "level": 69,
+      "palId": "GhostDragon",
+      "world": {
+        "x": -822007,
+        "y": -66402,
+        "z": 40122.793
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.45416758696852566,
+        "y": 0.8085360298177802
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/eidrolon"
+    },
+    {
+      "id": "skyisland_8_04_B_highland_FBOSS_1@-735438.4,-95932.93",
+      "spawnerId": "skyisland_8_04_B_highland_FBOSS_1",
+      "name": {
+        "zhHans": "空涡龙",
+        "en": "Jetragon"
+      },
+      "category": "alpha-pal",
+      "level": 70,
+      "palId": "JetDragon",
+      "world": {
+        "x": -735438.4,
+        "y": -95932.93,
+        "z": 47396.836
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.4337845596355605,
+        "y": 0.7487840971838764
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/jetragon"
+    },
+    {
+      "id": "skyisland_8_07_G_mountain_FBOSS_2@-822824,16747",
+      "spawnerId": "skyisland_8_07_G_mountain_FBOSS_2",
+      "name": {
+        "zhHans": "雷云鹫",
+        "en": "Dynamoff"
+      },
+      "category": "alpha-pal",
+      "level": 67,
+      "palId": "ThunderFluffyBird",
+      "world": {
+        "x": -822824,
+        "y": 16747,
+        "z": 45679
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.5115592214246273,
+        "y": 0.8090999447818885
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/dynamoff"
+    },
+    {
+      "id": "skyisland_8_10_D_swamp_FBOSS_1@-746847.06,-10678.006",
+      "spawnerId": "skyisland_8_10_D_swamp_FBOSS_1",
+      "name": {
+        "zhHans": "电懒懒",
+        "en": "Slowatt"
+      },
+      "category": "alpha-pal",
+      "level": 66,
+      "palId": "ElecLizard",
+      "world": {
+        "x": -746847.06,
+        "y": -10678.006,
+        "z": 41413.113
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.49262975842076195,
+        "y": 0.756658655438984
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/slowatt"
+    },
+    {
+      "id": "skyisland_8_06_C_lotsulake_FBOSS_1@-802420,-112610",
+      "spawnerId": "skyisland_8_06_C_lotsulake_FBOSS_1",
+      "name": {
+        "zhHans": "沁莲龙",
+        "en": "Ophydia"
+      },
+      "category": "alpha-pal",
+      "level": 69,
+      "palId": "LotusDragon",
+      "world": {
+        "x": -802420,
+        "y": -112610,
+        "z": 51608.094
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.4222736057426836,
+        "y": 0.7950165654334622
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/ophydia"
+    },
+    {
+      "id": "skyisland_8_11_E_meadow_FBOSS_1@-772844,-11173",
+      "spawnerId": "skyisland_8_11_E_meadow_FBOSS_1",
+      "name": {
+        "zhHans": "电涡蜗",
+        "en": "Snock"
+      },
+      "category": "alpha-pal",
+      "level": 65,
+      "palId": "ElecSnail",
+      "world": {
+        "x": -772844,
+        "y": -11173,
+        "z": 39727
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.492288100496963,
+        "y": 0.7746024295969078
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/snock"
+    },
+    {
+      "id": "81_1_grass_FBOSS_14@-167230,96430",
+      "spawnerId": "81_1_grass_FBOSS_14",
+      "name": {
+        "zhHans": "阿努比斯",
+        "en": "Anubis"
+      },
+      "category": "alpha-pal",
+      "level": 55,
+      "palId": "Anubis",
+      "world": {
+        "x": -167230,
+        "y": 96430,
+        "z": -1737.1323
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.5665585311982331,
+        "y": 0.35659166206515736
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/anubis"
+    },
+    {
+      "id": "81_1_grass_FBOSS_1@-343155,244585",
+      "spawnerId": "81_1_grass_FBOSS_1",
+      "name": {
+        "zhHans": "森猛犸",
+        "en": "Mammorest"
+      },
+      "category": "alpha-pal",
+      "level": 38,
+      "palId": "GrassMammoth",
+      "world": {
+        "x": -343155,
+        "y": 244585,
+        "z": -95
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.6688190226394257,
+        "y": 0.4780197404748757
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/mammorest"
+    },
+    {
+      "id": "1_10_plain_F_Boss_FairyDragon@-315583.53,237116.97",
+      "spawnerId": "1_10_plain_F_Boss_FairyDragon",
+      "name": {
+        "zhHans": "疾旋鼬",
+        "en": "Chillet"
+      },
+      "category": "alpha-pal",
+      "level": 11,
+      "palId": "WeaselDragon",
+      "world": {
+        "x": -315583.53,
+        "y": 237116.97,
+        "z": 2448.4133
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.6636643912203203,
+        "y": 0.458989184152402
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/chillet"
+    },
+    {
+      "id": "81_1_grass_FBOSS_16@-333940,39610",
+      "spawnerId": "81_1_grass_FBOSS_16",
+      "name": {
+        "zhHans": "云海鹿",
+        "en": "Fenglope"
+      },
+      "category": "alpha-pal",
+      "level": 25,
+      "palId": "FengyunDeeper",
+      "world": {
+        "x": -333940,
+        "y": 39610,
+        "z": 1600
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.5273398674765323,
+        "y": 0.4716593042517946
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/fenglope"
+    },
+    {
+      "id": "81_1_grass_FBOSS_23@-372950,104400",
+      "spawnerId": "81_1_grass_FBOSS_23",
+      "name": {
+        "zhHans": "雷角马",
+        "en": "Univolt"
+      },
+      "category": "alpha-pal",
+      "level": 31,
+      "palId": "Kirin",
+      "world": {
+        "x": -372950,
+        "y": 104400,
+        "z": -770
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.5720596355604638,
+        "y": 0.4985850358917725
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/univolt"
+    },
+    {
+      "id": "81_1_grass_FBOSS_4@-113197.67,201490.47",
+      "spawnerId": "81_1_grass_FBOSS_4",
+      "name": {
+        "zhHans": "迅雷鸟",
+        "en": "Beakon"
+      },
+      "category": "alpha-pal",
+      "level": 37,
+      "palId": "ThunderBird",
+      "world": {
+        "x": -113197.67,
+        "y": 201490.47,
+        "z": 2063.3916
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.6390740405853119,
+        "y": 0.31929712175593594
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/beakon"
+    },
+    {
+      "id": "81_1_grass_FBOSS_31@-246100,77200",
+      "spawnerId": "81_1_grass_FBOSS_31",
+      "name": {
+        "zhHans": "碧海龙",
+        "en": "Azurobe"
+      },
+      "category": "alpha-pal",
+      "level": 40,
+      "palId": "BlueDragon",
+      "world": {
+        "x": -246100,
+        "y": 77200,
+        "z": -1460
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.5532854776366648,
+        "y": 0.41102981778023195
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/azurobe"
+    },
+    {
+      "id": "81_1_grass_FBOSS_18@-236727.1,321310.12",
+      "spawnerId": "81_1_grass_FBOSS_18",
+      "name": {
+        "zhHans": "笑魇猫",
+        "en": "Grintale"
+      },
+      "category": "alpha-pal",
+      "level": 17,
+      "palId": "NaughtyCat",
+      "world": {
+        "x": -236727.1,
+        "y": 321310.12,
+        "z": -1909.3772
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.7217767255659856,
+        "y": 0.40456039480949746
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/grintale"
+    },
+    {
+      "id": "81_1_grass_FBOSS_2@-335225,180735",
+      "spawnerId": "81_1_grass_FBOSS_2",
+      "name": {
+        "zhHans": "君王美露帕",
+        "en": "Kingpaca"
+      },
+      "category": "alpha-pal",
+      "level": 23,
+      "palId": "KingAlpaca",
+      "world": {
+        "x": -335225,
+        "y": 180735,
+        "z": 475
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.6247480673660961,
+        "y": 0.47254624516841526
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/kingpaca"
+    },
+    {
+      "id": "81_1_grass_FBOSS_24@-431050.44,56140.586",
+      "spawnerId": "81_1_grass_FBOSS_24",
+      "name": {
+        "zhHans": "连理龙",
+        "en": "Broncherry"
+      },
+      "category": "alpha-pal",
+      "level": 23,
+      "palId": "SakuraSaurus",
+      "world": {
+        "x": -431050.44,
+        "y": 56140.586,
+        "z": -1864.7648
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.5387497142462728,
+        "y": 0.538687493097736
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/broncherry"
+    },
+    {
+      "id": "81_1_grass_FBOSS_13@-162910,318720",
+      "spawnerId": "81_1_grass_FBOSS_13",
+      "name": {
+        "zhHans": "覆海龙",
+        "en": "Jormuntide"
+      },
+      "category": "alpha-pal",
+      "level": 55,
+      "palId": "Umihebi",
+      "world": {
+        "x": -162910,
+        "y": 318720,
+        "z": -2382.3545
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.7199889563776919,
+        "y": 0.3536098840419658
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/jormuntide"
+    },
+    {
+      "id": "81_1_forest_FBOSS_7@-254060,178050",
+      "spawnerId": "81_1_forest_FBOSS_7",
+      "name": {
+        "zhHans": "精灵龙",
+        "en": "Elphidran"
+      },
+      "category": "alpha-pal",
+      "level": 30,
+      "palId": "FairyDragon",
+      "world": {
+        "x": -254060,
+        "y": 178050,
+        "z": 4000
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.6228948094975152,
+        "y": 0.41652401987852017
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/elphidran"
+    },
+    {
+      "id": "81_1_grass_FBOSS_27@-122060,15810",
+      "spawnerId": "81_1_grass_FBOSS_27",
+      "name": {
+        "zhHans": "趴趴鲶",
+        "en": "Dumud"
+      },
+      "category": "alpha-pal",
+      "level": 14,
+      "palId": "LazyCatfish",
+      "world": {
+        "x": -122060,
+        "y": 15810,
+        "z": -1460
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.5109124792932082,
+        "y": 0.32541413583655443
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/dumud"
+    },
+    {
+      "id": "81_1_grass_FBOSS_22@-155950,31260",
+      "spawnerId": "81_1_grass_FBOSS_22",
+      "name": {
+        "zhHans": "疾风隼",
+        "en": "Nitewing"
+      },
+      "category": "alpha-pal",
+      "level": 18,
+      "palId": "HawkBird",
+      "world": {
+        "x": -155950,
+        "y": 31260,
+        "z": -1960
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.5215764770844837,
+        "y": 0.3488059083379348
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/nitewing"
+    },
+    {
+      "id": "81_1_grass_FBOSS_30@-239436.58,345.748",
+      "spawnerId": "81_1_grass_FBOSS_30",
+      "name": {
+        "zhHans": "桃蛛娘",
+        "en": "Tarantriss"
+      },
+      "category": "alpha-pal",
+      "level": 35,
+      "palId": "PurpleSpider",
+      "world": {
+        "x": -239436.58,
+        "y": 345.74753,
+        "z": 7166.6885
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.5002386440709553,
+        "y": 0.40643054942020984
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/tarantriss"
+    },
+    {
+      "id": "81_1_grass_FBOSS_25@-412259.28,106237.67",
+      "spawnerId": "81_1_grass_FBOSS_25",
+      "name": {
+        "zhHans": "叶泥泥",
+        "en": "Gumoss"
+      },
+      "category": "alpha-pal",
+      "level": 11,
+      "palId": "PlantSlime",
+      "world": {
+        "x": -412259.28,
+        "y": 106237.67,
+        "z": -2035.6112
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.5733280438983988,
+        "y": 0.5257173384870237
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/gumoss"
+    },
+    {
+      "id": "81_1_grass_FBOSS_21@-396003.12,53772.16",
+      "spawnerId": "81_1_grass_FBOSS_21",
+      "name": {
+        "zhHans": "毛老爹",
+        "en": "Sweepa"
+      },
+      "category": "alpha-pal",
+      "level": 11,
+      "palId": "MopKing",
+      "world": {
+        "x": -396003.12,
+        "y": 53772.16,
+        "z": -1575.8013
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.5371149641082276,
+        "y": 0.5144969077857537
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/sweepa"
+    },
+    {
+      "id": "81_1_grass_FBOSS_26@-206970,363810",
+      "spawnerId": "81_1_grass_FBOSS_26",
+      "name": {
+        "zhHans": "雷胖达",
+        "en": "Mossanda Lux"
+      },
+      "category": "alpha-pal",
+      "level": 31,
+      "palId": "GrassPanda_Electric",
+      "world": {
+        "x": -206970,
+        "y": 363810,
+        "z": 1140
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.7511112644947543,
+        "y": 0.38402125897294315
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/mossanda-lux"
+    },
+    {
+      "id": "81_1_grass_FBOSS_29@-147370,364010",
+      "spawnerId": "81_1_grass_FBOSS_29",
+      "name": {
+        "zhHans": "绿苔绒怪",
+        "en": "Wumpo Botan"
+      },
+      "category": "alpha-pal",
+      "level": 38,
+      "palId": "Yeti_Grass",
+      "world": {
+        "x": -147370,
+        "y": 364010,
+        "z": -1940
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.7512493097736057,
+        "y": 0.3428837658752071
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/wumpo-botan"
+    },
+    {
+      "id": "81_1_forest_FBOSS_6@-162481.34,233115.23",
+      "spawnerId": "81_1_forest_FBOSS_6",
+      "name": {
+        "zhHans": "女皇蜂",
+        "en": "Elizabee"
+      },
+      "category": "alpha-pal",
+      "level": 39,
+      "palId": "QueenBee",
+      "world": {
+        "x": -162481.34,
+        "y": 233115.23,
+        "z": 5175.2114
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.660902284649365,
+        "y": 0.35331401159580345
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/elizabee"
+    },
+    {
+      "id": "81_4_Sakurajima_FBOSS_2@-238810.95,-110487.63",
+      "spawnerId": "81_4_Sakurajima_FBOSS_2",
+      "name": {
+        "zhHans": "泰锋",
+        "en": "Knocklem"
+      },
+      "category": "alpha-pal",
+      "level": 55,
+      "palId": "WingGolem",
+      "world": {
+        "x": -238810.95,
+        "y": -110487.63,
+        "z": -205.30737
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.4237385215350635,
+        "y": 0.4059987230811706
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/knocklem"
+    },
+    {
+      "id": "81_3_volcano_FBOSS_2@-322819.97,-93429.84",
+      "spawnerId": "81_3_volcano_FBOSS_2",
+      "name": {
+        "zhHans": "熔岩兽",
+        "en": "Reptyro"
+      },
+      "category": "alpha-pal",
+      "level": 50,
+      "palId": "VolcanicMonster",
+      "world": {
+        "x": -322819.97,
+        "y": -93429.84,
+        "z": 18739.184
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.435512258420762,
+        "y": 0.46398396604086134
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/reptyro"
+    },
+    {
+      "id": "81_3_volcano_FBOSS_3@-276069.47,-180092.97",
+      "spawnerId": "81_3_volcano_FBOSS_3",
+      "name": {
+        "zhHans": "焰煌",
+        "en": "Blazamut"
+      },
+      "category": "alpha-pal",
+      "level": 52,
+      "palId": "KingBahamut",
+      "world": {
+        "x": -276069.47,
+        "y": -180092.97,
+        "z": 8181.594
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.375695078685809,
+        "y": 0.43171553699613474
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/blazamut"
+    },
+    {
+      "id": "sanctuary_2_volcano_FBOSS@-174578.95,-158213.75",
+      "spawnerId": "sanctuary_2_volcano_FBOSS",
+      "name": {
+        "zhHans": "魔渊龙",
+        "en": "Astegon"
+      },
+      "category": "alpha-pal",
+      "level": 55,
+      "palId": "BlackMetalDragon",
+      "world": {
+        "x": -174578.95,
+        "y": -158213.75,
+        "z": -1710.3036
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.3907966938155715,
+        "y": 0.36166410132523463
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/astegon"
+    },
+    {
+      "id": "sanctuary_1_forest_FBOSS@-443860.8,183689.42",
+      "spawnerId": "sanctuary_1_forest_FBOSS",
+      "name": {
+        "zhHans": "暴电熊",
+        "en": "Grizzbolt"
+      },
+      "category": "alpha-pal",
+      "level": 30,
+      "palId": "ElecPanda",
+      "world": {
+        "x": -443860.8,
+        "y": 183689.42,
+        "z": -1496.6549
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.6267872860298178,
+        "y": 0.5475295416896743
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/grizzbolt"
+    },
+    {
+      "id": "sanctuary_3_dessert_FBOSS@173548.3,474295.44",
+      "spawnerId": "sanctuary_3_dessert_FBOSS",
+      "name": {
+        "zhHans": "唤夜兽",
+        "en": "Frostallion Noct"
+      },
+      "category": "alpha-pal",
+      "level": 65,
+      "palId": "IceHorse_Dark",
+      "world": {
+        "x": 173548.3,
+        "y": 474295.44,
+        "z": 192.48369
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.8273712313638873,
+        "y": 0.12137748481501931
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/frostallion-noct"
+    },
+    {
+      "id": "BOSS_Female_Soldier02@-712045.56,-229952.92",
+      "spawnerId": "BOSS_Female_Soldier02",
+      "name": {
+        "zhHans": "Female Soldier02",
+        "en": "Female Soldier02"
+      },
+      "category": "human-boss",
+      "level": 56,
+      "palId": null,
+      "world": {
+        "x": -712045.56,
+        "y": -229952.92,
+        "z": 8893.03
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.34128042517945884,
+        "y": 0.732637741579238
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Male_People03@-335675.2,148683.03",
+      "spawnerId": "BOSS_Male_People03",
+      "name": {
+        "zhHans": "Male People03",
+        "en": "Male People03"
+      },
+      "category": "human-boss",
+      "level": 10,
+      "palId": null,
+      "world": {
+        "x": -335675.2,
+        "y": 148683.03,
+        "z": 6384.3687
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.6026249516841524,
+        "y": 0.47285698509110985
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Viking@-584187.7,-181661.73",
+      "spawnerId": "BOSS_Viking",
+      "name": {
+        "zhHans": "Viking",
+        "en": "Viking"
+      },
+      "category": "human-boss",
+      "level": 57,
+      "palId": null,
+      "world": {
+        "x": -584187.7,
+        "y": -181661.73,
+        "z": 978.42706
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.37461227912755385,
+        "y": 0.6443868718939811
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Police_Rifle@45909.48,304971.44",
+      "spawnerId": "BOSS_Police_Rifle",
+      "name": {
+        "zhHans": "Police Rifle",
+        "en": "Police Rifle"
+      },
+      "category": "human-boss",
+      "level": 40,
+      "palId": null,
+      "world": {
+        "x": 45909.48,
+        "y": 304971.44,
+        "z": -1015.37305
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.7104993373826615,
+        "y": 0.20947716731087795
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Believer_CrossBow@-164164.23,152549.42",
+      "spawnerId": "BOSS_Believer_CrossBow",
+      "name": {
+        "zhHans": "Believer Cross Bow",
+        "en": "Believer Cross Bow"
+      },
+      "category": "human-boss",
+      "level": 23,
+      "palId": null,
+      "world": {
+        "x": -164164.23,
+        "y": 152549.42,
+        "z": -1410.9744
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.605293636112645,
+        "y": 0.35447558669243506
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Hunter_Fat_GatlingGun@-242340,36220",
+      "spawnerId": "BOSS_Hunter_Fat_GatlingGun",
+      "name": {
+        "zhHans": "Hunter Fat Gatling Gun",
+        "en": "Hunter Fat Gatling Gun"
+      },
+      "category": "human-boss",
+      "level": 20,
+      "palId": null,
+      "world": {
+        "x": -242340,
+        "y": 36220,
+        "z": 13020
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.525,
+        "y": 0.4084345665378244
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Ninja@-124623.98,232502.7",
+      "spawnerId": "BOSS_Ninja",
+      "name": {
+        "zhHans": "Ninja",
+        "en": "Ninja"
+      },
+      "category": "human-boss",
+      "level": 28,
+      "palId": null,
+      "world": {
+        "x": -124623.98,
+        "y": 232502.7,
+        "z": 7801.965
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.6604795002760905,
+        "y": 0.32718386250690223
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_VikingElite@-805295.06,-478475.2",
+      "spawnerId": "BOSS_VikingElite",
+      "name": {
+        "zhHans": "Viking Elite",
+        "en": "Viking Elite"
+      },
+      "category": "human-boss",
+      "level": 58,
+      "palId": null,
+      "world": {
+        "x": -805295.06,
+        "y": -478475.2,
+        "z": -815.0132
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.16974378796245168,
+        "y": 0.7970010077305356
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_DarkTrader@-666737.7,-409956.38",
+      "spawnerId": "BOSS_DarkTrader",
+      "name": {
+        "zhHans": "Dark Trader",
+        "en": "Dark Trader"
+      },
+      "category": "human-boss",
+      "level": 59,
+      "palId": null,
+      "world": {
+        "x": -666737.7,
+        "y": -409956.38,
+        "z": 25605.273
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.21703728602981778,
+        "y": 0.7013650607399227
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Male_Trader03@-538826.5,-337667.7",
+      "spawnerId": "BOSS_Male_Trader03",
+      "name": {
+        "zhHans": "Male Trader03",
+        "en": "Male Trader03"
+      },
+      "category": "human-boss",
+      "level": 57,
+      "palId": null,
+      "world": {
+        "x": -538826.5,
+        "y": -337667.7,
+        "z": -426.02618
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.2669328409718388,
+        "y": 0.6130773743787963
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Believer_Fat_GiantClub@-79599.086,192658.28",
+      "spawnerId": "BOSS_Believer_Fat_GiantClub",
+      "name": {
+        "zhHans": "Believer Fat Giant Club",
+        "en": "Believer Fat Giant Club"
+      },
+      "category": "human-boss",
+      "level": 30,
+      "palId": null,
+      "world": {
+        "x": -79599.086,
+        "y": 192658.28,
+        "z": 6188.3384
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.6329778299282165,
+        "y": 0.2961064922694644
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Male_Soldier03@21850.117,-8346.555",
+      "spawnerId": "BOSS_Male_Soldier03",
+      "name": {
+        "zhHans": "Male Soldier03",
+        "en": "Male Soldier03"
+      },
+      "category": "human-boss",
+      "level": 49,
+      "palId": null,
+      "world": {
+        "x": 21850.117,
+        "y": -8346.555,
+        "z": 6712.4634
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.4942389874378796,
+        "y": 0.22608357468249585
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Male_Soldier04@-217110.73,127090.61",
+      "spawnerId": "BOSS_Male_Soldier04",
+      "name": {
+        "zhHans": "Male Soldier04",
+        "en": "Male Soldier04"
+      },
+      "category": "human-boss",
+      "level": 21,
+      "palId": null,
+      "world": {
+        "x": -217110.73,
+        "y": 127090.61,
+        "z": 6141.974
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.5877212934842628,
+        "y": 0.3910206584759801
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Scientist_LaserRifle@10215.881,153782.08",
+      "spawnerId": "BOSS_Scientist_LaserRifle",
+      "name": {
+        "zhHans": "Scientist Laser Rifle",
+        "en": "Scientist Laser Rifle"
+      },
+      "category": "human-boss",
+      "level": 45,
+      "palId": null,
+      "world": {
+        "x": 10215.881,
+        "y": 153782.08,
+        "z": 3150.0002
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.6061444505797902,
+        "y": 0.2341138314467145
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Police_Old@-686537.5,-380252.66",
+      "spawnerId": "BOSS_Police_Old",
+      "name": {
+        "zhHans": "Police Old",
+        "en": "Police Old"
+      },
+      "category": "human-boss",
+      "level": 57,
+      "palId": null,
+      "world": {
+        "x": -686537.5,
+        "y": -380252.66,
+        "z": 32747.375
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.23753957758144673,
+        "y": 0.7150314053009388
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Female_People03@-300962.38,157210.73",
+      "spawnerId": "BOSS_Female_People03",
+      "name": {
+        "zhHans": "Female People03",
+        "en": "Female People03"
+      },
+      "category": "human-boss",
+      "level": 15,
+      "palId": null,
+      "world": {
+        "x": -300962.38,
+        "y": 157210.73,
+        "z": -164.24446
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.6085109953064605,
+        "y": 0.4488972805080066
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Female_Soldier04@-75788.086,-82304.96",
+      "spawnerId": "BOSS_Female_Soldier04",
+      "name": {
+        "zhHans": "Female Soldier04",
+        "en": "Female Soldier04"
+      },
+      "category": "human-boss",
+      "level": 52,
+      "palId": null,
+      "world": {
+        "x": -75788.086,
+        "y": -82304.96,
+        "z": -960
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.4431909442297074,
+        "y": 0.2934760394809498
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Male_Trader01@-57544.383,116422.49",
+      "spawnerId": "BOSS_Male_Trader01",
+      "name": {
+        "zhHans": "Male Trader01",
+        "en": "Male Trader01"
+      },
+      "category": "human-boss",
+      "level": 42,
+      "palId": null,
+      "world": {
+        "x": -57544.383,
+        "y": 116422.49,
+        "z": 9060.125
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.5803578754831584,
+        "y": 0.28088375414135835
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Male_DesertPeople@-62624.902,402438.94",
+      "spawnerId": "BOSS_Male_DesertPeople",
+      "name": {
+        "zhHans": "Male Desert People",
+        "en": "Male Desert People"
+      },
+      "category": "human-boss",
+      "level": 36,
+      "palId": null,
+      "world": {
+        "x": -62624.902,
+        "y": 402438.94,
+        "z": 12180.669
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.7777739784649365,
+        "y": 0.2843904624516842
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Female_DesertPeople@147119.08,347473.56",
+      "spawnerId": "BOSS_Female_DesertPeople",
+      "name": {
+        "zhHans": "Female Desert People",
+        "en": "Female Desert People"
+      },
+      "category": "human-boss",
+      "level": 37,
+      "palId": null,
+      "world": {
+        "x": 147119.08,
+        "y": 347473.56,
+        "z": -856.4007
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.7398354224185534,
+        "y": 0.13961963003865263
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_FireCult_FlameThrower@-331690.16,-40407.434",
+      "spawnerId": "BOSS_FireCult_FlameThrower",
+      "name": {
+        "zhHans": "Fire Cult Flame Thrower",
+        "en": "Fire Cult Flame Thrower"
+      },
+      "category": "human-boss",
+      "level": 41,
+      "palId": null,
+      "world": {
+        "x": -331690.16,
+        "y": -40407.434,
+        "z": 15982.14
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.47210972252898953,
+        "y": 0.4701064053009386
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Male_NinjaElite@-18160,-151400",
+      "spawnerId": "BOSS_Male_NinjaElite",
+      "name": {
+        "zhHans": "Male Ninja Elite",
+        "en": "Male Ninja Elite"
+      },
+      "category": "human-boss",
+      "level": 53,
+      "palId": null,
+      "world": {
+        "x": -18160,
+        "y": -151400,
+        "z": 2360
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.3954997239094423,
+        "y": 0.25369961347321923
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Hunter_Rifle@-359201.56,181724.28",
+      "spawnerId": "BOSS_Hunter_Rifle",
+      "name": {
+        "zhHans": "Hunter Rifle",
+        "en": "Hunter Rifle"
+      },
+      "category": "human-boss",
+      "level": 12,
+      "palId": null,
+      "world": {
+        "x": -359201.56,
+        "y": 181724.28,
+        "z": 5179.0977
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.625430894533407,
+        "y": 0.48909549972390953
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Male_People@-126584.234,318232.75",
+      "spawnerId": "BOSS_Male_People",
+      "name": {
+        "zhHans": "Male People",
+        "en": "Male People"
+      },
+      "category": "human-boss",
+      "level": 26,
+      "palId": null,
+      "world": {
+        "x": -126584.234,
+        "y": 318232.75,
+        "z": -1519.0695
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.71965264356709,
+        "y": 0.32853688155715066
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Male_Soldier02@-224118.3,277672.06",
+      "spawnerId": "BOSS_Male_Soldier02",
+      "name": {
+        "zhHans": "Male Soldier02",
+        "en": "Male Soldier02"
+      },
+      "category": "human-boss",
+      "level": 23,
+      "palId": null,
+      "world": {
+        "x": -224118.3,
+        "y": 277672.06,
+        "z": -864.3568
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.6916565847598013,
+        "y": 0.3958574682495859
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Male_People02@97107.99,68422.43",
+      "spawnerId": "BOSS_Male_People02",
+      "name": {
+        "zhHans": "Male People02",
+        "en": "Male People02"
+      },
+      "category": "human-boss",
+      "level": 43,
+      "palId": null,
+      "world": {
+        "x": 97107.99,
+        "y": 68422.43,
+        "z": 42381.047
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.5472269671452236,
+        "y": 0.17413860436223083
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Male_Soldier@-409430,24820",
+      "spawnerId": "BOSS_Male_Soldier",
+      "name": {
+        "zhHans": "Male Soldier",
+        "en": "Male Soldier"
+      },
+      "category": "human-boss",
+      "level": 15,
+      "palId": null,
+      "world": {
+        "x": -409430,
+        "y": 24820,
+        "z": 1880
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.5171314191054666,
+        "y": 0.5237644947542794
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Female_People@-470651.97,-80708.37",
+      "spawnerId": "BOSS_Female_People",
+      "name": {
+        "zhHans": "Female People",
+        "en": "Female People"
+      },
+      "category": "human-boss",
+      "level": 38,
+      "palId": null,
+      "world": {
+        "x": -470651.97,
+        "y": -80708.37,
+        "z": -2009.124
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.44429295278851466,
+        "y": 0.566021514356709
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Female_Soldier@-177380,9850",
+      "spawnerId": "BOSS_Female_Soldier",
+      "name": {
+        "zhHans": "Female Soldier",
+        "en": "Female Soldier"
+      },
+      "category": "human-boss",
+      "level": 19,
+      "palId": null,
+      "world": {
+        "x": -177380,
+        "y": 9850,
+        "z": 6230
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.5067987299834346,
+        "y": 0.3635974599668691
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Female_Soldier03@-231660,-113810",
+      "spawnerId": "BOSS_Female_Soldier03",
+      "name": {
+        "zhHans": "Female Soldier03",
+        "en": "Female Soldier03"
+      },
+      "category": "human-boss",
+      "level": 39,
+      "palId": null,
+      "world": {
+        "x": -231660,
+        "y": -113810,
+        "z": -1150
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.4214453340695748,
+        "y": 0.4010629486471563
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Female_People02@-304539.22,35742.273",
+      "spawnerId": "BOSS_Female_People02",
+      "name": {
+        "zhHans": "Female People02",
+        "en": "Female People02"
+      },
+      "category": "human-boss",
+      "level": 16,
+      "palId": null,
+      "world": {
+        "x": -304539.22,
+        "y": 35742.273,
+        "z": 2271.2825
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.5246702602153507,
+        "y": 0.4513661098840419
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Male_Trader02@-907334.1,-389724.44",
+      "spawnerId": "BOSS_Male_Trader02",
+      "name": {
+        "zhHans": "Male Trader02",
+        "en": "Male Trader02"
+      },
+      "category": "human-boss",
+      "level": 57,
+      "palId": null,
+      "world": {
+        "x": -907334.1,
+        "y": -389724.44,
+        "z": -1882.6733
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.23100190502484816,
+        "y": 0.8674310463832137
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "BOSS_Male_People2@-124753.86,318055.84",
+      "spawnerId": "BOSS_Male_People2",
+      "name": {
+        "zhHans": "Male People2",
+        "en": "Male People2"
+      },
+      "category": "human-boss",
+      "level": 26,
+      "palId": null,
+      "world": {
+        "x": -124753.86,
+        "y": 318055.84,
+        "z": -1920.7535
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.719530535615682,
+        "y": 0.3272735091109884
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "5_2_island_iceblock_FBOSS_1@175142.77,221586.5",
+      "spawnerId": "5_2_island_iceblock_FBOSS_1",
+      "name": {
+        "zhHans": "海皇鲸",
+        "en": "Neptilius"
+      },
+      "category": "alpha-pal",
+      "level": 60,
+      "palId": "PoseidonOrca",
+      "world": {
+        "x": 175142.77,
+        "y": 221586.5,
+        "z": -2024.6559
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.6529448509110989,
+        "y": 0.1202769395361678
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/neptilius"
+    },
+    {
+      "id": "81_1_forest_FBOSS_3@-119314.516,288958.4",
+      "spawnerId": "81_1_forest_FBOSS_3",
+      "name": {
+        "zhHans": "踏春兔",
+        "en": "Verdash"
+      },
+      "category": "alpha-pal",
+      "level": 35,
+      "palId": "GrassRabbitMan",
+      "world": {
+        "x": -119314.516,
+        "y": 288958.4,
+        "z": 3096.7297
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.6994467145223634,
+        "y": 0.32351913031474333
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/verdash"
+    },
+    {
+      "id": "81_1_grass_FBOSS_9@-285331.3,210162.69",
+      "spawnerId": "81_1_grass_FBOSS_9",
+      "name": {
+        "zhHans": "企丸王",
+        "en": "Penking"
+      },
+      "category": "alpha-pal",
+      "level": 15,
+      "palId": "CaptainPenguin",
+      "world": {
+        "x": -285331.3,
+        "y": 210162.69,
+        "z": 766.80945
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.6450598357261181,
+        "y": 0.43810829652125904
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/penking"
+    },
+    {
+      "id": "81_1_grass_FBOSS_28@-426590,90670",
+      "spawnerId": "81_1_grass_FBOSS_28",
+      "name": {
+        "zhHans": "郁木羊",
+        "en": "Caprity Noct"
+      },
+      "category": "alpha-pal",
+      "level": 23,
+      "palId": "BerryGoat_Dark",
+      "world": {
+        "x": -426590,
+        "y": 90670,
+        "z": 110
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.5625828271673109,
+        "y": 0.535608779679735
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/caprity-noct"
+    },
+    {
+      "id": "81_5_Yamijima_FBOSS_9@-589257.2,-265874.4",
+      "spawnerId": "81_5_Yamijima_FBOSS_9",
+      "name": {
+        "zhHans": "魅爱莉",
+        "en": "Nitemary"
+      },
+      "category": "alpha-pal",
+      "level": 60,
+      "palId": "GhostRabbit",
+      "world": {
+        "x": -589257.2,
+        "y": -265874.4,
+        "z": 19702.037
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.31648647156267257,
+        "y": 0.6478859745996687
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/nitemary"
+    },
+    {
+      "id": "81_5_Yamijima_FBOSS_8@-797364.2,-245386.88",
+      "spawnerId": "81_5_Yamijima_FBOSS_8",
+      "name": {
+        "zhHans": "墨丸",
+        "en": "Smokie"
+      },
+      "category": "alpha-pal",
+      "level": 60,
+      "palId": "BlackPuppy",
+      "world": {
+        "x": -797364.2,
+        "y": -245386.88,
+        "z": 183.86575
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.3306274986195472,
+        "y": 0.791526918829376
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/smokie"
+    },
+    {
+      "id": "81_1_forest_FBOSS_2@-226362.23,231993.33",
+      "spawnerId": "81_1_forest_FBOSS_2",
+      "name": {
+        "zhHans": "焰巫狐",
+        "en": "Wixen"
+      },
+      "category": "alpha-pal",
+      "level": 28,
+      "palId": "FoxMage",
+      "world": {
+        "x": -226362.23,
+        "y": 231993.33,
+        "z": -1897.7047
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.6601279196576477,
+        "y": 0.3974062879624517
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/wixen"
+    },
+    {
+      "id": "81_1_grass_FBOSS_20@-276240,268990",
+      "spawnerId": "81_1_grass_FBOSS_20",
+      "name": {
+        "zhHans": "吹雪狐",
+        "en": "Foxcicle"
+      },
+      "category": "alpha-pal",
+      "level": 15,
+      "palId": "IceFox",
+      "world": {
+        "x": -276240,
+        "y": 268990,
+        "z": -1300
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.6856639977912755,
+        "y": 0.4318332413031475
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/foxcicle"
+    },
+    {
+      "id": "81_1_forest_FBOSS_4@-147025.53,217379.17",
+      "spawnerId": "81_1_forest_FBOSS_4",
+      "name": {
+        "zhHans": "秘斯媞雅",
+        "en": "Lunaris"
+      },
+      "category": "alpha-pal",
+      "level": 35,
+      "palId": "Mutant",
+      "world": {
+        "x": -147025.53,
+        "y": 217379.17,
+        "z": 2767.2039
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.6500408406957482,
+        "y": 0.3426460035891773
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/lunaris"
+    },
+    {
+      "id": "81_1_forest_FBOSS_5@-92059.77,273741.9",
+      "spawnerId": "81_1_forest_FBOSS_5",
+      "name": {
+        "zhHans": "绸笠蛾",
+        "en": "Sibelyx"
+      },
+      "category": "alpha-pal",
+      "level": 40,
+      "palId": "WhiteMoth",
+      "world": {
+        "x": -92059.77,
+        "y": 273741.9,
+        "z": 18877.033
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.6889438845941469,
+        "y": 0.3047071852567642
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/sibelyx"
+    },
+    {
+      "id": "81_1_forest_FBOSS_1@-245458.9,149122",
+      "spawnerId": "81_1_forest_FBOSS_1",
+      "name": {
+        "zhHans": "薇莉塔",
+        "en": "Vaelet"
+      },
+      "category": "alpha-pal",
+      "level": 27,
+      "palId": "VioletFairy",
+      "world": {
+        "x": -245458.9,
+        "y": 149122,
+        "z": 822.97565
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.6029279403644395,
+        "y": 0.4105873136388736
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/vaelet"
+    },
+    {
+      "id": "skyisland_8_09_D_forest_FBOSS_2@-773523.9,51495.863",
+      "spawnerId": "skyisland_8_09_D_forest_FBOSS_2",
+      "name": {
+        "zhHans": "缀夜星",
+        "en": "Wistella"
+      },
+      "category": "alpha-pal",
+      "level": 66,
+      "palId": "MoonChild",
+      "world": {
+        "x": -773523.9,
+        "y": 51495.863,
+        "z": 45252
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.5355438038376588,
+        "y": 0.7750717145223633
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/wistella"
+    },
+    {
+      "id": "81_1_grass_FBOSS_6@-282853.72,64952.2",
+      "spawnerId": "81_1_grass_FBOSS_6",
+      "name": {
+        "zhHans": "浪刃武士",
+        "en": "Bushi"
+      },
+      "category": "alpha-pal",
+      "level": 25,
+      "palId": "Ronin",
+      "world": {
+        "x": -282853.72,
+        "y": 64952.2,
+        "z": 5267.476
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.5448317228050801,
+        "y": 0.43639820541137486
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/bushi"
+    },
+    {
+      "id": "81_5_Yamijima_FBOSS_16@-729794.06,-338535.5",
+      "spawnerId": "81_5_Yamijima_FBOSS_16",
+      "name": {
+        "zhHans": "净岩龟",
+        "en": "Tetroise Primo"
+      },
+      "category": "alpha-pal",
+      "level": 60,
+      "palId": "CubeTurtle_Neutral",
+      "world": {
+        "x": -729794.06,
+        "y": -338535.5,
+        "z": 15500.139
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.2663338625069023,
+        "y": 0.744888224737714
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/tetroise-primo"
+    },
+    {
+      "id": "81_1_grass_FBOSS_10@-183818.9,40647.84",
+      "spawnerId": "81_1_grass_FBOSS_10",
+      "name": {
+        "zhHans": "狱焰王",
+        "en": "Blazehowl"
+      },
+      "category": "alpha-pal",
+      "level": 30,
+      "palId": "Manticore",
+      "world": {
+        "x": -183818.9,
+        "y": 40647.84,
+        "z": 8457.058
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.5280562120375483,
+        "y": 0.36804175869685263
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/blazehowl"
+    },
+    {
+      "id": "81_1_grass_FBOSS_FlameBuffalo@-349072.88,104534.984",
+      "spawnerId": "81_1_grass_FBOSS_FlameBuffalo",
+      "name": {
+        "zhHans": "炽焰牛",
+        "en": "Arsox"
+      },
+      "category": "alpha-pal",
+      "level": 15,
+      "palId": "FlameBuffalo",
+      "world": {
+        "x": -349072.88,
+        "y": 104534.984,
+        "z": -211.34375
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.5721528050800663,
+        "y": 0.4821044174489233
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/arsox"
+    },
+    {
+      "id": "81_5_Yamijima_FBOSS_11@-568029.2,-464143.12",
+      "spawnerId": "81_5_Yamijima_FBOSS_11",
+      "name": {
+        "zhHans": "梅莉姆",
+        "en": "Prunelia"
+      },
+      "category": "alpha-pal",
+      "level": 63,
+      "palId": "BlueberryFairy",
+      "world": {
+        "x": -568029.2,
+        "y": -464143.12,
+        "z": -1848.0032
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.17963616786305908,
+        "y": 0.6332338487023743
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/prunelia"
+    },
+    {
+      "id": "81_1_grass_FBOSS_15@-149050,-30550",
+      "spawnerId": "81_1_grass_FBOSS_15",
+      "name": {
+        "zhHans": "雪绒狐",
+        "en": "Foxparks Cryst"
+      },
+      "category": "alpha-pal",
+      "level": 15,
+      "palId": "Kitsunebi_Ice",
+      "world": {
+        "x": -149050,
+        "y": -30550,
+        "z": -1380
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.47891358365543896,
+        "y": 0.3440433462175594
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": "/pals/foxparks-cryst"
+    },
+    {
+      "id": "REGION_Oilrig_3@-789847.9,-636231",
+      "spawnerId": "REGION_Oilrig_3",
+      "name": {
+        "zhHans": "Oilrig 3",
+        "en": "Oilrig 3"
+      },
+      "category": "special",
+      "level": 60,
+      "palId": null,
+      "world": {
+        "x": -789847.9,
+        "y": -636231,
+        "z": -250.0003
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.06085657095527333,
+        "y": 0.7863389701822198
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "REGION_Oilrig_1@-321274.9,424944.06",
+      "spawnerId": "REGION_Oilrig_1",
+      "name": {
+        "zhHans": "Oilrig 1",
+        "en": "Oilrig 1"
+      },
+      "category": "special",
+      "level": 55,
+      "palId": null,
+      "world": {
+        "x": -321274.9,
+        "y": 424944.06,
+        "z": -2102.6147
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.7933076062948647,
+        "y": 0.4629175179458863
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    },
+    {
+      "id": "REGION_Oilrig_2@-250672.6,232290.08",
+      "spawnerId": "REGION_Oilrig_2",
+      "name": {
+        "zhHans": "Oilrig 2",
+        "en": "Oilrig 2"
+      },
+      "category": "special",
+      "level": 30,
+      "palId": null,
+      "world": {
+        "x": -250672.6,
+        "y": 232290.08,
+        "z": -2100
+      },
+      "mapId": "main",
+      "map": {
+        "x": 0.6603327443401436,
+        "y": 0.41418594699061295
+      },
+      "locationId": null,
+      "sourceAsset": "/Game/Pal/DataTable/UI/DT_BossSpawnerLoactionData",
+      "confidence": "extracted",
+      "palHref": null
+    }
+  ]
+}

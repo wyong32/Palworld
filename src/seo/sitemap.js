@@ -1,18 +1,18 @@
 import { databaseCategorySlug, getDatabaseCategoryGroups, getDatabaseItemPath } from "@/data/database";
 import { guides } from "@/data/guides";
-import { items } from "@/data/items";
+import { databaseRecords } from "@/data/databaseRecords";
 import { pals } from "@/data/pals";
 import { siteConfig } from "@/seo/site";
 import { legalRoutes } from "@/app/legal/_content";
 
 const STATIC_PAGE_LASTMOD = {
-  "/": "2026-07-15",
-  "/pals": "2026-07-15",
-  "/database": "2026-07-15",
+  "/": "2026-07-20",
+  "/pals": "2026-07-20",
+  "/database": "2026-07-20",
   "/breeding": "2026-07-15",
   "/breeding/calculator": "2026-07-17",
   "/guides": "2026-07-15",
-  "/map": "2026-07-15",
+  "/map": "2026-07-20",
   "/updates": "2026-07-15",
   "/legal": "2026-07-15",
   "/legal/privacy-policy": "2026-07-15",
@@ -23,8 +23,8 @@ const STATIC_PAGE_LASTMOD = {
 };
 
 const FALLBACK_LASTMOD = {
-  pals: "2026-07-13",
-  database: "2026-07-13",
+  pals: "2026-07-20",
+  database: "2026-07-20",
   guides: "2026-07-14",
 };
 
@@ -33,7 +33,10 @@ function normalizePath(path) {
 }
 
 function getEntryDate(entry, fallback) {
-  return entry.lastModified || entry.updatedAt || entry.lastChecked || entry.publishDate || fallback;
+  return [entry.lastModified, entry.updatedAt, entry.lastChecked, entry.publishDate, fallback]
+    .filter(Boolean)
+    .sort()
+    .at(-1);
 }
 
 function getLatestDate(entries, fallback) {
@@ -97,7 +100,7 @@ export function buildSitemapEntries() {
     }),
   );
 
-  const databaseCategoryEntries = getDatabaseCategoryGroups(items).map((group) =>
+  const databaseCategoryEntries = getDatabaseCategoryGroups(databaseRecords).map((group) =>
     makeSitemapEntry(`/database/${databaseCategorySlug(group.category)}`, {
       lastModified: getLatestDate(group.items, FALLBACK_LASTMOD.database),
       changeFrequency: "weekly",
@@ -105,7 +108,7 @@ export function buildSitemapEntries() {
     }),
   );
 
-  const databaseItemEntries = items.map((item) =>
+  const databaseItemEntries = databaseRecords.map((item) =>
     makeSitemapEntry(getDatabaseItemPath(item), {
       lastModified: getEntryDate(item, FALLBACK_LASTMOD.database),
       changeFrequency: "monthly",

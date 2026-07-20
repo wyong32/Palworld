@@ -46,6 +46,7 @@ export default function PalsPage({ pals }) {
             <div className="pals-hero-actions" aria-label="Quick Pal categories">
               <a href="#pal-results">Browse all Pals</a>
               <a href="#work-filters">Work suitability</a>
+              <Link href="/map#interactive-map-title">Fixed Alpha locations</Link>
             </div>
           </div>
         </div>

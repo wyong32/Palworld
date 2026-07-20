@@ -1,5 +1,5 @@
 import { getDatabaseCategoryBySlug, getDatabaseCategoryGroups } from "@/data/database";
-import { items } from "@/data/items";
+import { databaseRecords } from "@/data/databaseRecords";
 import { pals } from "@/data/pals";
 import DatabaseCategoryPage from "@/page/DatabaseCategoryPage";
 import { buildMetadata } from "@/seo/site";
@@ -7,24 +7,30 @@ import { fitDescription } from "@/seo/tdk";
 import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
-  return getDatabaseCategoryGroups(items).map((group) => ({ addressBar: group.slug }));
+  return getDatabaseCategoryGroups(databaseRecords).map((group) => ({ addressBar: group.slug }));
 }
 
 export async function generateMetadata({ params }) {
   const { addressBar } = await params;
-  const group = getDatabaseCategoryBySlug(items, addressBar);
+  const group = getDatabaseCategoryBySlug(databaseRecords, addressBar);
   if (!group) {
     return {};
   }
 
+  const creatureCategory = ["Bosses", "Predators", "Enemies"].includes(group.category);
+
   return buildMetadata(
     {
-      title: `Palworld Database - ${group.category} Item List Guide`,
+      title: creatureCategory
+        ? `Palworld Database - ${group.category} Stats and Records`
+        : `Palworld Database - ${group.category} Item List Guide`,
       description: fitDescription(
-        `Palworld Database ${group.category} list covers ${group.items.length} entries with item images, category context, route hints, related Pals, and player-use links for crafting and planning.`,
-        "Use it before opening individual item detail pages.",
+        creatureCategory
+          ? `Palworld Database ${group.category} list covers ${group.items.length} Palworld 1.0 records with combat stats, variants, drops, related Pals, and exact map links when the boss-spawner table provides them.`
+          : `Palworld Database ${group.category} list covers ${group.items.length} entries with item images, category context, route hints, related Pals, and player-use links for crafting and planning.`,
+        creatureCategory ? "Open a record for its extracted source fields." : "Use it before opening individual item detail pages.",
       ),
-      keywords: `Palworld Database ${group.category}, Palworld ${group.category}, Palworld items, Palworld Database`,
+      keywords: `Palworld Database ${group.category}, Palworld ${group.category}, Palworld 1.0 data, Palworld Database`,
     },
     `/database/${group.slug}`,
   );
@@ -32,11 +38,11 @@ export async function generateMetadata({ params }) {
 
 export default async function Page({ params }) {
   const { addressBar } = await params;
-  const group = getDatabaseCategoryBySlug(items, addressBar);
+  const group = getDatabaseCategoryBySlug(databaseRecords, addressBar);
 
   if (!group) {
     notFound();
   }
 
-  return <DatabaseCategoryPage group={group} items={items} pals={pals} />;
+  return <DatabaseCategoryPage group={group} items={databaseRecords} pals={pals} />;
 }

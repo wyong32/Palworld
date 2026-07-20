@@ -1,13 +1,13 @@
 import { databaseCategorySlug, getDatabaseCategoryBySlug, getDatabaseItemPath } from "@/data/database";
 import { buildDatabaseSeo, enrichDatabaseItem } from "@/data/databaseGuide";
-import { items } from "@/data/items";
+import { databaseRecords } from "@/data/databaseRecords";
 import { pals } from "@/data/pals";
 import DatabaseDetailPage from "@/page/DatabaseDetailPage";
 import { buildMetadata } from "@/seo/site";
 import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
-  return items.map((item) => ({
+  return databaseRecords.map((item) => ({
     addressBar: databaseCategorySlug(item.category),
     itemAddressBar: item.addressBar,
   }));
@@ -15,7 +15,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   const { addressBar, itemAddressBar } = await params;
-  const group = getDatabaseCategoryBySlug(items, addressBar);
+  const group = getDatabaseCategoryBySlug(databaseRecords, addressBar);
   const item = group?.items.find((entry) => entry.addressBar === itemAddressBar);
   if (!item) {
     return {};
@@ -30,12 +30,12 @@ export async function generateMetadata({ params }) {
 
 export default async function Page({ params }) {
   const { addressBar, itemAddressBar } = await params;
-  const group = getDatabaseCategoryBySlug(items, addressBar);
+  const group = getDatabaseCategoryBySlug(databaseRecords, addressBar);
   const item = group?.items.find((entry) => entry.addressBar === itemAddressBar);
 
   if (!item) {
     notFound();
   }
 
-  return <DatabaseDetailPage item={enrichDatabaseItem(item, { items, pals })} categorySlug={addressBar} />;
+  return <DatabaseDetailPage item={enrichDatabaseItem(item, { items: databaseRecords, pals })} categorySlug={addressBar} />;
 }

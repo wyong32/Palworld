@@ -101,6 +101,12 @@ export default function PalsExplorer({ data }) {
           <strong>{data.stats.combat}</strong>
           <span>Combat picks</span>
         </article>
+        <article className="is-map-linked">
+          <Link href="/map#interactive-map-title">
+            <strong>{data.stats.mapLinked}</strong>
+            <span>Map-linked Alpha Pals</span>
+          </Link>
+        </article>
       </section>
 
       <div className="listing-toolbar">
@@ -244,9 +250,16 @@ export default function PalsExplorer({ data }) {
                   </div>
                 </div>
               )}
-              <Link className="pal-result-link" href={`/pals/${pal.addressBar}`}>
-                Open Pal guide
-              </Link>
+              <div className="pal-result-actions">
+                <Link className="pal-result-link" href={`/pals/${pal.addressBar}`}>
+                  Open Pal guide
+                </Link>
+                {pal.mapHref && (
+                  <Link className="pal-map-result-link" href={pal.mapHref}>
+                    {pal.mapPointCount} fixed Alpha point{pal.mapPointCount === 1 ? "" : "s"} · {pal.mapRegions.join(" / ")}
+                  </Link>
+                )}
+              </div>
             </div>
           </article>
         ))}

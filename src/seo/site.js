@@ -5,6 +5,8 @@ export const siteConfig = {
   logoImage: "/images/logo.png",
   iconImage: "/images/ico.ico",
   defaultImage: "/images/og-image.png",
+  defaultImageWidth: 1254,
+  defaultImageHeight: 1254,
   defaultImageAlt: "Palworld Wiki social preview image",
   description:
     "Palworld Wiki for Pals, Database items, breeding routes, interactive map planning, update checks, and practical player guides.",
@@ -45,19 +47,19 @@ export const pageSeo = {
     keywords:
       "Palworld Breeding Calculator, Palworld breeding combos, Palworld parent pairs, Palworld breeding path calculator, Palworld passive skill breeding",
   },
-  database: {
-    title: "Palworld Database - Items, Gear, Materials and Structures",
-    description:
-      "Palworld Database organizes items, weapons, armor, materials, structures, Pal Gear, acquisition routes, practical uses, and connected Pal pages for planning.",
-    keywords:
-      "Palworld Database, Palworld items, Palworld materials, Palworld gear, Palworld structures, Palworld weapons",
+    database: {
+      title: "Palworld Database - Items, Bosses, Predators and Enemies",
+      description:
+        "Palworld Database organizes weapons, ammo, armor, consumables, recipes, Bosses, Predators, hostile enemies, map links, drops, and connected Pal pages.",
+      keywords:
+        "Palworld Database, Palworld weapons, Palworld items, Palworld bosses, Palworld predators, Palworld enemies",
   },
   map: {
-    title: "Palworld Map - Pals, Bosses, Dungeons and Resources",
+    title: "Palworld Map - Bosses, Quests and Wild Pal Habitats",
     description:
-      "Palworld Map combines interactive location layers with Pal, Alpha boss, dungeon, tower, resource, merchant, base, Sunreach, and World Tree route planning.",
+      "Palworld Map searches 126 fixed bosses, 162 exact quest objectives, and 7,403 wild Pal spawn anchors grouped into habitat clusters across both world maps.",
     keywords:
-      "Palworld Map, Palworld interactive map, Palworld locations, Palworld Alpha Pals, Palworld dungeon map, Palworld resources, best base locations",
+      "Palworld Map, Palworld interactive map, Palworld boss locations, Palworld quest locations, Palworld habitats, Palworld spawn map",
   },
   updates: {
     title: "Palworld Updates - 1.0 Patch Notes and Player Guide",
@@ -118,6 +120,8 @@ export function buildMetadata(seo, path = "/", options = {}) {
   const description = seo.description;
   const url = absoluteUrl(path);
   const imageUrl = absoluteUrl(options.image || seo.image || siteConfig.defaultImage);
+  const imageWidth = options.imageWidth || seo.imageWidth || siteConfig.defaultImageWidth;
+  const imageHeight = options.imageHeight || seo.imageHeight || siteConfig.defaultImageHeight;
   const imageAlt = options.imageAlt || seo.imageAlt || siteConfig.defaultImageAlt;
   const type = options.type || seo.type || "website";
   const publishedTime = options.publishedTime || seo.publishDate;
@@ -132,8 +136,8 @@ export function buildMetadata(seo, path = "/", options = {}) {
     images: [
       {
         url: imageUrl,
-        width: 1200,
-        height: 630,
+        width: imageWidth,
+        height: imageHeight,
         alt: imageAlt,
       },
     ],
@@ -184,7 +188,7 @@ export function buildMetadata(seo, path = "/", options = {}) {
     },
     openGraph,
     twitter: {
-      card: "summary_large_image",
+      card: imageWidth / imageHeight >= 1.7 ? "summary_large_image" : "summary",
       title,
       description,
       images: [imageUrl],

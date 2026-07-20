@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-labelledby="title desc">
+  <title id="title">Predator database record</title>
+  <desc id="desc">A neutral claw-mark symbol used when a specific Pal image is unavailable.</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#10231c"/><stop offset="1" stop-color="#275342"/></linearGradient></defs>
+  <rect width="640" height="480" rx="46" fill="url(#bg)"/>
+  <g fill="none" stroke="#b9f28c" stroke-width="32" stroke-linecap="round"><path d="M225 130l-62 226"/><path d="M327 112l-38 250"/><path d="M426 142l-15 218"/></g>
+  <path d="M180 382c88-62 191-65 284-4" fill="none" stroke="#efffe3" stroke-width="18" stroke-linecap="round"/>
+</svg>

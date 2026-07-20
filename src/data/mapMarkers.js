@@ -17,14 +17,10 @@ export const mapCategories = [
 ];
 
 export const mapSourceStats = [
-  { label: "Map locations", value: "28,910" },
-  { label: "Palpagos locations", value: "26,978" },
-  { label: "World Tree pins", value: "1,928" },
-  { label: "Alpha Pal pins", value: "65" },
-  { label: "Dungeon pins", value: "155-157" },
-  { label: "Fast travel pins", value: "137-152" },
-  { label: "Resource pins", value: "8,000+" },
-  { label: "Merchant pins", value: "18+" },
+  { label: "Fixed boss points", value: "126" },
+  { label: "Quest objectives", value: "162" },
+  { label: "Habitat anchors", value: "7,403" },
+  { label: "Habitat clusters", value: "668" },
 ];
 
 export const mapGuidance = [

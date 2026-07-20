@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import DatabaseIndexExplorer from "@/components/DatabaseIndexExplorer";
 import PageBreadcrumbs from "@/components/PageBreadcrumbs";
 import { buildDatabaseExplorerData } from "@/data/databaseGuide";
 import { databaseHubTrail } from "@/seo/breadcrumbs";
@@ -11,9 +12,9 @@ export default function DatabasePage({ items }) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "Palworld Database - Items, Gear, Materials and Structures",
+    name: "Palworld Database - Items, Bosses, Predators and Enemies",
     url: `${siteConfig.url}/database`,
-    description: "Browse Palworld item categories, acquisition routes, practical uses, related Pals, gear, structures, materials, weapons, and consumables.",
+    description: "Browse Palworld 1.0 items, crafting chains, Bosses, Predators and hostile enemy records with combat parameters, drops and exact map links where supported.",
     mainEntity: {
       "@type": "ItemList",
       numberOfItems: data.categories.length,
@@ -25,170 +26,110 @@ export default function DatabasePage({ items }) {
       })),
     },
   };
-  const categoryMap = new Map(data.categories.map((category) => [category.category, category]));
-  const playerLanes = [
-    {
-      title: "Capture and combat",
-      summary: "Spheres, weapons, ammo, armor, and accessories for boss prep and dungeon routes.",
-      categories: ["Spheres", "Weapons", "Ammo", "Armor", "Accessories"],
-    },
-    {
-      title: "Base and crafting",
-      summary: "Materials, structures, utility tools, Pal Gear, and schematics for production chains.",
-      categories: ["Materials", "Structures", "Utility", "Pal Gear", "Schematics"],
-    },
-    {
-      title: "Food and sustain",
-      summary: "Ingredients, consumables, furniture, and catch-all items for base upkeep and field routes.",
-      categories: ["Ingredients", "Consumables", "Furniture", "Items"],
-    },
-  ].map((lane) => ({
-    ...lane,
-    categories: lane.categories.map((name) => categoryMap.get(name)).filter(Boolean),
-  }));
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      <PageBreadcrumbs items={breadcrumbs} />
-      <section className="listing-hero-section database-hero-section">
-        <div className="container">
-          <div className="listing-hero-content database-hero-content">
-            <span className="wiki-kicker">Palworld Item Encyclopedia</span>
-            <h1>Palworld Database - Items, Gear, Materials, and Structures</h1>
-            <p>
-              Palworld Database starts with the category that matches your goal, then drills into item
-              lists and detail pages with acquisition hints, usage steps, related <Link href="/pals">Pals</Link>, crafting context,
-              and connected <Link href="/map">item routes</Link>.
-            </p>
-            <div className="database-hero-actions">
-              <a href="#database-categories">Browse categories</a>
-              <a href="#database-featured">Route-critical items</a>
+      <div className="database-index-page">
+        <PageBreadcrumbs items={breadcrumbs} />
+
+        <section className="database-catalog-hero">
+          <div className="container">
+            <div className="database-catalog-hero-grid">
+              <div className="database-catalog-hero-copy">
+                <span className="database-catalog-kicker">Palworld 1.0 · extracted records</span>
+                <h1>Items, Bosses, Predators, and Enemies</h1>
+                <p>
+                  Start with weapons, ammo, armor and consumables, then continue into crafting chains, fixed Alpha Bosses,
+                  Predator Pals and hostile human archetypes. Combat pages keep exact extracted facts separate from route guidance.
+                </p>
+                <div className="database-catalog-actions">
+                  <a href="#item-ledger">Search all records</a>
+                  <a href="#production-categories">Browse {data.categories.length} categories <span aria-hidden="true">↓</span></a>
+                </div>
+              </div>
+
+              <aside className="database-catalog-preview" aria-label="Database index sample">
+                <header><span>Index sample</span><strong>{data.stats.total} records</strong></header>
+                <div className="database-catalog-preview-items">
+                  {data.featured.slice(0, 4).map((item, index) => (
+                    <Link href={item.href} key={item.href}>
+                      <span>{String(index + 1).padStart(2, "0")}</span>
+                      <Image src={item.imageUrl} alt="" width={64} height={64} sizes="48px" />
+                      <span><strong>{item.title}</strong><small>{item.category}</small></span>
+                      <b aria-hidden="true">↗</b>
+                    </Link>
+                  ))}
+                </div>
+                <footer>
+                  <span><strong>{data.stats.matched}</strong> matched game records</span>
+                  <span><strong>{data.stats.reverseLinks.toLocaleString("en-US")}</strong> reverse links</span>
+                </footer>
+              </aside>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="database-index-section" id="database-categories">
-        <div className="container">
-          <div className="database-index-layout">
-            <section className="database-overview-stats" aria-label="Database coverage">
-              <article>
-                <strong>{data.stats.total}</strong>
-                <span>Item entries</span>
-              </article>
-              <article>
-                <strong>{data.stats.categories}</strong>
-                <span>Categories</span>
-              </article>
-              <article>
-                <strong>{playerLanes.length}</strong>
-                <span>Player routes</span>
-              </article>
-              <article>
-                <strong>{data.featured.length}</strong>
-                <span>Priority items</span>
-              </article>
-            </section>
-
-            <div className="database-route-panel" aria-labelledby="database-route-title">
+        <section className="database-production-section" id="production-categories">
+          <div className="container">
+            <header className="database-section-heading">
               <div>
-                <span className="wiki-kicker">Choose by player goal</span>
-                <h2 id="database-route-title">Open the right branch before drilling into item details.</h2>
-                <p>
-                  The Database starts as a category index. Pick the lane that matches your current
-                  route, open its second-level item list, then use item pages for acquisition notes,
-                  related <Link href="/pals">Pals</Link>, acquisition routes, and practical uses.
-                </p>
+                <span className="wiki-kicker">Database collections</span>
+                <h2>Browse by record category</h2>
               </div>
-              <div className="database-route-lanes">
-                {playerLanes.map((lane) => (
-                  <article key={lane.title}>
-                    <div>
-                      <strong>{lane.title}</strong>
-                      <p>{lane.summary}</p>
-                    </div>
-                    <div>
-                      {lane.categories.map((category) => (
-                        <Link href={`/database/${category.slug}`} key={category.category}>
-                          <span>{category.category}</span>
-                          <small>{category.count}</small>
-                        </Link>
-                      ))}
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
+              <p>Categories follow player priority: weapons, ammunition, armor and consumables first, then equipment, combat records, materials and base systems.</p>
+            </header>
 
-            <div className="database-index-head">
-              <div>
-                <span className="wiki-kicker">Category atlas</span>
-                <h2>Database Categories</h2>
-                <p>{data.stats.categories} categories · {data.stats.total} entries · each card opens a second-level item list.</p>
-              </div>
-              <a href="#database-featured">Jump to route-critical items</a>
-            </div>
-
-            <div className="database-category-grid database-category-grid-pro database-index-grid">
+            <div className="database-production-grid">
               {data.categories.map((group, index) => (
-                <article className="database-category-card database-category-card-pro" key={group.category}>
-                  <div className="database-category-head">
-                    <div>
-                      <span>{group.guide.role}</span>
-                      <h3>{group.category}</h3>
-                    </div>
-                    <strong>{group.count}</strong>
-                  </div>
-                  <div className="database-category-body">
+                <article className="database-production-category" key={group.category}>
+                  <div className="database-production-index">{String(index + 1).padStart(2, "0")}</div>
+                  <div className="database-production-copy">
+                    <h3><Link href={`/database/${group.slug}`}>{group.category}</Link><span>{group.count} entries</span></h3>
                     <p>{group.guide.intent}</p>
-                    <div className="database-category-samples">
-                      {group.sampleItems.slice(0, 4).map((item) => (
-                        <Link href={item.href} key={item.href}>
-                          <Image src={item.imageUrl} alt="" width={42} height={42} sizes="42px" />
-                          <span>{item.title}</span>
-                        </Link>
-                      ))}
-                    </div>
-                    <div className="database-category-footer">
-                      <Link className="database-category-link" href={`/database/${group.slug}`}>
-                        Open {group.category}
-                      </Link>
-                      <span className="database-category-mark">#{String(index + 1).padStart(2, "0")}</span>
-                    </div>
                   </div>
+                  <dl className="database-production-facts">
+                    <div><dt>Entries</dt><dd>{group.count}</dd></div>
+                    <div><dt>1.0 matches</dt><dd>{group.matchedCount}</dd></div>
+                    <div><dt>{group.isCreatureCategory ? "Map points" : "Recipes"}</dt><dd>{group.isCreatureCategory ? group.encounterCount : group.recipeCount}</dd></div>
+                    <div><dt>{group.isCreatureCategory ? "Drops" : "Uses"}</dt><dd>{group.isCreatureCategory ? group.dropCount : group.relationCount}</dd></div>
+                  </dl>
+                  <div className="database-production-samples" aria-label={`${group.category} sample items`}>
+                    {group.sampleItems.map((item) => (
+                      <Link href={item.href} key={item.href} aria-label={item.title} title={item.title}>
+                        <Image src={item.imageUrl} alt="" width={48} height={48} sizes="40px" />
+                      </Link>
+                    ))}
+                  </div>
+                  <Link href={`/database/${group.slug}`} className="database-production-open" aria-label={`Open ${group.category}`}>↗</Link>
                 </article>
               ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="database-featured-section" id="database-featured">
-        <div className="container">
-          <div className="database-featured-panel">
-            <div className="database-featured-copy">
-              <span className="wiki-kicker">Fast Routes</span>
-              <h2>Route-critical items to check first</h2>
-              <p>
-                These entries connect common player workflows: capture progression, ammo stockpiles,
-                armor upgrades, <Link href="/breeding">breeding support</Link>, Pal Gear, and <Link href="/database/materials">material chains</Link>.
-              </p>
-            </div>
-            <div className="database-featured-grid">
-              {data.featured.map((item) => (
-                <Link href={item.href} className="database-feature-card" key={item.href}>
-                  <Image src={item.imageUrl} alt={`${item.title} database item`} width={96} height={72} sizes="64px" />
-                  <span>
-                    <strong>{item.title}</strong>
-                    <small>{item.category} · {item.role}</small>
-                  </span>
-                </Link>
-              ))}
+        <section className="database-ledger-section" id="item-ledger">
+          <div className="container">
+            <header className="database-section-heading">
+              <div>
+                <span className="wiki-kicker">Complete site index</span>
+                <h2>Find an item or combat record</h2>
+              </div>
+              <p>Filter item production relationships or open a Boss, Predator or hostile enemy record for extracted stats, drops, variants and map links.</p>
+            </header>
+            <DatabaseIndexExplorer items={data.items} categories={data.categories.map((category) => category.category)} />
+          </div>
+        </section>
+
+        <section className="database-method-strip">
+          <div className="container">
+            <div>
+              <strong>How records connect</strong>
+              <span>Item definition</span><b>→</b><span>Recipe chain</span><b>→</b><span>Combat definition</span><b>→</b><Link href="/map">Exact boss point</Link><b>→</b><Link href="/pals">Related Pal</Link>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </>
   );
 }

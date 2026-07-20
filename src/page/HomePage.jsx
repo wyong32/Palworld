@@ -1,6 +1,6 @@
 import { databaseCategorySlug, getDatabaseCategoryGroups } from "@/data/database";
+import { databaseRecords } from "@/data/databaseRecords";
 import { guides } from "@/data/guides";
-import { items } from "@/data/items";
 import { bossRouteHighlights, newItemHighlights, newPalHighlights, onePointZeroCoverage } from "@/data/newContent";
 import { getPalWorkSuitability } from "@/data/palGuide";
 import { pals } from "@/data/pals";
@@ -61,9 +61,9 @@ const objectiveCards = [
   },
   {
     label: "Exploration",
-    title: "Find a Pal, boss, dungeon, or resource",
+    title: "Find a fixed Alpha or boss encounter",
     body:
-      "Start with the interactive map, then use the matching Pal, item, or guide page to prepare the actual route.",
+      "Search validated Palpagos and World Tree coordinates, then continue into the linked Pal, item, breeding, or preparation page.",
     href: "/map",
     link: "Open interactive map",
   },
@@ -104,7 +104,7 @@ const faqItems = [
   {
     question: "Where do I check a Pal location?",
     answer:
-      "Open the interactive map from the Pal detail page, enable the Pal or Alpha layer, search the species name, and confirm the active time and nearest fast-travel point.",
+      "When the fixed boss table contains an Alpha encounter, the Pal detail page shows its level, world coordinates, and a direct map link. Other Pals keep their habitat note separate instead of being assigned an invented exact point.",
   },
   {
     question: "How are Pal and item pages connected?",
@@ -119,7 +119,7 @@ const faqItems = [
 ];
 
 export default function HomePage() {
-  const categoryGroups = getDatabaseCategoryGroups(items);
+  const categoryGroups = getDatabaseCategoryGroups(databaseRecords);
   const topCategories = categoryGroups
     .map((group) => ({
       title: group.category,
@@ -132,8 +132,8 @@ export default function HomePage() {
 
   const stats = [
     { value: pals.length, label: "Pal entries", detail: "Images, roles, and links", href: "/pals" },
-    { value: items.length, label: "Item entries", detail: "Across the Database", href: "/database" },
-    { value: categoryGroups.length, label: "Item categories", detail: "For faster lookup", href: "/database" },
+    { value: databaseRecords.length, label: "Database records", detail: "Items and combat entities", href: "/database" },
+    { value: categoryGroups.length, label: "Database categories", detail: "For faster lookup", href: "/database" },
     { value: guides.length, label: "Long-form guides", detail: "Progression and World Tree", href: "/guides" },
   ];
 

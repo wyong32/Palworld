@@ -1,0 +1,27 @@
+{
+  "rawRows": 159,
+  "duplicateRowsRemoved": 33,
+  "bossMarkers": 126,
+  "rejectedRows": 0,
+  "maps": [
+    {
+      "id": "main",
+      "width": 8192,
+      "height": 8192
+    },
+    {
+      "id": "tree",
+      "width": 8192,
+      "height": 8192
+    }
+  ],
+  "categories": {
+    "alpha-pal": 90,
+    "human-boss": 33,
+    "special": 3
+  },
+  "mapCounts": {
+    "main": 119,
+    "tree": 7
+  }
+}

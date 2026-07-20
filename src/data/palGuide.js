@@ -1,6 +1,9 @@
 import { getDatabaseItemPath } from "@/data/database";
 import { featuredBreedingCombos } from "@/data/breedingTools";
+import { buildPalMapHref, getMapLinkedPalCount, getPalFixedEncounters } from "@/data/bossMap";
 import { currentWorkSuitability } from "@/data/currentWorkSuitability";
+import { breedingMatrix, getBreedingTargetPairs } from "@/data/breedingMatrix";
+import { gameDataProvenance, getPalGameDetails } from "@/data/gameDetails";
 import { fitDescription, fitTitle } from "@/seo/tdk";
 
 export const workTypes = [
@@ -191,7 +194,7 @@ export function parseWorkSuitability(value = "") {
 }
 
 function getCurrentWork(pal) {
-  return currentWorkSuitability[pal.title] || parseWorkSuitability(pal.workSuitability);
+  return getPalGameDetails(pal.title)?.work || currentWorkSuitability[pal.title] || parseWorkSuitability(pal.workSuitability);
 }
 
 function formatWorkSuitability(work) {
@@ -436,6 +439,7 @@ export function getPalGuideSummary(pal) {
 }
 
 export function enrichPal(pal, { items = [], allPals = [] } = {}) {
+  const gameData = getPalGameDetails(pal.title);
   const work = getCurrentWork(pal);
   const roles = getPalRoles(pal);
   const primaryWork = getPrimaryWork(work);
@@ -486,6 +490,18 @@ export function enrichPal(pal, { items = [], allPals = [] } = {}) {
       element: candidate.element,
       workSuitability: formatWorkSuitability(getCurrentWork(candidate)),
     }));
+  const breedingTarget = breedingMatrix.records.find((record) => record.pal?.addressBar === pal.addressBar);
+  const breedingRoutes = breedingTarget
+    ? getBreedingTargetPairs(breedingTarget.index)
+        .filter(({ parentA, parentB }) => parentA.pal && parentB.pal)
+        .slice(0, 6)
+        .map(({ parentA, parentB }) => ({
+          parentA: parentA.name,
+          parentAHref: parentA.href,
+          parentB: parentB.name,
+          parentBHref: parentB.href,
+        }))
+    : [];
   const investmentCards = getPalInvestmentCards(pal, {
     primaryWork,
     travelType,
@@ -501,9 +517,12 @@ export function enrichPal(pal, { items = [], allPals = [] } = {}) {
     travelType,
   });
   const sharedDropPals = getSharedDropPals(pal, { allPals, linkedDrops });
+  const mapEncounters = getPalFixedEncounters(pal.addressBar);
 
   return {
     ...pal,
+    gameData,
+    gameDataProvenance,
     workSuitability: formatWorkSuitability(work),
     guideSummary: getPalGuideSummary(pal),
     work: rankedWork,
@@ -519,7 +538,12 @@ export function enrichPal(pal, { items = [], allPals = [] } = {}) {
     investmentCards,
     alternativePals,
     sharedDropPals,
+    mapEncounters,
+    mapPointCount: mapEncounters.length,
+    mapHref: mapEncounters.length > 0 ? buildPalMapHref(pal.addressBar) : null,
+    mapRegions: Array.from(new Set(mapEncounters.map((encounter) => encounter.regionLabel))),
     breedingCombos,
+    breedingRoutes,
     recommendations: {
       base:
         !primaryWork
@@ -549,6 +573,38 @@ export function enrichPal(pal, { items = [], allPals = [] } = {}) {
   };
 }
 
+export function buildMapPalProfiles(pals, items) {
+  return Object.fromEntries(
+    pals
+      .map((pal) => {
+        const mapEncounters = getPalFixedEncounters(pal.addressBar);
+        if (mapEncounters.length === 0) {
+          return null;
+        }
+
+        const primaryWork = getPrimaryWork(getCurrentWork(pal));
+        return [
+          `/pals/${pal.addressBar}`,
+          {
+            title: pal.title,
+            href: `/pals/${pal.addressBar}`,
+            imageUrl: pal.imageUrl,
+            imageAlt: pal.imageAlt,
+            element: pal.element,
+            elements: pal.elements,
+            habitat: pal.habitat,
+            partnerSkill: pal.partnerSkill,
+            primaryWork,
+            linkedDrops: getLinkedDrops(pal, items).slice(0, 3),
+            mapPointCount: mapEncounters.length,
+            mapRegions: Array.from(new Set(mapEncounters.map((encounter) => encounter.regionLabel))),
+          },
+        ];
+      })
+      .filter(Boolean),
+  );
+}
+
 export function buildPalExplorerData(pals, items) {
   const enriched = pals.map((pal) => enrichPal(pal, { items, allPals: pals }));
   const byRole = (role) => enriched.filter((pal) => pal.roles.includes(role));
@@ -573,6 +629,9 @@ export function buildPalExplorerData(pals, items) {
       roles: pal.roles,
       travelType: pal.travelType,
       linkedDrops: pal.linkedDrops.slice(0, 3),
+      mapPointCount: pal.mapPointCount,
+      mapHref: pal.mapHref,
+      mapRegions: pal.mapRegions,
       guideSummary: pal.guideSummary,
       decisionSummary: pal.decisionSummary,
       recommendations: pal.recommendations,
@@ -583,6 +642,7 @@ export function buildPalExplorerData(pals, items) {
       topWorkers: byRole("Top Worker").length,
       flyingMounts: byRole("Flying Mount").length,
       combat: byRole("Combat Candidate").length,
+      mapLinked: getMapLinkedPalCount(),
       ranch: byRole("Ranch").length,
       drops: byRole("Resource Drops").length,
     },

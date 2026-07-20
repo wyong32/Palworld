@@ -1,0 +1,42 @@
+{
+  "version": "1.0",
+  "updatedAt": "2026-07-17T10:23:38.876Z",
+  "maps": [
+    {
+      "id": "main",
+      "image": "/images/map/palpagos-world-map.webp",
+      "width": 8192,
+      "height": 8192,
+      "worldBounds": {
+        "minX": -1099400,
+        "minY": -724400,
+        "maxX": 349400,
+        "maxY": 724400,
+        "width": 1448800,
+        "height": 1448800
+      },
+      "sourceAsset": "/Game/Pal/DataTable/WorldMapUIData/DT_WorldMapUIData",
+      "priority": 0,
+      "displayWidth": 4096,
+      "displayHeight": 4096
+    },
+    {
+      "id": "tree",
+      "image": "/images/map/world-tree-map.webp",
+      "width": 8192,
+      "height": 8192,
+      "worldBounds": {
+        "minX": 347351.5,
+        "minY": -818197,
+        "maxX": 689148.5,
+        "maxY": -476400,
+        "width": 341797,
+        "height": 341797
+      },
+      "sourceAsset": "/Game/Pal/DataTable/WorldMapUIData/DT_WorldMapUIData",
+      "priority": 1,
+      "displayWidth": 4096,
+      "displayHeight": 4096
+    }
+  ]
+}

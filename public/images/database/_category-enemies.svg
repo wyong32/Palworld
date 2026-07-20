@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-labelledby="title desc">
+  <title id="title">Enemy database record</title>
+  <desc id="desc">A neutral hostile-character silhouette used instead of claiming a specific character portrait.</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#251a1b"/><stop offset="1" stop-color="#63312e"/></linearGradient></defs>
+  <rect width="640" height="480" rx="46" fill="url(#bg)"/>
+  <circle cx="320" cy="168" r="82" fill="#f3d7bd"/>
+  <path d="M184 410c12-112 58-166 136-166s124 54 136 166" fill="#d65045" stroke="#fff1df" stroke-width="14"/>
+  <path d="M246 161l42 18m106-18l-42 18" stroke="#382326" stroke-width="16" stroke-linecap="round"/>
+</svg>

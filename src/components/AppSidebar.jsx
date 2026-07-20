@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { databaseCategorySlug, getDatabaseCategoryGroups } from "@/data/database";
 import { guides } from "@/data/guides";
-import { items } from "@/data/items";
+import { databaseRecords } from "@/data/databaseRecords";
 import { pals } from "@/data/pals";
 
 function numberLabel(value) {
@@ -9,14 +9,14 @@ function numberLabel(value) {
 }
 
 export default function AppSidebar() {
-  const databaseCategories = getDatabaseCategoryGroups(items);
+  const databaseCategories = getDatabaseCategoryGroups(databaseRecords);
   const topDatabaseCategories = [...databaseCategories]
     .sort((a, b) => b.items.length - a.items.length)
     .slice(0, 3);
 
   const coverageItems = [
     { value: pals.length, label: "Pal entries", href: "/pals" },
-    { value: items.length, label: "Item entries", href: "/database" },
+    { value: databaseRecords.length, label: "Database records", href: "/database" },
     { value: databaseCategories.length, label: "Categories", href: "/database" },
     { value: guides.length, label: "Guides", href: "/guides" },
   ];
@@ -33,7 +33,7 @@ export default function AppSidebar() {
     {
       title: "Database",
       links: [
-        { href: "/database", label: "Item Database", meta: numberLabel(items.length), desc: "Browse item categories, images, uses, and related Pals." },
+        { href: "/database", label: "Game Database", meta: numberLabel(databaseRecords.length), desc: "Browse items, recipes, Bosses, Predators, and hostile enemies." },
         ...topDatabaseCategories.map((category) => ({
           href: `/database/${databaseCategorySlug(category.category)}`,
           label: category.category,
@@ -46,7 +46,7 @@ export default function AppSidebar() {
       title: "Field Tools",
       links: [
         { href: "/breeding", label: "Breeding", meta: "1.0", desc: "Parent pairs, Cake, eggs, passives, and Mutation." },
-        { href: "/map", label: "Interactive Map", meta: "Map", desc: "Pals, bosses, dungeons, resources, and base spots." },
+        { href: "/map", label: "Interactive Map", meta: "Map", desc: "Fixed bosses, quest objectives, and clustered wild habitats from 1.0 game data." },
         { href: "/guides", label: "Player Guides", meta: numberLabel(guides.length), desc: "Progression and World Tree preparation." },
         { href: "/updates", label: "Updates", meta: "1.0", desc: "Current changes that affect your save and routes." },
       ],
