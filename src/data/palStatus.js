@@ -40,7 +40,7 @@ export function getPalPublicationStatus(pal) {
   return {
     key: "archive-unverified",
     label: "Unverified archive entry",
-    note: "No matching 1.0 species record was found. Keep this page as an archive reference, not a current Pal recommendation.",
+    note: "No matching 1.0 species record was found. Keep this page as an archive entry, not a current Pal recommendation.",
     indexable: false,
   };
 }

@@ -70,7 +70,7 @@ export default function DatabasePage({ items }) {
           </div>
         </section>
 
-        <section className="database-status-strip" aria-label="Database record status summary">
+        <section className="database-status-strip" aria-label="Database record status">
           <div className="container">
             <span><strong>{data.stats.current}</strong> current 1.0 records</span>
             <span><strong>{data.stats.legacyDisabled}</strong> disabled definitions</span>

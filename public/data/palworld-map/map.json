@@ -4,7 +4,7 @@
   "maps": [
     {
       "id": "main",
-      "image": "/images/map/palpagos-world-map.webp",
+      "image": "/images/map/palpagos-world-map-8192.webp",
       "width": 8192,
       "height": 8192,
       "worldBounds": {
@@ -22,7 +22,7 @@
     },
     {
       "id": "tree",
-      "image": "/images/map/world-tree-map.webp",
+      "image": "/images/map/world-tree-map-8192.webp",
       "width": 8192,
       "height": 8192,
       "worldBounds": {

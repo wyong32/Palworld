@@ -2,7 +2,7 @@ export const breedingHub = {
   eyebrow: "Breeding Guide",
   title: "Palworld Breeding Guide",
   summary:
-    "A complete Palworld breeding reference for 1.0: Breeding Farm setup, Cake production, Egg Incubators, parent selection, passive inheritance, mutation planning, and route building.",
+    "A complete Palworld breeding guide for 1.0: Breeding Farm setup, Cake production, Egg Incubators, parent selection, passive inheritance, mutation planning, and route building.",
   heroImage: "/images/palworld/screenshot-4.jpg",
   version: "Palworld 1.0",
   lastVerified: "2026-07-13",
@@ -21,8 +21,8 @@ export const breedingHub = {
       lede:
         "Breeding in Palworld is not only a way to fill the Paldeck. It is the main long-term system for chasing passive skills, creating subspecies, improving base workers, and preparing combat teams.",
       body: [
-        "The basic loop is simple: build a Breeding Farm, assign one male and one female Pal, place Cake into the farm box, wait for the egg, then move the egg to an Egg Incubator. The important strategic layer is choosing parents. Community wiki data documents a hidden breeding power value behind each Pal, and the child is selected by comparing the parents' values rather than by visible element alone.",
-        "For SEO and player usefulness, this page separates the breeding workflow into setup, parent choice, path planning, egg handling, and 1.0-specific changes. A future calculator can use this structure without rewriting the guide."
+        "The basic loop is simple: build a Breeding Farm, assign one male and one female Pal, place Cake into the farm box, wait for the egg, then move the egg to an Egg Incubator. The important strategic layer is choosing parents. Hidden breeding power sits behind each Pal, and the child is selected by comparing parent values rather than by visible element alone.",
+        "Use the workflow as a practical route: setup, parent choice, path planning, egg handling, and 1.0-specific changes before you commit rare passives or special Cake batches."
       ],
       facts: [
         "Breeding Farm requires a male Pal, a female Pal, and Cake.",
@@ -36,9 +36,9 @@ export const breedingHub = {
       title: "Breeding Farm Setup",
       badge: "Build",
       lede:
-        "The Breeding Farm is the station that turns parent selection into eggs. A professional guide should give the unlock, materials, and base-planning implications in one place.",
+        "The Breeding Farm is the station that turns parent selection into eggs. Check the unlock, materials, and base-planning implications before building several farms.",
       body: [
-        "Fandom lists the Breeding Farm as a tier 19 technology item costing 2 technology points, with a recipe of Wood, Stone, and Fiber. That makes it a mid-game system: you should already have basic resource automation, food production, and enough base space before trying to run multiple farms.",
+        "The Breeding Farm unlocks at technology tier 19 for 2 Technology Points and costs 100 Wood, 20 Stone, and 50 Fiber. That makes it a mid-game system: you should already have basic automation, food production, and enough base space before trying to run multiple farms.",
         "Because assigned Pals are removed from normal work while breeding, treat the farm like a dedicated production line. Keep parent storage, Cake storage, incubators, and feed access nearby. For large breeding projects, a separate breeding base is cleaner than mixing parent pairs into a mining or manufacturing base."
       ],
       facts: [
@@ -55,16 +55,16 @@ export const breedingHub = {
       lede:
         "Cake is the bottleneck most breeding bases underestimate. If Cake is missing, the pair will not convert time into eggs.",
       body: [
-        "Fandom's Cake page lists Flour, Red Berries, Milk, Egg, and Honey as crafting materials. That means a stable Cake line usually needs Wheat farming and milling, Berry farming, Chikipi or merchant access for eggs, Mozzarina or merchant access for milk, and Beegarde-style honey production.",
-        "For a real wiki page, Cake deserves its own planning block because it links breeding to farming, ranching, cooking workload, and base worker assignment. Players searching for breeding help often fail here, not at the parent-selection stage."
+        "Cake uses Flour, Red Berries, Milk, Egg, and Honey. That means a stable Cake line usually needs Wheat farming and milling, Berry farming, Chikipi or merchant access for eggs, Mozzarina or merchant access for milk, and Beegarde-style honey production.",
+        "Cake deserves its own planning block because it links breeding to farming, ranching, cooking workload, and base worker assignment. Players searching for breeding help often fail here, not at the parent-selection stage."
       ],
       facts: [
         "Cake is placed in the box attached to the Breeding Farm.",
-        "Fandom lists Cake materials as Flour, Red Berries, Milk, Egg, and Honey.",
+        "Cake materials are Flour, Red Berries, Milk, Egg, and Honey.",
         "Cake has a high workload cost, so cooking capacity matters.",
         "A dedicated Cake base should prioritize farming, ranching, transport, and kindling."
       ],
-      checklist: ["Wheat farm", "Mill Flour", "Berry supply", "Milk and Egg source", "Honey source", "Cooking worker"],
+      checklist: ["Wheat farm", "Mill Flour", "Berry supply", "Milk and Egg route", "Honey route", "Cooking worker"],
     },
     {
       title: "Parent Selection and Path Finder",
@@ -73,7 +73,7 @@ export const breedingHub = {
         "A breeding path finder should answer the player's real question: from the Pals I own, what is the shortest reliable route to the Pal I want?",
       body: [
         "The regular breeding system uses parent values to choose a child near the averaged result. That makes path planning possible: a strong or rare parent can be walked toward nearby results through repeated pairings, but normal breeding does not simply let every weak pair jump straight into the rarest Pal.",
-        "The future tool should support forward lookup, reverse lookup, and multi-step pathing. This page now sets the UX expectations for that tool: show parent pair, expected child, route length, special-combo warnings, and whether the result is better pursued by capture, breeding, or an update-specific mechanic."
+        "The calculator should support forward lookup, reverse lookup, and multi-step pathing: show parent pair, expected child, route length, special-combo warnings, and whether the result is better pursued by capture, breeding, or an update-specific mechanic."
       ],
       facts: [
         "Forward lookup: two parents to expected child.",
@@ -90,7 +90,7 @@ export const breedingHub = {
         "Version 1.0 changed the breeding conversation because Mutation adds a low-chance way for eggs to produce stronger-than-normal results.",
       body: [
         "The official 1.0 changelog adds Mutation as a breeding-related mechanic: mutated eggs can produce Pals with higher stats and a unique passive skill. The same changelog also introduces Mushroom Cake and Vegetable Cake effects, which makes the Cake system more than a simple on/off requirement.",
-        "Keep confirmed mechanics separate from practical planning notes. Mutation and special cakes are current 1.0 mechanics; exact optimization paths should stay conservative until the local calculator imports current 1.0 breeding tables."
+        "Keep confirmed mechanics separate from practical planning notes. Mutation and special cakes are current 1.0 mechanics; exact optimization paths should stay conservative until the route has been checked against current 1.0 combinations."
       ],
       facts: [
         "Mutation is a 1.0 mechanic tied to breeding.",
@@ -107,7 +107,7 @@ export const breedingHub = {
         "Egg management is the bridge between breeding theory and usable Pals. A clean workflow prevents good eggs from being lost in storage noise.",
       body: [
         "Eggs may come from Breeding Farm output or from world exploration. The hatch step should record parent pair, target, passive skills, element, and whether the hatch is kept, condensed, assigned to base work, or moved into a combat build.",
-        "A professional wiki should eventually expose egg categories, incubation conditions, and item links. Until that data is fully imported, the page gives players a practical audit workflow that still supports the future database."
+        "A strong egg routine tracks categories, incubation conditions, and item links. Until every egg detail has its own page, players can still follow a practical hatch workflow that keeps good results from being lost."
       ],
       facts: [
         "Breeding eggs and field eggs should be tracked separately.",
@@ -115,7 +115,7 @@ export const breedingHub = {
         "Temperature and incubation speed belong in the future Egg detail page.",
         "Final hatch review should connect to Pal, Database, Breeding, and Map detail checks."
       ],
-      checklist: ["Label egg source", "Incubate", "Check passives", "Assign outcome", "Update target list"],
+      checklist: ["Label egg route", "Incubate", "Check passives", "Assign outcome", "Update target list"],
     },
   ],
   workflow: [
@@ -144,17 +144,17 @@ export const breedingHub = {
   ],
   sources: [
     {
-      label: "Fandom Breeding",
+      label: "Breeding mechanics",
       href: "https://palworld.fandom.com/wiki/Breeding",
       note: "Breeding overview, hidden breeding power explanation, combination count, and special-combo structure.",
     },
     {
-      label: "Fandom Breeding Farm",
+      label: "Breeding Farm mechanics",
       href: "https://palworld.fandom.com/wiki/Breeding_Farm",
       note: "Technology tier, unlock cost, materials, male/female assignment, Cake requirement, and egg output notes.",
     },
     {
-      label: "Fandom Cake",
+      label: "Cake materials",
       href: "https://palworld.fandom.com/wiki/Cake",
       note: "Cake material requirements and crafting context.",
     },
@@ -189,12 +189,12 @@ export const mapHub = {
       lede:
         "A map page should help players choose what to do next, not simply display a static list of labels.",
       body: [
-        "The professional layout should support map intent clusters: Pal spawns, Alpha Pals, dungeons, towers, resources, merchants, settlements, fast travel, and base candidates. Each cluster answers a different player task.",
+        "The map layout supports player goals: Pal spawns, Alpha Pals, dungeons, towers, resources, merchants, settlements, fast travel, and base candidates. Each group answers a different route-planning task.",
         "The hub tells players which map category to use for each goal, which routes are likely affected by 1.0, and which local pages should be checked after location data updates."
       ],
       facts: [
         "Map pages should be filtered by player goal, not only by region.",
-        "Location pages should expose source and last-verified dates.",
+        "Location pages should show the current version and last checked date.",
         "1.0 habitat rebalance makes old fixed-spawn advice risky.",
         "Fast travel and base planning should connect back to Map, Database, and Breeding where relevant."
       ],
@@ -223,7 +223,7 @@ export const mapHub = {
       lede:
         "Pal location pages need version markers because 1.0 rebalanced Pal habitats and added many new Pals.",
       body: [
-        "The Steam changelog states that Pal habitats and spawn levels were reviewed, which means routes copied from older guides may point to the wrong place. A professional wiki should show last checked date and whether a location was checked after 1.0.",
+        "Pal habitats and spawn levels were reviewed for 1.0, which means older routes may point to the wrong place. Location advice should show a checked date and whether it was reviewed after 1.0.",
         "Alpha Pal locations are separate from ordinary spawns because they affect Ancient Civilization Parts, boss farming, route difficulty, and map markers. Alpha routes should link to tower, dungeon, and breeding pages where relevant."
       ],
       facts: [
@@ -232,7 +232,7 @@ export const mapHub = {
         "Alpha routes are different from normal spawn routes.",
         "Location pages should link back to Pal detail pages."
       ],
-      checklist: ["Normal spawn", "Alpha spawn", "Level band", "Element prep", "Source date"],
+      checklist: ["Normal spawn", "Alpha spawn", "Level band", "Element prep", "Checked date"],
     },
     {
       title: "Dungeons, Towers, and Boss Routes",
@@ -240,7 +240,7 @@ export const mapHub = {
       lede:
         "Dungeons and towers are map content, combat content, and progression content at the same time.",
       body: [
-        "Fandom describes dungeons as biome-dependent locations with Alpha Pals and guaranteed rewards at the end. Tower pages should focus on boss order, team preparation, time limits, unlock rewards, and story route context.",
+        "Dungeons are biome-dependent locations with Alpha Pals and guaranteed rewards at the end. Tower pages should focus on boss order, team preparation, time limits, unlock rewards, and story route context.",
         "The map hub should not try to fully duplicate every boss guide. It should provide the index layer: where the content belongs, why it matters, what preparation to bring, and which detail pages need expansion."
       ],
       facts: [
@@ -305,24 +305,24 @@ export const mapHub = {
       note: "Official 1.0 date, new regions, new Pals, and World Tree messaging.",
     },
     {
-      label: "Fandom Dungeons",
+      label: "Dungeon mechanics",
       href: "https://palworld.fandom.com/wiki/Dungeons",
       note: "Dungeon biome and Alpha Pal reward structure.",
     },
     {
-      label: "Fandom Wandering Merchant",
+      label: "Wandering Merchant mechanics",
       href: "https://palworld.fandom.com/wiki/Wandering_Merchant",
       note: "Merchant roles, item buying/selling, merchant types, and location behavior.",
     },
     {
-      label: "MapGenie Palpagos Islands",
+      label: "Interactive map pattern notes",
       href: "https://mapgenie.io/palworld/maps/palpagos-islands",
-      note: "Referenced for interactive map UX patterns such as category layers, search, marker inspection, and found-location tracking. Proprietary tiles and marker data are not copied.",
+      note: "Used only for planning common map interactions such as category layers, search, marker inspection, and checked-location tracking.",
     },
     {
       label: "Paldb Map",
       href: "https://paldb.cc/en/Map",
-      note: "External map reference for location category planning.",
+      note: "Used only for location category planning.",
     },
   ],
 };
@@ -336,7 +336,7 @@ export const updatesHub = {
   version: "Palworld 1.0",
   lastVerified: "2026-07-14",
   authorNote:
-    "This page prioritizes official Pocketpair announcements and Steam changelog data, then uses community wiki sources only for system-level follow-up work.",
+    "This page keeps update coverage focused on player impact: affected Pals, map routes, breeding systems, item planning, and save checks.",
   statCards: [
     { value: "2026-07-10", label: "1.0 official release date" },
     { value: "72", label: "New Pals listed in changelog" },
@@ -365,18 +365,18 @@ export const updatesHub = {
       title: "Patch Notes Workflow",
       badge: "Editorial",
       lede:
-        "A professional wiki should treat patch notes as an editorial workflow, not a single news card.",
+        "A useful update page should turn patch notes into clear player actions, not a single news card.",
       body: [
         "Each update should be broken into affected systems: Pals, items, breeding, map, bases, combat, servers, and UI. The page should then link the changed system to the corresponding local dataset or guide.",
-        "The current site now stores imported Pal and Database data locally, so patch notes should trigger a data refresh checklist: run the importer, check image coverage, rebuild sitemap, and verify affected pages in browser."
+        "Patch notes should trigger a practical refresh checklist: review affected Pals, check item images, rebuild the sitemap, and verify affected pages in browser."
       ],
       facts: [
         "Official changelog first, community follow-up second.",
-        "Each patch needs a source URL and last-checked date.",
+        "Each patch needs a current-version label and last-checked date.",
         "Data imports should be verified with lint and build.",
         "Major patch pages should link to affected guides."
       ],
-      checklist: ["Source note", "System tags", "Data refresh", "Internal links", "Verification"],
+      checklist: ["Version label", "System tags", "Data refresh", "Internal links", "Verification"],
     },
     {
       title: "New Pals and Paldeck Impact",
@@ -401,12 +401,12 @@ export const updatesHub = {
       lede:
         "Item changes affect Database SEO because players search for exact materials, recipes, technology unlocks, and where to get them.",
       body: [
-        "The local Database now has 767 Category:Items entries with local images. A professional update workflow should add fields beyond category membership: unlock tier, crafting materials, source, price, weight, structure type, and recipe dependencies.",
+        "The Database now has 767 item entries with local images. Update work should improve fields beyond category membership: unlock tier, crafting materials, acquisition route, price, weight, structure type, and recipe dependencies.",
         "When 1.0 adds new systems such as Awakening, Mutation support items, new ores, and ancient civilization technology, those terms should become database facets rather than loose guide text."
       ],
       facts: [
         "Database items now use local images, not generic screenshots.",
-        "Future item pages should include recipe, unlock, source, and usage fields.",
+        "Future item pages should include recipe, unlock, acquisition, and usage fields.",
         "New ores and special cakes should be tracked as update-sensitive records.",
         "Technology and recipe pages are currently pending deeper import."
       ],
@@ -424,7 +424,7 @@ export const updatesHub = {
       facts: [
         "Release dates and version numbers should be easy to find.",
         "Mechanics pages should avoid mixing old and current advice.",
-        "Imported data and player planning notes should stay separate.",
+        "Raw game values and player planning notes should stay separate.",
         "High-traffic pages need review after every major update."
       ],
       checklist: ["Last checked date", "Version tag", "Change impact", "Player caveats"],
@@ -434,7 +434,7 @@ export const updatesHub = {
     "Read the official Pocketpair news list and Steam changelog first.",
     "Tag each change by affected area: Pals, Map, Breeding, Database, Base, Combat, Servers, or Guides.",
     "Run data importers for Pals and Database, then check local image coverage.",
-    "Update affected long-form pages with source notes and last-verified dates.",
+    "Update affected long-form pages with version notes and last-verified dates.",
     "Run lint, build, desktop smoke checks, and mobile overflow checks before publishing."
   ],
   officialNotes: [
@@ -467,7 +467,7 @@ export const updatesHub = {
     {
       question: "What is the latest major Palworld update covered here?",
       answer:
-        "The update hub is currently built around Palworld 1.0, released July 10, 2026, with official Pocketpair and Steam changelog sources.",
+        "The update hub is currently built around Palworld 1.0, released July 10, 2026, with follow-up notes for every affected major system.",
     },
     {
       question: "Why do older Palworld guides need review after 1.0?",
@@ -477,7 +477,7 @@ export const updatesHub = {
     {
       question: "How should the site handle future patch notes?",
       answer:
-        "Each patch should be split into affected systems, linked to source URLs, connected to local data imports, and checked with lint, build, and browser smoke tests.",
+        "Each patch should be split into affected systems, connected to local page updates, and checked with lint, build, and browser smoke tests.",
     },
   ],
   sources: [

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { MapCategoryIcon, MapControlIcon } from "@/components/MapIcons";
 
 const DATA_PATHS = {
   maps: "/data/palworld-map/map.json",
@@ -27,6 +28,7 @@ const CATEGORY_META = {
   resource: { label: "Resource nodes", shortLabel: "Resource", tone: "copper" },
   merchant: { label: "Merchants", shortLabel: "Merchant", tone: "orange" },
   npc: { label: "NPC locations", shortLabel: "NPC", tone: "teal" },
+  "map-cluster": { label: "Nearby records", shortLabel: "Cluster", tone: "mixed" },
 };
 
 const MAP_META = {
@@ -62,7 +64,20 @@ const CATEGORY_GROUPS = [
   },
 ];
 const INITIAL_VIEW = { scale: 0.1, x: 0, y: 0 };
-const CLUSTER_CATEGORIES = new Set(["chest", "egg", "effigy", "resource", "wild-spawn"]);
+const MAX_ZOOM = 5;
+const CLUSTER_CATEGORIES = new Set([
+  "fast-travel",
+  "dungeon",
+  "quest",
+  "chest",
+  "egg",
+  "effigy",
+  "skill-fruit",
+  "note",
+  "resource",
+  "merchant",
+  "npc",
+]);
 
 function matchesQuery(marker, query, profile) {
   if (!query) {
@@ -115,16 +130,16 @@ function markerSummary(marker, profile) {
 function clusterMarkers(markers, activeMap, scale, query) {
   if (!activeMap || query) return markers;
   const width = activeMap.displayWidth || activeMap.width;
-  const gridSize = Math.max(0.008, Math.min(0.055, 44 / (width * Math.max(scale, 0.01))));
+  const gridSize = Math.max(0.004, Math.min(0.11, 68 / (width * Math.max(scale, 0.01))));
   const buckets = new Map();
   const unclustered = [];
 
   for (const marker of markers) {
-    if (!CLUSTER_CATEGORIES.has(marker.category) || marker.category === "wild-spawn") {
+    if (!CLUSTER_CATEGORIES.has(marker.category)) {
       unclustered.push(marker);
       continue;
     }
-    const key = `${marker.category}:${Math.floor(marker.map.x / gridSize)}:${Math.floor(marker.map.y / gridSize)}`;
+    const key = `${Math.floor(marker.map.x / gridSize)}:${Math.floor(marker.map.y / gridSize)}`;
     const bucket = buckets.get(key) || [];
     bucket.push(marker);
     buckets.set(key, bucket);
@@ -135,7 +150,8 @@ function clusterMarkers(markers, activeMap, scale, query) {
       unclustered.push(members[0]);
       continue;
     }
-    const category = members[0].category;
+    const memberCategories = new Set(members.map((marker) => marker.category));
+    const category = memberCategories.size === 1 ? members[0].category : "map-cluster";
     unclustered.push({
       id: `ui-cluster:${key}`,
       category,
@@ -144,11 +160,16 @@ function clusterMarkers(markers, activeMap, scale, query) {
         x: members.reduce((sum, marker) => sum + marker.map.x, 0) / members.length,
         y: members.reduce((sum, marker) => sum + marker.map.y, 0) / members.length,
       },
-      name: { en: `${members.length} ${CATEGORY_META[category].label}` },
+      name: {
+        en: category === "map-cluster"
+          ? `${members.length} nearby map records`
+          : `${members.length} ${CATEGORY_META[category].label}`,
+      },
       memberCount: members.length,
       members,
+      memberCategories: [...memberCategories],
       isUiCluster: true,
-      precision: "UI cluster of exact level actor coordinates",
+      precision: "Visual cluster of exact coordinates",
     });
   }
 
@@ -158,6 +179,7 @@ function clusterMarkers(markers, activeMap, scale, query) {
 export default function InteractiveMap({ preset, palProfiles = {} }) {
   const viewportRef = useRef(null);
   const stageRef = useRef(null);
+  const markerLayerRef = useRef(null);
   const fitScaleRef = useRef(0.1);
   const dragRef = useRef(null);
   const pendingTargetRef = useRef(null);
@@ -173,6 +195,7 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
   const [query, setQuery] = useState("");
   const [categories, setCategories] = useState(() => new Set(preset?.categories || DEFAULT_CATEGORIES));
   const [selectedId, setSelectedId] = useState(null);
+  const [selectedCluster, setSelectedCluster] = useState(null);
   const [appliedPresetKey, setAppliedPresetKey] = useState(preset?.key);
 
   if (preset?.key !== appliedPresetKey) {
@@ -181,6 +204,7 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
     setCategories(new Set(preset.categories));
     setQuery("");
     setSelectedId(null);
+    setSelectedCluster(null);
   }
 
   const activeMap = useMemo(
@@ -215,38 +239,58 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
     [categories, mapMarkers, normalizedQuery, palProfiles],
   );
 
-  const renderedMarkers = useMemo(
-    () => clusterMarkers(visibleMarkers, activeMap, renderScale, normalizedQuery),
-    [activeMap, normalizedQuery, renderScale, visibleMarkers],
-  );
+  const renderedMarkers = useMemo(() => {
+    const clusteredMarkers = clusterMarkers(visibleMarkers, activeMap, renderScale, normalizedQuery);
+    const focusedIds = selectedCluster
+      ? new Set(selectedCluster.members.map((member) => member.id))
+      : selectedId
+        ? new Set([selectedId])
+        : null;
+
+    if (!focusedIds) {
+      return clusteredMarkers;
+    }
+
+    return clusteredMarkers.flatMap((marker) => {
+      if (!marker.isUiCluster || !marker.members.some((member) => focusedIds.has(member.id))) {
+        return marker;
+      }
+
+      return marker.members;
+    });
+  }, [activeMap, normalizedQuery, renderScale, selectedCluster, selectedId, visibleMarkers]);
 
   const selectedMarker = useMemo(
     () => markers.find((marker) => marker.id === selectedId) || null,
     [markers, selectedId],
   );
 
-  const selectedProfile = selectedMarker?.palHref ? palProfiles[selectedMarker.palHref] : null;
+  const selectedDetail = selectedCluster || selectedMarker;
+  const selectedProfile = selectedDetail?.palHref ? palProfiles[selectedDetail.palHref] : null;
   const selectedHabitatSpecies = useMemo(() => {
-    if (selectedMarker?.category !== "wild-spawn") return [];
-    if (!normalizedQuery) return selectedMarker.species;
+    if (selectedDetail?.category !== "wild-spawn") return [];
+    if (!normalizedQuery) return selectedDetail.species;
     const matches = [];
     const remaining = [];
-    for (const pal of selectedMarker.species) {
+    for (const pal of selectedDetail.species) {
       (normalizeSpeciesSearch(pal).includes(normalizedQuery) ? matches : remaining).push(pal);
     }
     return [...matches, ...remaining];
-  }, [normalizedQuery, selectedMarker]);
+  }, [normalizedQuery, selectedDetail]);
 
   const renderView = useCallback(() => {
     viewFrameRef.current = null;
     const stage = stageRef.current;
-    if (!stage) {
+    const markerLayer = markerLayerRef.current;
+    if (!stage || !markerLayer) {
       return;
     }
 
     const { scale, x, y } = viewRef.current;
-    stage.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${scale})`;
-    stage.style.setProperty("--marker-inverse-scale", String(1 / scale));
+    const transform = `translate3d(${x}px, ${y}px, 0) scale(${scale})`;
+    stage.style.transform = transform;
+    markerLayer.style.transform = transform;
+    markerLayer.style.setProperty("--marker-inverse-scale", String(1 / scale));
   }, []);
 
   const updateView = useCallback((nextView, immediate = false) => {
@@ -296,7 +340,7 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
     const pointY = (clientY ?? rect.top + rect.height / 2) - rect.top;
 
     const current = viewRef.current;
-    const nextScale = Math.min(Math.max(current.scale * factor, fitScaleRef.current * 0.82), 1.6);
+    const nextScale = Math.min(Math.max(current.scale * factor, fitScaleRef.current * 0.82), MAX_ZOOM);
     if (Math.abs(nextScale - current.scale) < 0.00001) {
       return;
     }
@@ -324,7 +368,30 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
       x: rect.width / 2 - marker.map.x * width * nextScale,
       y: rect.height / 2 - marker.map.y * height * nextScale,
     });
+    setSelectedCluster(null);
     setSelectedId(marker.id);
+  }, [activeMap, updateView]);
+
+  const zoomIntoCluster = useCallback((cluster) => {
+    const viewport = viewportRef.current;
+    if (!viewport || !activeMap) {
+      return;
+    }
+
+    const rect = viewport.getBoundingClientRect();
+    const width = activeMap.displayWidth || activeMap.width;
+    const height = activeMap.displayHeight || activeMap.height;
+    const nextScale = Math.min(
+      Math.max(viewRef.current.scale * 2.2, fitScaleRef.current * 4.4),
+      MAX_ZOOM,
+    );
+    updateView({
+      scale: nextScale,
+      x: rect.width / 2 - cluster.map.x * width * nextScale,
+      y: rect.height / 2 - cluster.map.y * height * nextScale,
+    });
+    setSelectedCluster(cluster);
+    setSelectedId(null);
   }, [activeMap, updateView]);
 
   useEffect(() => {
@@ -450,10 +517,12 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
     setMapId(nextMapId);
     setQuery("");
     setSelectedId(null);
+    setSelectedCluster(null);
   }
 
   function closeMarkerDetail() {
     setSelectedId(null);
+    setSelectedCluster(null);
   }
 
   function toggleCategory(category) {
@@ -470,16 +539,19 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
     if (selectedMarker?.category === category && categories.has(category)) {
       setSelectedId(null);
     }
+    setSelectedCluster(null);
   }
 
   function showCoreLayers() {
     setCategories(new Set(DEFAULT_CATEGORIES));
     setSelectedId(null);
+    setSelectedCluster(null);
   }
 
   function clearLayers() {
     setCategories(new Set());
     setSelectedId(null);
+    setSelectedCluster(null);
   }
 
   function handlePointerDown(event) {
@@ -556,10 +628,10 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
         <div>
           <span>01 / INTERACTIVE FIELD ATLAS</span>
           <h2 id="interactive-map-title">Palworld 1.0 Interactive Map</h2>
-          <p>Exact level actors, fixed encounters, and clearly labeled habitat clusters across both 1.0 world projections.</p>
+          <p>Exact locations, fixed encounters, and clearly labeled habitat clusters across both 1.0 world projections.</p>
         </div>
         <div className="local-boss-map-proof" aria-label="Map data status">
-          <small>{coverage ? "ACTOR COVERAGE LOADED" : "PREPARING LAYERS"}</small>
+          <small>{coverage ? "MAP LAYERS READY" : "PREPARING LAYERS"}</small>
           <strong>{(markers.length || 126).toLocaleString("en-US")}</strong>
           <span>searchable records</span>
         </div>
@@ -591,10 +663,24 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
               <input
                 type="search"
                 value={query}
-                onChange={(event) => setQuery(event.target.value)}
+                onChange={(event) => {
+                  setQuery(event.target.value);
+                  setSelectedCluster(null);
+                }}
                 placeholder="Pal, dungeon, coal, egg…"
               />
-              {query && <button type="button" onClick={() => setQuery("")} aria-label="Clear map search">×</button>}
+              {query && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setQuery("");
+                    setSelectedCluster(null);
+                  }}
+                  aria-label="Clear map search"
+                >
+                  <MapControlIcon name="close" />
+                </button>
+              )}
             </div>
           </label>
 
@@ -619,7 +705,9 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
                           disabled={count === 0}
                           onChange={() => toggleCategory(category)}
                         />
-                        <i className={`map-dot is-${meta.tone}`} aria-hidden="true" />
+                        <span className={`map-layer-icon is-${meta.tone}`} aria-hidden="true">
+                          <MapCategoryIcon category={category} />
+                        </span>
                         <span>{meta.label}</span>
                         <b>{count.toLocaleString("en-US")}</b>
                       </label>
@@ -647,7 +735,9 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
                     className={marker.id === selectedId ? "is-active" : ""}
                     onClick={() => centerOnMarker(marker)}
                   >
-                    <i className={`map-dot is-${CATEGORY_META[marker.category].tone}`} aria-hidden="true" />
+                    <span className={`map-layer-icon is-${CATEGORY_META[marker.category].tone}`} aria-hidden="true">
+                      <MapCategoryIcon category={marker.category} />
+                    </span>
                     <span>
                       <strong>{marker.name.en}</strong>
                       <small>{markerSummary(marker, profile)}</small>
@@ -665,7 +755,7 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
           ref={viewportRef}
           className="local-boss-map-viewport"
           role="application"
-          aria-label={`${MAP_META[activeMap?.id]?.label || "Palworld"} game-data map`}
+          aria-label={`${MAP_META[activeMap?.id]?.label || "Palworld"} interactive map`}
           tabIndex={0}
           onKeyDown={handleKeyDown}
           onPointerDown={handlePointerDown}
@@ -676,102 +766,159 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
           {loadState === "loading" && <div className="local-boss-map-message">Loading local map data…</div>}
           {loadState === "error" && (
             <div className="local-boss-map-message is-error">
-              <strong>The local game-data atlas could not load.</strong>
+              <strong>The interactive atlas could not load.</strong>
               <span>{loadError}</span>
             </div>
           )}
           {loadState === "ready" && activeMap && (
-            <div ref={stageRef} className="local-boss-map-stage" style={stageStyle}>
-              <Image
-                key={activeMap.id}
-                src={activeMap.image}
-                alt={`${MAP_META[activeMap.id]?.label || activeMap.id} game map`}
-                width={activeMap.displayWidth || activeMap.width}
-                height={activeMap.displayHeight || activeMap.height}
-                sizes="(max-width: 768px) 100vw, 900px"
-                loading="eager"
-                draggable={false}
-                unoptimized
-              />
-              <div className="local-boss-marker-layer">
-                {renderedMarkers.map((marker) => (
-                  <button
-                    type="button"
-                    key={marker.id}
-                    className={`local-boss-marker is-${CATEGORY_META[marker.category].tone}${marker.id === selectedId ? " is-active" : ""}`}
-                    style={{
-                      left: `${marker.map.x * 100}%`,
-                      top: `${marker.map.y * 100}%`,
-                    }}
-                    aria-label={`${marker.name.en}, ${CATEGORY_META[marker.category].label}`}
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      centerOnMarker(marker.isUiCluster ? marker.members[0] : marker);
-                    }}
-                  >
-                    <span aria-hidden="true">{marker.isUiCluster ? marker.memberCount : ""}</span>
-                  </button>
-                ))}
+            <>
+              <div ref={stageRef} className="local-boss-map-stage" style={stageStyle}>
+                <Image
+                  key={activeMap.id}
+                  src={activeMap.image}
+                  alt={`${MAP_META[activeMap.id]?.label || activeMap.id} game map`}
+                  width={activeMap.displayWidth || activeMap.width}
+                  height={activeMap.displayHeight || activeMap.height}
+                  sizes="(max-width: 768px) 100vw, 900px"
+                  loading="eager"
+                  draggable={false}
+                  unoptimized
+                />
               </div>
-            </div>
+              <div ref={markerLayerRef} className="local-boss-marker-layer" style={stageStyle}>
+                {renderedMarkers.map((marker) => {
+                  const markerMeta = CATEGORY_META[marker.category];
+                  const profile = palProfiles[marker.palHref];
+                  const isSelected = marker.id === selectedId || marker.id === selectedCluster?.id;
+                  const tooltipText = marker.isUiCluster
+                    ? "Zoom in to separate these UI-grouped records"
+                    : markerSummary(marker, profile);
+
+                  return (
+                    <button
+                      type="button"
+                      key={marker.id}
+                      className={`local-boss-marker is-${markerMeta.tone}${marker.isUiCluster ? " is-cluster" : ""}${isSelected ? " is-active" : ""}`}
+                      style={{
+                        left: `${marker.map.x * 100}%`,
+                        top: `${marker.map.y * 100}%`,
+                      }}
+                      aria-label={marker.isUiCluster
+                        ? `${marker.name.en}. Zoom in and expand every record in this visual cluster.`
+                        : `${marker.name.en}, ${markerMeta.label}`}
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        if (marker.isUiCluster) {
+                          zoomIntoCluster(marker);
+                        } else {
+                          centerOnMarker(marker);
+                        }
+                      }}
+                    >
+                      <span className="local-boss-marker-shape" aria-hidden="true" />
+                      <span className="local-boss-marker-glyph" aria-hidden="true">
+                        <MapCategoryIcon category={marker.category} />
+                      </span>
+                      {marker.isUiCluster && (
+                        <span className="local-boss-marker-count" aria-hidden="true">
+                          {marker.memberCount > 99 ? "99+" : marker.memberCount}
+                        </span>
+                      )}
+                      <span className="local-boss-marker-tooltip" aria-hidden="true">
+                        <strong>{marker.name.en}</strong>
+                        <small>{tooltipText}</small>
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </>
           )}
 
+          <div className="local-boss-map-density" aria-live="polite">
+            <strong>{renderedMarkers.length.toLocaleString("en-US")}</strong>
+            <span>map symbols</span>
+            <small>{visibleMarkers.length.toLocaleString("en-US")} records in active layers</small>
+          </div>
+
           <div className="local-boss-map-tools" aria-label="Map zoom controls">
-            <button type="button" onClick={() => zoomAt(1.32)} aria-label="Zoom in">+</button>
-            <button type="button" onClick={() => zoomAt(1 / 1.32)} aria-label="Zoom out">−</button>
-            <button type="button" onClick={fitMap}>Fit map</button>
+            <button type="button" onClick={() => zoomAt(1.32)} aria-label="Zoom in">
+              <MapControlIcon name="plus" />
+            </button>
+            <button type="button" onClick={() => zoomAt(1 / 1.32)} aria-label="Zoom out">
+              <MapControlIcon name="minus" />
+            </button>
+            <button type="button" className="is-fit" onClick={fitMap}>
+              <MapControlIcon name="fit" />
+              <span>Fit map</span>
+            </button>
           </div>
 
-          <div className="local-boss-map-legend" aria-hidden="true">
-            Drag to pan · Wheel or buttons to zoom
+          <div className="local-boss-map-legend" aria-label="Map symbol key">
+            <span>
+              <i className="is-exact" aria-hidden="true"><MapCategoryIcon category="alpha-pal" /></i>
+              Exact point
+            </span>
+            <span>
+              <i className="is-cluster" aria-hidden="true"><MapCategoryIcon category="map-cluster" /></i>
+              Nearby records
+            </span>
+            <small>Drag to pan · Select a cluster to zoom and expand</small>
           </div>
 
-          {selectedMarker && (
-            <article className="local-boss-map-detail" aria-live="polite">
-              <button type="button" className="local-boss-map-detail-close" onClick={closeMarkerDetail} aria-label="Close map details">×</button>
-              <span>{CATEGORY_META[selectedMarker.category].label}</span>
-              <h3>{selectedMarker.name.en}</h3>
-              {selectedMarker.name.zhHans && selectedMarker.name.zhHans !== selectedMarker.name.en && <p>{selectedMarker.name.zhHans}</p>}
+          {selectedDetail && (
+            <article className={`local-boss-map-detail${selectedDetail.isUiCluster ? " is-cluster-detail" : ""}`} aria-live="polite">
+              <button type="button" className="local-boss-map-detail-close" onClick={closeMarkerDetail} aria-label="Close map details">
+                <MapControlIcon name="close" />
+              </button>
+              <span>{CATEGORY_META[selectedDetail.category].label}</span>
+              <h3>{selectedDetail.name.en}</h3>
+              {selectedDetail.name.zhHans && selectedDetail.name.zhHans !== selectedDetail.name.en && <p>{selectedDetail.name.zhHans}</p>}
               <dl>
-                {selectedMarker.level != null && <div><dt>Level</dt><dd>Lv.{selectedMarker.level}</dd></div>}
-                <div><dt>Map</dt><dd>{MAP_META[selectedMarker.mapId]?.label || selectedMarker.mapId}</dd></div>
-                {selectedMarker.category === "wild-spawn" ? (
+                {selectedDetail.level != null && <div><dt>Level</dt><dd>Lv.{selectedDetail.level}</dd></div>}
+                <div><dt>Map</dt><dd>{MAP_META[selectedDetail.mapId]?.label || selectedDetail.mapId}</dd></div>
+                {selectedDetail.isUiCluster ? (
                   <>
-                    <div><dt>Anchors</dt><dd>{selectedMarker.memberCount}</dd></div>
-                    <div><dt>Species</dt><dd>{selectedMarker.speciesCount}</dd></div>
+                    <div><dt>Records</dt><dd>{selectedDetail.memberCount}</dd></div>
+                    <div><dt>Types</dt><dd>{selectedDetail.memberCategories.length}</dd></div>
+                  </>
+                ) : selectedDetail.category === "wild-spawn" ? (
+                  <>
+                    <div><dt>Anchors</dt><dd>{selectedDetail.memberCount}</dd></div>
+                    <div><dt>Species</dt><dd>{selectedDetail.speciesCount}</dd></div>
                   </>
                 ) : (
                   <>
-                    <div><dt>World X</dt><dd>{formatCoordinate(selectedMarker.world?.x)}</dd></div>
-                    <div><dt>World Y</dt><dd>{formatCoordinate(selectedMarker.world?.y)}</dd></div>
-                    {selectedMarker.world?.z != null && <div><dt>World Z</dt><dd>{formatCoordinate(selectedMarker.world.z)}</dd></div>}
+                    <div><dt>World X</dt><dd>{formatCoordinate(selectedDetail.world?.x)}</dd></div>
+                    <div><dt>World Y</dt><dd>{formatCoordinate(selectedDetail.world?.y)}</dd></div>
+                    {selectedDetail.world?.z != null && <div><dt>World Z</dt><dd>{formatCoordinate(selectedDetail.world.z)}</dd></div>}
                   </>
                 )}
               </dl>
-              <small>{selectedMarker.precision || "Fixed game-data coordinate"} · Palworld 1.0</small>
-              {selectedMarker.sourceAsset && (
-                <small title={selectedMarker.sourceAsset}>Source: unpacked MainWorld_5 level actor · {selectedMarker.confidence || "extracted"}</small>
-              )}
-              {selectedMarker.isUiCluster && (
-                <div className="local-boss-map-record-list">
-                  <strong>{selectedMarker.memberCount} exact points in this visual cluster</strong>
-                  {selectedMarker.members.slice(0, 8).map((member) => (
+              <small>{selectedDetail.precision || "Fixed map coordinate"} · Palworld 1.0</small>
+              {selectedDetail.isUiCluster && (
+                <div className="local-boss-map-record-list is-cluster-records">
+                  <strong>All {selectedDetail.memberCount} records in this visual cluster</strong>
+                  <small>Select any record to center it and open its individual details.</small>
+                  {selectedDetail.members.map((member) => (
                     <button type="button" key={member.id} onClick={() => centerOnMarker(member)}>
-                      {member.name.en} · X {formatCoordinate(member.world?.x)} · Y {formatCoordinate(member.world?.y)}
+                      <span>{member.name.en}</span>
+                      <small>
+                        {CATEGORY_META[member.category].shortLabel} · X {formatCoordinate(member.world?.x)} · Y {formatCoordinate(member.world?.y)}
+                      </small>
                     </button>
                   ))}
-                  {selectedMarker.memberCount > 8 && <small>Zoom in to split this UI cluster into smaller groups.</small>}
                 </div>
               )}
-              {selectedMarker.category === "quest" && (
+              {selectedDetail.category === "quest" && !selectedDetail.isUiCluster && (
                 <div className="local-boss-map-record-list">
-                  <strong>{selectedMarker.questType}</strong>
-                  {selectedMarker.objectives.slice(0, 5).map((objective) => (
+                  <strong>{selectedDetail.questType}</strong>
+                  {selectedDetail.objectives.slice(0, 5).map((objective) => (
                     <span key={objective.id}>{objective.label}</span>
                   ))}
                 </div>
               )}
-              {selectedMarker.category === "wild-spawn" && (
+              {selectedDetail.category === "wild-spawn" && (
                 <div className="local-boss-map-record-list">
                   <strong>Species recorded in this UI cluster</strong>
                   {selectedHabitatSpecies.slice(0, 8).map((pal) => (
@@ -779,7 +926,7 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
                       ? <Link href={pal.href} key={pal.id}>{pal.title} · Lv.{pal.levelMin}–{pal.levelMax}{pal.times.length ? ` · ${pal.times.join("/")}` : ""}</Link>
                       : <span key={pal.id}>{pal.title} · Lv.{pal.levelMin}–{pal.levelMax}</span>
                   ))}
-                  {selectedMarker.speciesCount > 8 && <small>Search a Pal name to narrow the habitat layer.</small>}
+                  {selectedDetail.speciesCount > 8 && <small>Search a Pal name to narrow the habitat layer.</small>}
                 </div>
               )}
               {selectedProfile && (
@@ -810,18 +957,18 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
                   <Link href={drop.href} key={drop.href}>{drop.title}</Link>
                 ))}
                 {selectedProfile && <Link href="/breeding/calculator">Breeding planner</Link>}
-                {selectedMarker.category === "human-boss" && (
+                {selectedDetail.category === "human-boss" && !selectedDetail.isUiCluster && (
                   <Link href="/guides/palworld-1-0-progression-guide">Boss preparation guide</Link>
                 )}
-                {selectedMarker.category === "special" && <Link href="/database/materials">Route materials</Link>}
-                {selectedMarker.category === "quest" && <Link href="/guides">Quest preparation guides</Link>}
-                {selectedMarker.category === "resource" && (
-                  <Link href={`/database/materials/${({ Ore: "ore", Coal: "coal", Sulfur: "sulfur", "Pure Quartz": "pure-quartz", "Nightstar Sand": "nightstar-sand", "Crude Oil": "crude-oil" })[selectedMarker.subtype] || ""}`.replace(/\/$/, "")}>Open material data</Link>
+                {selectedDetail.category === "special" && !selectedDetail.isUiCluster && <Link href="/database/materials">Route materials</Link>}
+                {selectedDetail.category === "quest" && !selectedDetail.isUiCluster && <Link href="/guides">Quest preparation guides</Link>}
+                {selectedDetail.category === "resource" && !selectedDetail.isUiCluster && (
+                  <Link href={`/database/materials/${({ Ore: "ore", Coal: "coal", Sulfur: "sulfur", "Pure Quartz": "pure-quartz", "Nightstar Sand": "nightstar-sand", "Crude Oil": "crude-oil" })[selectedDetail.subtype] || ""}`.replace(/\/$/, "")}>Open material data</Link>
                 )}
-                {selectedMarker.category === "dungeon" && <Link href="/guides">Dungeon preparation guides</Link>}
-                {selectedMarker.category === "fast-travel" && <Link href="/guides/palworld-1-0-progression-guide">Progression route</Link>}
-                {["chest", "egg", "effigy", "skill-fruit", "note"].includes(selectedMarker.category) && <Link href="/database">Browse the database</Link>}
-                {["merchant", "npc"].includes(selectedMarker.category) && <Link href="/database/creatures">Browse characters</Link>}
+                {selectedDetail.category === "dungeon" && !selectedDetail.isUiCluster && <Link href="/guides">Dungeon preparation guides</Link>}
+                {selectedDetail.category === "fast-travel" && !selectedDetail.isUiCluster && <Link href="/guides/palworld-1-0-progression-guide">Progression route</Link>}
+                {["chest", "egg", "effigy", "skill-fruit", "note"].includes(selectedDetail.category) && !selectedDetail.isUiCluster && <Link href="/database">Browse the database</Link>}
+                {["merchant", "npc"].includes(selectedDetail.category) && !selectedDetail.isUiCluster && <Link href="/database/creatures">Browse characters</Link>}
               </div>
             </article>
           )}

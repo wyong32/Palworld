@@ -8534,7 +8534,7 @@
     },
     "Dynamoff": {
       "internalId": "ThunderFluffyBird",
-      "description": "With so little to eat at high altitudes, it will occasionally even feast on its enemies' brains. It is thought that groups seeking a more dependable food source descended to lower skies, ultimately diverging into .",
+      "description": "With so little to eat at high altitudes, it will occasionally even feast on its enemies' brains. It is thought that groups seeking a more dependable food supply descended to lower skies, ultimately diverging into .",
       "sourceAsset": "Content/Pal/DataTable/Character/DT_PalMonsterParameter.uasset",
       "stats": {
         "hp": 75,
@@ -19308,7 +19308,7 @@
     "Bone": {
       "kind": "item",
       "internalId": "Bone",
-      "description": "Bone collected from Pals. A valuable source of premium calcium.",
+      "description": "Bone collected from Pals. A valuable supply of premium calcium.",
       "sourceAsset": "Content/Pal/DataTable/Item/DT_ItemDataTable.uasset",
       "type": "Material",
       "subtype": "Material Monster",
@@ -20933,7 +20933,7 @@
     "Ceiling Lamp": {
       "kind": "structure",
       "internalId": "CeilingLamp",
-      "description": "A light source that provides illumination to a base even at night. It can be placed on a ceiling. Requires electricity, but lights up a larger area.",
+      "description": "A lighting fixture that provides illumination to a base even at night. It can be placed on a ceiling. Requires electricity, but lights up a larger area.",
       "sourceAsset": "Content/Pal/DataTable/MapObject/Building/DT_BuildObjectDataTable.uasset",
       "type": "Ceiling",
       "subtype": "Infra Environment",
@@ -39340,7 +39340,7 @@
     "Lamp": {
       "kind": "structure",
       "internalId": "Lamp",
-      "description": "A light source that provides illumination to a base even at night. Requires electricity, but lights up a larger area.",
+      "description": "A lighting fixture that provides illumination to a base even at night. Requires electricity, but lights up a larger area.",
       "sourceAsset": "Content/Pal/DataTable/MapObject/Building/DT_BuildObjectDataTable.uasset",
       "type": "Freestanding",
       "subtype": "Infra Environment",
@@ -39394,7 +39394,7 @@
     "Large Ceiling Lamp": {
       "kind": "structure",
       "internalId": "LargeCeilingLamp",
-      "description": "A light source that provides illumination to a base even at night. It can be placed on a ceiling. Requires a significant amount of electricity, but lights up an even larger area.",
+      "description": "A lighting fixture that provides illumination to a base even at night. It can be placed on a ceiling. Requires a significant amount of electricity, but lights up an even larger area.",
       "sourceAsset": "Content/Pal/DataTable/MapObject/Building/DT_BuildObjectDataTable.uasset",
       "type": "Ceiling",
       "subtype": "Infra Environment",
@@ -39610,7 +39610,7 @@
     "Large Mounted Lamp": {
       "kind": "structure",
       "internalId": "LargeLamp",
-      "description": "A light source that provides illumination to a base even at night. Requires a significant amount of electricity, but lights up an even larger area.",
+      "description": "A lighting fixture that provides illumination to a base even at night. Requires a significant amount of electricity, but lights up an even larger area.",
       "sourceAsset": "Content/Pal/DataTable/MapObject/Building/DT_BuildObjectDataTable.uasset",
       "type": "Freestanding",
       "subtype": "Infra Environment",
@@ -45687,7 +45687,7 @@
     "Mounted Torch": {
       "kind": "structure",
       "internalId": "Torch",
-      "description": "A light source that provides illumination to a base even at night. Requires a Fire Pal to light a flame.",
+      "description": "A lighting fixture that provides illumination to a base even at night. Requires a Fire Pal to light a flame.",
       "sourceAsset": "Content/Pal/DataTable/MapObject/Building/DT_BuildObjectDataTable.uasset",
       "type": "Freestanding",
       "subtype": "Infra Environment",
@@ -63995,7 +63995,7 @@
     "Wall Torch": {
       "kind": "structure",
       "internalId": "WallTorch",
-      "description": "A light source that provides illumination to a base even at night. It can be placed on walls. Requires a Fire Pal to light a flame.",
+      "description": "A lighting fixture that provides illumination to a base even at night. It can be placed on walls. Requires a Fire Pal to light a flame.",
       "sourceAsset": "Content/Pal/DataTable/MapObject/Building/DT_BuildObjectDataTable.uasset",
       "type": "Wall Hanging",
       "subtype": "Infra Environment",

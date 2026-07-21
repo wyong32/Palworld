@@ -54,7 +54,7 @@ const mapFocuses = [
     index: "06",
     label: "Quest objectives",
     title: "Exact objective points",
-    note: "Inspect extracted quest anchors without converting them into route guesses.",
+    note: "Inspect fixed quest locations without converting them into route guesses.",
     mapId: "main",
     categories: ["quest"],
   },

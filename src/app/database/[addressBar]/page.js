@@ -28,7 +28,7 @@ export async function generateMetadata({ params }) {
         creatureCategory
           ? `Palworld Database ${group.category} list covers ${group.items.length} Palworld 1.0 records with combat stats, variants, drops, related Pals, and exact map links when the boss-spawner table provides them.`
           : `Palworld Database ${group.category} list covers ${group.items.length} entries with item images, category context, route hints, related Pals, and player-use links for crafting and planning.`,
-        creatureCategory ? "Open a record for its extracted source fields." : "Use it before opening individual item detail pages.",
+        creatureCategory ? "Open an entry for combat stats, drops, and route checks." : "Use it before opening individual item detail pages.",
       ),
       keywords: `Palworld Database ${group.category}, Palworld ${group.category}, Palworld 1.0 data, Palworld Database`,
     },

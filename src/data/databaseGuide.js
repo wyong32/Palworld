@@ -103,8 +103,8 @@ export const categoryGuides = {
     priority: "Tower bosses, Alpha routes, raid fights, dungeon clearing, and endgame farming.",
   },
   Bosses: {
-    role: "Boss encounter reference",
-    intent: "Compare fixed Alpha, Tower and Raid Boss definitions using extracted combat rows, exact fixed-spawn coordinates, drops and linked standard Pal pages.",
+    role: "Boss encounter guide",
+    intent: "Compare fixed Alpha, Tower and Raid Boss entries with combat values, exact fixed-spawn coordinates, drops, and linked standard Pal pages.",
     howToUse: "Use the displayed level and combat modifiers for preparation. A map link appears only when the exact spawner ID and coordinates exist in the published map dataset.",
     acquisition: "Fixed Alpha entries show exact coordinates. Tower and Raid Boss records remain location-neutral when no fixed point is available.",
     priority: "Alpha routes, Tower progression, Raid preparation, drop checks and combat-stat comparison.",
@@ -126,7 +126,7 @@ export const categoryGuides = {
   Items: {
     role: "General index",
     intent: "Catch cross-category pages and miscellaneous entries that do not cleanly fit one production lane yet.",
-    howToUse: "Use these as reference pages, then move through related categories once a clearer item role is known.",
+    howToUse: "Use these as broad lookup pages, then move through related categories once a clearer item role is known.",
     acquisition: "Acquisition depends on the item and may involve crafting, merchants, exploration, drops, technology, or event rewards.",
     priority: "General lookup, item routing, and miscellaneous planning.",
   },
@@ -728,7 +728,7 @@ export function buildDatabaseSeo(item) {
   const guide = categoryGuides[item.category] || categoryGuides.Items;
   const status = getDatabasePublicationStatus(item);
   if (!status.indexable) {
-    const suffix = status.key === "editorial-category" ? "Category Reference" : status.key === "legacy-disabled" ? "Legacy Record" : "Unverified Record";
+    const suffix = status.key === "editorial-category" ? "Category Entry" : status.key === "legacy-disabled" ? "Legacy Record" : "Unverified Record";
     return {
       title: fitTitle("Palworld Database -", item.title, suffix),
       description: fitDescription(`Palworld Database archive record for ${item.title}: ${status.label}. ${status.note}`),
@@ -740,7 +740,7 @@ export function buildDatabaseSeo(item) {
       title: fitTitle("Palworld Database -", item.title, "Stats and Drops"),
       description: fitDescription(
         `Palworld Database ${item.title} record with 1.0 combat stats, internal variants, supported drops, related Pal links, and exact fixed-spawn coordinates when available.`,
-        "Source fields stay separate from editorial guidance.",
+        "Player notes stay separate from raw game values.",
       ),
       keywords: `${item.title}, Palworld ${item.displayName}, Palworld ${item.category}, Palworld boss stats, Palworld enemy drops`,
     };

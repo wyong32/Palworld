@@ -10,17 +10,17 @@ const faqItems = [
   {
     question: "How do I find a specific Alpha Pal on the map?",
     answer:
-      "Choose the Alpha preset, search the English or Chinese name or internal ID, then select the result to center its fixed game-data point and open the matching Pal guide.",
+      "Choose the Alpha preset, search the English or Chinese name or internal ID, then select the result to center its fixed map point and open the matching Pal guide.",
   },
   {
     question: "Why are tower bosses and random dungeon bosses not shown?",
     answer:
-      "The atlas shows extracted dungeon entrance actors, but tower masters and random dungeon interiors are not fixed overworld points in the imported map tables, so the map does not invent coordinates for them.",
+      "The atlas shows fixed dungeon entrances, but tower masters and random dungeon interiors are not fixed overworld points, so they are kept separate from the location layers.",
   },
   {
     question: "Why does World Tree use a separate map?",
     answer:
-      "Palworld stores the World Tree with its own map image and world bounds. The atlas preserves that projection for its bosses, travel points, collectibles, and other extracted level actors instead of placing them on Palpagos.",
+      "The World Tree uses its own map image and world bounds. The atlas preserves that projection for its bosses, travel points, collectibles, and other locations instead of placing them on Palpagos.",
   },
   {
     question: "How should I prepare for a boss or tower route?",
@@ -114,7 +114,7 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
 
         <section className={styles.coverageRail} aria-label="Exploration map coverage">
           <div className={styles.coverageLead}>
-            <span>EXTRACTED COVERAGE</span>
+            <span>MAP COVERAGE</span>
             <strong>Start with a task, not a wall of pins.</strong>
           </div>
           {sourceStats.slice(0, 4).map((stat, index) => (
@@ -177,7 +177,7 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
                 <h3>World Tree uses its own projection</h3>
                 <p>
                   The <a href="#interactive-map-title" data-map-focus="world-tree">World Tree preset</a> switches the
-                  image, bounds, and extracted layers, keeping those endgame points out of the Palpagos coordinate space.
+                  image, bounds, and location layers, keeping those endgame points out of the Palpagos coordinate space.
                 </p>
               </div>
             </article>

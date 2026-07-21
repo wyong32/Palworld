@@ -80,7 +80,7 @@ export const legalPages = {
     },
     eyebrow: "Legal",
     description:
-      "These Terms of Service explain the basic rules for using Palworld Wiki as an independent player guide and reference site.",
+      "These Terms of Service explain the basic rules for using Palworld Wiki as an independent player guide and lookup site.",
     href: "/legal/terms-of-service",
     sections: [
       {
@@ -93,7 +93,7 @@ export const legalPages = {
       {
         title: "Site purpose",
         body: [
-          "Palworld Wiki provides game reference pages, player guides, Pal data, item pages, breeding notes, map planning, patch coverage, and related informational content.",
+          "Palworld Wiki provides game lookup pages, player guides, Pal data, item pages, breeding notes, map planning, patch coverage, and related informational content.",
           "The site is intended for general informational and entertainment purposes. Game data, routes, recommendations, and update notes may change as the game changes.",
         ],
       },
@@ -150,13 +150,13 @@ export const legalPages = {
         title: "Game-related rights",
         body: [
           "Palworld names, logos, artwork, screenshots, characters, Pals, items, locations, and related game assets are the property of their respective owners.",
-          "This site is an independent fan-made wiki and guide resource. It is not affiliated with, endorsed by, or operated by the owners or publishers of Palworld.",
+          "This site is an independent fan-made wiki and guide site. It is not affiliated with, endorsed by, or operated by the owners or publishers of Palworld.",
         ],
       },
       {
-        title: "Permitted references",
+        title: "Permitted page use",
         body: [
-          "You may link to Palworld Wiki pages, quote short excerpts with clear attribution, and use page URLs for personal or community discussion.",
+          "You may link to Palworld Wiki pages and use page URLs for personal or community discussion.",
           "You may not copy full pages, mirror the site, bulk reuse structured content, republish images as your own assets, or use the site in a way that suggests official endorsement.",
         ],
       },
@@ -206,7 +206,7 @@ export const legalPages = {
       {
         title: "Independence",
         body: [
-          "Palworld Wiki is not an official Palworld website. The site exists as a fan-made reference and guide project for players.",
+          "Palworld Wiki is not an official Palworld website. The site exists as a fan-made wiki and guide project for players.",
           `For corrections, site questions, or general contact, email ${legalContactEmail}.`,
         ],
       },
