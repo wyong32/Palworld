@@ -96,7 +96,7 @@ function PalSummaryCard({ record, label, emphasis = false }) {
 }
 
 function PalPicker({ label, records, value, onChange, query, onQueryChange }) {
-  const selected = records[value];
+  const selected = records.find((record) => record.index === value);
 
   const filteredRecords = useMemo(() => {
     const normalized = query.trim().toLowerCase();
@@ -157,6 +157,72 @@ function PairCard({ pair, target }) {
   );
 }
 
+function planOwnedRoute(matrixData, ownedIndices, targetIndex) {
+  if (ownedIndices.length === 0) return { status: "empty", steps: [] };
+  const generations = new Array(matrixData.records.length).fill(Number.POSITIVE_INFINITY);
+  const parents = new Map();
+  ownedIndices.forEach((index) => { generations[index] = 0; });
+  if (generations[targetIndex] === 0) return { status: "owned", generations, steps: [] };
+
+  for (let pass = 0; pass < matrixData.records.length; pass += 1) {
+    let changed = false;
+    for (let rowIndex = 0; rowIndex < matrixData.rows.length; rowIndex += 1) {
+      if (!Number.isFinite(generations[rowIndex]) || matrixData.records[rowIndex]?.breedable === false) continue;
+      for (let columnIndex = 0; columnIndex < matrixData.rows[rowIndex].length; columnIndex += 1) {
+        if (!Number.isFinite(generations[columnIndex]) || matrixData.records[columnIndex]?.breedable === false) continue;
+        const childIndex = matrixData.rows[rowIndex][columnIndex];
+        if (matrixData.records[childIndex]?.breedable === false) continue;
+        const childGeneration = Math.max(generations[rowIndex], generations[columnIndex]) + 1;
+        if (childGeneration >= generations[childIndex]) continue;
+        generations[childIndex] = childGeneration;
+        parents.set(childIndex, [rowIndex, columnIndex]);
+        changed = true;
+      }
+    }
+    if (!changed) break;
+  }
+
+  if (!Number.isFinite(generations[targetIndex])) return { status: "unreachable", generations, steps: [] };
+  const steps = [];
+  const visited = new Set();
+  function trace(childIndex) {
+    if (visited.has(childIndex) || !parents.has(childIndex)) return;
+    const [parentAIndex, parentBIndex] = parents.get(childIndex);
+    trace(parentAIndex);
+    trace(parentBIndex);
+    visited.add(childIndex);
+    steps.push({
+      generation: generations[childIndex],
+      parentA: matrixData.records[parentAIndex],
+      parentB: matrixData.records[parentBIndex],
+      child: matrixData.records[childIndex],
+    });
+  }
+  trace(targetIndex);
+  return { status: "found", generations, steps, targetGeneration: generations[targetIndex] };
+}
+
+function OwnedPalPicker({ records, selected, onToggle, query, onQueryChange }) {
+  const filtered = useMemo(() => {
+    const normalized = query.trim().toLowerCase();
+    return records.filter((record) => !normalized || getSearchText(record).includes(normalized));
+  }, [query, records]);
+  return (
+    <div className="calculator-owned-picker">
+      <div className="calculator-picker-head"><span>Owned Pal species</span><strong>{selected.length} selected</strong></div>
+      <label className="tool-search"><span>Search owned Pals</span><input type="search" value={query} onChange={(event) => onQueryChange(event.target.value)} placeholder="Search your box by Pal name or role" /></label>
+      <div className="calculator-picker-options" aria-label="Owned Pal species options">
+        {filtered.map((record) => (
+          <button type="button" key={`owned-${record.id}-${record.index}`} className={selected.includes(record.index) ? "is-active" : ""} aria-pressed={selected.includes(record.index)} onClick={() => onToggle(record.index)}>
+            <RecordImage record={record} size={44} />
+            <span><strong>{record.name}</strong><small>{selected.includes(record.index) ? "Owned" : record.element || record.id}</small></span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function ComboCard({ combo }) {
   const parentA = comboPalRecord(combo.parentARef, combo.parentA);
   const parentB = comboPalRecord(combo.parentBRef, combo.parentB);
@@ -195,6 +261,9 @@ export default function BreedingCalculatorTool({ combos = [] }) {
   const [pairLimit, setPairLimit] = useState(PAIR_LIMIT_STEP);
   const [comboQuery, setComboQuery] = useState("");
   const [comboRole, setComboRole] = useState("All");
+  const [ownedQuery, setOwnedQuery] = useState("");
+  const [ownedIndices, setOwnedIndices] = useState([]);
+  const [ownedRoute, setOwnedRoute] = useState(null);
 
   useEffect(() => {
     let active = true;
@@ -224,6 +293,7 @@ export default function BreedingCalculatorTool({ combos = [] }) {
   }, []);
 
   const records = useMemo(() => matrixData?.records || [], [matrixData]);
+  const availableRecords = useMemo(() => records.filter((record) => record.breedable !== false), [records]);
   const parentA = records[parentAIndex];
   const parentB = records[parentBIndex];
   const child = matrixData ? records[getChildIndex(matrixData, parentAIndex, parentBIndex)] : null;
@@ -243,6 +313,7 @@ export default function BreedingCalculatorTool({ combos = [] }) {
           parentA: records[rowIndex],
           parentB: records[columnIndex],
         };
+        if (pair.parentA.breedable === false || pair.parentB.breedable === false) continue;
         const haystack = `${pair.parentA.name} ${pair.parentB.name} ${pair.parentA.element} ${pair.parentB.element}`.toLowerCase();
 
         if (!normalizedQuery || haystack.includes(normalizedQuery)) {
@@ -285,6 +356,12 @@ export default function BreedingCalculatorTool({ combos = [] }) {
   const changeTarget = (index) => {
     setTargetIndex(index);
     setPairLimit(PAIR_LIMIT_STEP);
+    setOwnedRoute(null);
+  };
+
+  const toggleOwned = (index) => {
+    setOwnedIndices((current) => current.includes(index) ? current.filter((entry) => entry !== index) : [...current, index]);
+    setOwnedRoute(null);
   };
 
   return (
@@ -295,6 +372,9 @@ export default function BreedingCalculatorTool({ combos = [] }) {
         </button>
         <button type="button" className={mode === "target" ? "is-active" : ""} onClick={() => setMode("target")}>
           Target to Parents
+        </button>
+        <button type="button" className={mode === "owned" ? "is-active" : ""} onClick={() => setMode("owned")}>
+          Owned Pals to Target
         </button>
       </div>
 
@@ -315,7 +395,7 @@ export default function BreedingCalculatorTool({ combos = [] }) {
           <div className="calculator-parent-grid">
             <PalPicker
               label="Parent A"
-              records={records}
+              records={availableRecords}
               value={parentAIndex}
               onChange={setParentAIndex}
               query={parentAQuery}
@@ -323,7 +403,7 @@ export default function BreedingCalculatorTool({ combos = [] }) {
             />
             <PalPicker
               label="Parent B"
-              records={records}
+              records={availableRecords}
               value={parentBIndex}
               onChange={setParentBIndex}
               query={parentBQuery}
@@ -373,7 +453,7 @@ export default function BreedingCalculatorTool({ combos = [] }) {
           <div className="calculator-target-row">
             <PalPicker
               label="Target Pal"
-              records={records}
+              records={availableRecords}
               value={targetIndex}
               onChange={changeTarget}
               query={targetQuery}
@@ -413,6 +493,41 @@ export default function BreedingCalculatorTool({ combos = [] }) {
                 Show more parent pairs
               </button>
             </div>
+          )}
+        </div>
+      )}
+
+      {matrixData && mode === "owned" && (
+        <div className="calculator-workbench calculator-owned-workbench">
+          <div className="calculator-owned-grid">
+            <OwnedPalPicker records={availableRecords} selected={ownedIndices} onToggle={toggleOwned} query={ownedQuery} onQueryChange={setOwnedQuery} />
+            <div className="calculator-owned-target">
+              <PalPicker label="Target Pal" records={availableRecords} value={targetIndex} onChange={changeTarget} query={targetQuery} onQueryChange={setTargetQuery} />
+              <div className="calculator-owned-actions">
+                <button type="button" onClick={() => setOwnedRoute(planOwnedRoute(matrixData, ownedIndices, targetIndex))}>Find shortest generation path</button>
+                <button type="button" onClick={() => { setOwnedIndices([]); setOwnedRoute(null); }}>Clear owned list</button>
+              </div>
+            </div>
+          </div>
+
+          {ownedRoute?.status === "empty" && <p className="calculator-status">Select at least one owned Pal species before calculating.</p>}
+          {ownedRoute?.status === "owned" && <p className="calculator-status"><strong>{target.name}</strong> is already in your owned list; no breeding step is required.</p>}
+          {ownedRoute?.status === "unreachable" && <p className="calculator-status">No route from the selected species reaches <strong>{target.name}</strong> in the current 1.0 matrix.</p>}
+          {ownedRoute?.status === "found" && (
+            <section className="calculator-owned-route" aria-live="polite">
+              <div className="breeding-results-head">
+                <div><span className="eyebrow">Shortest matrix path</span><h2>{target.name} in {ownedRoute.targetGeneration} generation{ownedRoute.targetGeneration === 1 ? "" : "s"}</h2><p>Breed the listed child before any later step that uses it as a parent. Species-level planning assumes you have a compatible male/female pair when the same species appears on both sides.</p></div>
+                <strong>{ownedRoute.steps.length} breeding step{ownedRoute.steps.length === 1 ? "" : "s"}</strong>
+              </div>
+              <div className="calculator-route-steps">
+                {ownedRoute.steps.map((step, index) => (
+                  <article key={`${step.child.id}-${index}`}>
+                    <span>Generation {step.generation} · Step {index + 1}</span>
+                    <div className="calculator-result-equation"><PalSummaryCard record={step.parentA} label="Parent" /><strong>+</strong><PalSummaryCard record={step.parentB} label="Parent" /><strong>=</strong><PalSummaryCard record={step.child} label="Child" emphasis /></div>
+                  </article>
+                ))}
+              </div>
+            </section>
           )}
         </div>
       )}

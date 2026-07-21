@@ -57,16 +57,16 @@ export const pageSeo = {
   map: {
     title: "Palworld Map - Bosses, Quests and Wild Pal Habitats",
     description:
-      "Palworld Map searches 126 fixed bosses, 162 exact quest objectives, and 7,403 wild Pal spawn anchors grouped into habitat clusters across both world maps.",
+      "Palworld Map searches fixed bosses, fast travel, dungeons, resources, collectibles, quest objectives, and clustered wild Pal habitats across both world maps.",
     keywords:
-      "Palworld Map, Palworld interactive map, Palworld boss locations, Palworld quest locations, Palworld habitats, Palworld spawn map",
+      "Palworld Map, Palworld interactive map, Palworld boss locations, Palworld dungeons, Palworld resources, Palworld collectibles, Palworld habitats",
   },
   updates: {
-    title: "Palworld Updates - 1.0 Patch Notes and Player Guide",
+    title: "Palworld Updates - 1.0.1 Patch Notes and Player Guide",
     description:
-      "Palworld Updates turns 1.0 patch notes into clear player actions for new Pals, Sunreach, World Tree, Awakening, Mutation, breeding, map routes, and gear.",
+      "Palworld Updates tracks the verified 1.0.1 hotfix and turns 1.0 changes into player actions for Pals, World Tree, breeding, routes, saves, and gear.",
     keywords:
-      "Palworld Updates, Palworld 1.0 patch notes, Palworld new Pals, Palworld Sunreach, Palworld World Tree, Palworld Mutation",
+      "Palworld Updates, Palworld 1.0.1 patch notes, Palworld 1.0 patch notes, Palworld Sunreach, Palworld World Tree, Palworld Mutation",
   },
   search: {
     title: "Palworld Wiki Search - Find Pals, Items and Guides",

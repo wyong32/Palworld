@@ -7,12 +7,12 @@ import { updatesHubTrail } from "@/seo/breadcrumbs";
 import { pageSeo, siteConfig } from "@/seo/site";
 
 const quickStats = [
-  { value: "1.0", label: "Current major version", note: "Release branch" },
+  { value: "1.0.1", label: "Latest verified patch", note: "PC release · July 14" },
   { value: "2026-07-10", label: "Launch date", note: "Version 1.0 release" },
   { value: "72", label: "New Pals", note: "47 new plus 25 variants" },
-  { value: "287", label: "Roster after 1.0", note: "Current 1.0 roster count" },
-  { value: "Lv.85", label: "Player level cap", note: "Current 1.0 progression cap" },
-  { value: "850K+", label: "Steam concurrency", note: "Post-launch player peak" },
+  { value: "287", label: "Current Pal roster", note: "Boss-only and 11 crossover entries tracked separately" },
+  { value: "Lv.80", label: "Player level cap", note: "Current 1.0 progression cap" },
+  { value: "850K+", label: "Steam concurrency", note: "Pocketpair milestone · July 13" },
 ];
 
 const priorityActions = [
@@ -144,8 +144,14 @@ const impactRows = [
 
 const timeline = [
   {
+    date: "2026-07-14",
+    title: "Version 1.0.1 reliability hotfix",
+    body:
+      "The first post-launch patch fixed cases where save data could be unintentionally discarded and where Burning could continue after touching a Campfire. Console-specific notes also covered stability fixes. It did not announce a new roster, breeding table, or progression rebalance.",
+  },
+  {
     date: "2026-07-13",
-    title: "Post-launch peak signal",
+    title: "Pocketpair reports 850,000 concurrent Steam players",
     body:
       "More than 850,000 concurrent Steam players returned after 1.0, making the launch period especially active for new routes, discoveries, and balance changes.",
   },
@@ -186,7 +192,7 @@ const faqItems = [
   {
     question: "What is the latest major Palworld update covered here?",
     answer:
-      "This page is currently built around Palworld 1.0, released on July 10, 2026.",
+      "The current content branch is Palworld 1.0, released on July 10, 2026. The latest verified maintenance patch covered here is 1.0.1, released for PC on July 14, 2026.",
   },
   {
     question: "Should I trust old Early Access Palworld guides after 1.0?",
@@ -217,7 +223,7 @@ export default function UpdatesPage() {
     "@type": "Article",
     headline: "Palworld Updates: 1.0 Patch Notes, New Pals, Map Changes and Wiki Tracker",
     description: pageSeo.updates.description,
-    dateModified: "2026-07-15",
+    dateModified: "2026-07-21",
     author: {
       "@type": "Organization",
       name: siteConfig.name,
@@ -253,14 +259,14 @@ export default function UpdatesPage() {
         <section className="updates-page-hero" aria-labelledby="updates-page-title">
           <div className="updates-page-hero-grid">
             <div className="updates-page-copy">
-              <span className="eyebrow">Palworld 1.0 Update Desk</span>
+              <span className="eyebrow">Palworld 1.0.1 Update Desk</span>
               <h1 id="updates-page-title">Palworld Updates - 1.0 Patch Notes, New Pals, and Route Changes</h1>
               <p>
                 Palworld Updates tracks 1.0 patch notes, new <Link href="/pals">Pals</Link>, <Link href="/map">Sunreach</Link>, <Link href="/guides/world-tree-preparation-checklist">World Tree routes</Link>,
                 Awakening, <Link href="/breeding">Mutation</Link>, <Link href="/database">Database</Link> changes, and the player routes that need a fresh check.
               </p>
               <div className="updates-page-proof">
-                <span>Last checked: 2026-07-15</span>
+                <span>Last checked: 2026-07-21</span>
                 <span>Major systems checked for route impact</span>
               </div>
             </div>
@@ -275,9 +281,9 @@ export default function UpdatesPage() {
                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 42vw, 360px"
               />
               <div className="updates-page-release-card">
-                <span>Current major version</span>
-                <strong>Palworld 1.0</strong>
-                <small>Release date: July 10, 2026</small>
+                <span>Latest verified patch</span>
+                <strong>Palworld 1.0.1</strong>
+                <small>PC release: July 14, 2026 · 1.0 content branch</small>
               </div>
             </div>
           </div>

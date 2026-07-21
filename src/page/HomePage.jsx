@@ -6,6 +6,7 @@ import { getPalWorkSuitability } from "@/data/palGuide";
 import { pals } from "@/data/pals";
 import Image from "next/image";
 import Link from "next/link";
+import { getPalRosterStats } from "@/data/palStatus";
 
 function findPal(title) {
   return pals.find((pal) => pal.title === title);
@@ -30,7 +31,7 @@ const reasonCards = [
   {
     title: "Current for the Palworld 1.0 era",
     body:
-      "Version 1.0 raised the level cap to 85, added 72 Pals and variants, opened Sunreach and the World Tree, and changed breeding, combat, bases, and progression.",
+      "Version 1.0 raised the level cap to 80, added 72 Pals and variants, opened Sunreach and the World Tree, and changed breeding, combat, bases, and progression.",
   },
 ];
 
@@ -71,7 +72,7 @@ const objectiveCards = [
 
 const updateHighlights = [
   {
-    title: "Level cap raised to 85",
+    title: "Level cap raised to 80",
     body:
       "Recheck technology, equipment, team investment, and old endgame assumptions before continuing an Early Access save.",
     href: "/updates",
@@ -114,11 +115,12 @@ const faqItems = [
   {
     question: "Is the site updated for Palworld 1.0?",
     answer:
-      "The main guides cover the July 10, 2026 release, including the level 85 cap, 72 additions to the roster, Sunreach, the World Tree, Awakening, Mutation, and major route changes.",
+      "The main guides cover the July 10, 2026 release, including the level 80 cap, 72 additions to the roster, Sunreach, the World Tree, Awakening, Mutation, and major route changes.",
   },
 ];
 
 export default function HomePage() {
+  const rosterStats = getPalRosterStats(pals);
   const categoryGroups = getDatabaseCategoryGroups(databaseRecords);
   const topCategories = categoryGroups
     .map((group) => ({
@@ -131,7 +133,7 @@ export default function HomePage() {
     .slice(0, 6);
 
   const stats = [
-    { value: pals.length, label: "Pal entries", detail: "Images, roles, and links", href: "/pals" },
+    { value: rosterStats.current, label: "Current 1.0 Pals", detail: `${rosterStats.bossOnly + rosterStats.crossoverCreatures} current special entries and ${rosterStats.internalUnreleased + rosterStats.archiveUnverified} archives kept separate`, href: "/pals" },
     { value: databaseRecords.length, label: "Database records", detail: "Items and combat entities", href: "/database" },
     { value: categoryGroups.length, label: "Database categories", detail: "For faster lookup", href: "/database" },
     { value: guides.length, label: "Long-form guides", detail: "Progression and World Tree", href: "/guides" },

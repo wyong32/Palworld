@@ -1,0 +1,45 @@
+{
+  "version": "1.0",
+  "updatedAt": "2026-07-21T03:45:45.687Z",
+  "provenance": {
+    "steamBuildId": "24088745",
+    "source": "Palworld 1.0 unpacked MainWorld_5 persistent level and World Partition generated cells",
+    "notes": "Every record is an exact Root.RelativeLocation extracted from a placed level actor. Clustering is applied only by the map UI."
+  },
+  "coverage": {
+    "chest": 1559,
+    "dungeon": 170,
+    "effigy": 407,
+    "egg": 1816,
+    "fast-travel": 152,
+    "merchant": 8,
+    "note": 64,
+    "npc": 141,
+    "resource": 5123,
+    "skill-fruit": 47
+  },
+  "mapCoverage": {
+    "main": {
+      "chest": 1521,
+      "dungeon": 170,
+      "effigy": 360,
+      "egg": 1786,
+      "fast-travel": 137,
+      "merchant": 8,
+      "note": 55,
+      "npc": 140,
+      "resource": 5123,
+      "skill-fruit": 35
+    },
+    "tree": {
+      "chest": 38,
+      "effigy": 47,
+      "egg": 30,
+      "fast-travel": 15,
+      "note": 9,
+      "npc": 1,
+      "skill-fruit": 12
+    }
+  },
+  "markerCount": 9487
+}

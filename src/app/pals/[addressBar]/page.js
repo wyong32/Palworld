@@ -3,6 +3,7 @@ import { items } from "@/data/items";
 import { buildPalSeo, enrichPal } from "@/data/palGuide";
 import PalsDetailPage from "@/page/PalsDetailPage";
 import { buildMetadata } from "@/seo/site";
+import { getPalPublicationStatus } from "@/data/palStatus";
 import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
@@ -20,6 +21,7 @@ export async function generateMetadata({ params }) {
     type: "article",
     publishedTime: pal.publishDate,
     modifiedTime: pal.lastModified || pal.updatedAt || pal.lastChecked || pal.publishDate,
+    index: getPalPublicationStatus(pal).indexable,
   });
 }
 

@@ -83,7 +83,7 @@ export default function PalsExplorer({ data }) {
       <section className="pal-explorer-stats" aria-label="Pal index role counts">
         <article>
           <strong>{data.stats.total}</strong>
-          <span>Indexed entries</span>
+          <span>Current 1.0 Pals</span>
         </article>
         <article>
           <strong>{data.stats.workers}</strong>
@@ -111,7 +111,7 @@ export default function PalsExplorer({ data }) {
 
       <div className="listing-toolbar">
         <strong>Pal index coverage</strong>
-        <span>204 regular Pals, 84 subspecies, 11 crossover creatures, and 5 unreleased archive entries</span>
+        <span>{data.stats.total} current Pals · {data.stats.special} current boss/crossover entries · {data.stats.archives} archive entries</span>
       </div>
 
       <section className="pal-spotlight-grid" aria-label="Recommended Pal categories">
@@ -220,8 +220,9 @@ export default function PalsExplorer({ data }) {
                   <Link href={`/pals/${pal.addressBar}`}>{pal.title}</Link>
                 </h2>
               </div>
+              {pal.publicationStatus.key !== "current" && <span className="pal-archive-badge">{pal.publicationStatus.label}</span>}
               <p>
-                <strong>Recommended for:</strong> {pal.decisionSummary || "Paldeck collection and species comparison"}.
+                <strong>{pal.publicationStatus.key === "current" ? "Recommended for:" : pal.publicationStatus.indexable ? "Entry scope:" : "Archive status:"}</strong> {pal.publicationStatus.key === "current" ? pal.decisionSummary || "Paldeck collection and species comparison" : pal.publicationStatus.note}
               </p>
               <div className="pal-chip-row" aria-label={`${pal.title} elements`}>
                 {pal.elements.map((entry) => (

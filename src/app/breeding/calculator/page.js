@@ -117,7 +117,7 @@ export default function BreedingCalculatorPage() {
             </p>
             <div className="breeding-calculator-meta" aria-label="Calculator coverage">
               <span>{breedingMatrixStats.version}</span>
-              <span>{breedingMatrixStats.palCount} Pal records</span>
+              <span>{breedingMatrixStats.selectablePalCount} selectable · {breedingMatrixStats.palCount} source records</span>
               <span>{breedingMatrixStats.possiblePairCount.toLocaleString()} parent pairs</span>
               <span>Updated {breedingMatrixStats.updatedAt}</span>
             </div>

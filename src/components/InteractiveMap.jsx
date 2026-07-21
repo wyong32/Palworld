@@ -8,6 +8,7 @@ const DATA_PATHS = {
   maps: "/data/palworld-map/map.json",
   bosses: "/data/palworld-map/bosses.json",
   locations: "/data/palworld-map/locations.json",
+  exploration: "/data/palworld-map/exploration.json",
 };
 
 const CATEGORY_META = {
@@ -16,6 +17,16 @@ const CATEGORY_META = {
   special: { label: "Special regions", shortLabel: "Special", tone: "water" },
   quest: { label: "Quest objectives", shortLabel: "Quest", tone: "violet" },
   "wild-spawn": { label: "Wild habitats", shortLabel: "Habitat", tone: "leaf" },
+  "fast-travel": { label: "Fast travel", shortLabel: "Travel", tone: "sky" },
+  dungeon: { label: "Dungeon entrances", shortLabel: "Dungeon", tone: "slate" },
+  chest: { label: "Treasure chests", shortLabel: "Chest", tone: "gold" },
+  egg: { label: "Pal eggs", shortLabel: "Egg", tone: "rose" },
+  effigy: { label: "Lifmunk Effigies", shortLabel: "Effigy", tone: "lime" },
+  "skill-fruit": { label: "Skill Fruit trees", shortLabel: "Skill Fruit", tone: "mint" },
+  note: { label: "Journal notes", shortLabel: "Note", tone: "ink" },
+  resource: { label: "Resource nodes", shortLabel: "Resource", tone: "copper" },
+  merchant: { label: "Merchants", shortLabel: "Merchant", tone: "orange" },
+  npc: { label: "NPC locations", shortLabel: "NPC", tone: "teal" },
 };
 
 const MAP_META = {
@@ -23,9 +34,35 @@ const MAP_META = {
   tree: { label: "World Tree", description: "Endgame region" },
 };
 
-const ALL_CATEGORIES = Object.keys(CATEGORY_META);
-const DEFAULT_CATEGORIES = ALL_CATEGORIES.filter((category) => category !== "wild-spawn");
+const DEFAULT_CATEGORIES = new Set(["alpha-pal", "human-boss", "special", "fast-travel", "dungeon", "resource", "merchant"]);
+const CATEGORY_GROUPS = [
+  {
+    key: "encounters",
+    label: "Encounters",
+    note: "Bosses and habitats",
+    categories: ["alpha-pal", "human-boss", "special", "wild-spawn"],
+  },
+  {
+    key: "navigation",
+    label: "Navigation",
+    note: "Travel and objectives",
+    categories: ["fast-travel", "dungeon", "quest"],
+  },
+  {
+    key: "collection",
+    label: "Collection",
+    note: "High-density finds",
+    categories: ["chest", "egg", "effigy", "skill-fruit", "note"],
+  },
+  {
+    key: "supply",
+    label: "Supply & people",
+    note: "Resources and services",
+    categories: ["resource", "merchant", "npc"],
+  },
+];
 const INITIAL_VIEW = { scale: 0.1, x: 0, y: 0 };
+const CLUSTER_CATEGORIES = new Set(["chest", "egg", "effigy", "resource", "wild-spawn"]);
 
 function matchesQuery(marker, query, profile) {
   if (!query) {
@@ -39,6 +76,8 @@ function matchesQuery(marker, query, profile) {
     marker.palId,
     marker.searchText,
     marker.questType,
+    marker.subtype,
+    marker.actorClass,
     ...(marker.species || []).flatMap((pal) => [pal.title, pal.id]),
     profile?.element,
     ...(profile?.elements || []),
@@ -67,7 +106,53 @@ function markerSummary(marker, profile) {
   if (marker.category === "quest") {
     return `${marker.questType} · ${marker.objectives.length} objective${marker.objectives.length === 1 ? "" : "s"}`;
   }
+  if (marker.subtype) {
+    return `${marker.subtype} · ${marker.precision?.startsWith("Exact") ? "Exact point" : CATEGORY_META[marker.category].shortLabel}`;
+  }
   return `Lv.${marker.level ?? "?"} · ${CATEGORY_META[marker.category].shortLabel}${profile?.element ? ` · ${profile.element}` : ""}`;
+}
+
+function clusterMarkers(markers, activeMap, scale, query) {
+  if (!activeMap || query) return markers;
+  const width = activeMap.displayWidth || activeMap.width;
+  const gridSize = Math.max(0.008, Math.min(0.055, 44 / (width * Math.max(scale, 0.01))));
+  const buckets = new Map();
+  const unclustered = [];
+
+  for (const marker of markers) {
+    if (!CLUSTER_CATEGORIES.has(marker.category) || marker.category === "wild-spawn") {
+      unclustered.push(marker);
+      continue;
+    }
+    const key = `${marker.category}:${Math.floor(marker.map.x / gridSize)}:${Math.floor(marker.map.y / gridSize)}`;
+    const bucket = buckets.get(key) || [];
+    bucket.push(marker);
+    buckets.set(key, bucket);
+  }
+
+  for (const [key, members] of buckets) {
+    if (members.length === 1) {
+      unclustered.push(members[0]);
+      continue;
+    }
+    const category = members[0].category;
+    unclustered.push({
+      id: `ui-cluster:${key}`,
+      category,
+      mapId: members[0].mapId,
+      map: {
+        x: members.reduce((sum, marker) => sum + marker.map.x, 0) / members.length,
+        y: members.reduce((sum, marker) => sum + marker.map.y, 0) / members.length,
+      },
+      name: { en: `${members.length} ${CATEGORY_META[category].label}` },
+      memberCount: members.length,
+      members,
+      isUiCluster: true,
+      precision: "UI cluster of exact level actor coordinates",
+    });
+  }
+
+  return unclustered;
 }
 
 export default function InteractiveMap({ preset, palProfiles = {} }) {
@@ -81,6 +166,7 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
   const [maps, setMaps] = useState([]);
   const [markers, setMarkers] = useState([]);
   const [coverage, setCoverage] = useState(null);
+  const [renderScale, setRenderScale] = useState(INITIAL_VIEW.scale);
   const [loadState, setLoadState] = useState("loading");
   const [loadError, setLoadError] = useState("");
   const [mapId, setMapId] = useState(preset?.mapId || "main");
@@ -129,6 +215,11 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
     [categories, mapMarkers, normalizedQuery, palProfiles],
   );
 
+  const renderedMarkers = useMemo(
+    () => clusterMarkers(visibleMarkers, activeMap, renderScale, normalizedQuery),
+    [activeMap, normalizedQuery, renderScale, visibleMarkers],
+  );
+
   const selectedMarker = useMemo(
     () => markers.find((marker) => marker.id === selectedId) || null,
     [markers, selectedId],
@@ -160,6 +251,7 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
 
   const updateView = useCallback((nextView, immediate = false) => {
     viewRef.current = nextView;
+    setRenderScale((current) => Math.abs(current - nextView.scale) / Math.max(current, 0.01) > 0.12 ? nextView.scale : current);
 
     if (immediate) {
       if (viewFrameRef.current !== null) {
@@ -240,25 +332,27 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
 
     async function loadMapData() {
       try {
-        const [mapResponse, bossResponse, locationResponse] = await Promise.all([
+        const [mapResponse, bossResponse, locationResponse, explorationResponse] = await Promise.all([
           fetch(DATA_PATHS.maps, { signal: controller.signal }),
           fetch(DATA_PATHS.bosses, { signal: controller.signal }),
           fetch(DATA_PATHS.locations, { signal: controller.signal }),
+          fetch(DATA_PATHS.exploration, { signal: controller.signal }),
         ]);
 
-        if (!mapResponse.ok || !bossResponse.ok || !locationResponse.ok) {
-          throw new Error(`Map data request failed (${mapResponse.status}/${bossResponse.status}/${locationResponse.status}).`);
+        if (!mapResponse.ok || !bossResponse.ok || !locationResponse.ok || !explorationResponse.ok) {
+          throw new Error(`Map data request failed (${mapResponse.status}/${bossResponse.status}/${locationResponse.status}/${explorationResponse.status}).`);
         }
 
-        const [mapData, bossData, locationData] = await Promise.all([
+        const [mapData, bossData, locationData, explorationData] = await Promise.all([
           mapResponse.json(),
           bossResponse.json(),
           locationResponse.json(),
+          explorationResponse.json(),
         ]);
-        if (!Array.isArray(mapData.maps) || !Array.isArray(bossData.bosses) || !Array.isArray(locationData.markers)) {
+        if (!Array.isArray(mapData.maps) || !Array.isArray(bossData.bosses) || !Array.isArray(locationData.markers) || !Array.isArray(explorationData.markers)) {
           throw new Error("Map data is not in the expected format.");
         }
-        const allMarkers = [...bossData.bosses, ...locationData.markers];
+        const allMarkers = [...bossData.bosses, ...locationData.markers, ...explorationData.markers];
 
         const params = new URLSearchParams(window.location.search);
         const markerId = params.get("marker");
@@ -274,7 +368,7 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
 
         setMaps(mapData.maps);
         setMarkers(allMarkers);
-        setCoverage(locationData.coverage);
+        setCoverage({ ...locationData.coverage, ...explorationData.coverage });
         if (targetMarker) {
           pendingTargetRef.current = targetMarker;
           setMapId(targetMarker.mapId);
@@ -378,6 +472,16 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
     }
   }
 
+  function showCoreLayers() {
+    setCategories(new Set(DEFAULT_CATEGORIES));
+    setSelectedId(null);
+  }
+
+  function clearLayers() {
+    setCategories(new Set());
+    setSelectedId(null);
+  }
+
   function handlePointerDown(event) {
     if (event.target.closest("button, a, input")) {
       return;
@@ -450,18 +554,14 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
     <section className="local-boss-map" aria-labelledby="interactive-map-title">
       <header className="local-boss-map-head">
         <div>
-          <span>Game-data location atlas</span>
+          <span>01 / INTERACTIVE FIELD ATLAS</span>
           <h2 id="interactive-map-title">Palworld 1.0 Interactive Map</h2>
-          <p>
-            Search fixed bosses, exact quest objectives, and habitat clusters built from unpacked 1.0 spawn-area anchors.
-            {coverage
-              ? ` The habitat layer groups ${coverage.habitatAnchors.toLocaleString("en-US")} anchors into ${coverage.habitatClusters.toLocaleString("en-US")} readable clusters.`
-              : ""} Random dungeon interiors are intentionally excluded.
-          </p>
+          <p>Exact level actors, fixed encounters, and clearly labeled habitat clusters across both 1.0 world projections.</p>
         </div>
         <div className="local-boss-map-proof" aria-label="Map data status">
-          <strong>{markers.length || 126}</strong>
-          <span>searchable map records</span>
+          <small>{coverage ? "ACTOR COVERAGE LOADED" : "PREPARING LAYERS"}</small>
+          <strong>{(markers.length || 126).toLocaleString("en-US")}</strong>
+          <span>searchable records</span>
         </div>
       </header>
 
@@ -486,60 +586,79 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
           </div>
 
           <label className="local-boss-map-search">
-            <span>Find a boss, Pal habitat, or quest</span>
-            <input
-              type="search"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="Try Jetragon, Anubis, or World Tree"
-            />
+            <span>Search this projection</span>
+            <div>
+              <input
+                type="search"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Pal, dungeon, coal, egg…"
+              />
+              {query && <button type="button" onClick={() => setQuery("")} aria-label="Clear map search">×</button>}
+            </div>
           </label>
 
           <fieldset className="local-boss-map-filters">
-            <legend>Game-data layers</legend>
-            {ALL_CATEGORIES.map((category) => {
-              const meta = CATEGORY_META[category];
-              return (
-                <label key={category}>
-                  <input
-                    type="checkbox"
-                    checked={categories.has(category)}
-                    onChange={() => toggleCategory(category)}
-                  />
-                  <i className={`map-dot is-${meta.tone}`} aria-hidden="true" />
-                  <span>{meta.label}</span>
-                  <b>{categoryCounts[category] || 0}</b>
-                </label>
-              );
-            })}
+            <legend>Map layers</legend>
+            <div className="local-boss-map-filter-actions">
+              <button type="button" onClick={showCoreLayers}>Core layers</button>
+              <button type="button" onClick={clearLayers}>Clear all</button>
+            </div>
+            {CATEGORY_GROUPS.map((group) => (
+              <div className="local-boss-map-filter-group" key={group.key}>
+                <header><strong>{group.label}</strong><small>{group.note}</small></header>
+                <div>
+                  {group.categories.map((category) => {
+                    const meta = CATEGORY_META[category];
+                    const count = categoryCounts[category] || 0;
+                    return (
+                      <label key={category}>
+                        <input
+                          type="checkbox"
+                          checked={categories.has(category)}
+                          disabled={count === 0}
+                          onChange={() => toggleCategory(category)}
+                        />
+                        <i className={`map-dot is-${meta.tone}`} aria-hidden="true" />
+                        <span>{meta.label}</span>
+                        <b>{count.toLocaleString("en-US")}</b>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
           </fieldset>
 
           <div className="local-boss-map-count" aria-live="polite">
-            <strong>{visibleMarkers.length}</strong>
+            <strong>{visibleMarkers.length.toLocaleString("en-US")}</strong>
             <span>visible on {MAP_META[activeMap?.id]?.label || "map"}</span>
           </div>
 
-          <div className="local-boss-map-results" aria-label="Visible map records">
-            {visibleMarkers.slice(0, 18).map((marker) => {
-              const profile = palProfiles[marker.palHref];
-              return (
-                <button
-                  type="button"
-                  key={marker.id}
-                  className={marker.id === selectedId ? "is-active" : ""}
-                  onClick={() => centerOnMarker(marker)}
-                >
-                  <i className={`map-dot is-${CATEGORY_META[marker.category].tone}`} aria-hidden="true" />
-                  <span>
-                    <strong>{marker.name.en}</strong>
-                    <small>{markerSummary(marker, profile)}</small>
-                  </span>
-                </button>
-              );
-            })}
-            {visibleMarkers.length > 18 && <p>Refine the search to narrow {visibleMarkers.length - 18} more records.</p>}
-            {visibleMarkers.length === 0 && <p>No map record matches these filters. Try another map or enable more layers.</p>}
-          </div>
+          <details className="local-boss-map-results-panel" open={Boolean(query)}>
+            <summary>Browse visible records <span>{Math.min(visibleMarkers.length, 18)} / {visibleMarkers.length.toLocaleString("en-US")}</span></summary>
+            <div className="local-boss-map-results" aria-label="Visible map records">
+              {visibleMarkers.slice(0, 18).map((marker) => {
+                const profile = palProfiles[marker.palHref];
+                return (
+                  <button
+                    type="button"
+                    key={marker.id}
+                    className={marker.id === selectedId ? "is-active" : ""}
+                    onClick={() => centerOnMarker(marker)}
+                  >
+                    <i className={`map-dot is-${CATEGORY_META[marker.category].tone}`} aria-hidden="true" />
+                    <span>
+                      <strong>{marker.name.en}</strong>
+                      <small>{markerSummary(marker, profile)}</small>
+                    </span>
+                  </button>
+                );
+              })}
+              {visibleMarkers.length > 18 && <p>Search to narrow {visibleMarkers.length - 18} more records.</p>}
+              {visibleMarkers.length === 0 && <p>No record matches. Try another map or enable more layers.</p>}
+            </div>
+          </details>
         </aside>
 
         <div
@@ -575,7 +694,7 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
                 unoptimized
               />
               <div className="local-boss-marker-layer">
-                {visibleMarkers.map((marker) => (
+                {renderedMarkers.map((marker) => (
                   <button
                     type="button"
                     key={marker.id}
@@ -587,10 +706,10 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
                     aria-label={`${marker.name.en}, ${CATEGORY_META[marker.category].label}`}
                     onClick={(event) => {
                       event.stopPropagation();
-                      centerOnMarker(marker);
+                      centerOnMarker(marker.isUiCluster ? marker.members[0] : marker);
                     }}
                   >
-                    <span aria-hidden="true" />
+                    <span aria-hidden="true">{marker.isUiCluster ? marker.memberCount : ""}</span>
                   </button>
                 ))}
               </div>
@@ -625,10 +744,25 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
                   <>
                     <div><dt>World X</dt><dd>{formatCoordinate(selectedMarker.world?.x)}</dd></div>
                     <div><dt>World Y</dt><dd>{formatCoordinate(selectedMarker.world?.y)}</dd></div>
+                    {selectedMarker.world?.z != null && <div><dt>World Z</dt><dd>{formatCoordinate(selectedMarker.world.z)}</dd></div>}
                   </>
                 )}
               </dl>
               <small>{selectedMarker.precision || "Fixed game-data coordinate"} · Palworld 1.0</small>
+              {selectedMarker.sourceAsset && (
+                <small title={selectedMarker.sourceAsset}>Source: unpacked MainWorld_5 level actor · {selectedMarker.confidence || "extracted"}</small>
+              )}
+              {selectedMarker.isUiCluster && (
+                <div className="local-boss-map-record-list">
+                  <strong>{selectedMarker.memberCount} exact points in this visual cluster</strong>
+                  {selectedMarker.members.slice(0, 8).map((member) => (
+                    <button type="button" key={member.id} onClick={() => centerOnMarker(member)}>
+                      {member.name.en} · X {formatCoordinate(member.world?.x)} · Y {formatCoordinate(member.world?.y)}
+                    </button>
+                  ))}
+                  {selectedMarker.memberCount > 8 && <small>Zoom in to split this UI cluster into smaller groups.</small>}
+                </div>
+              )}
               {selectedMarker.category === "quest" && (
                 <div className="local-boss-map-record-list">
                   <strong>{selectedMarker.questType}</strong>
@@ -681,6 +815,13 @@ export default function InteractiveMap({ preset, palProfiles = {} }) {
                 )}
                 {selectedMarker.category === "special" && <Link href="/database/materials">Route materials</Link>}
                 {selectedMarker.category === "quest" && <Link href="/guides">Quest preparation guides</Link>}
+                {selectedMarker.category === "resource" && (
+                  <Link href={`/database/materials/${({ Ore: "ore", Coal: "coal", Sulfur: "sulfur", "Pure Quartz": "pure-quartz", "Nightstar Sand": "nightstar-sand", "Crude Oil": "crude-oil" })[selectedMarker.subtype] || ""}`.replace(/\/$/, "")}>Open material data</Link>
+                )}
+                {selectedMarker.category === "dungeon" && <Link href="/guides">Dungeon preparation guides</Link>}
+                {selectedMarker.category === "fast-travel" && <Link href="/guides/palworld-1-0-progression-guide">Progression route</Link>}
+                {["chest", "egg", "effigy", "skill-fruit", "note"].includes(selectedMarker.category) && <Link href="/database">Browse the database</Link>}
+                {["merchant", "npc"].includes(selectedMarker.category) && <Link href="/database/creatures">Browse characters</Link>}
               </div>
             </article>
           )}

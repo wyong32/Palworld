@@ -1,0 +1,706 @@
+{
+  "packageCount": 9978,
+  "failedPackageCount": 0,
+  "failedPackages": [],
+  "relevantTypes": [
+    {
+      "actorClass": "BP_PalMapObjectSpawnerTreasureBox_VisibleContent_DarkIslandDrop_C",
+      "count": 3588
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_RockCopper_C",
+      "count": 2027
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawnerTreasureBox_VisibleContent_grassDrop_C",
+      "count": 1468
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_RockCoal_C",
+      "count": 1021
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawnerTreasureBox_VisibleContent_grassDrop2_C",
+      "count": 894
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_Sulfur_C",
+      "count": 718
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawnerTreasureBox_VisibleContent_WorldTreeDrop_C",
+      "count": 690
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_RockQuartz_C",
+      "count": 675
+    },
+    {
+      "actorClass": "BP_pal_b00_OilPlatform_fence_01_C",
+      "count": 667
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawnerTreasureBox_VisibleContent_SkyIslandDrop_C",
+      "count": 574
+    },
+    {
+      "actorClass": "BP_pal_b00_OilPlatform_fence_2_C",
+      "count": 535
+    },
+    {
+      "actorClass": "bp_palmapobjectspawner_palegg_tenraku_grade_01_C",
+      "count": 496
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawnerTreasureBox_VisibleContent_DessertDrop_C",
+      "count": 429
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawnerTreasureBox_VisibleContent_SakurajimaDrop1_C",
+      "count": 347
+    },
+    {
+      "actorClass": "BP_PalOilrigLightComponent_C",
+      "count": 341
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_NightStone_C",
+      "count": 271
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_Treasure_desert_01_C",
+      "count": 263
+    },
+    {
+      "actorClass": "BP_OilrigNPCSpawner_Mono_C",
+      "count": 240
+    },
+    {
+      "actorClass": "bp_palmapobjectspawner_palegg_volcanic_grade_01_C",
+      "count": 240
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_SkyIslandOre_C",
+      "count": 226
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawnerTreasureBox_VisibleContent_VolcanoDrop_C",
+      "count": 219
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_Treasure_Darkisland01_C",
+      "count": 201
+    },
+    {
+      "actorClass": "BP_LevelObject_OilField_C",
+      "count": 185
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_Treasure_SnowyMountain_01_C",
+      "count": 178
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_Treasure_Grass_Grade_01_C",
+      "count": 173
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawnerTreasureBox_VisibleContent_SnowDrop_C",
+      "count": 162
+    },
+    {
+      "actorClass": "bp_palmapobjectspawner_palegg_glacier_grade_02_C",
+      "count": 161
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawner_C",
+      "count": 160
+    },
+    {
+      "actorClass": "BP_LevelObject_Relic_C",
+      "count": 155
+    },
+    {
+      "actorClass": "BP_LevelObject_TowerFastTravelPoint_C",
+      "count": 152
+    },
+    {
+      "actorClass": "bp_palmapobjectspawner_palegg_grass_grade_03_C",
+      "count": 146
+    },
+    {
+      "actorClass": "bp_palmapobjectspawner_palegg_grass_grade_02_C",
+      "count": 144
+    },
+    {
+      "actorClass": "BP_MapObjectSpawnerLocationComponent_SkillFruits_C",
+      "count": 141
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_Treasure_Volcano_Grade_02_C",
+      "count": 130
+    },
+    {
+      "actorClass": "bp_palmapobjectspawner_palegg_grass_grade_01_C",
+      "count": 125
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_Treasure_Forest_Grade_01_C",
+      "count": 123
+    },
+    {
+      "actorClass": "bp_palmapobjectspawner_palegg_desert_grade_01_C",
+      "count": 122
+    },
+    {
+      "actorClass": "BP_DungeonPortalV2_Exit_C",
+      "count": 120
+    },
+    {
+      "actorClass": "bp_palmapobjectspawner_palegg_glacier_grade_01_C",
+      "count": 110
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_Treasure_Forest_Grade_02_C",
+      "count": 108
+    },
+    {
+      "actorClass": "BP_OilrigExplosiveObject_Barrel_C",
+      "count": 106
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_Treasure_SkyIsland_01_C",
+      "count": 76
+    },
+    {
+      "actorClass": "bp_palmapobjectspawner_palegg_tenraku_grade_02_C",
+      "count": 71
+    },
+    {
+      "actorClass": "bp_palmapobjectspawner_palegg_volcanic_grade_02_C",
+      "count": 70
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_Treasure_Sakurajima1_C",
+      "count": 68
+    },
+    {
+      "actorClass": "BP_LevelObject_Note_C",
+      "count": 64
+    },
+    {
+      "actorClass": "BP_OilrigExplosiveObject_GasTank_C",
+      "count": 53
+    },
+    {
+      "actorClass": "BP_DungeonPortalMarker_Grass1_C",
+      "count": 48
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_Treasure_Ruins_Grade_01_C",
+      "count": 48
+    },
+    {
+      "actorClass": "BP_PalSpawner_Sheets_1_1_plain_begginer_C",
+      "count": 48
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_Treasure_Element_Sakurajima_C",
+      "count": 47
+    },
+    {
+      "actorClass": "BP_OilrigTreasureBoxSpawner_C",
+      "count": 45
+    },
+    {
+      "actorClass": "BP_LevelObject_TreasureMapPoint_C",
+      "count": 42
+    },
+    {
+      "actorClass": "BP_OilRigCannon_AAMachineGun_C",
+      "count": 40
+    },
+    {
+      "actorClass": "bp_palmapobjectspawner_palegg_skyisland_grade_01_C",
+      "count": 39
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_Treasure_WorldTree_C",
+      "count": 38
+    },
+    {
+      "actorClass": "bp_palmapobjectspawner_palegg_Sakurajima_grade_01_C",
+      "count": 36
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_Treasure_Element_Desert_C",
+      "count": 32
+    },
+    {
+      "actorClass": "BP_DungeonPortalMarker_Forest_C",
+      "count": 30
+    },
+    {
+      "actorClass": "BP_LevelObject_Relic_FlameBambi_C",
+      "count": 30
+    },
+    {
+      "actorClass": "BP_LevelObject_Relic_IceCrocodile_C",
+      "count": 30
+    },
+    {
+      "actorClass": "BP_LevelObject_Relic_LeafMomonga_C",
+      "count": 30
+    },
+    {
+      "actorClass": "BP_LevelObject_Relic_Monkey_C",
+      "count": 30
+    },
+    {
+      "actorClass": "BP_LevelObject_Relic_NegativeKoala_C",
+      "count": 30
+    },
+    {
+      "actorClass": "BP_LevelObject_Relic_Penguin_C",
+      "count": 30
+    },
+    {
+      "actorClass": "BP_LevelObject_Relic_PinkCat_C",
+      "count": 30
+    },
+    {
+      "actorClass": "BP_LevelObject_Relic_SheepBall_C",
+      "count": 30
+    },
+    {
+      "actorClass": "bp_palmapobjectspawner_palegg_worldtree_grade_01_C",
+      "count": 30
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawnerTreasureBox_VisibleContent_C",
+      "count": 30
+    },
+    {
+      "actorClass": "BP_OilrigNPCSpawner_Infinite_C",
+      "count": 28
+    },
+    {
+      "actorClass": "bp_palmapobjectspawner_palegg_grass_grade_04_C",
+      "count": 26
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_Treasure_Element_Forest_C",
+      "count": 22
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_Treasure_specialspot_01_C",
+      "count": 17
+    },
+    {
+      "actorClass": "BP_DungeonPortalMarker_Viking_C_C",
+      "count": 16
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_Treasure_Forest_Grade_03_C",
+      "count": 16
+    },
+    {
+      "actorClass": "BP_DungeonPortalMarker_Desert_C",
+      "count": 15
+    },
+    {
+      "actorClass": "BP_DungeonPortalMarker_Sakura_C",
+      "count": 15
+    },
+    {
+      "actorClass": "BP_DungeonPortalMarker_Snow_C",
+      "count": 15
+    },
+    {
+      "actorClass": "BP_DungeonPortalMarker_Volcano_C",
+      "count": 15
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_SkillFruits_Grass_C",
+      "count": 14
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_SkillFruits_WorldTree_C",
+      "count": 12
+    },
+    {
+      "actorClass": "BP_OilRigCannon_LaserTower_C",
+      "count": 10
+    },
+    {
+      "actorClass": "BP_BoxPlacementTool_Sulfur_C",
+      "count": 8
+    },
+    {
+      "actorClass": "BP_DungeonPortalMarker_Viking_B_C",
+      "count": 8
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_Treasure_Element_SkyIsland_C",
+      "count": 8
+    },
+    {
+      "actorClass": "BP_pal_b00_OilPlatform_Stair_6_C",
+      "count": 7
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_SkillFruits_DarkIsland_C",
+      "count": 7
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_Treasure_Volcano_Grade_01_C",
+      "count": 7
+    },
+    {
+      "actorClass": "BP_DungeonPortalMarker_Viking_C",
+      "count": 6
+    },
+    {
+      "actorClass": "BP_EnemyCampTreasureBoxSpawnerComponent_C",
+      "count": 6
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawner_Unique_C",
+      "count": 6
+    },
+    {
+      "actorClass": "BP_OilrigTreasureBoxSpawner_Goal_C",
+      "count": 6
+    },
+    {
+      "actorClass": "BP_pal_b00_OilPlatform_Stair_2_C",
+      "count": 6
+    },
+    {
+      "actorClass": "BP_pal_b00_OilPlatform_Stair_4_C",
+      "count": 6
+    },
+    {
+      "actorClass": "BP_TreasureBoxVisual_Camp_C",
+      "count": 6
+    },
+    {
+      "actorClass": "BP_OilRigCannon_LaserTower_LargeOilrig_C",
+      "count": 5
+    },
+    {
+      "actorClass": "BP_OilrigGoalCrateSpawner_C",
+      "count": 5
+    },
+    {
+      "actorClass": "BP_LevelObject_Relic_GuardianDog_C",
+      "count": 4
+    },
+    {
+      "actorClass": "BP_LevelObject_Relic_LazyDragon_C",
+      "count": 4
+    },
+    {
+      "actorClass": "BP_LevelObject_Relic_Mutant_C",
+      "count": 4
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawner_MedalTrader_C",
+      "count": 4
+    },
+    {
+      "actorClass": "BP_pal_b00_OilPlatform_fence_4_C",
+      "count": 4
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_SkillFruits_Sakura_C",
+      "count": 4
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_SkillFruits_SkyIsland_C",
+      "count": 4
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_Treasure_Grass_Grade_02_C",
+      "count": 4
+    },
+    {
+      "actorClass": "BP_pal_b00_OilPlatform_Stair_C",
+      "count": 3
+    },
+    {
+      "actorClass": "BP_PalAmbientSoundArea_Oilrig_C",
+      "count": 3
+    },
+    {
+      "actorClass": "BP_QuestTargetNPCSpawner_Breeder03_C",
+      "count": 3
+    },
+    {
+      "actorClass": "BP_FishingSpot_D_Oilrig_Rare_C",
+      "count": 2
+    },
+    {
+      "actorClass": "BP_FishingSpot_I_Oilrig_Rare_C",
+      "count": 2
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_SkillFruits_Desert_C",
+      "count": 2
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_SkillFruits_Snow_C",
+      "count": 2
+    },
+    {
+      "actorClass": "BP_PalMapObjectSpawner_SkillFruits_Volcano_C",
+      "count": 2
+    },
+    {
+      "actorClass": "BP_SquadNPCSpawner_C",
+      "count": 2
+    },
+    {
+      "actorClass": "BP_DungeonPortalMarker_Skyland_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_DungeonPortalMarker_Yakushima_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_FishingSpot_A_Oilrig_Rare_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_Item_PalEgg_Dark_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawner_Quest_Police_LoneWolf3_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawner_Quest_SurveyGirl02_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawner_Quest_SurveyGirl03_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawner_Quest_SurveyGirl04_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawner_Quest_SurveyMan02_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawner_Quest_SurveyMan03_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawner_Quest_VolcanoPorter001_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawner_StrongOldMan01_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawner_StrongOldMan02_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawner_StrongOldMan05_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_BOSS_Believer_CrossBow_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_BOSS_Believer_Fat_GatlingGun_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_BOSS_DarkTrader_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_BOSS_Female_DesertPeople_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_BOSS_Female_People_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_BOSS_Female_People02_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_BOSS_Female_People03_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_BOSS_Female_Soldier02_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_BOSS_Female_Soldier03_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_BOSS_Female_Soldier04_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_BOSS_FireCult_FlameThrower_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_BOSS_Hunter_Rifle_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_BOSS_Male_DesertPeople_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_BOSS_Male_NinjaElite_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_BOSS_Male_People_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_BOSS_Male_People02_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_BOSS_Male_People03_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_BOSS_Male_People2_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_BOSS_Male_Soldier_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_BOSS_Male_Soldier02_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_BOSS_Male_Soldier03_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_BOSS_Male_Soldier04_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_BOSS_Ninja_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_BOSS_Police_Old_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_BOSS_Police_Rifle_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_Male_Trader01_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_Male_Trader02_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_MonoNPCSpawnerBossBase_Male_Trader03_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_OilrigMachineStartPoint_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_pal_b00_OilPlatform_Stair_06_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_pal_b00_OilPlatform_Stair_08_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_pal_b00_OilPlatform_Stair_5_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_pal_b00_OilPlatform_Stair_7_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_pal_b00_OilPlatform_Stair_8_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_pal_b07_cenote_wall_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_PalTalkableLevelObject_WorldTreeMiddleBoss_Note_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_QuestTargetNPCSpawner_Ranger02_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_SquadNPCSpawnerBossBase_BOSS_Female_Soldier_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_SquadNPCSpawnerBossBase_BOSS_Hunter_Fat_GatlingGun_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_SquadNPCSpawnerBossBase_BOSS_Scientist_LaserRifle_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_SquadNPCSpawnerBossBase_Viking_C",
+      "count": 1
+    },
+    {
+      "actorClass": "BP_SquadNPCSpawnerBossBase_VikingElite_C",
+      "count": 1
+    }
+  ],
+  "classifiedRecordCount": 9487,
+  "finalization": {
+    "rawMarkerCount": 9487,
+    "inMapBoundsCount": 9487,
+    "emittedMarkerCount": 9487,
+    "duplicateCoordinateCount": 0,
+    "coverage": {
+      "chest": 1559,
+      "dungeon": 170,
+      "effigy": 407,
+      "egg": 1816,
+      "fast-travel": 152,
+      "merchant": 8,
+      "note": 64,
+      "npc": 141,
+      "resource": 5123,
+      "skill-fruit": 47
+    }
+  }
+}

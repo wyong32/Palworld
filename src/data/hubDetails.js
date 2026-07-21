@@ -341,7 +341,7 @@ export const updatesHub = {
     { value: "2026-07-10", label: "1.0 official release date" },
     { value: "72", label: "New Pals listed in changelog" },
     { value: "287", label: "Total Pals after 1.0" },
-    { value: "850K+", label: "Steam concurrency after launch" },
+    { value: "850K+", label: "Pocketpair milestone on July 13" },
   ],
   sections: [
     {

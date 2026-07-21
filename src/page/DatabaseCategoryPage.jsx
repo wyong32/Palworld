@@ -44,7 +44,7 @@ export default function DatabaseCategoryPage({ group, items, pals }) {
             <div>
               <span className="wiki-kicker">Database category</span>
               <h1>{group.category}</h1>
-              <p>{data.guide.intent} {data.isCreatureCategory ? "Every entry below is generated from a matched Palworld 1.0 character definition." : "The list below separates matched 1.0 records from entries without an exact DataTable match."}</p>
+              <p>{data.guide.intent} {data.isCreatureCategory ? "Every entry below represents a current Palworld 1.0 combat record." : "The list below separates current records from legacy, disabled, or broader category entries."}</p>
               <div className="database-hero-actions">
                 <a href="#category-ledger">Open {group.category} list</a>
                 <Link href="/database">Database index</Link>

@@ -1,5 +1,8 @@
 import currentBreedingMatrix from "@/data/currentBreedingMatrix.json";
 import { pals } from "@/data/pals";
+import { getPalGameDetails } from "@/data/gameDetails";
+import { getPalSkillVerification } from "@/data/skillVerification";
+import { getPalPublicationStatus } from "@/data/palStatus";
 
 const palsBySlug = new Map(pals.map((pal) => [pal.addressBar, pal]));
 const palsByTitle = new Map(pals.map((pal) => [pal.title.toLowerCase(), pal]));
@@ -22,20 +25,24 @@ export function getPalForBreedingRecord(record) {
 
 export function enrichBreedingRecord(record, index) {
   const pal = getPalForBreedingRecord(record);
+  const game = pal ? getPalGameDetails(pal.title) : null;
+  const skills = pal ? getPalSkillVerification(pal.title) : null;
+  const publicationStatus = pal ? getPalPublicationStatus(pal) : null;
 
   return {
     ...record,
     index,
-    pal,
+    pal: pal ? { title: pal.title, addressBar: pal.addressBar } : null,
     name: pal?.title || record.name,
     href: pal ? `/pals/${pal.addressBar}` : record.href,
     imageUrl: pal?.imageUrl || null,
     imageAlt: pal?.imageAlt || `${record.name} Palworld breeding record`,
     element: pal?.element || "",
     elements: pal?.elements || [],
-    drops: pal?.drops || "",
-    workSuitability: pal?.workSuitability || "",
-    partnerSkill: pal?.partnerSkill || "",
+    drops: game?.drops?.map((drop) => drop.title).join(", ") || pal?.drops || "",
+    workSuitability: game?.work?.map((entry) => `${entry.type} ${entry.level}`).join(", ") || "",
+    partnerSkill: skills?.partnerSkill?.name || "",
+    breedable: publicationStatus?.key !== "boss-only",
   };
 }
 
@@ -77,5 +84,6 @@ export const breedingMatrixStats = {
   version: breedingMatrix.version,
   updatedAt: breedingMatrix.updatedAt,
   palCount: breedingMatrix.records.length,
+  selectablePalCount: breedingMatrix.records.filter((record) => record.breedable).length,
   possiblePairCount: breedingMatrix.rows.reduce((total, row) => total + row.length, 0),
 };

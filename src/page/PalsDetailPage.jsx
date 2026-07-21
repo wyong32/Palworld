@@ -66,6 +66,12 @@ export default function PalsDetailPage({ pal }) {
 
       <section className="detail-hero-section pal-detail-hero-section">
         <div className="container">
+          {pal.publicationStatus.key !== "current" && (
+            <aside className={`pal-publication-alert is-${pal.publicationStatus.key}`} role="note">
+              <strong>{pal.publicationStatus.label}</strong>
+              <span>{pal.publicationStatus.note}</span>
+            </aside>
+          )}
           <div className="detail-hero-content pal-detail-hero-content">
             <div className="detail-hero-copy">
               <span className="wiki-kicker">Paldeck #{pal.number}</span>
@@ -92,6 +98,7 @@ export default function PalsDetailPage({ pal }) {
               <nav className="pal-detail-toc" aria-label={`${pal.title} page sections`}>
                 {stats && <a href="#stats">Stats</a>}
                 <a href="#work">Work and combat</a>
+                {pal.skillData && <a href="#skills">Skills</a>}
                 <a href="#locations">Locations</a>
                 <a href="#breeding">Breeding</a>
                 <a href="#drops">Drops</a>
@@ -103,7 +110,7 @@ export default function PalsDetailPage({ pal }) {
                   <span className="wiki-kicker">Species parameters</span>
                   <h2>{pal.title} base stats</h2>
                   <p>
-                    These are species base parameters from the 1.0 monster parameter table, not a level-50 character sheet.
+                    These are version 1.0 species base parameters, not a leveled character sheet.
                     Level, Potential, passives, condensation and other modifiers change the values shown in play.
                   </p>
                   <div className="entity-stat-grid">
@@ -150,12 +157,64 @@ export default function PalsDetailPage({ pal }) {
                 </div>
               </section>
 
+              {pal.skillData && (
+                <section id="skills" className="pal-detail-section">
+                  <span className="wiki-kicker">1.0 skill verification</span>
+                  <h2>{pal.title} Partner Skill and learnset</h2>
+                  <article className="pal-partner-skill-card">
+                    <div>
+                      <span>Partner Skill</span>
+                      <h3>{pal.skillData.partnerSkill.name || "No current Partner Skill record"}</h3>
+                    </div>
+                    <p>{pal.skillData.partnerSkill.description || "No effect description is available for this Partner Skill."}</p>
+                    {pal.skillData.partnerSkill.valuesByRank?.length > 0 && (
+                      <dl>
+                        {pal.skillData.partnerSkill.valuesByRank.map((value, index) => (
+                          <div key={`${pal.title}-partner-rank-${index + 1}`}><dt>Rank {index + 1}</dt><dd>{value}</dd></div>
+                        ))}
+                      </dl>
+                    )}
+                  </article>
+
+                  {pal.skillData.innateTraits.length > 0 && (
+                    <div className="pal-innate-trait-list">
+                      <h3>Innate traits</h3>
+                      {pal.skillData.innateTraits.map((trait) => (
+                        <article key={trait.internalId}>
+                          <strong>{trait.name}</strong>
+                          <span>{trait.description || "No effect description is available for this trait."}</span>
+                        </article>
+                      ))}
+                    </div>
+                  )}
+
+                  {pal.skillData.activeSkills.length > 0 ? (
+                    <div className="pal-active-skill-table">
+                      <div className="pal-active-skill-head" aria-hidden="true">
+                        <span>Level</span><span>Skill</span><span>Element</span><span>Power</span><span>Cooldown</span>
+                      </div>
+                      {pal.skillData.activeSkills.map((skill) => (
+                        <article key={`${skill.internalId}-${skill.learnLevel}`}>
+                          <span>Lv.{skill.learnLevel}</span>
+                          <div><strong>{skill.name}</strong><small>{skill.type} · {skill.description}</small></div>
+                          <span>{skill.element}</span>
+                          <span>{skill.power || "—"}</span>
+                          <span>{skill.cooldown ? `${skill.cooldown}s` : "—"}</span>
+                        </article>
+                      ))}
+                    </div>
+                  ) : (
+                    <p>No natural Active Skill learnset was present for this record.</p>
+                  )}
+                </section>
+              )}
+
               <section id="locations" className="pal-detail-section">
                 <span className="wiki-kicker">Encounter data</span>
                 <h2>Where to find {pal.title}</h2>
                 {pal.mapEncounters.length > 0 ? (
                   <>
-                    <p>{pal.mapPointCount} fixed Alpha encounter{pal.mapPointCount === 1 ? " is" : "s are"} available below. These are exact world coordinates from the boss-spawner data, not approximate habitat markers.</p>
+                    <p>{pal.mapPointCount} fixed Alpha encounter{pal.mapPointCount === 1 ? " is" : "s are"} available below. These are exact encounter coordinates, not approximate habitat markers.</p>
                     <div className="pal-map-location-grid">
                       {pal.mapEncounters.map((encounter) => (
                         <article key={encounter.id}>
@@ -182,7 +241,9 @@ export default function PalsDetailPage({ pal }) {
               <section id="breeding" className="pal-detail-section">
                 <span className="wiki-kicker">Current breeding table</span>
                 <h2>How to breed {pal.title}</h2>
-                {pal.breedingRoutes.length > 0 ? (
+                {pal.publicationStatus.key === "boss-only" ? (
+                  <p>{pal.title} is a boss-only Paldeck entry and cannot currently be captured, owned, deployed, or bred. Its internal self-pair row is excluded from player-facing breeding routes.</p>
+                ) : pal.breedingRoutes.length > 0 ? (
                   <>
                     <p>Each parent pair below resolves to {pal.title} in the current site breeding matrix. Parent passives and Potential do not change the species result.</p>
                     <div className="breeding-route-grid">
@@ -222,7 +283,7 @@ export default function PalsDetailPage({ pal }) {
                     </table>
                   </div>
                 ) : (
-                  <p>No standard level-0 drop row was matched for {pal.title}. The page does not infer rates from the older free-text drop field.</p>
+                  <p>No standard drop-rate data is available for {pal.title}. The page does not infer missing rates.</p>
                 )}
                 {pal.linkedTech && <p className="pal-tech-callout"><strong>Related Pal Gear:</strong> {pal.linkedTech.href ? <Link href={pal.linkedTech.href}>{pal.linkedTech.title}</Link> : pal.linkedTech.title}</p>}
               </section>
@@ -241,18 +302,11 @@ export default function PalsDetailPage({ pal }) {
                 </div>
               </section>
 
-              <div className="game-data-proof">
-                <strong>Data method</strong>
-                <p>Base parameters, Work Suitability and standard drops are normalized from the Palworld 1.0 unpacked DataTables. Map points come from the separate boss-spawner import. Practical readings are editorial summaries and are labeled as such.</p>
-              </div>
             </article>
 
             <aside className="detail-side-panel pal-detail-side-panel">
               <h2>{pal.title} record</h2>
               <dl className="detail-fact-list">
-                <FactRow label="Game data" value={game ? pal.gameDataProvenance.gameVersion : "No matched 1.0 species row"} />
-                <FactRow label="Steam build" value={game ? pal.gameDataProvenance.steamBuildId : null} />
-                <FactRow label="Data table" value={game?.sourceAsset?.split("/").at(-1)} />
                 <FactRow label="Paldeck No." value={pal.number} />
                 <FactRow label="Internal ID" value={game?.internalId} />
                 <FactRow label="Element" value={pal.elements.join(", ")} />

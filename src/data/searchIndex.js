@@ -3,6 +3,9 @@ import { buildPalMapHref, getPalFixedEncounters } from "@/data/bossMap";
 import { guides } from "@/data/guides";
 import { databaseRecords } from "@/data/databaseRecords";
 import { pals } from "@/data/pals";
+import { getPalGameDetails } from "@/data/gameDetails";
+import { getPalPublicationStatus } from "@/data/palStatus";
+import { getPalSkillVerification } from "@/data/skillVerification";
 
 function cleanText(value) {
   return String(value || "")
@@ -21,6 +24,23 @@ function itemText(item) {
     item.guide?.howToUse,
     item.tags?.join(" "),
   ].filter(Boolean).join(" ");
+}
+
+function palSearchFacts(pal) {
+  const game = getPalGameDetails(pal.title);
+  const skills = getPalSkillVerification(pal.title);
+  const status = getPalPublicationStatus(pal);
+  const work = (game?.work || []).map((entry) => `${entry.type} Lv.${entry.level}`).join(" ");
+  const activeSkills = (skills?.activeSkills || []).map((skill) => `${skill.name} ${skill.element}`).join(" ");
+  const innateTraits = (skills?.innateTraits || []).map((trait) => `${trait.name} ${trait.description}`).join(" ");
+  return {
+    status,
+    work,
+    partnerSkill: skills?.partnerSkill?.name || "",
+    partnerEffect: skills?.partnerSkill?.description || "",
+    activeSkills,
+    innateTraits,
+  };
 }
 
 export function buildSearchIndex() {
@@ -58,15 +78,28 @@ export function buildSearchIndex() {
   });
 
   return [
-    ...pals.map((pal) => ({
-      type: "Pal",
-      title: `Palworld Pals - ${pal.title}`,
-      href: `/pals/${pal.addressBar}`,
-      summary: cleanText(pal.guideSummary || `${pal.element} Pal with ${pal.workSuitability || "multiple uses"}.`),
-      keywords: ["Palworld Pals", pal.title, pal.element, pal.partnerSkill, pal.workSuitability, pal.drops, pal.roles?.join(" ")].filter(Boolean).join(" "),
-      imageUrl: pal.imageUrl,
-      imageAlt: pal.imageAlt,
-    })),
+    ...pals.map((pal) => {
+      const facts = palSearchFacts(pal);
+      return {
+        type: facts.status.key === "current"
+          ? "Pal"
+          : facts.status.key === "boss-only"
+            ? "Boss-only Paldeck Entry"
+            : facts.status.key === "crossover-creature"
+              ? "Crossover Creature"
+              : "Pal Archive",
+        title: `Palworld Pals - ${pal.title}`,
+        href: `/pals/${pal.addressBar}`,
+        summary: cleanText(
+          facts.status.key === "current"
+            ? `${pal.element} Pal${facts.work ? ` with ${facts.work}` : ""}. ${facts.partnerSkill ? `Partner Skill: ${facts.partnerSkill}.` : ""}`
+            : `${facts.status.label}. ${facts.status.note}`,
+        ),
+        keywords: ["Palworld Pals", pal.title, pal.element, facts.partnerSkill, facts.partnerEffect, facts.work, facts.activeSkills, facts.innateTraits, pal.drops, pal.roles?.join(" ")].filter(Boolean).join(" "),
+        imageUrl: pal.imageUrl,
+        imageAlt: pal.imageAlt,
+      };
+    }),
     ...fixedAlphaLocations,
     ...databaseCategories,
     ...databaseRecords.map((item) => ({
@@ -117,10 +150,10 @@ export function buildSearchIndex() {
     },
     {
       type: "Updates",
-      title: "Palworld Updates - 1.0 Patch Notes",
+      title: "Palworld Updates - 1.0.1 and 1.0 Patch Notes",
       href: "/updates",
       summary: "Review current patch changes, new Pals, map changes, breeding updates, and player tasks.",
-      keywords: "Palworld Updates patch notes version history 1.0 new pals sunreach world tree awakening mutation",
+      keywords: "Palworld Updates patch notes version history 1.0.1 save fix burning bug 1.0 new pals sunreach world tree awakening mutation",
     },
   ];
 }

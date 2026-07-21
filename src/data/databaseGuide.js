@@ -1,39 +1,14 @@
 import { databaseCategorySlug, getDatabaseCategoryGroups, getDatabaseItemPath } from "@/data/database";
-import { gameDataProvenance, getItemGameDetails, getPalGameDetails } from "@/data/gameDetails";
+import { getItemGameDetails, getPalGameDetails } from "@/data/gameDetails";
+import { getDatabasePublicationStatus } from "@/data/databaseStatus";
 import { fitDescription, fitTitle } from "@/seo/tdk";
 
-export const databaseSourceRefs = [
-  {
-    label: "Fandom Category:Items",
-    href: "https://palworld.fandom.com/wiki/Category:Items",
-    note: "Primary local import source for item membership, source URLs, and available item images.",
-  },
-  {
-    label: "Game8 item guide",
-    href: "https://game8.co/games/Palworld/archives/439563",
-    note: "Reviewed for player-facing item categories, inventory routing, and how-to-use framing.",
-  },
-  {
-    label: "Game8 materials guide",
-    href: "https://game8.co/games/Palworld/archives/445030",
-    note: "Reviewed for material acquisition patterns such as Pal drops, merchants, gathering, crafting, and refining.",
-  },
-  {
-    label: "Fandom weapons",
-    href: "https://palworld.fandom.com/wiki/Weapons",
-    note: "Reviewed for weapon grouping into melee, ranged, grenades, Pal weapons, and collaboration weapons.",
-  },
-  {
-    label: "Palworld.gg item database",
-    href: "https://palworld.gg/items",
-    note: "Reviewed for database UX patterns: search, type filters, rarity filters, recipes, price, tech level, and dropped-by links.",
-  },
-  {
-    label: "Paldb items",
-    href: "https://paldb.cc/Items",
-    note: "Reviewed for item detail patterns including descriptions, stats, resistances, rarity-style grouping, and progression comparisons.",
-  },
-];
+function withoutSourceMetadata(record) {
+  if (!record) return record;
+  const cleaned = { ...record };
+  ["sourceName", "sourceUrl", "sourceListUrl", "imageSourceUrl", "sourceAsset", "sourceAssets"].forEach((field) => delete cleaned[field]);
+  return cleaned;
+}
 
 export const categoryGuides = {
   Accessories: {
@@ -131,14 +106,14 @@ export const categoryGuides = {
     role: "Boss encounter reference",
     intent: "Compare fixed Alpha, Tower and Raid Boss definitions using extracted combat rows, exact fixed-spawn coordinates, drops and linked standard Pal pages.",
     howToUse: "Use the displayed level and combat modifiers for preparation. A map link appears only when the exact spawner ID and coordinates exist in the published map dataset.",
-    acquisition: "Fixed Alpha coordinates come from DT_BossSpawnerLoactionData. Tower and Raid Boss records remain location-neutral when that table does not provide a fixed point.",
+    acquisition: "Fixed Alpha entries show exact coordinates. Tower and Raid Boss records remain location-neutral when no fixed point is available.",
     priority: "Alpha routes, Tower progression, Raid preparation, drop checks and combat-stat comparison.",
   },
   Predators: {
     role: "Predator Pal encounters",
     intent: "Separate PREDATOR_ combat definitions and drops from the corresponding standard Pal pages.",
     howToUse: "Compare the Predator row with the linked standard Pal, then plan around its damage modifiers and verified drop table instead of assuming normal wild-Pal values.",
-    acquisition: "These records confirm a Predator character definition; they do not invent a fixed coordinate when the boss-spawner table has no matching point.",
+    acquisition: "Predator records do not invent a fixed coordinate when no matching point is available.",
     priority: "Predator Core farming, high-pressure combat routes and special Pal comparisons.",
   },
   Enemies: {
@@ -524,6 +499,7 @@ export function getRelatedItems(item, items) {
 
 export function enrichDatabaseItem(item, { items = [], pals = [] } = {}) {
   const gameData = getItemGameDetails(item.title);
+  const publicationStatus = getDatabasePublicationStatus(item);
   const itemByHref = new Map(items.map((candidate) => [getDatabaseItemPath(candidate), candidate]));
   const attachItemImage = (relation) => {
     const related = relation.href ? itemByHref.get(relation.href) : null;
@@ -531,7 +507,7 @@ export function enrichDatabaseItem(item, { items = [], pals = [] } = {}) {
   };
   const enrichedGameData = gameData
     ? {
-        ...gameData,
+        ...withoutSourceMetadata(gameData),
         materials: (gameData.materials || []).map(attachItemImage),
         recipes: (gameData.recipes || []).map((recipe) => ({
           ...recipe,
@@ -579,9 +555,9 @@ export function enrichDatabaseItem(item, { items = [], pals = [] } = {}) {
   const routeSteps = getItemRouteSteps(item, { relatedPals, relatedItems });
 
   return {
-    ...item,
+    ...withoutSourceMetadata(item),
     gameData: enrichedGameData,
-    gameDataProvenance,
+    publicationStatus,
     guide,
     role: getItemRole(item),
     acquisitionHints,
@@ -632,6 +608,9 @@ export function buildDatabaseExplorerData(items) {
       matched: enrichedItems.filter((item) => item.gameData).length,
       recipes: enrichedItems.filter((item) => (item.gameData?.recipes?.length || 0) > 0 || (item.gameData?.materials?.length || 0) > 0).length,
       reverseLinks: enrichedItems.reduce((total, item) => total + item.usedIn.length, 0),
+      current: enrichedItems.filter((item) => item.publicationStatus.indexable).length,
+      legacyDisabled: enrichedItems.filter((item) => item.publicationStatus.key === "legacy-disabled").length,
+      editorialOrUnmatched: enrichedItems.filter((item) => ["editorial-category", "unmatched-item"].includes(item.publicationStatus.key)).length,
     },
     categories: categories.map((group) => ({
       ...group,
@@ -664,6 +643,7 @@ export function buildDatabaseExplorerData(items) {
       category: item.category,
       description: item.guideSummary,
       matched: Boolean(item.gameData),
+      publicationStatus: item.publicationStatus,
       kind: item.gameData?.kind || "unmatched",
       recipeCount: item.gameData?.recipes?.length || (item.gameData?.materials?.length ? 1 : 0),
       usedInCount: item.usedIn.length,
@@ -682,7 +662,6 @@ export function buildDatabaseExplorerData(items) {
       role: item.role,
       summary: item.guideSummary,
     })),
-    sourceRefs: databaseSourceRefs,
   };
 }
 
@@ -703,17 +682,19 @@ export function buildDatabaseCategoryData(group, allItems, pals) {
       category: item.category,
       categories: item.categories,
       role: item.role,
-      sourceName: item.sourceName,
-      sourceUrl: item.sourceUrl,
       lastChecked: item.lastChecked,
       guideSummary: item.guideSummary,
       acquisitionHints: item.acquisitionHints,
       relatedPalCount: item.relatedPals.length,
       relatedItemCount: item.relatedItems.length,
       matched: Boolean(item.gameData),
+      publicationStatus: item.publicationStatus,
       kind: item.gameData?.kind || "unmatched",
       type: item.gameData?.type || "",
       subtype: item.gameData?.subtype || "",
+      organization: item.gameData?.organization || "",
+      weapon: item.gameData?.weapon && item.gameData.weapon !== "None" ? item.gameData.weapon : "",
+      variantCount: item.gameData?.variants?.length || 0,
       gameplayEnabled: item.gameData?.gameplayEnabled,
       recipeCount: item.gameData?.recipes?.length || (item.gameData?.materials?.length ? 1 : 0),
       usedInCount: item.usedIn.length,
@@ -737,14 +718,23 @@ export function buildDatabaseCategoryData(group, allItems, pals) {
       linkedPals: enriched.filter((item) => item.relatedPals.length > 0).length,
       mapped: enriched.filter((item) => (item.gameData?.encounters?.length || 0) > 0).length,
       withDrops: enriched.filter((item) => (item.gameData?.drops?.length || 0) > 0).length,
+      withVariants: enriched.filter((item) => (item.gameData?.variants?.length || 0) > 1).length,
     },
     isCreatureCategory: ["Bosses", "Predators", "Enemies"].includes(group.category),
-    sourceRefs: databaseSourceRefs,
   };
 }
 
 export function buildDatabaseSeo(item) {
   const guide = categoryGuides[item.category] || categoryGuides.Items;
+  const status = getDatabasePublicationStatus(item);
+  if (!status.indexable) {
+    const suffix = status.key === "editorial-category" ? "Category Reference" : status.key === "legacy-disabled" ? "Legacy Record" : "Unverified Record";
+    return {
+      title: fitTitle("Palworld Database -", item.title, suffix),
+      description: fitDescription(`Palworld Database archive record for ${item.title}: ${status.label}. ${status.note}`),
+      keywords: `Palworld ${item.title}, ${item.title} archive, Palworld legacy item record`,
+    };
+  }
   if (item.recordType === "creature") {
     return {
       title: fitTitle("Palworld Database -", item.title, "Stats and Drops"),

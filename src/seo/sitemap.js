@@ -2,8 +2,10 @@ import { databaseCategorySlug, getDatabaseCategoryGroups, getDatabaseItemPath } 
 import { guides } from "@/data/guides";
 import { databaseRecords } from "@/data/databaseRecords";
 import { pals } from "@/data/pals";
+import { isIndexablePal } from "@/data/palStatus";
 import { siteConfig } from "@/seo/site";
 import { legalRoutes } from "@/app/legal/_content";
+import { isIndexableDatabaseRecord } from "@/data/databaseStatus";
 
 const STATIC_PAGE_LASTMOD = {
   "/": "2026-07-20",
@@ -13,7 +15,7 @@ const STATIC_PAGE_LASTMOD = {
   "/breeding/calculator": "2026-07-17",
   "/guides": "2026-07-15",
   "/map": "2026-07-20",
-  "/updates": "2026-07-15",
+  "/updates": "2026-07-21",
   "/legal": "2026-07-15",
   "/legal/privacy-policy": "2026-07-15",
   "/legal/terms-of-service": "2026-07-15",
@@ -92,7 +94,7 @@ export function buildSitemapEntries() {
     ),
   ];
 
-  const palEntries = pals.map((pal) =>
+  const palEntries = pals.filter(isIndexablePal).map((pal) =>
     makeSitemapEntry(`/pals/${pal.addressBar}`, {
       lastModified: getEntryDate(pal, FALLBACK_LASTMOD.pals),
       changeFrequency: "monthly",
@@ -108,7 +110,7 @@ export function buildSitemapEntries() {
     }),
   );
 
-  const databaseItemEntries = databaseRecords.map((item) =>
+  const databaseItemEntries = databaseRecords.filter(isIndexableDatabaseRecord).map((item) =>
     makeSitemapEntry(getDatabaseItemPath(item), {
       lastModified: getEntryDate(item, FALLBACK_LASTMOD.database),
       changeFrequency: "monthly",

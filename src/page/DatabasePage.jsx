@@ -37,11 +37,11 @@ export default function DatabasePage({ items }) {
           <div className="container">
             <div className="database-catalog-hero-grid">
               <div className="database-catalog-hero-copy">
-                <span className="database-catalog-kicker">Palworld 1.0 · extracted records</span>
+                <span className="database-catalog-kicker">Palworld 1.0 · database records</span>
                 <h1>Items, Bosses, Predators, and Enemies</h1>
                 <p>
                   Start with weapons, ammo, armor and consumables, then continue into crafting chains, fixed Alpha Bosses,
-                  Predator Pals and hostile human archetypes. Combat pages keep exact extracted facts separate from route guidance.
+                  Predator Pals and hostile human archetypes. Combat pages keep base parameters separate from route guidance.
                 </p>
                 <div className="database-catalog-actions">
                   <a href="#item-ledger">Search all records</a>
@@ -62,11 +62,19 @@ export default function DatabasePage({ items }) {
                   ))}
                 </div>
                 <footer>
-                  <span><strong>{data.stats.matched}</strong> matched game records</span>
+                  <span><strong>{data.stats.current}</strong> current indexed records</span>
                   <span><strong>{data.stats.reverseLinks.toLocaleString("en-US")}</strong> reverse links</span>
                 </footer>
               </aside>
             </div>
+          </div>
+        </section>
+
+        <section className="database-status-strip" aria-label="Database record status summary">
+          <div className="container">
+            <span><strong>{data.stats.current}</strong> current 1.0 records</span>
+            <span><strong>{data.stats.legacyDisabled}</strong> disabled definitions</span>
+            <span><strong>{data.stats.editorialOrUnmatched}</strong> editorial or unmatched records</span>
           </div>
         </section>
 
@@ -115,7 +123,7 @@ export default function DatabasePage({ items }) {
                 <span className="wiki-kicker">Complete site index</span>
                 <h2>Find an item or combat record</h2>
               </div>
-              <p>Filter item production relationships or open a Boss, Predator or hostile enemy record for extracted stats, drops, variants and map links.</p>
+              <p>Filter item production relationships or open a Boss, Predator or hostile enemy record for base parameters, drops, scenario variants and exact map links. These values are not simulated final combat results.</p>
             </header>
             <DatabaseIndexExplorer items={data.items} categories={data.categories.map((category) => category.category)} />
           </div>

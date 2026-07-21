@@ -131,9 +131,9 @@ function getEditorialReading(item, game) {
   if (!game) return null;
   const stats = game.stats || {};
   if (game.kind === "creature") {
-    if (game.encounters?.length > 0) return `${item.title} has ${game.encounters.length} exact fixed-spawn record${game.encounters.length === 1 ? "" : "s"}. Those coordinates identify the source-table point; they do not imply a safe route, respawn condition or recommended player level.`;
+    if (game.encounters?.length > 0) return `${item.title} has ${game.encounters.length} exact fixed-spawn record${game.encounters.length === 1 ? "" : "s"}. Those coordinates identify the encounter point; they do not imply a safe route, respawn condition or recommended player level.`;
     if (game.subtype === "Human Enemy") return `This page groups rows only when localized name, weapon and organization match. Scenario variants remain visible because an oil-rig, invasion, arena or quest row can carry different combat modifiers.`;
-    return `No fixed coordinate is assigned because the extracted boss-spawner table does not provide one for this ${game.subtype}. The absence of a map link is deliberate.`;
+    return `No fixed coordinate is available for this ${game.subtype}. The absence of a map link is deliberate.`;
   }
   if (game.kind === "structure") return `${item.title} is a placeable structure. Its material list and build-work requirement below are the useful planning values; placement and worker pathing still have to be tested in the player’s base layout.`;
   if (stats.attack > 0) return `${item.title} is an offensive item with ${stats.attack} listed attack${stats.magazineSize > 0 ? ` and a ${stats.magazineSize}-round magazine` : ""}. Compare durability and ammunition availability before treating the higher attack value as a complete loadout decision.`;
@@ -215,6 +215,12 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
       <PageBreadcrumbs items={breadcrumbs} />
       <section className="database-dossier-hero">
         <div className="container">
+          {item.publicationStatus && !item.publicationStatus.indexable && (
+            <aside className={`database-publication-alert is-${item.publicationStatus.key}`} role="note">
+              <strong>{item.publicationStatus.label}</strong>
+              <span>{item.publicationStatus.note}</span>
+            </aside>
+          )}
           <div className="database-dossier-grid">
             <figure className="database-dossier-visual">
               <div className="database-dossier-image-frame">
@@ -228,7 +234,7 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
 
             <div className="database-dossier-copy">
               <span className="database-dossier-kicker">
-                Game data <i aria-hidden="true" /> {game ? item.gameDataProvenance.gameVersion : "Site record"}
+                Record scope <i aria-hidden="true" /> {game ? "Palworld 1.0" : "Site category"}
               </span>
               <h1>{item.title}</h1>
               <p className="database-dossier-lead">{heroSummary}</p>
@@ -263,6 +269,7 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
                 <span className="wiki-kicker">{isCreature ? "Verified record" : "Verified function"}</span>
                 <h2>{isCreature ? `${item.title} overview` : `What ${item.title} does`}</h2>
                 <p>{purposeSummary}</p>
+                {item.publicationStatus && <p className="database-record-status"><strong>Record status:</strong> {item.publicationStatus.label}. {item.publicationStatus.note}</p>}
                 {getEditorialReading(item, game) && <p className="editorial-note"><strong>Practical reading:</strong> {getEditorialReading(item, game)}</p>}
                 {game?.gameplayEnabled === false && (
                   <p className="database-record-warning"><strong>Definition status:</strong> the matched item row has <code>bLegalInGame=false</code>. The values and recipe are present in the 1.0 table, but this page does not present the item as a normally enabled inventory record.</p>
@@ -284,7 +291,7 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
                 <section className="pal-detail-section" id="encounters">
                   <span className="wiki-kicker">Boss spawner table</span>
                   <h2>{item.displayName || item.title} locations</h2>
-                  <p>Each point below is an exact world coordinate from <code>DT_BossSpawnerLoactionData</code>. It is not a regional planning marker or a clustered approximation.</p>
+                  <p>Each point below is an exact encounter coordinate. It is not a regional planning marker or a clustered approximation.</p>
                   <div className="creature-encounter-list">
                     {game.encounters.map((encounter) => (
                       <article key={`${encounter.spawnerId}-${encounter.world.x}-${encounter.world.y}`}>
@@ -297,7 +304,7 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
                         </dl>
                         {encounter.mapHref
                           ? <Link href={encounter.mapHref}>Open exact marker on the map →</Link>
-                          : <span className="database-record-warning">No published marker matches this extracted point.</span>}
+                          : <span className="database-record-warning">No published marker matches this point.</span>}
                       </article>
                     ))}
                   </div>
@@ -308,7 +315,7 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
                 <section className="pal-detail-section" id="drops">
                   <span className="wiki-kicker">Drop table</span>
                   <h2>{item.displayName || item.title} drops</h2>
-                  <p>The rate and quantity range are copied from the level-0 character drop row. Linked rewards open their Database item page.</p>
+                  <p>The table shows standard drop rates and quantity ranges. Linked rewards open their Database item page.</p>
                   <div className="pal-drop-grid creature-drop-grid">
                     {game.drops.map((drop) => <CreatureDropCard entry={drop} key={drop.id} />)}
                   </div>
@@ -482,19 +489,11 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
                 )}
               </section>
 
-              <div className="game-data-proof">
-                <strong>Data method</strong>
-                <p>{isCreature ? "Character values, hostile classification, boss flags, fixed-spawn points and drops are normalized from the Palworld 1.0 unpacked DataTables. Exact coordinates are labeled as such; variants and editorial interpretation remain separate." : "Descriptions, item values, recipes, building materials and technology requirements are normalized from the Palworld 1.0 unpacked DataTables. Zero-value fields are omitted. Any practical reading is labeled as editorial and does not replace the displayed values."}</p>
-              </div>
             </article>
 
             <aside className="detail-side-panel database-detail-side-panel">
               <h2>{item.title} record</h2>
               <dl className="detail-fact-list">
-                <FactRow label="Game data" value={game ? item.gameDataProvenance.gameVersion : "No matched 1.0 record"} />
-                <FactRow label="Steam build" value={game ? item.gameDataProvenance.steamBuildId : null} />
-                <FactRow label="Data table" value={game?.sourceAsset?.split("/").at(-1)} />
-                <FactRow label="Source tables" value={game?.sourceAssets?.map((source) => source.split("/").at(-1)).join(", ")} />
                 <FactRow label="Internal ID" value={game?.internalId} />
                 <FactRow label="Record type" value={game?.kind} />
                 <FactRow label={isCreature ? "Entity type" : "Item type"} value={game?.type} />

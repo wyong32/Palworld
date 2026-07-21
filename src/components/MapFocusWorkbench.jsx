@@ -5,41 +5,81 @@ import InteractiveMap from "@/components/InteractiveMap";
 
 const mapFocuses = [
   {
+    key: "explore",
+    index: "01",
+    label: "Route essentials",
+    title: "Travel, dungeons, and supplies",
+    note: "Begin with the utility layer for a practical trip across Palpagos.",
+    mapId: "main",
+    categories: ["fast-travel", "dungeon", "resource", "skill-fruit", "merchant"],
+  },
+  {
     key: "alpha",
+    index: "02",
     label: "Alpha Pals",
-    title: "Scout fixed Alpha encounters",
-    note: "90 exact Alpha Pal points with direct links into the matching Pal guide.",
+    title: "Fixed Alpha encounters",
+    note: "90 exact Alpha points linked to their matching Pal guides.",
     mapId: "main",
     categories: ["alpha-pal"],
   },
   {
     key: "human",
+    index: "03",
     label: "Human bosses",
-    title: "Inspect fixed human encounters",
-    note: "33 game-data locations for named and internal human boss spawners.",
+    title: "Fixed human encounters",
+    note: "33 locations kept separate from catchable Pal records.",
     mapId: "main",
     categories: ["human-boss"],
   },
   {
     key: "special",
+    index: "04",
     label: "Special regions",
-    title: "Check the oil-rig points",
-    note: "Three exact special-area records kept separate from creature encounters.",
+    title: "Oil-rig approach points",
+    note: "Three exact special-area records, separate from creature encounters.",
     mapId: "main",
     categories: ["special"],
   },
   {
+    key: "habitats",
+    index: "05",
+    label: "Wild habitats",
+    title: "Pal spawn clusters",
+    note: "Search 7,403 spawn anchors through species-aware habitat clusters.",
+    mapId: "main",
+    categories: ["wild-spawn"],
+  },
+  {
+    key: "objectives",
+    index: "06",
+    label: "Quest objectives",
+    title: "Exact objective points",
+    note: "Inspect extracted quest anchors without converting them into route guesses.",
+    mapId: "main",
+    categories: ["quest"],
+  },
+  {
+    key: "collection",
+    index: "07",
+    label: "Collectibles",
+    title: "Eggs, chests, Effigies, and notes",
+    note: "Use UI clustering to scan thousands of retained exact actor points.",
+    mapId: "main",
+    categories: ["chest", "egg", "effigy", "skill-fruit", "note"],
+  },
+  {
     key: "world-tree",
+    index: "08",
     label: "World Tree",
-    title: "Open the endgame boss map",
-    note: "Seven fixed Alpha encounters projected onto the separate World Tree map.",
+    title: "Open the endgame projection",
+    note: "Bosses, travel, collectibles, and actors stay inside World Tree bounds.",
     mapId: "tree",
-    categories: ["alpha-pal"],
+    categories: ["alpha-pal", "fast-travel", "chest", "egg", "effigy", "skill-fruit", "note", "npc"],
   },
 ];
 
 export default function MapFocusWorkbench({ palProfiles }) {
-  const [activeKey, setActiveKey] = useState("alpha");
+  const [activeKey, setActiveKey] = useState("explore");
   const stageRef = useRef(null);
   const active = useMemo(
     () => mapFocuses.find((item) => item.key === activeKey) || mapFocuses[0],
@@ -69,11 +109,15 @@ export default function MapFocusWorkbench({ palProfiles }) {
 
   return (
     <section ref={stageRef} className="map-workbench-stage" aria-label="Interactive Palworld map and linked tasks">
-      <aside className="map-workbench-tasks" aria-label="Map player tasks">
+      <header className="map-preset-header">
         <div>
-          <span className="wiki-kicker">Quick map presets</span>
+          <span>EXPEDITION MODE</span>
           <h2>Start with the fixed-point layer you need.</h2>
         </div>
+        <p>{active.note}</p>
+      </header>
+
+      <nav className="map-workbench-tasks" aria-label="Map player tasks">
         {mapFocuses.map((action) => (
           <button
             type="button"
@@ -82,12 +126,11 @@ export default function MapFocusWorkbench({ palProfiles }) {
             aria-pressed={action.key === activeKey}
             onClick={() => setActiveKey(action.key)}
           >
-            <span>{action.label}</span>
-            <strong>{action.title}</strong>
-            <small>{action.note}</small>
+            <span className="map-task-index">{action.index}</span>
+            <span className="map-task-copy"><small>{action.label}</small><strong>{action.title}</strong></span>
           </button>
         ))}
-      </aside>
+      </nav>
 
       <div className="map-workbench-map">
         <InteractiveMap preset={active} palProfiles={palProfiles} />

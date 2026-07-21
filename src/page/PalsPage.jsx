@@ -5,12 +5,15 @@ import { newPalHighlights, specialMonsterHighlights, unreleasedArchiveHighlights
 import { buildPalExplorerData } from "@/data/palGuide";
 import { palsHubTrail } from "@/seo/breadcrumbs";
 import { siteConfig } from "@/seo/site";
+import { getPalRosterStats, isCurrentPal } from "@/data/palStatus";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function PalsPage({ pals }) {
   const breadcrumbs = palsHubTrail();
   const explorerData = buildPalExplorerData(pals, items);
+  const rosterStats = getPalRosterStats(pals);
+  const currentPals = pals.filter(isCurrentPal);
   const schema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -19,8 +22,8 @@ export default function PalsPage({ pals }) {
     description: "Search and compare Palworld Pals by work suitability, element, combat role, mount type, drops, and breeding value.",
     mainEntity: {
       "@type": "ItemList",
-      numberOfItems: pals.length,
-      itemListElement: pals.map((pal, index) => ({
+      numberOfItems: currentPals.length,
+      itemListElement: currentPals.map((pal, index) => ({
         "@type": "ListItem",
         position: index + 1,
         name: pal.title,
@@ -43,6 +46,13 @@ export default function PalsPage({ pals }) {
               flying or ground mount use, Partner Skill, drops, and breeding value. Start with
               a player goal, then open the Pal guide for the exact decision.
             </p>
+            <div className="pal-roster-proof" aria-label="Pal roster coverage">
+              <span><strong>{rosterStats.current}</strong> current 1.0 Pals</span>
+              <span><strong>{rosterStats.bossOnly}</strong> boss-only Paldeck entry</span>
+              <span><strong>{rosterStats.crossoverCreatures}</strong> crossover creatures</span>
+              <span><strong>{rosterStats.internalUnreleased}</strong> unreleased internal records</span>
+              <span><strong>{rosterStats.archiveUnverified}</strong> unverified archive entries</span>
+            </div>
             <div className="pals-hero-actions" aria-label="Quick Pal categories">
               <a href="#pal-results">Browse all Pals</a>
               <a href="#work-filters">Work suitability</a>

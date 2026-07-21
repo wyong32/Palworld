@@ -4,7 +4,7 @@
     "steamBuildId": "24088745",
     "engine": "UE5.1",
     "mappingSha256": "5F8E6B4C70E5FAF3D1C36FBB1FCDC0C5A507F5B87D9F99B7373F9CCE933167B2",
-    "importedAt": "2026-07-20T08:55:48.620Z",
+    "importedAt": "2026-07-21T02:28:55.941Z",
     "note": "Values are normalized from the listed Palworld 1.0 DataTables. Site recommendations are derived separately."
   },
   "coverage": {
@@ -50189,6 +50189,14 @@
           "count": 30
         },
         {
+          "id": "Altar",
+          "title": "Summoning Altar",
+          "href": "/database/structures/summoning-altar",
+          "category": "Structures",
+          "relation": "Builds",
+          "count": 20
+        },
+        {
           "id": "DamagedScarecrow",
           "title": "Training Dummy",
           "href": "/database/structures/training-dummy",
@@ -59931,6 +59939,14 @@
           "count": 70
         },
         {
+          "id": "Altar",
+          "title": "Summoning Altar",
+          "href": "/database/structures/summoning-altar",
+          "category": "Structures",
+          "relation": "Builds",
+          "count": 100
+        },
+        {
           "id": "FarmBlockV2_tomato",
           "title": "Tomato Plantation",
           "href": "/database/structures/tomato-plantation",
@@ -61244,37 +61260,45 @@
       "usedIn": []
     },
     "Summoning Altar": {
-      "kind": "item",
-      "internalId": "PalSummon",
-      "description": "Slab depicting . Offer to a Summoning Altar to summon a powerful Pal.",
-      "sourceAsset": "Content/Pal/DataTable/Item/DT_ItemDataTable.uasset",
-      "type": "Consume",
-      "subtype": "Consume Other",
-      "gameplayEnabled": false,
+      "kind": "structure",
+      "internalId": "Altar",
+      "description": "Offer a Slab depicting a Pal to summon a powerful Pal to your base. Adequate caution and battle readiness is paramount.",
+      "sourceAsset": "Content/Pal/DataTable/MapObject/Building/DT_BuildObjectDataTable.uasset",
+      "type": "Pal Other",
+      "subtype": "Infra Environment",
       "stats": {
         "rank": 1,
-        "rarity": 2,
-        "maxStack": 9999,
-        "weight": 1,
-        "price": 10,
-        "durability": 0,
-        "magazineSize": 0,
-        "attack": 0,
-        "hp": 0,
-        "defense": 0,
-        "shield": 0,
-        "magicAttack": 0,
-        "magicDefense": 0,
-        "restoreSatiety": 0,
-        "restoreSanity": 0,
-        "restoreHealth": 0,
-        "element": null,
-        "sleepWeapon": false,
-        "sneakAttackRate": 0,
-        "passives": []
+        "buildWork": 10000,
+        "buildCapacity": 0,
+        "energyPerSecond": 0,
+        "baseOnly": false,
+        "hubAreaOnly": true,
+        "maxPerBase": 1
       },
-      "recipes": [],
-      "technology": null,
+      "materials": [
+        {
+          "id": "Stone",
+          "title": "Stone",
+          "href": "/database/materials/stone",
+          "count": 100
+        },
+        {
+          "id": "Pal_crystal_S",
+          "title": "Paldium Fragment",
+          "href": "/database/materials/paldium-fragment",
+          "count": 20
+        }
+      ],
+      "technology": {
+        "id": "Altar",
+        "level": 33,
+        "cost": 3,
+        "tier": 0,
+        "ancientTechnology": true,
+        "requiredBoss": null,
+        "requiredTechnology": null,
+        "researchId": null
+      },
       "usedIn": []
     },
     "Surfent Saddle": {

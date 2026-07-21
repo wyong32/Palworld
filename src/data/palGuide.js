@@ -3,7 +3,9 @@ import { featuredBreedingCombos } from "@/data/breedingTools";
 import { buildPalMapHref, getMapLinkedPalCount, getPalFixedEncounters } from "@/data/bossMap";
 import { currentWorkSuitability } from "@/data/currentWorkSuitability";
 import { breedingMatrix, getBreedingTargetPairs } from "@/data/breedingMatrix";
-import { gameDataProvenance, getPalGameDetails } from "@/data/gameDetails";
+import { getPalGameDetails } from "@/data/gameDetails";
+import { getPalPublicationStatus, isCurrentPal } from "@/data/palStatus";
+import { getPalSkillVerification } from "@/data/skillVerification";
 import { fitDescription, fitTitle } from "@/seo/tdk";
 
 export const workTypes = [
@@ -32,34 +34,6 @@ export const elementMatchups = {
   Neutral: { strong: [], weak: ["Dark"] },
   Water: { strong: ["Fire"], weak: ["Electric"] },
 };
-
-export const palSourceRefs = [
-  {
-    label: "Palpedia source data",
-    href: "https://palworld.fandom.com/wiki/Palpedia",
-    note: "Local Pal entries use Palpedia facts, images, drops, partner skill, work suitability, and habitat fields.",
-  },
-  {
-    label: "Work Suitability",
-    href: "https://palworld.fandom.com/wiki/Work_Suitability",
-    note: "Work suitability governs task efficiency and role assignment at bases.",
-  },
-  {
-    label: "Elements",
-    href: "https://palworld.fandom.com/wiki/Elements",
-    note: "Element matchups drive damage advantages and team planning.",
-  },
-  {
-    label: "Rideable Pals",
-    href: "https://palworld.fandom.com/wiki/Rideable_Pals",
-    note: "Mount pages distinguish ground, swimming, flying, and glider roles.",
-  },
-  {
-    label: "Partner Skills",
-    href: "https://palworld.fandom.com/wiki/Partner_Skills",
-    note: "Partner Skills define species abilities and can be improved with condensation.",
-  },
-];
 
 const flyingMountNames = new Set([
   "Nitewing",
@@ -195,6 +169,13 @@ export function parseWorkSuitability(value = "") {
 
 function getCurrentWork(pal) {
   return getPalGameDetails(pal.title)?.work || currentWorkSuitability[pal.title] || parseWorkSuitability(pal.workSuitability);
+}
+
+function withoutSourceMetadata(record) {
+  if (!record) return record;
+  const cleaned = { ...record };
+  ["sourceName", "sourceUrl", "sourceListUrl", "imageSourceUrl", "sourceAsset", "sourceAssets"].forEach((field) => delete cleaned[field]);
+  return cleaned;
 }
 
 function formatWorkSuitability(work) {
@@ -358,7 +339,7 @@ function getAlternativePals(pal, { allPals, work, primaryWork, roles, travelType
   const fallbackRole = travelType || (roles.includes("Combat Candidate") ? "Combat Candidate" : "");
 
   return allPals
-    .filter((candidate) => candidate.addressBar !== pal.addressBar)
+    .filter((candidate) => candidate.addressBar !== pal.addressBar && isCurrentPal(candidate))
     .map((candidate) => {
       const candidateWork = getCurrentWork(candidate);
       const sameWork = primaryWork
@@ -398,7 +379,7 @@ function getSharedDropPals(pal, { allPals, linkedDrops }) {
   }
 
   return allPals
-    .filter((candidate) => candidate.addressBar !== pal.addressBar)
+    .filter((candidate) => candidate.addressBar !== pal.addressBar && isCurrentPal(candidate))
     .map((candidate) => {
       const matches = dropTitles.filter((title) => itemMatchesDrop(candidate.drops || "", title));
       return { candidate, matches };
@@ -439,7 +420,9 @@ export function getPalGuideSummary(pal) {
 }
 
 export function enrichPal(pal, { items = [], allPals = [] } = {}) {
-  const gameData = getPalGameDetails(pal.title);
+  const gameData = withoutSourceMetadata(getPalGameDetails(pal.title));
+  const publicationStatus = getPalPublicationStatus(pal);
+  const skillData = withoutSourceMetadata(getPalSkillVerification(pal.title));
   const work = getCurrentWork(pal);
   const roles = getPalRoles(pal);
   const primaryWork = getPrimaryWork(work);
@@ -450,6 +433,7 @@ export function enrichPal(pal, { items = [], allPals = [] } = {}) {
   const weakAgainst = Array.from(new Set((pal.elements || []).flatMap((element) => elementMatchups[element]?.weak || [])));
   const rankedWork = work.map((entry) => {
     const comparable = allPals
+      .filter(isCurrentPal)
       .flatMap((candidate) => getCurrentWork(candidate))
       .filter((candidateWork) => candidateWork.type === entry.type);
     const topLevel = Math.max(entry.level, ...comparable.map((candidateWork) => candidateWork.level));
@@ -472,7 +456,7 @@ export function enrichPal(pal, { items = [], allPals = [] } = {}) {
       targetHref: `/pals/${allPals.find((candidate) => candidate.title === combo.target)?.addressBar || ""}`,
     }));
   const relatedPals = allPals
-    .filter((candidate) => candidate.addressBar !== pal.addressBar)
+    .filter((candidate) => candidate.addressBar !== pal.addressBar && isCurrentPal(candidate))
     .map((candidate) => {
       const sameElements = candidate.elements?.filter((element) => pal.elements?.includes(element)).length || 0;
       const candidateWork = getCurrentWork(candidate);
@@ -490,7 +474,9 @@ export function enrichPal(pal, { items = [], allPals = [] } = {}) {
       element: candidate.element,
       workSuitability: formatWorkSuitability(getCurrentWork(candidate)),
     }));
-  const breedingTarget = breedingMatrix.records.find((record) => record.pal?.addressBar === pal.addressBar);
+  const breedingTarget = publicationStatus.key === "boss-only"
+    ? null
+    : breedingMatrix.records.find((record) => record.pal?.addressBar === pal.addressBar);
   const breedingRoutes = breedingTarget
     ? getBreedingTargetPairs(breedingTarget.index)
         .filter(({ parentA, parentB }) => parentA.pal && parentB.pal)
@@ -520,9 +506,11 @@ export function enrichPal(pal, { items = [], allPals = [] } = {}) {
   const mapEncounters = getPalFixedEncounters(pal.addressBar);
 
   return {
-    ...pal,
+    ...withoutSourceMetadata(pal),
     gameData,
-    gameDataProvenance,
+    publicationStatus,
+    skillData,
+    partnerSkill: skillData?.partnerSkill?.name || "",
     workSuitability: formatWorkSuitability(work),
     guideSummary: getPalGuideSummary(pal),
     work: rankedWork,
@@ -607,8 +595,9 @@ export function buildMapPalProfiles(pals, items) {
 
 export function buildPalExplorerData(pals, items) {
   const enriched = pals.map((pal) => enrichPal(pal, { items, allPals: pals }));
-  const byRole = (role) => enriched.filter((pal) => pal.roles.includes(role));
-  const byWork = (type, minLevel = 1) => enriched.filter((pal) => pal.work.some((entry) => entry.type === type && entry.level >= minLevel));
+  const currentEnriched = enriched.filter((pal) => pal.publicationStatus.key === "current");
+  const byRole = (role) => currentEnriched.filter((pal) => pal.roles.includes(role));
+  const byWork = (type, minLevel = 1) => currentEnriched.filter((pal) => pal.work.some((entry) => entry.type === type && entry.level >= minLevel));
 
   return {
     pals: enriched.map((pal) => ({
@@ -635,10 +624,13 @@ export function buildPalExplorerData(pals, items) {
       guideSummary: pal.guideSummary,
       decisionSummary: pal.decisionSummary,
       recommendations: pal.recommendations,
+      publicationStatus: pal.publicationStatus,
     })),
     stats: {
-      total: enriched.length,
-      workers: enriched.filter((pal) => pal.work.length > 0).length,
+      total: currentEnriched.length,
+      special: enriched.filter((pal) => pal.publicationStatus.indexable && pal.publicationStatus.key !== "current").length,
+      archives: enriched.filter((pal) => !pal.publicationStatus.indexable).length,
+      workers: currentEnriched.filter((pal) => pal.work.length > 0).length,
       topWorkers: byRole("Top Worker").length,
       flyingMounts: byRole("Flying Mount").length,
       combat: byRole("Combat Candidate").length,
@@ -652,7 +644,7 @@ export function buildPalExplorerData(pals, items) {
         title: "High-level Work Specialists",
         label: "Base",
         description: "Compare the highest recorded Work Suitability levels before staffing a dedicated production line.",
-        pals: enriched
+        pals: currentEnriched
           .filter((pal) => pal.maxWorkLevel >= 4)
           .sort((a, b) => b.maxWorkLevel - a.maxWorkLevel || a.id - b.id)
           .slice(0, 8),
@@ -713,6 +705,14 @@ export function buildPalExplorerData(pals, items) {
 }
 
 export function buildPalSeo(pal) {
+  const status = getPalPublicationStatus(pal);
+  if (!status.indexable) {
+    return {
+      title: fitTitle("Palworld Pals Archive -", pal.title, "Record Status"),
+      description: fitDescription(`Palworld Pals archive record for ${pal.title}: ${status.label}. ${status.note}`),
+      keywords: `Palworld ${pal.title}, ${pal.title} archive, Palworld unreleased Pal`,
+    };
+  }
   const title = fitTitle("Palworld Pals -", `${pal.title} Stats, Work and Best Uses`);
   const description = fitDescription(
     `Palworld Pals ${pal.title} guide covers element matchups, partner skill, work suitability, drops, breeding notes, combat roles, and Database links for route planning.`,

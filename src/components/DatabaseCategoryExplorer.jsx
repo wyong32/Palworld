@@ -12,14 +12,17 @@ export default function DatabaseCategoryExplorer({ data }) {
   const filteredItems = useMemo(() => {
     const needle = query.trim().toLowerCase();
     return data.items
-      .filter((item) => !needle || `${item.title} ${item.guideSummary} ${item.type} ${item.subtype}`.toLowerCase().includes(needle))
+      .filter((item) => !needle || `${item.title} ${item.guideSummary} ${item.type} ${item.subtype} ${item.organization} ${item.weapon}`.toLowerCase().includes(needle))
       .filter((item) => {
         if (relationship === "Recipe") return item.recipeCount > 0;
         if (relationship === "Component") return item.usedInCount > 0;
         if (relationship === "Pal") return item.relatedPalCount > 0;
         if (relationship === "Map") return item.encounterCount > 0;
         if (relationship === "Drops") return item.dropCount > 0;
+        if (relationship === "Variants") return item.variantCount > 1;
         if (relationship === "Unmatched") return !item.matched;
+        if (relationship === "Current") return item.publicationStatus?.indexable;
+        if (relationship === "Legacy") return item.publicationStatus?.key === "legacy-disabled";
         return true;
       })
       .sort((a, b) => {
@@ -51,8 +54,11 @@ export default function DatabaseCategoryExplorer({ data }) {
               {!data.isCreatureCategory && <option>Component</option>}
               {data.isCreatureCategory && <option>Map</option>}
               {data.isCreatureCategory && <option>Drops</option>}
+              {data.isCreatureCategory && <option>Variants</option>}
               <option value="Pal">Pal-linked</option>
               {!data.isCreatureCategory && <option>Unmatched</option>}
+              {!data.isCreatureCategory && <option>Current</option>}
+              {!data.isCreatureCategory && <option>Legacy</option>}
             </select>
           </label>
           <label>
@@ -69,7 +75,7 @@ export default function DatabaseCategoryExplorer({ data }) {
       </div>
 
       <div className="database-category-column-head" aria-hidden="true">
-        <span>Record</span><span>Game data</span><span>Connections</span><span>Open</span>
+        <span>Record</span><span>Status</span><span>Connections</span><span>Open</span>
       </div>
 
       <div className="database-category-rows" aria-live="polite">
@@ -85,10 +91,13 @@ export default function DatabaseCategoryExplorer({ data }) {
             </div>
             <div className="database-category-row-data">
               <span className={item.matched ? "is-confirmed" : "is-unmatched"}>{item.matched ? "Matched 1.0" : "No exact match"}</span>
+              {item.publicationStatus && <span>{item.publicationStatus.shortLabel}</span>}
               {item.gameplayEnabled === false && <span>Item flag off</span>}
               {item.technologyLevel && <span>Tech Lv.{item.technologyLevel}</span>}
               {data.isCreatureCategory && item.maxEncounterLevel > 0 && <span>Encounter Lv.{item.maxEncounterLevel}</span>}
               {data.isCreatureCategory && item.hp > 0 && <span>HP {item.hp}</span>}
+              {data.isCreatureCategory && item.organization && <span>{item.organization}</span>}
+              {data.isCreatureCategory && item.weapon && <span>{item.weapon}</span>}
               {item.attack > 0 && <span>ATK {item.attack}</span>}
               {item.defense > 0 && <span>DEF {item.defense}</span>}
             </div>
@@ -98,6 +107,7 @@ export default function DatabaseCategoryExplorer({ data }) {
               {item.unlockCount > 0 && <span>{item.unlockCount} unlocks</span>}
               {item.encounterCount > 0 && <span>{item.encounterCount} exact map point{item.encounterCount === 1 ? "" : "s"}</span>}
               {item.dropCount > 0 && <span>{item.dropCount} drop{item.dropCount === 1 ? "" : "s"}</span>}
+              {item.variantCount > 1 && <span>{item.variantCount} internal variants</span>}
               {item.relatedPalCount > 0 && <span>{item.relatedPalCount} Pal link{item.relatedPalCount === 1 ? "" : "s"}</span>}
               {item.recipeCount + item.usedInCount + item.unlockCount + item.relatedPalCount + item.encounterCount + item.dropCount === 0 && <span>No indexed relation</span>}
             </div>

@@ -4,6 +4,7 @@ import { databaseRecords } from "@/data/databaseRecords";
 import { pals } from "@/data/pals";
 import DatabaseDetailPage from "@/page/DatabaseDetailPage";
 import { buildMetadata } from "@/seo/site";
+import { getDatabasePublicationStatus } from "@/data/databaseStatus";
 import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
@@ -25,6 +26,7 @@ export async function generateMetadata({ params }) {
     type: "article",
     publishedTime: item.publishDate,
     modifiedTime: item.lastModified || item.updatedAt || item.lastChecked || item.publishDate,
+    index: getDatabasePublicationStatus(item).indexable,
   });
 }
 

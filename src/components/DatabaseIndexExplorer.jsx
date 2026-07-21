@@ -26,6 +26,8 @@ export default function DatabaseIndexExplorer({ items, categories }) {
         if (relation === "Drops") return item.dropCount > 0;
         if (relation === "Matched") return item.matched;
         if (relation === "Unmatched") return !item.matched;
+        if (relation === "Current") return item.publicationStatus?.indexable;
+        if (relation === "Legacy") return item.publicationStatus?.key === "legacy-disabled";
         return true;
       })
       .sort((a, b) => {
@@ -67,6 +69,8 @@ export default function DatabaseIndexExplorer({ items, categories }) {
             <option value="Drops">Has drops</option>
             <option>Matched</option>
             <option>Unmatched</option>
+            <option>Current</option>
+            <option>Legacy</option>
           </select>
         </label>
         <label>
@@ -100,6 +104,7 @@ export default function DatabaseIndexExplorer({ items, categories }) {
             </div>
             <dl className="database-ledger-relations" aria-label={`${item.title} data relationships`}>
               <div className={item.matched ? "is-confirmed" : "is-unmatched"}><dt>Data</dt><dd>{item.matched ? "Matched" : "Site only"}</dd></div>
+              <div><dt>Status</dt><dd>{item.publicationStatus?.shortLabel || "Unclassified"}</dd></div>
               <div><dt>{item.kind === "creature" ? "Map points" : "Recipes"}</dt><dd>{item.kind === "creature" ? item.encounterCount || "—" : item.recipeCount || "—"}</dd></div>
               <div><dt>{item.kind === "creature" ? "Drops" : "Used in"}</dt><dd>{item.kind === "creature" ? item.dropCount || "—" : item.usedInCount || "—"}</dd></div>
               <div><dt>{item.kind === "creature" ? "Level" : item.unlockCount > 0 ? "Unlocks" : "Tech"}</dt><dd>{item.kind === "creature" ? item.maxEncounterLevel || "—" : item.unlockCount || item.technologyLevel || "—"}</dd></div>
