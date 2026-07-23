@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import GptAdSlot from "@/components/GptAdSlot";
 import PageBreadcrumbs from "@/components/PageBreadcrumbs";
 import { buildBreadcrumbJsonLd, palsDetailTrail } from "@/seo/breadcrumbs";
 import { siteConfig } from "@/seo/site";
@@ -91,6 +92,9 @@ export default function PalsDetailPage({ pal }) {
         </div>
       </section>
 
+      {/* GPT 广告：banner_1 */}
+      <GptAdSlot elementId="div-gpt-ad-pal-detail-1" unit={1} />
+
       <section className="detail-body-section">
         <div className="container">
           <div className="detail-body-content">
@@ -156,6 +160,9 @@ export default function PalsDetailPage({ pal }) {
                   <div><strong>Partner Skill</strong><span>{pal.partnerSkill || "Not recorded"}</span></div>
                 </div>
               </section>
+
+              {/* GPT 广告：banner_2 */}
+              <GptAdSlot elementId="div-gpt-ad-pal-detail-2" unit={2} />
 
               {pal.skillData && (
                 <section id="skills" className="pal-detail-section">
@@ -238,6 +245,9 @@ export default function PalsDetailPage({ pal }) {
                 )}
               </section>
 
+              {/* GPT 广告：banner_3 */}
+              <GptAdSlot elementId="div-gpt-ad-pal-detail-3" unit={3} />
+
               <section id="breeding" className="pal-detail-section">
                 <span className="wiki-kicker">Current breeding table</span>
                 <h2>How to breed {pal.title}</h2>
@@ -288,6 +298,9 @@ export default function PalsDetailPage({ pal }) {
                 {pal.linkedTech && <p className="pal-tech-callout"><strong>Related Pal Gear:</strong> {pal.linkedTech.href ? <Link href={pal.linkedTech.href}>{pal.linkedTech.title}</Link> : pal.linkedTech.title}</p>}
               </section>
 
+              {/* GPT 广告：banner_1 */}
+              <GptAdSlot elementId="div-gpt-ad-pal-detail-4" unit={1} />
+
               <section id="similar-pals" className="pal-detail-section">
                 <span className="wiki-kicker">Direct comparisons</span>
                 <h2>Pals similar to {pal.title}</h2>
@@ -325,6 +338,8 @@ export default function PalsDetailPage({ pal }) {
           </div>
         </div>
       </section>
+      {/* GPT 广告：banner_2 */}
+      <GptAdSlot elementId="div-gpt-ad-pal-detail-5" unit={2} />
     </>
   );
 }

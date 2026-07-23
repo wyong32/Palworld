@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import GptAdSlot from "@/components/GptAdSlot";
 import PageBreadcrumbs from "@/components/PageBreadcrumbs";
 import { buildBreadcrumbJsonLd, databaseItemTrail } from "@/seo/breadcrumbs";
 import { siteConfig } from "@/seo/site";
@@ -247,6 +248,9 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
         </div>
       </section>
 
+      {/* GPT 广告：banner_1 */}
+      <GptAdSlot elementId="div-gpt-ad-database-detail-1" unit={1} />
+
       <section className="detail-body-section">
         <div className="container">
           <div className="detail-body-content">
@@ -275,6 +279,9 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
                   <p className="database-record-warning"><strong>Definition status:</strong> the matched item row has <code>bLegalInGame=false</code>. The values and recipe are present in the 1.0 table, but this page does not present the item as a normally enabled inventory record.</p>
                 )}
               </section>
+
+              {/* GPT 广告：banner_2 */}
+              <GptAdSlot elementId="div-gpt-ad-database-detail-2" unit={2} />
 
               {visibleStats.length > 0 && (
                 <section className="pal-detail-section" id="stats">
@@ -471,6 +478,9 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
                 </section>
               )}
 
+              {/* GPT 广告：banner_3 */}
+              <GptAdSlot elementId="div-gpt-ad-database-detail-3" unit={3} />
+
               <section className="pal-detail-section" id="related-items">
                 <span className="wiki-kicker">Next database entries</span>
                 <h2>{isCreature ? `${item.title} drops and nearby records` : hasMaterials ? `${item.title} materials and related items` : `Items related to ${item.title}`}</h2>
@@ -488,6 +498,9 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
                   <p>There is no supported item connection to show. Return to <Link href={`/database/${categorySlug}`}>{item.category}</Link> for the full category.</p>
                 )}
               </section>
+
+              {/* GPT 广告：banner_1 */}
+              <GptAdSlot elementId="div-gpt-ad-database-detail-4" unit={1} />
 
             </article>
 
@@ -523,6 +536,8 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
           </div>
         </div>
       </section>
+      {/* GPT 广告：banner_2 */}
+      <GptAdSlot elementId="div-gpt-ad-database-detail-5" unit={2} />
     </>
   );
 }

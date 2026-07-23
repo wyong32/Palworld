@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import BreedingPlanner from "@/components/BreedingPlanner";
+import GptAdSlot from "@/components/GptAdSlot";
 import PageBreadcrumbs from "@/components/PageBreadcrumbs";
 import { breedingSteps, cakeProductionPlan, mutationCards } from "@/data/breedingTools";
 import { getDatabaseItemPath } from "@/data/database";
@@ -257,6 +258,9 @@ export default function BreedingPage() {
           </div>
         </section>
 
+        {/* GPT 广告：banner_1 */}
+        <GptAdSlot elementId="div-gpt-ad-breeding-1" unit={1} />
+
         <section className="breeding-command-section" aria-labelledby="breeding-command-title">
           <div className="breeding-section-head">
             <span className="eyebrow">Player route</span>
@@ -294,9 +298,15 @@ export default function BreedingPage() {
           </div>
         </section>
 
+        {/* GPT 广告：banner_2 */}
+        <GptAdSlot elementId="div-gpt-ad-breeding-2" unit={2} />
+
         <section id="planner" className="breeding-tool-section" aria-label="Breeding planner tool">
           <BreedingPlanner steps={breedingSteps} cakePlan={cakePlan} mutationCards={mutationCards} />
         </section>
+
+        {/* GPT 广告：banner_3 */}
+        <GptAdSlot elementId="div-gpt-ad-breeding-3" unit={3} />
 
         <section className="breeding-flow-section" aria-labelledby="breeding-flow-title">
           <div className="breeding-section-head">
@@ -323,6 +333,9 @@ export default function BreedingPage() {
             ))}
           </div>
         </section>
+
+        {/* GPT 广告：banner_1 */}
+        <GptAdSlot elementId="div-gpt-ad-breeding-4" unit={1} />
 
         <section id="cake-route" className="breeding-cake-section" aria-labelledby="breeding-cake-title">
           <div className="breeding-section-head">
@@ -373,6 +386,8 @@ export default function BreedingPage() {
             ))}
           </div>
         </section>
+        {/* GPT 广告：banner_2 */}
+        <GptAdSlot elementId="div-gpt-ad-breeding-5" unit={2} />
       </article>
     </>
   );

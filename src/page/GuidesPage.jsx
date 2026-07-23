@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import GptAdSlot from "@/components/GptAdSlot";
 import PageBreadcrumbs from "@/components/PageBreadcrumbs";
 import { guidesHubTrail } from "@/seo/breadcrumbs";
 import { siteConfig } from "@/seo/site";
@@ -39,6 +40,9 @@ export default function GuidesPage({ guides }) {
         </div>
       </section>
 
+      {/* GPT 广告：banner_1 */}
+      <GptAdSlot elementId="div-gpt-ad-guides-1" unit={1} />
+
       <section className="listing-grid-section">
         <div className="container">
           <div className="listing-grid-content">
@@ -46,6 +50,8 @@ export default function GuidesPage({ guides }) {
               <strong>Updated guide hub</strong>
               <span>{guides.length} guides</span>
             </div>
+            {/* GPT 广告：banner_2 */}
+            <GptAdSlot elementId="div-gpt-ad-guides-2" unit={2} />
             <div className="listing-card-grid">
               {guides.map((guide) => (
                 <article className="listing-card" key={guide.id}>
@@ -71,6 +77,8 @@ export default function GuidesPage({ guides }) {
           </div>
         </div>
       </section>
+      {/* GPT 广告：banner_3 */}
+      <GptAdSlot elementId="div-gpt-ad-guides-3" unit={3} />
     </>
   );
 }

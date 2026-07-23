@@ -1,4 +1,5 @@
 import Link from "next/link";
+import GptAdSlot from "@/components/GptAdSlot";
 import MapFocusWorkbench from "@/components/MapFocusWorkbench";
 import { bossRouteHighlights } from "@/data/newContent";
 import PageBreadcrumbs from "@/components/PageBreadcrumbs";
@@ -112,6 +113,9 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
           </aside>
         </header>
 
+        {/* GPT 广告：banner_1 */}
+        <GptAdSlot elementId="div-gpt-ad-map-1" unit={1} />
+
         <section className={styles.coverageRail} aria-label="Exploration map coverage">
           <div className={styles.coverageLead}>
             <span>MAP COVERAGE</span>
@@ -127,6 +131,9 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
         </section>
 
         <MapFocusWorkbench palProfiles={palProfiles} />
+
+        {/* GPT 广告：banner_2 */}
+        <GptAdSlot elementId="div-gpt-ad-map-2" unit={2} />
 
         <section className={styles.precisionSection} id="precision-guide" aria-labelledby="map-guide-title">
           <header>
@@ -183,6 +190,9 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
             </article>
           </div>
         </section>
+
+        {/* GPT 广告：banner_3 */}
+        <GptAdSlot elementId="div-gpt-ad-map-3" unit={3} />
 
         <section className={styles.precisionSection} aria-labelledby="map-1-0-title">
           <header>
@@ -274,6 +284,9 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
           </div>
         </section>
 
+        {/* GPT 广告：banner_1 */}
+        <GptAdSlot elementId="div-gpt-ad-map-4" unit={1} />
+
         <section className={styles.planningIndex} aria-labelledby="map-local-index-title">
           <header className={styles.sectionHeading}>
             <div>
@@ -323,6 +336,8 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
             ))}
           </div>
         </section>
+        {/* GPT 广告：banner_2 */}
+        <GptAdSlot elementId="div-gpt-ad-map-5" unit={2} />
       </article>
     </>
   );
