@@ -1,6 +1,6 @@
 import PalsExplorer from "@/components/PalsExplorer";
 import PageBreadcrumbs from "@/components/PageBreadcrumbs";
-import GptAdSlot from "@/components/GptAdSlot";
+import AdPlaceholder from "@/components/AdPlaceholder";
 import { items } from "@/data/items";
 import { newPalHighlights, specialMonsterHighlights, unreleasedArchiveHighlights } from "@/data/newContent";
 import { buildPalExplorerData } from "@/data/palGuide";
@@ -63,8 +63,8 @@ export default function PalsPage({ pals }) {
         </div>
       </section>
 
-      {/* GPT 广告：banner_1 */}
-      <GptAdSlot elementId="div-gpt-ad-pals-1" unit={1} />
+      {/* Reserved advertising space */}
+      <AdPlaceholder />
 
       <section className="pals-table-section" id="pal-results">
         <div className="container">
@@ -101,14 +101,14 @@ export default function PalsPage({ pals }) {
               </div>
             </article>
           </section>
-          {/* GPT 广告：banner_2 */}
-          <GptAdSlot elementId="div-gpt-ad-pals-2" unit={2} />
+          {/* Reserved advertising space */}
+          <AdPlaceholder />
           <PalsExplorer data={explorerData} />
         </div>
       </section>
 
-      {/* GPT 广告：banner_3 */}
-      <GptAdSlot elementId="div-gpt-ad-pals-3" unit={3} />
+      {/* Reserved advertising space */}
+      <AdPlaceholder />
 
     </>
   );

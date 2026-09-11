@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import GptAdSlot from "@/components/GptAdSlot";
+import AdPlaceholder from "@/components/AdPlaceholder";
 import UpdateImpactBoard from "@/components/UpdateImpactBoard";
 import { bossRouteHighlights, newItemHighlights, newPalHighlights, onePointZeroCoverage } from "@/data/newContent";
 import PageBreadcrumbs from "@/components/PageBreadcrumbs";
@@ -290,8 +290,8 @@ export default function UpdatesPage() {
           </div>
         </section>
 
-        {/* GPT 广告：banner_1 */}
-        <GptAdSlot elementId="div-gpt-ad-updates-1" unit={1} />
+        {/* Reserved advertising space */}
+        <AdPlaceholder />
 
         <section className="updates-page-stats" aria-label="Palworld 1.0 update facts">
           {quickStats.map((stat) => (
@@ -325,8 +325,8 @@ export default function UpdatesPage() {
           </div>
         </section>
 
-        {/* GPT 广告：banner_2 */}
-        <GptAdSlot elementId="div-gpt-ad-updates-2" unit={2} />
+        {/* Reserved advertising space */}
+        <AdPlaceholder />
 
         <section className="updates-page-section" aria-labelledby="updates-new-content-title">
           <div className="updates-section-head">
@@ -386,8 +386,8 @@ export default function UpdatesPage() {
           </div>
         </section>
 
-        {/* GPT 广告：banner_3 */}
-        <GptAdSlot elementId="div-gpt-ad-updates-3" unit={3} />
+        {/* Reserved advertising space */}
+        <AdPlaceholder />
 
         <section className="updates-page-section" aria-labelledby="updates-impact-title">
           <div className="updates-section-head">
@@ -417,8 +417,8 @@ export default function UpdatesPage() {
           </div>
         </section>
 
-        {/* GPT 广告：banner_1 */}
-        <GptAdSlot elementId="div-gpt-ad-updates-4" unit={1} />
+        {/* Reserved advertising space */}
+        <AdPlaceholder />
 
         <section className="updates-page-section updates-tool-section" aria-label="Interactive patch impact board">
           <UpdateImpactBoard />
@@ -480,8 +480,8 @@ export default function UpdatesPage() {
             ))}
           </div>
         </section>
-        {/* GPT 广告：banner_2 */}
-        <GptAdSlot elementId="div-gpt-ad-updates-5" unit={2} />
+        {/* Reserved advertising space */}
+        <AdPlaceholder />
       </article>
     </>
   );

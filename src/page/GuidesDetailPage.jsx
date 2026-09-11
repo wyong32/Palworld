@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import GptAdSlot from "@/components/GptAdSlot";
+import AdPlaceholder from "@/components/AdPlaceholder";
 import PageBreadcrumbs from "@/components/PageBreadcrumbs";
 import { buildBreadcrumbJsonLd, guidesDetailTrail } from "@/seo/breadcrumbs";
 import { siteConfig } from "@/seo/site";
@@ -32,8 +32,8 @@ export default function GuidesDetailPage({ guide }) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <PageBreadcrumbs items={breadcrumbs} />
-      {/* GPT 广告：banner_1 */}
-      <GptAdSlot elementId="div-gpt-ad-guide-detail-1" unit={1} />
+      {/* Reserved advertising space */}
+      <AdPlaceholder />
       <section className="detail-hero-section">
         <div className="container">
           <div className="detail-hero-content">
@@ -55,8 +55,8 @@ export default function GuidesDetailPage({ guide }) {
         </div>
       </section>
 
-      {/* GPT 广告：banner_2 */}
-      <GptAdSlot elementId="div-gpt-ad-guide-detail-2" unit={2} />
+      {/* Reserved advertising space */}
+      <AdPlaceholder />
 
       <section className="detail-body-section">
         <div className="container">
@@ -75,8 +75,8 @@ export default function GuidesDetailPage({ guide }) {
           </div>
         </div>
       </section>
-      {/* GPT 广告：banner_3 */}
-      <GptAdSlot elementId="div-gpt-ad-guide-detail-3" unit={3} />
+      {/* Reserved advertising space */}
+      <AdPlaceholder />
     </>
   );
 }

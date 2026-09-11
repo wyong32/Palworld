@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import GptAdSlot from "@/components/GptAdSlot";
+import AdPlaceholder from "@/components/AdPlaceholder";
 import PageBreadcrumbs from "@/components/PageBreadcrumbs";
 import { buildBreadcrumbJsonLd, databaseItemTrail } from "@/seo/breadcrumbs";
 import { siteConfig } from "@/seo/site";
@@ -248,8 +248,8 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
         </div>
       </section>
 
-      {/* GPT 广告：banner_1 */}
-      <GptAdSlot elementId="div-gpt-ad-database-detail-1" unit={1} />
+      {/* Reserved advertising space */}
+      <AdPlaceholder />
 
       <section className="detail-body-section">
         <div className="container">
@@ -280,8 +280,8 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
                 )}
               </section>
 
-              {/* GPT 广告：banner_2 */}
-              <GptAdSlot elementId="div-gpt-ad-database-detail-2" unit={2} />
+              {/* Reserved advertising space */}
+              <AdPlaceholder />
 
               {visibleStats.length > 0 && (
                 <section className="pal-detail-section" id="stats">
@@ -478,8 +478,8 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
                 </section>
               )}
 
-              {/* GPT 广告：banner_3 */}
-              <GptAdSlot elementId="div-gpt-ad-database-detail-3" unit={3} />
+              {/* Reserved advertising space */}
+              <AdPlaceholder />
 
               <section className="pal-detail-section" id="related-items">
                 <span className="wiki-kicker">Next database entries</span>
@@ -499,8 +499,8 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
                 )}
               </section>
 
-              {/* GPT 广告：banner_1 */}
-              <GptAdSlot elementId="div-gpt-ad-database-detail-4" unit={1} />
+              {/* Reserved advertising space */}
+              <AdPlaceholder />
 
             </article>
 
@@ -536,8 +536,8 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
           </div>
         </div>
       </section>
-      {/* GPT 广告：banner_2 */}
-      <GptAdSlot elementId="div-gpt-ad-database-detail-5" unit={2} />
+      {/* Reserved advertising space */}
+      <AdPlaceholder />
     </>
   );
 }

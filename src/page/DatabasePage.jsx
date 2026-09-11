@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import DatabaseIndexExplorer from "@/components/DatabaseIndexExplorer";
-import GptAdSlot from "@/components/GptAdSlot";
+import AdPlaceholder from "@/components/AdPlaceholder";
 import PageBreadcrumbs from "@/components/PageBreadcrumbs";
 import { buildDatabaseExplorerData } from "@/data/databaseGuide";
 import { databaseHubTrail } from "@/seo/breadcrumbs";
@@ -71,8 +71,8 @@ export default function DatabasePage({ items }) {
           </div>
         </section>
 
-        {/* GPT 广告：banner_1 */}
-        <GptAdSlot elementId="div-gpt-ad-database-1" unit={1} />
+        {/* Reserved advertising space */}
+        <AdPlaceholder />
 
         <section className="database-status-strip" aria-label="Database record status">
           <div className="container">
@@ -120,8 +120,8 @@ export default function DatabasePage({ items }) {
           </div>
         </section>
 
-        {/* GPT 广告：banner_2 */}
-        <GptAdSlot elementId="div-gpt-ad-database-2" unit={2} />
+        {/* Reserved advertising space */}
+        <AdPlaceholder />
 
         <section className="database-ledger-section" id="item-ledger">
           <div className="container">
@@ -136,8 +136,8 @@ export default function DatabasePage({ items }) {
           </div>
         </section>
 
-        {/* GPT 广告：banner_3 */}
-        <GptAdSlot elementId="div-gpt-ad-database-3" unit={3} />
+        {/* Reserved advertising space */}
+        <AdPlaceholder />
 
         <section className="database-method-strip">
           <div className="container">

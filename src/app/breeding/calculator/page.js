@@ -1,6 +1,6 @@
 import Link from "next/link";
 import BreedingCalculatorTool from "@/components/BreedingCalculatorTool";
-import GptAdSlot from "@/components/GptAdSlot";
+import AdPlaceholder from "@/components/AdPlaceholder";
 import PageBreadcrumbs from "@/components/PageBreadcrumbs";
 import { featuredBreedingCombos } from "@/data/breedingTools";
 import { breedingMatrixStats } from "@/data/breedingMatrix";
@@ -133,13 +133,13 @@ export default function BreedingCalculatorPage() {
           </aside>
         </section>
 
-        {/* GPT 广告：banner_1 */}
-        <GptAdSlot elementId="div-gpt-ad-breeding-calculator-1" unit={1} />
+        {/* Reserved advertising space */}
+        <AdPlaceholder />
 
         <BreedingCalculatorTool combos={combos} />
 
-        {/* GPT 广告：banner_2 */}
-        <GptAdSlot elementId="div-gpt-ad-breeding-calculator-2" unit={2} />
+        {/* Reserved advertising space */}
+        <AdPlaceholder />
 
         <section className="breeding-calculator-section" aria-labelledby="breeding-calculator-route-title">
           <div className="breeding-section-head">
@@ -160,8 +160,8 @@ export default function BreedingCalculatorPage() {
           </div>
         </section>
 
-        {/* GPT 广告：banner_3 */}
-        <GptAdSlot elementId="div-gpt-ad-breeding-calculator-3" unit={3} />
+        {/* Reserved advertising space */}
+        <AdPlaceholder />
 
         <section className="breeding-calculator-section" aria-labelledby="breeding-calculator-support-title">
           <div className="breeding-section-head">
@@ -176,8 +176,8 @@ export default function BreedingCalculatorPage() {
           </div>
         </section>
 
-        {/* GPT 广告：banner_1 */}
-        <GptAdSlot elementId="div-gpt-ad-breeding-calculator-4" unit={1} />
+        {/* Reserved advertising space */}
+        <AdPlaceholder />
 
         <section className="breeding-calculator-section" aria-labelledby="breeding-calculator-faq-title">
           <div className="breeding-section-head">

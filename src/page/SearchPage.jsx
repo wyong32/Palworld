@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import GptAdSlot from "@/components/GptAdSlot";
+import AdPlaceholder from "@/components/AdPlaceholder";
 import PageBreadcrumbs from "@/components/PageBreadcrumbs";
 import { searchSite } from "@/data/searchIndex";
 import { searchHubTrail } from "@/seo/breadcrumbs";
@@ -49,8 +49,8 @@ export default function SearchPage({ query }) {
         </div>
       </section>
 
-      {/* GPT 广告：banner_1 */}
-      <GptAdSlot elementId="div-gpt-ad-search-1" unit={1} />
+      {/* Reserved advertising space */}
+      <AdPlaceholder />
 
       <section className="search-results-section">
         <div className="container">
@@ -62,8 +62,8 @@ export default function SearchPage({ query }) {
             <Link href="/pals">Browse all Pals</Link>
           </div>
 
-          {/* GPT 广告：banner_2 */}
-          <GptAdSlot elementId="div-gpt-ad-search-2" unit={2} />
+          {/* Reserved advertising space */}
+          <AdPlaceholder />
 
           {results.length > 0 ? (
             <div className="search-result-grid">
@@ -92,8 +92,8 @@ export default function SearchPage({ query }) {
           )}
         </div>
       </section>
-      {/* GPT 广告：banner_3 */}
-      <GptAdSlot elementId="div-gpt-ad-search-3" unit={3} />
+      {/* Reserved advertising space */}
+      <AdPlaceholder />
     </>
   );
 }

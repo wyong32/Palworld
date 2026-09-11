@@ -1,5 +1,5 @@
 import Link from "next/link";
-import GptAdSlot from "@/components/GptAdSlot";
+import AdPlaceholder from "@/components/AdPlaceholder";
 import MapFocusWorkbench from "@/components/MapFocusWorkbench";
 import { bossRouteHighlights } from "@/data/newContent";
 import PageBreadcrumbs from "@/components/PageBreadcrumbs";
@@ -113,8 +113,8 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
           </aside>
         </header>
 
-        {/* GPT 广告：banner_1 */}
-        <GptAdSlot elementId="div-gpt-ad-map-1" unit={1} />
+        {/* Reserved advertising space */}
+        <AdPlaceholder />
 
         <section className={styles.coverageRail} aria-label="Exploration map coverage">
           <div className={styles.coverageLead}>
@@ -132,8 +132,8 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
 
         <MapFocusWorkbench palProfiles={palProfiles} />
 
-        {/* GPT 广告：banner_2 */}
-        <GptAdSlot elementId="div-gpt-ad-map-2" unit={2} />
+        {/* Reserved advertising space */}
+        <AdPlaceholder />
 
         <section className={styles.precisionSection} id="precision-guide" aria-labelledby="map-guide-title">
           <header>
@@ -191,8 +191,8 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
           </div>
         </section>
 
-        {/* GPT 广告：banner_3 */}
-        <GptAdSlot elementId="div-gpt-ad-map-3" unit={3} />
+        {/* Reserved advertising space */}
+        <AdPlaceholder />
 
         <section className={styles.precisionSection} aria-labelledby="map-1-0-title">
           <header>
@@ -284,8 +284,8 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
           </div>
         </section>
 
-        {/* GPT 广告：banner_1 */}
-        <GptAdSlot elementId="div-gpt-ad-map-4" unit={1} />
+        {/* Reserved advertising space */}
+        <AdPlaceholder />
 
         <section className={styles.planningIndex} aria-labelledby="map-local-index-title">
           <header className={styles.sectionHeading}>
@@ -336,8 +336,8 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
             ))}
           </div>
         </section>
-        {/* GPT 广告：banner_2 */}
-        <GptAdSlot elementId="div-gpt-ad-map-5" unit={2} />
+        {/* Reserved advertising space */}
+        <AdPlaceholder />
       </article>
     </>
   );

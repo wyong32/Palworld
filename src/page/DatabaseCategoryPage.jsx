@@ -1,6 +1,6 @@
 import Link from "next/link";
 import DatabaseCategoryExplorer from "@/components/DatabaseCategoryExplorer";
-import GptAdSlot from "@/components/GptAdSlot";
+import AdPlaceholder from "@/components/AdPlaceholder";
 import PageBreadcrumbs from "@/components/PageBreadcrumbs";
 import { getDatabaseCategoryGroups } from "@/data/database";
 import { buildDatabaseCategoryData } from "@/data/databaseGuide";
@@ -61,8 +61,8 @@ export default function DatabaseCategoryPage({ group, items, pals }) {
         </div>
       </section>
 
-      {/* GPT 广告：banner_1 */}
-      <GptAdSlot elementId="div-gpt-ad-database-category-1" unit={1} />
+      {/* Reserved advertising space */}
+      <AdPlaceholder />
 
       <nav className="database-category-rail" aria-label="Database categories">
         <div className="container">
@@ -74,16 +74,16 @@ export default function DatabaseCategoryPage({ group, items, pals }) {
         </div>
       </nav>
 
-      {/* GPT 广告：banner_2 */}
-      <GptAdSlot elementId="div-gpt-ad-database-category-2" unit={2} />
+      {/* Reserved advertising space */}
+      <AdPlaceholder />
 
       <section className="database-category-ledger-section" id="category-ledger">
         <div className="container">
           <DatabaseCategoryExplorer data={data} />
         </div>
       </section>
-      {/* GPT 广告：banner_3 */}
-      <GptAdSlot elementId="div-gpt-ad-database-category-3" unit={3} />
+      {/* Reserved advertising space */}
+      <AdPlaceholder />
     </>
   );
 }

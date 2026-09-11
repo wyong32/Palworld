@@ -4,7 +4,7 @@ import { guides } from "@/data/guides";
 import { bossRouteHighlights, newItemHighlights, newPalHighlights, onePointZeroCoverage } from "@/data/newContent";
 import { getPalWorkSuitability } from "@/data/palGuide";
 import { pals } from "@/data/pals";
-import GptAdSlot from "@/components/GptAdSlot";
+import AdPlaceholder from "@/components/AdPlaceholder";
 import Image from "next/image";
 import Link from "next/link";
 import { getPalRosterStats } from "@/data/palStatus";
@@ -224,8 +224,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* GPT 广告：banner_1 */}
-      <GptAdSlot elementId="div-gpt-ad-home-1" unit={1} />
+      {/* Reserved advertising space */}
+      <AdPlaceholder />
 
       <section className="home-section home-objective-section" aria-labelledby="home-objective-title">
         <div className="container">
@@ -249,8 +249,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* GPT 广告：banner_2 */}
-      <GptAdSlot elementId="div-gpt-ad-home-2" unit={2} />
+      {/* Reserved advertising space */}
+      <AdPlaceholder />
 
       <section className="home-section home-planning-section" aria-labelledby="home-planning-title">
         <div className="container">
@@ -299,8 +299,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* GPT 广告：banner_3 */}
-      <GptAdSlot elementId="div-gpt-ad-home-3" unit={3} />
+      {/* Reserved advertising space */}
+      <AdPlaceholder />
 
       <section className="home-section home-version-section" aria-labelledby="home-version-title">
         <div className="container">
@@ -400,8 +400,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* GPT 广告：banner_1 */}
-      <GptAdSlot elementId="div-gpt-ad-home-4" unit={1} />
+      {/* Reserved advertising space */}
+      <AdPlaceholder />
 
       <section className="home-section home-reasons-section" aria-labelledby="home-reasons-title">
         <div className="container">
@@ -420,8 +420,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* GPT 广告：banner_2 */}
-      <GptAdSlot elementId="div-gpt-ad-home-5" unit={2} />
+      {/* Reserved advertising space */}
+      <AdPlaceholder />
 
       <section className="home-section home-faq-redesign-section" aria-labelledby="home-faq-title">
         <div className="container">
