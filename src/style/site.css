@@ -148,6 +148,11 @@ select:focus-visible {
   background: transparent;
 }
 
+.ad-slot-native-container {
+  width: 100%;
+  min-height: 300px;
+}
+
 .ad-slot-loading {
   display: block;
   width: min(100%, 728px);
