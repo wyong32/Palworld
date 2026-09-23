@@ -113,9 +113,6 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
           </aside>
         </header>
 
-        {/* Reserved advertising space */}
-        <AdPlaceholder />
-
         <section className={styles.coverageRail} aria-label="Exploration map coverage">
           <div className={styles.coverageLead}>
             <span>MAP COVERAGE</span>
@@ -132,8 +129,8 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
 
         <MapFocusWorkbench palProfiles={palProfiles} />
 
-        {/* Reserved advertising space */}
-        <AdPlaceholder />
+        {/* 中文注释：交互地图结束后放置原生广告，与说明标题保持间隔。 */}
+        <AdPlaceholder format="native" />
 
         <section className={styles.precisionSection} id="precision-guide" aria-labelledby="map-guide-title">
           <header>
@@ -190,9 +187,6 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
             </article>
           </div>
         </section>
-
-        {/* Reserved advertising space */}
-        <AdPlaceholder />
 
         <section className={styles.precisionSection} aria-labelledby="map-1-0-title">
           <header>
@@ -284,9 +278,6 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
           </div>
         </section>
 
-        {/* Reserved advertising space */}
-        <AdPlaceholder />
-
         <section className={styles.planningIndex} aria-labelledby="map-local-index-title">
           <header className={styles.sectionHeading}>
             <div>
@@ -336,7 +327,7 @@ export default function MapPage({ hub, markers, categories, sourceStats, guidanc
             ))}
           </div>
         </section>
-        {/* Reserved advertising space */}
+        {/* 中文注释：地图规划正文结束后的横幅广告。 */}
         <AdPlaceholder />
       </article>
     </>

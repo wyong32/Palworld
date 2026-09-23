@@ -248,9 +248,6 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
         </div>
       </section>
 
-      {/* Reserved advertising space */}
-      <AdPlaceholder />
-
       <section className="detail-body-section">
         <div className="container">
           <div className="detail-body-content">
@@ -280,8 +277,8 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
                 )}
               </section>
 
-              {/* Reserved advertising space */}
-              <AdPlaceholder />
+              {/* 中文注释：主要资料段之间放置原生广告。 */}
+              <AdPlaceholder format="native" />
 
               {visibleStats.length > 0 && (
                 <section className="pal-detail-section" id="stats">
@@ -478,7 +475,7 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
                 </section>
               )}
 
-              {/* Reserved advertising space */}
+              {/* 中文注释：长正文与关联条目之间放置横幅广告。 */}
               <AdPlaceholder />
 
               <section className="pal-detail-section" id="related-items">
@@ -498,9 +495,6 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
                   <p>There is no supported item connection to show. Return to <Link href={`/database/${categorySlug}`}>{item.category}</Link> for the full category.</p>
                 )}
               </section>
-
-              {/* Reserved advertising space */}
-              <AdPlaceholder />
 
             </article>
 
@@ -536,8 +530,6 @@ export default function DatabaseDetailPage({ item, categorySlug }) {
           </div>
         </div>
       </section>
-      {/* Reserved advertising space */}
-      <AdPlaceholder />
     </>
   );
 }

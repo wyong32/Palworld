@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AdPlaceholder from "@/components/AdPlaceholder";
 import PageBreadcrumbs from "@/components/PageBreadcrumbs";
 import { legalDetailTrail } from "@/seo/breadcrumbs";
 import { legalRoutes, legalUpdatedDate } from "../_content";
@@ -48,6 +49,9 @@ export default function LegalArticle({ page }) {
           </nav>
         </aside>
       </section>
+
+      {/* 中文注释：法律页摘要与正文两个板块结束后放置原生广告。 */}
+      <AdPlaceholder format="native" />
     </article>
   );
 }

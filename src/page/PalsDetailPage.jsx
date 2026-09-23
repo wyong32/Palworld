@@ -92,9 +92,6 @@ export default function PalsDetailPage({ pal }) {
         </div>
       </section>
 
-      {/* Reserved advertising space */}
-      <AdPlaceholder />
-
       <section className="detail-body-section">
         <div className="container">
           <div className="detail-body-content">
@@ -161,8 +158,8 @@ export default function PalsDetailPage({ pal }) {
                 </div>
               </section>
 
-              {/* Reserved advertising space */}
-              <AdPlaceholder />
+              {/* 中文注释：基础资料与技能资料之间放置原生广告。 */}
+              <AdPlaceholder format="native" />
 
               {pal.skillData && (
                 <section id="skills" className="pal-detail-section">
@@ -245,7 +242,7 @@ export default function PalsDetailPage({ pal }) {
                 )}
               </section>
 
-              {/* Reserved advertising space */}
+              {/* 中文注释：战斗与繁殖内容之间放置横幅广告。 */}
               <AdPlaceholder />
 
               <section id="breeding" className="pal-detail-section">
@@ -298,9 +295,6 @@ export default function PalsDetailPage({ pal }) {
                 {pal.linkedTech && <p className="pal-tech-callout"><strong>Related Pal Gear:</strong> {pal.linkedTech.href ? <Link href={pal.linkedTech.href}>{pal.linkedTech.title}</Link> : pal.linkedTech.title}</p>}
               </section>
 
-              {/* Reserved advertising space */}
-              <AdPlaceholder />
-
               <section id="similar-pals" className="pal-detail-section">
                 <span className="wiki-kicker">Direct comparisons</span>
                 <h2>Pals similar to {pal.title}</h2>
@@ -338,7 +332,7 @@ export default function PalsDetailPage({ pal }) {
           </div>
         </div>
       </section>
-      {/* Reserved advertising space */}
+      {/* 中文注释：Pal 详情正文结束后的横幅广告。 */}
       <AdPlaceholder />
     </>
   );

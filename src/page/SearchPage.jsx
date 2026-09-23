@@ -49,9 +49,6 @@ export default function SearchPage({ query }) {
         </div>
       </section>
 
-      {/* Reserved advertising space */}
-      <AdPlaceholder />
-
       <section className="search-results-section">
         <div className="container">
           <div className="search-results-head">
@@ -61,9 +58,6 @@ export default function SearchPage({ query }) {
             </div>
             <Link href="/pals">Browse all Pals</Link>
           </div>
-
-          {/* Reserved advertising space */}
-          <AdPlaceholder />
 
           {results.length > 0 ? (
             <div className="search-result-grid">
@@ -92,8 +86,8 @@ export default function SearchPage({ query }) {
           )}
         </div>
       </section>
-      {/* Reserved advertising space */}
-      <AdPlaceholder />
+      {/* 中文注释：搜索说明与结果列表两个板块结束后放置原生广告。 */}
+      <AdPlaceholder format="native" />
     </>
   );
 }

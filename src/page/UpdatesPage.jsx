@@ -290,9 +290,6 @@ export default function UpdatesPage() {
           </div>
         </section>
 
-        {/* Reserved advertising space */}
-        <AdPlaceholder />
-
         <section className="updates-page-stats" aria-label="Palworld 1.0 update facts">
           {quickStats.map((stat) => (
             <div key={stat.label}>
@@ -324,9 +321,6 @@ export default function UpdatesPage() {
             ))}
           </div>
         </section>
-
-        {/* Reserved advertising space */}
-        <AdPlaceholder />
 
         <section className="updates-page-section" aria-labelledby="updates-new-content-title">
           <div className="updates-section-head">
@@ -386,8 +380,8 @@ export default function UpdatesPage() {
           </div>
         </section>
 
-        {/* Reserved advertising space */}
-        <AdPlaceholder />
+        {/* 中文注释：较长的新内容区结束后展示原生广告。 */}
+        <AdPlaceholder format="native" />
 
         <section className="updates-page-section" aria-labelledby="updates-impact-title">
           <div className="updates-section-head">
@@ -416,9 +410,6 @@ export default function UpdatesPage() {
             ))}
           </div>
         </section>
-
-        {/* Reserved advertising space */}
-        <AdPlaceholder />
 
         <section className="updates-page-section updates-tool-section" aria-label="Interactive patch impact board">
           <UpdateImpactBoard />
@@ -480,7 +471,7 @@ export default function UpdatesPage() {
             ))}
           </div>
         </section>
-        {/* Reserved advertising space */}
+        {/* 中文注释：更新页正文结束后的横幅广告。 */}
         <AdPlaceholder />
       </article>
     </>

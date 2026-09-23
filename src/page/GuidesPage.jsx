@@ -40,9 +40,6 @@ export default function GuidesPage({ guides }) {
         </div>
       </section>
 
-      {/* Reserved advertising space */}
-      <AdPlaceholder />
-
       <section className="listing-grid-section">
         <div className="container">
           <div className="listing-grid-content">
@@ -50,8 +47,6 @@ export default function GuidesPage({ guides }) {
               <strong>Updated guide hub</strong>
               <span>{guides.length} guides</span>
             </div>
-            {/* Reserved advertising space */}
-            <AdPlaceholder />
             <div className="listing-card-grid">
               {guides.map((guide) => (
                 <article className="listing-card" key={guide.id}>
@@ -77,8 +72,8 @@ export default function GuidesPage({ guides }) {
           </div>
         </div>
       </section>
-      {/* Reserved advertising space */}
-      <AdPlaceholder />
+      {/* 中文注释：指南导览与指南列表两个板块结束后放置原生广告。 */}
+      <AdPlaceholder format="native" />
     </>
   );
 }

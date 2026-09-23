@@ -58,7 +58,12 @@ export default function RootLayout({ children }) {
           {`window.localStorage.removeItem('**lsv**');`}
         </Script>
         <Script src="/collect-data.js" strategy="afterInteractive" />
-        
+        {/* 中文注释：弹窗广告只在根布局延迟加载一次，避免页面内多个广告位重复触发。 */}
+        <Script
+          id="alliance-popunder"
+          src="https://pl31457322.profitableratecpmnetwork.com/40/f1/13/40f1137ec2b7e262144cd8f7d46ac1b8.js"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   );

@@ -32,8 +32,6 @@ export default function GuidesDetailPage({ guide }) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <PageBreadcrumbs items={breadcrumbs} />
-      {/* Reserved advertising space */}
-      <AdPlaceholder />
       <section className="detail-hero-section">
         <div className="container">
           <div className="detail-hero-content">
@@ -55,9 +53,6 @@ export default function GuidesDetailPage({ guide }) {
         </div>
       </section>
 
-      {/* Reserved advertising space */}
-      <AdPlaceholder />
-
       <section className="detail-body-section">
         <div className="container">
           <div className="detail-body-content">
@@ -75,8 +70,8 @@ export default function GuidesDetailPage({ guide }) {
           </div>
         </div>
       </section>
-      {/* Reserved advertising space */}
-      <AdPlaceholder />
+      {/* 中文注释：指南摘要与正文两个板块结束后放置原生广告。 */}
+      <AdPlaceholder format="native" />
     </>
   );
 }

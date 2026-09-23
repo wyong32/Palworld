@@ -61,9 +61,6 @@ export default function DatabaseCategoryPage({ group, items, pals }) {
         </div>
       </section>
 
-      {/* Reserved advertising space */}
-      <AdPlaceholder />
-
       <nav className="database-category-rail" aria-label="Database categories">
         <div className="container">
           {categoryLinks.map((category) => (
@@ -74,16 +71,13 @@ export default function DatabaseCategoryPage({ group, items, pals }) {
         </div>
       </nav>
 
-      {/* Reserved advertising space */}
-      <AdPlaceholder />
-
       <section className="database-category-ledger-section" id="category-ledger">
         <div className="container">
           <DatabaseCategoryExplorer data={data} />
         </div>
       </section>
-      {/* Reserved advertising space */}
-      <AdPlaceholder />
+      {/* 中文注释：分类概览与分类列表两个板块结束后放置原生广告。 */}
+      <AdPlaceholder format="native" />
     </>
   );
 }

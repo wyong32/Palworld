@@ -63,9 +63,6 @@ export default function PalsPage({ pals }) {
         </div>
       </section>
 
-      {/* Reserved advertising space */}
-      <AdPlaceholder />
-
       <section className="pals-table-section" id="pal-results">
         <div className="container">
           <section className="pal-spotlight-grid" aria-label="Palworld 1.0 additions and special creatures">
@@ -101,14 +98,11 @@ export default function PalsPage({ pals }) {
               </div>
             </article>
           </section>
-          {/* Reserved advertising space */}
-          <AdPlaceholder />
+          {/* 中文注释：专题卡片与筛选列表之间放置原生广告。 */}
+          <AdPlaceholder format="native" />
           <PalsExplorer data={explorerData} />
         </div>
       </section>
-
-      {/* Reserved advertising space */}
-      <AdPlaceholder />
 
     </>
   );

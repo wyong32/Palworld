@@ -133,13 +133,10 @@ export default function BreedingCalculatorPage() {
           </aside>
         </section>
 
-        {/* Reserved advertising space */}
-        <AdPlaceholder />
-
         <BreedingCalculatorTool combos={combos} />
 
-        {/* Reserved advertising space */}
-        <AdPlaceholder />
+        {/* 中文注释：计算工具与后续攻略之间放置原生广告。 */}
+        <AdPlaceholder format="native" />
 
         <section className="breeding-calculator-section" aria-labelledby="breeding-calculator-route-title">
           <div className="breeding-section-head">
@@ -160,9 +157,6 @@ export default function BreedingCalculatorPage() {
           </div>
         </section>
 
-        {/* Reserved advertising space */}
-        <AdPlaceholder />
-
         <section className="breeding-calculator-section" aria-labelledby="breeding-calculator-support-title">
           <div className="breeding-section-head">
             <span className="eyebrow">Connected pages</span>
@@ -176,7 +170,7 @@ export default function BreedingCalculatorPage() {
           </div>
         </section>
 
-        {/* Reserved advertising space */}
+        {/* 中文注释：路线说明与关联页面两个板块结束后放置横幅广告。 */}
         <AdPlaceholder />
 
         <section className="breeding-calculator-section" aria-labelledby="breeding-calculator-faq-title">

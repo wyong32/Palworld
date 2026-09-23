@@ -258,9 +258,6 @@ export default function BreedingPage() {
           </div>
         </section>
 
-        {/* Reserved advertising space */}
-        <AdPlaceholder />
-
         <section className="breeding-command-section" aria-labelledby="breeding-command-title">
           <div className="breeding-section-head">
             <span className="eyebrow">Player route</span>
@@ -298,15 +295,12 @@ export default function BreedingPage() {
           </div>
         </section>
 
-        {/* Reserved advertising space */}
-        <AdPlaceholder />
+        {/* 中文注释：操作流程与计算工具之间放置原生广告。 */}
+        <AdPlaceholder format="native" />
 
         <section id="planner" className="breeding-tool-section" aria-label="Breeding planner tool">
           <BreedingPlanner steps={breedingSteps} cakePlan={cakePlan} mutationCards={mutationCards} />
         </section>
-
-        {/* Reserved advertising space */}
-        <AdPlaceholder />
 
         <section className="breeding-flow-section" aria-labelledby="breeding-flow-title">
           <div className="breeding-section-head">
@@ -333,9 +327,6 @@ export default function BreedingPage() {
             ))}
           </div>
         </section>
-
-        {/* Reserved advertising space */}
-        <AdPlaceholder />
 
         <section id="cake-route" className="breeding-cake-section" aria-labelledby="breeding-cake-title">
           <div className="breeding-section-head">
@@ -386,7 +377,7 @@ export default function BreedingPage() {
             ))}
           </div>
         </section>
-        {/* Reserved advertising space */}
+        {/* 中文注释：繁殖指南正文结束后的横幅广告。 */}
         <AdPlaceholder />
       </article>
     </>

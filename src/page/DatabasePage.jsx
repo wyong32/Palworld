@@ -71,9 +71,6 @@ export default function DatabasePage({ items }) {
           </div>
         </section>
 
-        {/* Reserved advertising space */}
-        <AdPlaceholder />
-
         <section className="database-status-strip" aria-label="Database record status">
           <div className="container">
             <span><strong>{data.stats.current}</strong> current 1.0 records</span>
@@ -120,8 +117,8 @@ export default function DatabasePage({ items }) {
           </div>
         </section>
 
-        {/* Reserved advertising space */}
-        <AdPlaceholder />
+        {/* 中文注释：分类目录与完整索引之间放置原生广告。 */}
+        <AdPlaceholder format="native" />
 
         <section className="database-ledger-section" id="item-ledger">
           <div className="container">
@@ -136,9 +133,6 @@ export default function DatabasePage({ items }) {
           </div>
         </section>
 
-        {/* Reserved advertising space */}
-        <AdPlaceholder />
-
         <section className="database-method-strip">
           <div className="container">
             <div>
@@ -147,6 +141,9 @@ export default function DatabasePage({ items }) {
             </div>
           </div>
         </section>
+
+        {/* 中文注释：完整索引与关联方法两个板块结束后放置横幅广告。 */}
+        <AdPlaceholder />
       </div>
     </>
   );

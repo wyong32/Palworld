@@ -224,7 +224,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Reserved advertising space */}
+      {/* 中文注释：首页首屏内容结束后放置横幅广告，与主标题保持完整内容间隔。 */}
       <AdPlaceholder />
 
       <section className="home-section home-objective-section" aria-labelledby="home-objective-title">
@@ -248,9 +248,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* Reserved advertising space */}
-      <AdPlaceholder />
 
       <section className="home-section home-planning-section" aria-labelledby="home-planning-title">
         <div className="container">
@@ -299,7 +296,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Reserved advertising space */}
+      {/* 中文注释：首页中段横幅广告。 */}
       <AdPlaceholder />
 
       <section className="home-section home-version-section" aria-labelledby="home-version-title">
@@ -400,8 +397,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Reserved advertising space */}
-      <AdPlaceholder />
+      {/* 中文注释：攻略内容与站点优势之间放置原生广告。 */}
+      <AdPlaceholder format="native" />
 
       <section className="home-section home-reasons-section" aria-labelledby="home-reasons-title">
         <div className="container">
@@ -420,9 +417,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Reserved advertising space */}
-      <AdPlaceholder />
-
       <section className="home-section home-faq-redesign-section" aria-labelledby="home-faq-title">
         <div className="container">
           <div className="home-faq-redesign-head">
@@ -437,6 +431,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* 中文注释：站点优势与 FAQ 两个完整板块结束后放置横幅广告。 */}
+      <AdPlaceholder />
     </>
   );
 }

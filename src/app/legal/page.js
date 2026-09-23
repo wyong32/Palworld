@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AdPlaceholder from "@/components/AdPlaceholder";
 import PageBreadcrumbs from "@/components/PageBreadcrumbs";
 import { buildMetadata } from "@/seo/site";
 import { legalHubTrail } from "@/seo/breadcrumbs";
@@ -41,6 +42,9 @@ export default function LegalIndexPage() {
           );
         })}
       </section>
+
+      {/* 中文注释：法律页介绍与目录两个板块结束后放置原生广告。 */}
+      <AdPlaceholder format="native" />
     </article>
   );
 }
