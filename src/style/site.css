@@ -125,8 +125,8 @@ select:focus-visible {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  margin: clamp(40px, 6vw, 72px) auto;
-  padding: 12px;
+  margin: 10px auto;
+  padding: 0 12px;
   border-radius: 6px;
   background: rgba(255, 253, 245, 0.45);
   color: var(--color-muted);
@@ -134,11 +134,11 @@ select:focus-visible {
 }
 
 .ad-slot--banner {
-  min-height: 114px;
+  min-height: 90px;
 }
 
 .ad-slot--native {
-  min-height: 324px;
+  min-height: 300px;
 }
 
 .ad-slot-frame {
@@ -161,12 +161,12 @@ select:focus-visible {
 
 @media (max-width: 768px) {
   .ad-slot {
-    margin-block: 36px;
+    margin-block: 10px;
     padding-inline: 0;
   }
 
   .ad-slot--banner {
-    min-height: 74px;
+    min-height: 50px;
   }
 
   .ad-slot-loading {
